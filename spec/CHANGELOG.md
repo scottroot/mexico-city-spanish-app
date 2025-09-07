@@ -5,6 +5,19 @@ All notable changes to the Spanish Language Learning App will be documented in t
 ## [Unreleased]
 
 ### Added
+- **Custom Quiz System**: Complete quiz configuration and persistence system
+  - `types/quiz.ts` - Updated `QuizConfig` interface with `selectedTenseMoods: string[]` and `selectedPronouns: string[]`
+  - `app/quiz/page.tsx` - Custom quiz setup page with modal-based tense/verb/pronoun selection
+  - `app/api/quiz/route.ts` - Quiz generation API with tense-mood filtering and pronoun selection
+  - `app/api/quiz-preferences/route.ts` - User quiz preferences persistence API
+  - `database/add_quiz_preferences_table.sql` - Database migration for quiz preferences table
+  - `user_quiz_preferences` table with RLS policies for user data isolation
+  - Bottom-sliding modals for tense, verb, and pronoun selection with radio selectors
+  - "Select All" functionality for tense selection
+  - Persistent quiz settings (selected tenses, custom verbs, pronouns, question count)
+  - Simplified pronoun labels: `tú` as 'you', `usted` as 'you (formal)', `ustedes` as 'you all'
+  - Disabled `vosotros` entirely from application (frontend UI and backend quiz generation)
+  - Enhanced answer comparison logic to accept answers with or without pronouns
 - **User Favorites System**: Database-backed verb favoriting with persistent storage
   - `entities/Favorites.ts` - TypeScript entity for favorites CRUD operations
   - `user_favorites` table in database with RLS policies
@@ -94,6 +107,29 @@ All notable changes to the Spanish Language Learning App will be documented in t
   - Enhanced error handling and logging for profile operations
 
 ### Fixed
+- **Quiz Answer Comparison**: Fixed answer validation to accept both pronoun-included and pronoun-excluded answers
+  - `components/games/CustomQuizGame.tsx` - Updated `isCorrect` logic to check exact match and pronoun+conjugation match
+  - Resolved issue where "yo había cogido" was marked wrong when correct answer was "había cogido"
+- **Quiz Tense Selection**: Fixed tense selection cross-contamination between moods
+  - `app/quiz/page.tsx` - Changed from separate `selectedTenses`/`selectedMoods` arrays to single `selectedTenseMoods` array
+  - Resolved issue where selecting one tense would incorrectly highlight others
+- **Quiz Tense Database Mapping**: Fixed tense value mismatches between frontend and database
+  - `app/quiz/page.tsx` - Updated `tenseOptions` with correct database `value` fields matching `verb_conjugations` table
+  - Resolved "No questions could be generated" errors for certain tenses
+- **Quiz Preferences Database Schema**: Fixed missing `selected_pronouns` column in database
+  - `database/setup.sql` - Added `selected_pronouns TEXT[] NOT NULL DEFAULT '{}'` to `user_quiz_preferences` table
+  - Resolved 500 Internal Server Error when saving quiz preferences
+- **Quiz Duplicate Tense Entries**: Fixed duplicate entries in `selectedTenseMoods` array
+  - `app/quiz/page.tsx` - Added deduplication logic in `loadQuizPreferences` and `useEffect` cleanup
+  - Resolved incorrect tense count display (showing 2 when only 1 selected)
+- **Quiz Pronoun Filtering**: Fixed pronoun filtering in quiz generation
+  - `app/api/quiz/route.ts` - Added filtering of `pronounForms` based on `config.selectedPronouns`
+  - Resolved issue where unselected pronouns appeared in quiz questions
+- **Quiz English Phrase Generation**: Fixed missing pronouns in English phrases
+  - `app/api/quiz/route.ts` - Re-added `generateEnglishPhrase` function to prepend pronouns to form translations
+  - Resolved issue where English phrases showed "had caught" instead of "I had caught"
+- **Quiz Loading Spinner**: Fixed invisible loading spinner in Start Quiz button
+  - `app/quiz/page.tsx` - Added proper CSS classes (`border-2 border-white border-t-transparent rounded-full`) to spinner div
 - **CVerbs Page Hydration Error**: Resolved nested button HTML structure issue
   - Changed outer `<button>` to `<div>` with `cursor-pointer` class in `app/cverbs/page.js`
   - Fixed React hydration error caused by invalid nested button elements

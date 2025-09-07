@@ -249,6 +249,34 @@ CREATE TABLE public.user_favorites (
 - `verb_infinitive`: Spanish verb infinitive (unique per user)
 - `created_at`: Record creation timestamp
 
+### `public.user_quiz_preferences`
+Stores user's custom quiz configuration preferences.
+
+```sql
+CREATE TABLE public.user_quiz_preferences (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE UNIQUE NOT NULL,
+  selected_tense_moods TEXT[] NOT NULL DEFAULT '{}',
+  selected_pronouns TEXT[] NOT NULL DEFAULT '{}',
+  verb_selection TEXT CHECK (verb_selection IN ('all', 'favorites', 'custom')) NOT NULL DEFAULT 'all',
+  custom_verbs TEXT[] NOT NULL DEFAULT '{}',
+  question_count INTEGER NOT NULL DEFAULT 10,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+**Fields:**
+- `id`: Primary key (UUID)
+- `user_id`: References `profiles.id` (unique per user)
+- `selected_tense_moods`: Array of tense-mood combinations (e.g., "Presente-Indicativo")
+- `selected_pronouns`: Array of selected pronouns (e.g., ["yo", "tú", "él"])
+- `verb_selection`: Verb selection mode (all/favorites/custom)
+- `custom_verbs`: Array of custom verb infinitives when verb_selection is 'custom'
+- `question_count`: Number of questions per quiz
+- `created_at`: Record creation timestamp
+- `updated_at`: Last update timestamp
+
 ---
 
 ## Row Level Security (RLS)
@@ -343,6 +371,25 @@ CREATE POLICY "Users can delete own favorites" ON public.user_favorites
   FOR DELETE USING (auth.uid() = user_id);
 ```
 
+#### `public.user_quiz_preferences`
+```sql
+-- Users can view own quiz preferences
+CREATE POLICY "Users can view own quiz preferences" ON public.user_quiz_preferences
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- Users can insert own quiz preferences
+CREATE POLICY "Users can insert own quiz preferences" ON public.user_quiz_preferences
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Users can update own quiz preferences
+CREATE POLICY "Users can update own quiz preferences" ON public.user_quiz_preferences
+  FOR UPDATE USING (auth.uid() = user_id);
+
+-- Users can delete own quiz preferences
+CREATE POLICY "Users can delete own quiz preferences" ON public.user_quiz_preferences
+  FOR DELETE USING (auth.uid() = user_id);
+```
+
 ---
 
 ## Triggers and Functions
@@ -422,6 +469,9 @@ CREATE INDEX idx_verb_conjugations_mood_tense ON public.verb_conjugations(mood, 
 -- User favorites indexes
 CREATE INDEX idx_user_favorites_user_id ON public.user_favorites(user_id);
 CREATE INDEX idx_user_favorites_verb_infinitive ON public.user_favorites(verb_infinitive);
+
+-- User quiz preferences indexes
+CREATE INDEX idx_user_quiz_preferences_user_id ON public.user_quiz_preferences(user_id);
 ```
 
 ### Real-time Subscriptions
@@ -493,6 +543,15 @@ INSERT INTO public.games (id, title, type, difficulty, content) VALUES
 - Implemented database-backed favorites with RLS policies
 - Added compatibility fields for existing code
 - Created `Favorites` entity for type-safe database operations
+
+### Version 1.5 - Custom Quiz System
+- Added `user_quiz_preferences` table for persistent quiz configuration
+- Implemented quiz preferences API with GET/POST endpoints
+- Added tense-mood filtering and pronoun selection in quiz generation
+- Created database migration script for quiz preferences table
+- Enhanced quiz answer comparison to accept answers with or without pronouns
+- Disabled `vosotros` pronoun entirely from application
+- Added comprehensive quiz configuration UI with bottom-sliding modals
 
 ---
 

@@ -261,7 +261,7 @@ async function generateQuizQuestions(
     // Create the question
     const question: QuizQuestion = {
       id: `q_${questions.length + 1}`,
-      englishPhrase: selectedForm.formEnglish || `${selectedForm.pronounEnglish} ${conjugation.verb_english || conjugation.infinitive_english}`,
+      englishPhrase: generateEnglishPhrase(selectedForm.pronounEnglish, selectedForm.formEnglish, conjugation.verb_english || conjugation.infinitive_english),
       tense: conjugation.tense,
       mood: conjugation.mood,
       tenseEnglish: conjugation.tense_english,
@@ -293,5 +293,16 @@ async function generateQuizQuestions(
   });
   
   return questions;
+}
+
+function generateEnglishPhrase(pronounEnglish: string, formEnglish: string | null, verbEnglish: string): string {
+  // If we have the English form from the database, add the pronoun to it
+  if (formEnglish && formEnglish.trim() !== '') {
+    return `${pronounEnglish} ${formEnglish}`;
+  }
+  
+  // Otherwise, construct it from the pronoun and verb
+  const baseVerb = verbEnglish.replace(/^to\s+/, '');
+  return `${pronounEnglish} ${baseVerb}`;
 }
 

@@ -348,6 +348,38 @@ export default function CustomQuizPage() {
             </div>
           </motion.div>
         )}
+
+        {/* Quick Start Quiz Button */}
+        <div className="text-center mb-8">
+          <Button
+            onClick={handleStartQuiz}
+            disabled={loading || config.selectedTenseMoods.length === 0 || 
+                     (config.verbSelection === 'custom' && config.customVerbs.length === 0) ||
+                     (config.verbSelection === 'favorites' && favoriteVerbs.length === 0) ||
+                     config.selectedPronouns.length === 0}
+            className="rounded-full border border-orange-500 text-orange-500 hover:text-orange-600 
+            leading-none text-lg"
+          >
+            {loading ? (
+              <div className="flex items-center gap-2">
+                <div className="flex w-4 h-4 border-2 border-orange-500 border-t-transparent 
+                rounded-full animate-spin" />
+                <div className="w-[18ch] text-center">
+                  {language === 'es' ? 'Generando Quiz...' : 'Generating Quiz...'}
+                </div>
+                <div className="flex w-4 h-4" />
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <div className="flex w-4 h-4" />
+                <div className="w-[18ch] text-center">
+                  {language === 'es' ? 'Iniciar Quiz Rápido' : 'Quick Start Quiz'}
+                </div>
+                <div className="flex w-4 h-4" />
+              </div>
+            )}
+          </Button>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Tense Selection */}

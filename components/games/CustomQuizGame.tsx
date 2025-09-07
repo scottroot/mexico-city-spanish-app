@@ -64,18 +64,19 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
     // If answer is wrong, wait for user to click "Next Question"
     if (isCorrect) {
       setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex(currentQuestionIndex + 1);
-          setUserAnswer('');
-          setShowResult(false);
-          setShowInfinitive(false);
-        } else {
-          // Quiz completed
-          console.log('Quiz completed!', {
-            currentIndex: currentQuestionIndex,
-            totalQuestions: questions.length,
-            isCorrect
-          });
+        setCurrentQuestionIndex(prevIndex => {
+          if (prevIndex < questions.length - 1) {
+            setUserAnswer('');
+            setShowResult(false);
+            setShowInfinitive(false);
+            return prevIndex + 1;
+          } else {
+            // Quiz completed
+            console.log('Quiz completed!', {
+              currentIndex: prevIndex,
+              totalQuestions: questions.length,
+              isCorrect
+            });
           const completionTime = Math.round((Date.now() - startTime) / 1000);
           const finalScore = score + (isCorrect ? 1 : 0);
           const finalMistakes = mistakes + (isCorrect ? 0 : 1);
@@ -110,7 +111,9 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
           });
           
           onComplete(result);
-        }
+            return prevIndex;
+          }
+        });
       }, 1000);
     }
   };
@@ -119,10 +122,10 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
     setShowInfinitive(!showInfinitive);
   };
   
-  const playAudio = async (text: string) => {
+  const playAudio = async (text: string, includePronoun: boolean = true) => {
     try {
-      // Provide natural context for better pronunciation
-      const contextText = `${currentQuestion.pronoun} ${text}`;
+      // For infinitive, don't include pronoun. For conjugations, include pronoun for context
+      const contextText = includePronoun ? `${currentQuestion.pronoun} ${text}` : text;
       const response = await fetch(`/api/tts?text=${encodeURIComponent(contextText)}`);
       if (response.ok) {
         const audioBlob = await response.blob();
@@ -135,7 +138,23 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
     }
   };
   
-  const isCorrect = showResult && userAnswer.toLowerCase().trim() === currentQuestion.correctAnswer.toLowerCase().trim();
+  const isCorrect = showResult && (() => {
+    const userAnswerClean = userAnswer.toLowerCase().trim();
+    const correctAnswerClean = currentQuestion.correctAnswer.toLowerCase().trim();
+    
+    // Check if user answer matches exactly
+    if (userAnswerClean === correctAnswerClean) {
+      return true;
+    }
+    
+    // Check if user answer includes the pronoun + correct answer
+    const answerWithPronoun = `${currentQuestion.pronoun.toLowerCase()} ${correctAnswerClean}`;
+    if (userAnswerClean === answerWithPronoun) {
+      return true;
+    }
+    
+    return false;
+  })();
   const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
   
   // Handle Enter key for "Next Question" when answer is wrong
@@ -229,7 +248,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => playAudio(currentQuestion.infinitive)}
+                    onClick={() => playAudio(currentQuestion.infinitive, false)}
                     className="p-1"
                   >
                     <Volume2 className="w-4 h-4 text-orange-600" />

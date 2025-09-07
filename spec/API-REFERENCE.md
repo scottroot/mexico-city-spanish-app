@@ -80,6 +80,31 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - RLS: Public read access
 - Returns: Verb details with all conjugation forms across tenses and moods
 
+### Quiz API Endpoints
+
+#### `POST /api/quiz`
+- File: `app/api/quiz/route.ts`
+- Input: `QuizConfig` object with `selectedTenseMoods`, `selectedPronouns`, `verbSelection`, `customVerbs`, `questionCount`
+- Returns: `Promise<{ questions: QuizQuestion[] }>`
+- Database: `public.verb_conjugations` table with tense-mood filtering
+- Features: Pronoun filtering, English phrase generation with pronouns, `vosotros` disabled
+- Returns: Array of quiz questions with conjugations, pronouns, and explanations
+
+#### `GET /api/quiz-preferences`
+- File: `app/api/quiz-preferences/route.ts`
+- Returns: `Promise<QuizConfig>`
+- Database: `public.user_quiz_preferences` table
+- RLS: `auth.uid() = user_id`
+- Returns: User's saved quiz configuration or default values
+
+#### `POST /api/quiz-preferences`
+- File: `app/api/quiz-preferences/route.ts`
+- Input: `QuizConfig` object
+- Returns: `Promise<{ success: boolean, error?: string }>`
+- Database: `public.user_quiz_preferences` table with upsert operation
+- RLS: `auth.uid() = user_id`
+- Features: Validates input, maps frontend config to database fields, enhanced error logging
+
 ### Game Entity Methods (TypeScript)
 
 #### `Game.list()`
@@ -301,6 +326,9 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - `ProgressResult<T>`: Generic result type with `success`, `data`, `error`
 - `Verb`: Verb entity interface with `id`, `infinitive`, `infinitive_english`
 - `VerbConjugation`: Verb conjugation interface with all tense forms and mood data
+- `QuizConfig`: Quiz configuration interface with `selectedTenseMoods`, `selectedPronouns`, `verbSelection`, `customVerbs`, `questionCount`
+- `QuizQuestion`: Quiz question interface with `id`, `infinitive`, `correctAnswer`, `pronoun`, `pronounEnglish`, `explanation`
+- `PronounOption`: Pronoun option interface with `value`, `label`, `labelEnglish`
 
 ### TTS Types
 - `DeepgramTTSOptions`: TTS configuration object
@@ -354,6 +382,18 @@ This document provides a comprehensive API reference for the Spanish Language Le
 ### Network-Adaptive Streaming
 - Uses: `NetworkPerformanceEstimator.getInstance()` → `getOptimalPreset()`
 - Pattern: Network detection → Preset selection → Optimized streaming
+
+### Custom Quiz Integration
+- File: `app/quiz/page.tsx` - Custom quiz setup page with modal-based selection
+- Uses: `loadQuizPreferences()` and `saveQuizPreferences()` for persistence
+- Pattern: Quiz config → API calls → Database storage → Quiz generation
+- Features: Bottom-sliding modals, tense/verb/pronoun selection, persistent preferences
+
+### Quiz Game Integration
+- File: `components/games/CustomQuizGame.tsx` - Quiz game component with enhanced answer comparison
+- Uses: `isCorrect` logic with pronoun-included and pronoun-excluded answer validation
+- Pattern: User input → Answer comparison → Result display → Audio playback
+- Features: TTS integration, progress tracking, enhanced answer validation
 
 ---
 
