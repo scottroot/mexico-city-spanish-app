@@ -42,9 +42,10 @@ export async function GET(request: NextRequest): Promise<NextResponse<TTSRespons
     const model: DeepgramModel = (modelParam || process.env.DEEPGRAM_VOICE_MAN || 'aura-2-luna-es') as DeepgramModel;
 
     const response = await DEEPGRAM_CLIENT.speak.request(
-      { text },
+      { text: `${text}.` },
       { 
-        model, encoding: DEEPGRAM_ENCODING,
+        model,
+        encoding: DEEPGRAM_ENCODING,
         sample_rate: DEEPGRAM_SAMPLE_RATE,
         filler_words: false
       }

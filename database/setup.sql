@@ -95,6 +95,19 @@ CREATE TABLE IF NOT EXISTS public.verb_conjugations (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- 8. Create user_quiz_preferences table
+CREATE TABLE IF NOT EXISTS public.user_quiz_preferences (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  selected_tense_moods TEXT[] NOT NULL DEFAULT '{}', -- Array of "tense-mood" strings
+  verb_selection TEXT CHECK (verb_selection IN ('favorites', 'custom')) NOT NULL DEFAULT 'favorites',
+  custom_verbs TEXT[] NOT NULL DEFAULT '{}', -- Array of verb infinitives
+  question_count INTEGER NOT NULL DEFAULT 10,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id) -- One preference record per user
+);
+
 -- 8. Enable Row Level Security (RLS)
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.progress ENABLE ROW LEVEL SECURITY;
@@ -103,6 +116,7 @@ ALTER TABLE public.games ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.verbs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.verb_conjugations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_favorites ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.user_quiz_preferences ENABLE ROW LEVEL SECURITY;
 
 -- 9. Create RLS Policies for profiles
 DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
@@ -172,6 +186,23 @@ CREATE POLICY "Users can insert own favorites" ON public.user_favorites
 
 DROP POLICY IF EXISTS "Users can delete own favorites" ON public.user_favorites;
 CREATE POLICY "Users can delete own favorites" ON public.user_favorites
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- 14. Create RLS Policies for user_quiz_preferences
+DROP POLICY IF EXISTS "Users can view own quiz preferences" ON public.user_quiz_preferences;
+CREATE POLICY "Users can view own quiz preferences" ON public.user_quiz_preferences
+  FOR SELECT USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can insert own quiz preferences" ON public.user_quiz_preferences;
+CREATE POLICY "Users can insert own quiz preferences" ON public.user_quiz_preferences
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can update own quiz preferences" ON public.user_quiz_preferences;
+CREATE POLICY "Users can update own quiz preferences" ON public.user_quiz_preferences
+  FOR UPDATE USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can delete own quiz preferences" ON public.user_quiz_preferences;
+CREATE POLICY "Users can delete own quiz preferences" ON public.user_quiz_preferences
   FOR DELETE USING (auth.uid() = user_id);
 
 -- 15. Function to handle new user registration
@@ -337,6 +368,8 @@ CREATE INDEX IF NOT EXISTS idx_verb_conjugations_mood_tense ON public.verb_conju
 
 CREATE INDEX IF NOT EXISTS idx_user_favorites_user_id ON public.user_favorites(user_id);
 CREATE INDEX IF NOT EXISTS idx_user_favorites_verb_infinitive ON public.user_favorites(verb_infinitive);
+
+CREATE INDEX IF NOT EXISTS idx_user_quiz_preferences_user_id ON public.user_quiz_preferences(user_id);
 
 -- 22. Create a view for user progress summary
 CREATE OR REPLACE VIEW public.user_progress_summary AS

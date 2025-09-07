@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const config: QuizConfig = await request.json();
     
     console.log('Generating quiz with config:', config);
+    console.log('Selected pronouns:', config.selectedPronouns);
     
     const supabase = await createClient();
     
@@ -94,8 +95,8 @@ export async function POST(request: Request) {
     // Generate quiz questions
     const questions = await generateQuizQuestions(
       availableVerbs,
-      config.selectedTenses,
-      config.selectedMoods,
+      config.selectedTenseMoods,
+      config.selectedPronouns,
       config.questionCount,
       supabase
     );
@@ -121,13 +122,19 @@ export async function POST(request: Request) {
 
 async function generateQuizQuestions(
   verbs: VerbOption[],
-  selectedTenses: string[],
-  selectedMoods: string[],
+  selectedTenseMoods: string[],
+  selectedPronouns: string[],
   questionCount: number,
   supabase: any
 ): Promise<QuizQuestion[]> {
   const questions: QuizQuestion[] = [];
   const usedCombinations = new Set<string>();
+  
+  // Parse selected tense-mood combinations
+  const tenseMoodPairs = selectedTenseMoods.map(tm => {
+    const [tense, mood] = tm.split('-');
+    return { tense, mood };
+  });
   
   // Get all conjugations for the selected verbs, tenses, and moods
   // Join with verbs table to get infinitive_english
@@ -138,8 +145,7 @@ async function generateQuizQuestions(
       verbs!inner(infinitive_english)
     `)
     .in('infinitive', verbs.map(v => v.infinitive))
-    .in('tense', selectedTenses)
-    .in('mood', selectedMoods);
+    .or(tenseMoodPairs.map(pair => `and(tense.eq.${pair.tense},mood.eq.${pair.mood})`).join(','));
   
   if (error || !conjugations) {
     console.error('Error loading conjugations:', error);
@@ -157,8 +163,8 @@ async function generateQuizQuestions(
     validConjugations: validConjugations.length,
     requestedQuestions: questionCount,
     selectedVerbs: verbs.map(v => v.infinitive),
-    selectedTenses,
-    selectedMoods
+    selectedTenseMoods,
+    tenseMoodPairs
   });
   
   // Generate questions
@@ -171,8 +177,8 @@ async function generateQuizQuestions(
     
     console.log(`Attempt ${attempts}: Trying to generate question ${questions.length + 1}/${questionCount}`);
     
-    // Randomly select a pronoun form
-    const pronounForms = [
+    // Randomly select a pronoun form from selected pronouns only
+    const allPronounForms = [
       { 
         pronoun: 'yo', 
         pronounEnglish: 'I', 
@@ -181,12 +187,12 @@ async function generateQuizQuestions(
       },
       { 
         pronoun: 'tú', 
-        pronounEnglish: 'you (informal)', 
+        pronounEnglish: 'you', 
         form: conjugation.form_2s,
         formEnglish: conjugation.form_2s_english
       },
       { 
-                pronoun: 'él', 
+        pronoun: 'él', 
         pronounEnglish: 'he', 
         form: conjugation.form_3s,
         formEnglish: conjugation.form_3s_english
@@ -210,30 +216,29 @@ async function generateQuizQuestions(
         formEnglish: conjugation.form_1p_english
       },
       { 
-        pronoun: 'vosotros', 
-        pronounEnglish: 'you (plural, Spain)', 
-        form: conjugation.form_2p,
-        formEnglish: conjugation.form_2p_english
-      },
-      { 
         pronoun: 'ellos', 
-        pronounEnglish: 'they (masculine)', 
+        pronounEnglish: 'they', 
         form: conjugation.form_3p,
         formEnglish: conjugation.form_3p_english
       },
       { 
         pronoun: 'ellas', 
-        pronounEnglish: 'they (feminine)', 
+        pronounEnglish: 'they', 
         form: conjugation.form_3p,
         formEnglish: conjugation.form_3p_english
       },
       { 
         pronoun: 'ustedes', 
-        pronounEnglish: 'you (formal plural)', 
+        pronounEnglish: 'you all', 
         form: conjugation.form_3p,
         formEnglish: conjugation.form_3p_english
       }
-    ].filter(p => p.form && p.form.trim() !== '');
+    ];
+    
+    // Filter to only include selected pronouns and valid forms
+    const pronounForms = allPronounForms.filter(p => 
+      selectedPronouns.includes(p.pronoun) && p.form && p.form.trim() !== ''
+    );
     
     if (pronounForms.length === 0) {
       validConjugations.splice(randomIndex, 1);
@@ -256,9 +261,7 @@ async function generateQuizQuestions(
     // Create the question
     const question: QuizQuestion = {
       id: `q_${questions.length + 1}`,
-      englishPhrase: selectedForm.formEnglish ? 
-        `${selectedForm.pronounEnglish} ${selectedForm.formEnglish}` : 
-        generateEnglishPhrase(selectedForm.pronounEnglish, conjugation.verb_english || conjugation.infinitive_english, conjugation.tense_english),
+      englishPhrase: selectedForm.formEnglish || `${selectedForm.pronounEnglish} ${conjugation.verb_english || conjugation.infinitive_english}`,
       tense: conjugation.tense,
       mood: conjugation.mood,
       tenseEnglish: conjugation.tense_english,
@@ -292,36 +295,3 @@ async function generateQuizQuestions(
   return questions;
 }
 
-function generateEnglishPhrase(pronoun: string, verbEnglish: string, tenseEnglish: string): string {
-  // Extract the base verb from the infinitive (remove "to ")
-  const baseVerb = verbEnglish.replace(/^to\s+/, '');
-  
-  // For now, just return a simple phrase with the base verb
-  // This is a temporary solution until we have proper English conjugations in the DB
-  const pronounMap: { [key: string]: string } = {
-    'I': 'I',
-    'you (informal)': 'You',
-    'he/she/you (formal)': 'He/She',
-    'we': 'We',
-    'you (plural, Spain)': 'You (plural)',
-    'they/you (plural)': 'They'
-  };
-  
-  const cleanPronoun = pronounMap[pronoun] || pronoun;
-  
-  // Simple tense-based phrases without trying to conjugate the verb
-  switch (tenseEnglish) {
-    case 'Present':
-      return `${cleanPronoun} ${baseVerb}`;
-    case 'Preterite':
-      return `${cleanPronoun} ${baseVerb} (past)`;
-    case 'Imperfect':
-      return `${cleanPronoun} used to ${baseVerb}`;
-    case 'Future':
-      return `${cleanPronoun} will ${baseVerb}`;
-    case 'Conditional':
-      return `${cleanPronoun} would ${baseVerb}`;
-    default:
-      return `${cleanPronoun} ${baseVerb}`;
-  }
-}

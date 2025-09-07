@@ -1,10 +1,10 @@
 // Quiz Types for Custom Quiz Feature
 
 export interface QuizConfig {
-  selectedTenses: string[];
-  selectedMoods: string[];
+  selectedTenseMoods: string[]; // Format: "tense-mood" (e.g., "Presente-Indicativo")
   verbSelection: 'favorites' | 'custom';
   customVerbs: string[];
+  selectedPronouns: string[]; // Array of pronouns to use (e.g., ["yo", "tú", "él"])
   questionCount: number;
 }
 
@@ -59,4 +59,10 @@ export interface VerbOption {
 export interface QuestionCountOption {
   value: number;
   label: string;
+}
+
+export interface PronounOption {
+  value: string;
+  label: string;
+  labelEnglish: string;
 }
