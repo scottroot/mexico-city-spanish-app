@@ -96,7 +96,7 @@ export default function QuizGamePage() {
     const isGood = percentage >= 70;
     
     return (
-      <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-orange-50 to-pink-50 p-4">
+      <div className="min-h-full bg-gradient-to-br from-orange-50 to-pink-50 p-4">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -251,7 +251,7 @@ export default function QuizGamePage() {
   
   // Quiz in progress
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-orange-50 to-pink-50">
+    <div className="min-h-full bg-gradient-to-br from-orange-50 to-pink-50">
       <CustomQuizGame
         questions={quizData.questions}
         onComplete={handleQuizComplete}

@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -31,6 +31,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
   const [correctAnswers, setCorrectAnswers] = useState<boolean[]>([]);
   const [startTime] = useState(Date.now());
   
+  const inputRef = useRef<HTMLInputElement>(null);
   const currentQuestion = questions[currentQuestionIndex];
   
   // Debug logging
@@ -137,6 +138,28 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
   const isCorrect = showResult && userAnswer.toLowerCase().trim() === currentQuestion.correctAnswer.toLowerCase().trim();
   const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
   
+  // Handle Enter key for "Next Question" when answer is wrong
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && showResult && !isCorrect && currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setUserAnswer('');
+        setShowResult(false);
+        setShowInfinitive(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, [showResult, isCorrect, currentQuestionIndex, questions.length]);
+  
+  // Focus input when question changes
+  useEffect(() => {
+    if (inputRef.current && !showResult) {
+      inputRef.current.focus();
+    }
+  }, [currentQuestionIndex, showResult]);
+  
   return (
     <div className="max-w-2xl mx-auto p-4">
       <div className="mb-6">
@@ -158,7 +181,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
       </div>
 
       <Card className="mb-6 bg-gradient-to-br from-orange-50 to-pink-50 border-0 shadow-lg">
-        <CardContent className="p-8">
+        <CardContent className="px-6 py-0">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
               {currentQuestion.englishPhrase}
@@ -222,20 +245,21 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
       </Card>
 
       <Card className="mb-6">
-        <CardContent className="p-6">
-          <div className="flex gap-3">
+        <CardContent className="pl-0 pr-0 pt-0 pb-0">
+          <div className="flex gap-0">
             <Input
+              ref={inputRef}
               value={userAnswer}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(e.target.value)}
               placeholder={language === 'es' ? 'Escribe tu respuesta aquí...' : 'Type your answer here...'}
-              className="flex-1"
+              className="flex-1 text-base bg-gray-50"
               disabled={showResult}
               onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSubmit()}
             />
             <Button 
               onClick={handleSubmit}
               disabled={showResult || !userAnswer.trim()}
-              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
+              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 pt-2 pb-2!"
             >
               {language === 'es' ? 'Enviar' : 'Submit'}
             </Button>
@@ -270,12 +294,12 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
           </div>
           
           {!isCorrect && (
-            <div className="mb-4">
-              <p className="text-gray-700 mb-2">
+            <div className="mb-4 flex items-center">
+              <p className="text-gray-500 mr-2">
                 <strong>{language === 'es' ? 'Respuesta correcta:' : 'Correct answer:'}</strong>
               </p>
               <div className="flex items-center gap-2">
-                <span className="text-lg font-medium text-gray-800">
+                <span className="text-lg leading-none font-medium text-gray-800">
                   {currentQuestion.pronoun} {currentQuestion.correctAnswer}
                 </span>
                 <Button
@@ -316,7 +340,8 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
                 }}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
               >
-                {language === 'es' ? 'Siguiente Pregunta' : 'Next Question'}
+                {language === 'es' ? 'Siguiente Pregunta' : 'Next Question'} 
+                <span className="ml-2 text-xs opacity-75">(Enter)</span>
               </Button>
             </div>
           )}

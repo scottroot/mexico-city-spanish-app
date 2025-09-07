@@ -50,7 +50,7 @@ export default function Layout({ children, currentPageName, user }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
+    <div className="min-h-full bg-gradient-to-br from-orange-50 via-white to-teal-50">
       <style>
         {`
           :root {
