@@ -31,16 +31,26 @@ Spanish-Language-App/
 │   │   │   └── page.js          # Signup page
 │   │   └── forgot-password/
 │   │       └── page.js          # Password reset page
+│   ├── external-app-to-integrate/ # External verb conjugation app
+│   │   └── external-app/        # Source app for verb functionality
+│   │       ├── api/verbs/       # Verb API endpoints
+│   │       ├── components/      # Verb conjugation components
+│   │       ├── utils/           # Verb utilities and data
+│   │       ├── verbs.csv        # Verb conjugation data
+│   │       └── verbs.db         # SQLite verb database
 │   ├── game/
 │   │   ├── Game.js              # Main game component
 │   │   └── page.js              # Game page route (protected)
 │   ├── progress/
 │   │   ├── Progress.js          # Progress tracking component
 │   │   └── page.js              # Progress page route (protected)
+│   ├── verbs/
+│   │   ├── Verbs.js             # Verb learning component
+│   │   └── page.js              # Verbs page route
 │   ├── globals.css              # Global styles
-│   ├── Home.js                  # Home page component
+│   ├── Home.tsx                 # Home page component
 │   ├── layout.js                # Root layout with AuthProvider
-│   └── page.js                  # Home page route (protected)
+│   └── page.tsx                 # Home page route (protected)
 ├── components/                   # Reusable UI components
 │   ├── auth/                    # Authentication components
 │   │   ├── LoginForm.js         # Login form component
@@ -87,6 +97,8 @@ Spanish-Language-App/
 ├── database/                     # Database setup and documentation
 │   ├── setup.sql                # Complete database schema
 │   └── README.md                # Database setup instructions
+├── scripts/                     # Utility scripts
+│   └── import-verbs.js          # Verb data migration script
 ├── spec/                        # Technical documentation
 │   ├── README.md                # This file
 │   ├── TTS-ARCHITECTURE.md      # TTS system architecture
@@ -129,6 +141,7 @@ Spanish-Language-App/
 
 - **User Authentication**: Complete signup/login system with Supabase and automatic profile creation
 - **Interactive Games**: Grammar, vocabulary, and pronunciation practice
+- **Verb Conjugation System**: Comprehensive Spanish verb database with 637 verbs and 11,466 conjugations
 - **Progress Tracking**: User learning progress and achievements with persistence
 - **Text-to-Speech**: Real-time audio generation for pronunciation
 - **Multi-language UI**: Toggle between English and Spanish (Latinoamericano) interface
@@ -335,6 +348,16 @@ TTS System Architecture:
 - Fields: `id`, `user_id`, `total_games_completed`, `total_score`, `current_streak`, `longest_streak`, `last_played`, `created_at`, `updated_at`
 - Auto-updated via `update_user_stats()` trigger
 
+### Verb Entity
+- Table: `public.verbs`
+- Fields: `id`, `infinitive`, `infinitive_english`, `created_at`, `updated_at`
+- Contains 637 unique Spanish verbs with English translations
+
+### VerbConjugation Entity
+- Table: `public.verb_conjugations`
+- Fields: `id`, `verb_id`, `infinitive`, `mood`, `mood_english`, `tense`, `tense_english`, `verb_english`, `form_1s`, `form_2s`, `form_3s`, `form_1p`, `form_2p`, `form_3p`, `gerund`, `gerund_english`, `pastparticiple`, `pastparticiple_english`, `created_at`, `updated_at`
+- Contains 11,466 conjugation records across all tenses and moods
+
 ---
 
 ## Database Schema
@@ -363,11 +386,21 @@ The app uses Supabase PostgreSQL with Row Level Security (RLS) for data isolatio
 - Fields: `id`, `user_id`, `total_games_completed`, `total_score`, `current_streak`, `longest_streak`, `last_played`, `created_at`, `updated_at`
 - RLS: `auth.uid() = user_id`
 
+#### `verbs`
+- Fields: `id`, `infinitive`, `infinitive_english`, `created_at`, `updated_at`
+- RLS: Public read access
+- Contains 637 unique Spanish verbs
+
+#### `verb_conjugations`
+- Fields: `id`, `verb_id`, `infinitive`, `mood`, `mood_english`, `tense`, `tense_english`, `verb_english`, `form_1s`, `form_2s`, `form_3s`, `form_1p`, `form_2p`, `form_3p`, `gerund`, `gerund_english`, `pastparticiple`, `pastparticiple_english`, `created_at`, `updated_at`
+- RLS: Public read access
+- Contains 11,466 conjugation records
+
 ### Security
 
 #### Row Level Security (RLS)
 - Policies: `auth.uid() = id` (profiles), `auth.uid() = user_id` (progress, user_stats)
-- All tables: `profiles`, `progress`, `user_stats`
+- All tables: `profiles`, `progress`, `user_stats`, `verbs`, `verb_conjugations`
 
 #### Triggers and Functions
 - `handle_new_user()`: Auto-creates profile + user_stats on signup

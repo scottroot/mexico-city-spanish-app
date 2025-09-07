@@ -15,10 +15,13 @@
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.57.2",
     "clsx": "^2.0.0",
+    "csv-parser": "^3.2.0",
     "date-fns": "^2.30.0",
+    "dotenv": "^17.2.2",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.294.0",
     "next": "^15.0.0",
+    "papaparse": "^5.5.3",
     "react": "^18.0.0-0",
     "react-dom": "^18.0.0-0"
   },

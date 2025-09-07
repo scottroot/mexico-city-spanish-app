@@ -10,7 +10,7 @@ export default function LanguageToggle() {
   const dropdownRef = useRef(null)
 
   const languages = [
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'es', name: 'Español', flag: '🇲🇽' },
     { code: 'en', name: 'English', flag: '🇺🇸' }
   ]
 

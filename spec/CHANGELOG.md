@@ -5,6 +5,15 @@ All notable changes to the Spanish Language Learning App will be documented in t
 ## [Unreleased]
 
 ### Added
+- **Verb Conjugation System**: Complete Spanish verb database integration
+  - `verbs` table with 637 unique Spanish verbs and English translations
+  - `verb_conjugations` table with 11,466 conjugation records across all tenses and moods
+  - Public read access for verb data with proper RLS policies
+  - Migration script (`scripts/import-verbs.js`) for CSV to Supabase import
+  - Comprehensive verb database covering Indicativo, Subjuntivo, and Imperativo moods
+  - All verb forms: yo, tú, él/ella/usted, nosotros, vosotros, ellos/ellas/ustedes
+  - Gerunds and past participles for each verb
+  - External app integration from `app/external-app-to-integrate/external-app/`
 - **Database-Driven Architecture**: Complete migration from mock data to Supabase database
   - `games` table created in Supabase with proper RLS policies
   - TypeScript entities: `Game.ts` and `Progress.ts` with full type safety
@@ -64,6 +73,7 @@ All notable changes to the Spanish Language Learning App will be documented in t
 - **Database Security**: Enhanced Row Level Security (RLS) implementation
   - `games` table with public read, authenticated write policies
   - Progress data isolation with user-specific RLS policies
+  - Verb data with public read access for learning content
   - Secure API key handling in server-side TTS endpoint
 - **Profile Creation Security**: Added multiple security checks for automatic profile creation
   - User ID validation
@@ -76,6 +86,7 @@ All notable changes to the Spanish Language Learning App will be documented in t
 ### Core Features
 - User authentication with Supabase
 - Interactive learning games (Grammar, Vocabulary, Pronunciation)
+- Spanish verb conjugation system with comprehensive database
 - Progress tracking and user statistics
 - Text-to-Speech integration with Deepgram
 - Responsive design with Tailwind CSS

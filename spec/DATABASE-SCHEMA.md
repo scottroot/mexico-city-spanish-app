@@ -154,6 +154,76 @@ CREATE TABLE public.user_stats (
 - `created_at`: Record creation timestamp
 - `updated_at`: Last update timestamp
 
+### `public.verbs`
+Stores Spanish verb infinitives with English translations.
+
+```sql
+CREATE TABLE public.verbs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  infinitive TEXT UNIQUE NOT NULL,
+  infinitive_english TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+**Fields:**
+- `id`: Primary key (UUID)
+- `infinitive`: Spanish verb infinitive (unique)
+- `infinitive_english`: English translation
+- `created_at`: Record creation timestamp
+- `updated_at`: Last update timestamp
+
+### `public.verb_conjugations`
+Stores all conjugation forms for Spanish verbs across all tenses and moods.
+
+```sql
+CREATE TABLE public.verb_conjugations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  verb_id UUID REFERENCES public.verbs(id) ON DELETE CASCADE NOT NULL,
+  infinitive TEXT NOT NULL,
+  mood TEXT NOT NULL,
+  mood_english TEXT NOT NULL,
+  tense TEXT NOT NULL,
+  tense_english TEXT NOT NULL,
+  verb_english TEXT,
+  form_1s TEXT,
+  form_2s TEXT,
+  form_3s TEXT,
+  form_1p TEXT,
+  form_2p TEXT,
+  form_3p TEXT,
+  gerund TEXT,
+  gerund_english TEXT,
+  pastparticiple TEXT,
+  pastparticiple_english TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+**Fields:**
+- `id`: Primary key (UUID)
+- `verb_id`: References `verbs.id`
+- `infinitive`: Denormalized verb infinitive for easier queries
+- `mood`: Spanish mood (Indicativo, Subjuntivo, Imperativo)
+- `mood_english`: English mood translation
+- `tense`: Spanish tense (Presente, Pretérito, etc.)
+- `tense_english`: English tense translation
+- `verb_english`: English verb translation
+- `form_1s`: First person singular (yo)
+- `form_2s`: Second person singular (tú)
+- `form_3s`: Third person singular (él/ella/usted)
+- `form_1p`: First person plural (nosotros)
+- `form_2p`: Second person plural (vosotros)
+- `form_3p`: Third person plural (ellos/ellas/ustedes)
+- `gerund`: Spanish gerund form
+- `gerund_english`: English gerund translation
+- `pastparticiple`: Spanish past participle
+- `pastparticiple_english`: English past participle translation
+- `created_at`: Record creation timestamp
+- `updated_at`: Last update timestamp
+
 ---
 
 ## Row Level Security (RLS)
@@ -217,6 +287,20 @@ CREATE POLICY "Users can view own stats" ON public.user_stats
 -- Users can update own stats
 CREATE POLICY "Users can update own stats" ON public.user_stats
   FOR ALL USING (auth.uid() = user_id);
+```
+
+#### `public.verbs`
+```sql
+-- Anyone can view verbs (public content)
+CREATE POLICY "Anyone can view verbs" ON public.verbs
+  FOR SELECT USING (true);
+```
+
+#### `public.verb_conjugations`
+```sql
+-- Anyone can view verb conjugations (public content)
+CREATE POLICY "Anyone can view verb conjugations" ON public.verb_conjugations
+  FOR SELECT USING (true);
 ```
 
 ---
@@ -288,6 +372,12 @@ CREATE INDEX idx_user_stats_total_score ON public.user_stats(total_score);
 -- Games table indexes
 CREATE INDEX idx_games_type ON public.games(type);
 CREATE INDEX idx_games_difficulty ON public.games(difficulty);
+
+-- Verb table indexes
+CREATE INDEX idx_verbs_infinitive ON public.verbs(infinitive);
+CREATE INDEX idx_verb_conjugations_verb_id ON public.verb_conjugations(verb_id);
+CREATE INDEX idx_verb_conjugations_infinitive ON public.verb_conjugations(infinitive);
+CREATE INDEX idx_verb_conjugations_mood_tense ON public.verb_conjugations(mood, tense);
 ```
 
 ### Real-time Subscriptions
@@ -345,6 +435,13 @@ INSERT INTO public.games (id, title, type, difficulty, content) VALUES
 - Added comprehensive error handling
 - Implemented database-driven architecture
 - Migrated from mock data to database storage
+
+### Version 1.3 - Verb Conjugation System
+- Added `verbs` table with 637 unique Spanish verbs
+- Added `verb_conjugations` table with 11,466 conjugation records
+- Implemented public read access for verb data
+- Created migration script (`scripts/import-verbs.js`) for CSV to Supabase import
+- Added comprehensive verb database with all tenses and moods
 
 ---
 
