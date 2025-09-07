@@ -7,6 +7,7 @@
     "games": "Games",
     "progress": "Progress",
     "verbs": "Verbs",
+    "cverbs": "CVerbs",
     "login": "Sign In",
     "logout": "Sign Out",
     "user": "User"
@@ -132,5 +133,14 @@
     "feature3": "Irregular letters highlighted in red",
     "feature4": "Search functionality",
     "feature5": "Clean, organized layout"
+  },
+  "cverbs": {
+    "title": "Condensed Verbs",
+    "subtitle": "Compact view of Spanish verb conjugations",
+    "features": "Condensed Features",
+    "feature1": "Compact grid layout for efficient viewing",
+    "feature2": "Multiple tenses displayed simultaneously",
+    "feature3": "Mood-based navigation tabs",
+    "feature4": "Space-efficient design"
   }
 }

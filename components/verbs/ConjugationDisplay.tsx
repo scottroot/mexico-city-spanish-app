@@ -39,12 +39,14 @@ interface ConjugationDisplayProps {
   verb: Verb;
   loading?: boolean;
   onClose?: () => void;
+  isMobile?: boolean;
 }
 
 export default function ConjugationDisplay({ 
   verb, 
   loading = false, 
-  onClose 
+  onClose,
+  isMobile = false
 }: ConjugationDisplayProps) {
   const [expandedMoods, setExpandedMoods] = useState<Set<string>>(new Set(['Indicativo']));
   const { t } = useLanguage();
@@ -113,7 +115,7 @@ export default function ConjugationDisplay({
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className={`${isMobile ? 'w-full' : 'flex-1'} flex items-center justify-center ${isMobile ? 'h-64' : ''}`}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
           <p className="text-gray-600">{t('verbs.loadingConjugations')}</p>
@@ -123,14 +125,14 @@ export default function ConjugationDisplay({
   }
 
   return (
-    <div className="flex-1 overflow-y-auto bg-gray-50">
-      <div className="max-w-6xl mx-auto p-6">
+    <div className={`${isMobile ? 'w-full' : 'flex-1'} ${isMobile ? 'overflow-y-auto' : 'overflow-y-auto'} bg-gray-50`}>
+      <div className={`${isMobile ? 'px-4 py-6' : 'max-w-6xl mx-auto p-6'}`}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className={`flex items-center justify-between ${isMobile ? 'mb-4' : 'mb-6'}`}>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-orange-500" />
-              <h1 className="text-3xl font-bold text-gray-900">
+              <BookOpen className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-orange-500`} />
+              <h1 className={`${isMobile ? 'text-2xl' : 'text-3xl'} font-bold text-gray-900`}>
                 {verb.infinitive}
               </h1>
             </div>

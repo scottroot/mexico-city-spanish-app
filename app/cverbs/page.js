@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 import { BookOpen, Sparkles } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import VerbSidebar from '../../components/verbs/VerbSidebar';
-import ConjugationDisplay from '../../components/verbs/ConjugationDisplay';
+import CondensedConjugationDisplay from '../../components/verbs/CondensedConjugationDisplay';
 import TenseTimeline from '../../components/verbs/TenseTimeline';
 
-export default function VerbsPage() {
+export default function CVerbsPage() {
   const [verbs, setVerbs] = useState([]);
   const [selectedVerb, setSelectedVerb] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -84,7 +84,7 @@ export default function VerbsPage() {
       {/* Main Content Area */}
       <div className="flex-1 overflow-hidden">
         {selectedVerb ? (
-          <ConjugationDisplay 
+          <CondensedConjugationDisplay 
             verb={selectedVerb} 
             loading={loadingVerb} 
             onClose={handleCloseVerb} 
@@ -96,11 +96,11 @@ export default function VerbsPage() {
                 <div className="flex items-center justify-center gap-2 mb-6">
                   <Sparkles className="w-8 h-8 text-orange-500" />
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-                    {t('verbs.title')}
+                    {t('cverbs.title')}
                   </h1>
                 </div>
                 <p className="text-xl text-gray-600">
-                  {t('verbs.subtitle')}
+                  {t('cverbs.subtitle')}
                 </p>
               </div>
               
@@ -113,14 +113,13 @@ export default function VerbsPage() {
               >
                 <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-orange-500" />
-                  {t('verbs.features')}
+                  {t('cverbs.features')}
                 </h2>
                 <ul className="text-gray-600 space-y-2 text-left">
-                  <li>• {t('verbs.feature1')}</li>
-                  <li>• {t('verbs.feature2')}</li>
-                  <li>• {t('verbs.feature3')}</li>
-                  <li>• {t('verbs.feature4')}</li>
-                  <li>• {t('verbs.feature5')}</li>
+                  <li>• {t('cverbs.feature1')}</li>
+                  <li>• {t('cverbs.feature2')}</li>
+                  <li>• {t('cverbs.feature3')}</li>
+                  <li>• {t('cverbs.feature4')}</li>
                 </ul>
               </motion.div>
             </div>

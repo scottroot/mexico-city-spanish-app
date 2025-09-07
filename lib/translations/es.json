@@ -7,6 +7,7 @@
     "games": "Juegos",
     "progress": "Progreso",
     "verbs": "Verbos",
+    "cverbs": "CVerbos",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "user": "Usuario"
@@ -132,5 +133,14 @@
     "feature3": "Letras irregulares resaltadas en rojo",
     "feature4": "Funcionalidad de búsqueda",
     "feature5": "Diseño limpio y organizado"
+  },
+  "cverbs": {
+    "title": "Verbos Condensados",
+    "subtitle": "Vista compacta de conjugaciones de verbos en español",
+    "features": "Características Condensadas",
+    "feature1": "Diseño de cuadrícula compacta para visualización eficiente",
+    "feature2": "Múltiples tiempos mostrados simultáneamente",
+    "feature3": "Pestañas de navegación basadas en modos",
+    "feature4": "Diseño eficiente en espacio"
   }
 }
