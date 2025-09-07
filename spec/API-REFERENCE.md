@@ -63,6 +63,23 @@ This document provides a comprehensive API reference for the Spanish Language Le
 
 ## Database APIs
 
+### Verb API Endpoints
+
+#### `GET /api/verbs`
+- File: `app/api/verbs/route.ts`
+- Returns: `Promise<{ verbs: Verb[] }>`
+- Database: `public.verbs` table
+- RLS: Public read access
+- Returns: Array of all verbs with `id`, `infinitive`, `infinitive_english`
+
+#### `GET /api/verbs/[infinitive]`
+- File: `app/api/verbs/[infinitive]/route.ts`
+- Parameters: `infinitive` (verb infinitive from URL)
+- Returns: `Promise<{ verb: Verb, conjugations: VerbConjugation[] }>`
+- Database: `public.verbs` and `public.verb_conjugations` tables
+- RLS: Public read access
+- Returns: Verb details with all conjugation forms across tenses and moods
+
 ### Game Entity Methods (TypeScript)
 
 #### `Game.list()`
@@ -126,6 +143,33 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - Calls: `supabase.from('user_progress_summary').select().single()`
 - Returns: `Promise<ProgressResult<any>>`
 - Uses: Database view for aggregated statistics
+
+### Favorites Entity Methods (TypeScript)
+
+#### `Favorites.addFavorite(verbInfinitive)`
+- File: `entities/Favorites.ts`
+- Calls: `supabase.from('user_favorites').insert()`
+- Returns: `Promise<FavoritesResult<FavoriteData>>`
+- Checks: Existing favorites with `.maybeSingle()`
+- RLS: `auth.uid() = user_id`
+
+#### `Favorites.removeFavorite(verbInfinitive)`
+- File: `entities/Favorites.ts`
+- Calls: `supabase.from('user_favorites').delete()`
+- Returns: `Promise<FavoritesResult<null>>`
+- RLS: `auth.uid() = user_id`
+
+#### `Favorites.getUserFavorites()`
+- File: `entities/Favorites.ts`
+- Calls: `supabase.from('user_favorites').select('verb_infinitive')`
+- Returns: `Promise<FavoritesResult<string[]>>`
+- RLS: `auth.uid() = user_id`
+
+#### `Favorites.isFavorited(verbInfinitive)`
+- File: `entities/Favorites.ts`
+- Calls: `supabase.from('user_favorites').select('id').maybeSingle()`
+- Returns: `Promise<boolean>`
+- RLS: `auth.uid() = user_id`
 
 ---
 
@@ -255,6 +299,8 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - `ProgressData`: Progress entity interface with database fields
 - `ProgressCreateData`: Progress creation data with compatibility fields
 - `ProgressResult<T>`: Generic result type with `success`, `data`, `error`
+- `Verb`: Verb entity interface with `id`, `infinitive`, `infinitive_english`
+- `VerbConjugation`: Verb conjugation interface with all tense forms and mood data
 
 ### TTS Types
 - `DeepgramTTSOptions`: TTS configuration object
@@ -294,6 +340,12 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - File: `app/verbs/Verbs.js`
 - Uses: `playTTS()` for verb pronunciation
 - Pattern: `playAudio()` → `playTTS()` → server-side Deepgram → audio playback
+
+### CVerbs Page Integration
+- File: `app/cverbs/page.js`
+- Uses: `CondensedConjugationDisplay.tsx` component
+- Pattern: Verb selection → API call → Grid display → TTS integration
+- Features: Responsive grid layout, language-aware tense names, mood tabs
 
 ### Performance Monitoring Integration
 - Uses: `StreamingPerformanceMonitor` with `streamTextToSpeech()`

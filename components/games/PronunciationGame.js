@@ -66,7 +66,11 @@ export default function PronunciationGame({ game, onComplete }) {
           mistakes: finalMistakes
         }).then(result => {
           if (result.success) {
-            console.log('Progress saved successfully:', result.data);
+            if (result.message) {
+              console.log('Progress info:', result.message);
+            } else {
+              console.log('Progress saved successfully:', result.data);
+            }
           } else {
             console.error('Failed to save progress:', result.error);
           }

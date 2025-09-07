@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Volume2, Heart, BookOpen, Grid } from 'lucide-react';
+import { Volume2, Heart } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
+import { Favorites } from '../../entities/Favorites';
 
 interface VerbConjugation {
   infinitive: string;
@@ -42,10 +42,10 @@ interface CondensedConjugationDisplayProps {
 }
 
 const moods = [
-  { id: 'Indicativo', label: 'Indicative' },
-  { id: 'Subjuntivo', label: 'Subjunctive' },
-  { id: 'Imperativo', label: 'Imperative' },
-  { id: 'Otros', label: 'Other' }
+  { id: 'Indicativo', label: 'Indicative', labelEs: 'Indicativo' },
+  { id: 'Subjuntivo', label: 'Subjunctive', labelEs: 'Subjuntivo' },
+  { id: 'Imperativo', label: 'Imperative', labelEs: 'Imperativo' },
+  { id: 'Otros', label: 'Other', labelEs: 'Otros' }
 ];
 
 const pronouns = [
@@ -63,7 +63,18 @@ export default function CondensedConjugationDisplay({
   onClose 
 }: CondensedConjugationDisplayProps) {
   const [selectedMood, setSelectedMood] = useState('Indicativo');
-  const { t } = useLanguage();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [loadingFavorite, setLoadingFavorite] = useState(false);
+  const { t, language } = useLanguage();
+
+  // Load favorite status on mount
+  React.useEffect(() => {
+    const checkFavorite = async () => {
+      const favorited = await Favorites.isFavorited(verb.infinitive);
+      setIsFavorite(favorited);
+    };
+    checkFavorite();
+  }, [verb.infinitive]);
 
   // TTS function using your existing pattern
   const playAudio = async (text: string) => {
@@ -74,6 +85,28 @@ export default function CondensedConjugationDisplay({
     } catch (error) {
       console.error('Error with TTS:', error);
       fallbackTTS(text);
+    }
+  };
+
+  // Toggle favorite
+  const toggleFavorite = async () => {
+    setLoadingFavorite(true);
+    try {
+      if (isFavorite) {
+        const result = await Favorites.removeFavorite(verb.infinitive);
+        if (result.success) {
+          setIsFavorite(false);
+        }
+      } else {
+        const result = await Favorites.addFavorite(verb.infinitive);
+        if (result.success) {
+          setIsFavorite(true);
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    } finally {
+      setLoadingFavorite(false);
     }
   };
 
@@ -121,65 +154,40 @@ export default function CondensedConjugationDisplay({
   }
 
   return (
-    <div className="flex flex-col h-full bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                {verb.infinitive} <span className="text-gray-500">({verb.infinitive_english})</span>
-              </h1>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => playAudio(verb.infinitive)}
-              className="text-gray-500 hover:text-orange-500"
-            >
-              <Volume2 className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-500 hover:text-red-500"
-            >
-              <Heart className="w-4 h-4" />
-            </Button>
-          </div>
-          
+    <div className="h-full flex flex-col">
+      {/* Main Content Header */}
+        <div className="py-4 text-center border-b border-orange-200 bg-gradient-to-r from-orange-50 to-pink-50">
+        <div className="flex items-center justify-center gap-3">
+          <h1 className="text-sm md:text-base lg:text-xl font-bold text-gray-900">
+            {verb.infinitive} <span className="text-gray-500">({verb.infinitive_english})</span>
+          </h1>
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-500 hover:text-gray-700"
+            <button
+              onClick={() => playAudio(verb.infinitive)}
+              className="p-2 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 transition-all duration-200 shadow-md hover:shadow-lg"
             >
-              <BookOpen className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-gray-500 hover:text-gray-700"
+              <Volume2 className="w-4 h-4 text-white" />
+            </button>
+            <button
+              onClick={toggleFavorite}
+              disabled={loadingFavorite}
+              className={`p-2 rounded-full transition-all duration-200 ${
+                isFavorite 
+                  ? 'bg-red-500 hover:bg-red-600 shadow-md' 
+                  : 'bg-gray-100 hover:bg-gray-200'
+              } ${loadingFavorite ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              <Grid className="w-4 h-4" />
-            </Button>
-            {onClose && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onClose}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            )}
+              <Heart className={`w-4 h-4 ${
+                isFavorite ? 'text-white fill-white' : 'text-gray-600'
+              }`} />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Conjugation Grid */}
-      <div className="flex-1 overflow-y-auto p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="flex-1 overflow-y-auto bg-white">
+        <div className="grid gap-4 p-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {currentConjugations.map((conjugation, index) => (
             <motion.div
               key={conjugation.tense}
@@ -187,45 +195,35 @@ export default function CondensedConjugationDisplay({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="h-full">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-semibold text-gray-900 text-sm">
-                      {conjugation.tense}
-                    </h3>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => playAudio(conjugation.tense)}
-                      className="text-gray-400 hover:text-orange-500 p-1 h-6 w-6"
-                    >
-                      <Volume2 className="w-3 h-3" />
-                    </Button>
-                  </div>
+              <Card className=" bg-white h-full shadow-none border-none">
+                <CardContent className="p-3">
+                  {/* Card Header */}
+                  <h3 className="font-normal text-gray-900 text-sm md:text-base lg:text-xl  mb-2">
+                    {language === 'en' && 'tense_english' in conjugation 
+                      ? conjugation.tense_english 
+                      : conjugation.tense}
+                  </h3>
                   
+                  {/* Card Body - Compact List */}
                   <div className="space-y-1">
                     {pronouns.map((pronoun, formIndex) => {
                       const formValue = conjugation[pronoun.key as keyof VerbConjugation] as string;
                       if (!formValue || formValue.trim() === '') return null;
                       
                       return (
-                        <div key={formIndex} className="flex items-center justify-between text-sm">
-                          <span className="text-gray-600 font-medium min-w-[60px]">
+                        <div key={formIndex} className="flex items-center justify-between text-xs md:text-sm lg:text-base gap-2">
+                          <span className="text-gray-600 font-medium min-w-[50px] flex-shrink-0">
                             {pronoun.label}
                           </span>
-                          <div className="flex items-center gap-2 flex-1">
-                            <span className="text-gray-900 font-medium">
-                              {formValue}
-                            </span>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => playAudio(formValue)}
-                              className="text-gray-400 hover:text-orange-500 p-1 h-5 w-5"
-                            >
-                              <Volume2 className="w-3 h-3" />
-                            </Button>
-                          </div>
+                          <span className="text-gray-900 font-medium flex-1 text-right">
+                            {formValue}
+                          </span>
+                          <button
+                            onClick={() => playAudio(formValue)}
+                            className="p-1 rounded-full bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-sm hover:shadow-md flex-shrink-0"
+                          >
+                            <Volume2 className="w-3 h-3 text-white" />
+                          </button>
                         </div>
                       );
                     })}
@@ -237,25 +235,21 @@ export default function CondensedConjugationDisplay({
         </div>
       </div>
 
-      {/* Bottom Mood Navigation */}
-      <div className="bg-white border-t border-gray-200 px-6 py-3">
-        <div className="flex items-center justify-center gap-1">
-          {moods.map((mood) => (
-            <Button
+      {/* Bottom Navigation - Sticky Tab Bar */}
+        <div className="sticky bottom-0 border-t bg-gradient-to-r from-orange-50 to-pink-50 flex justify-center gap-2 p-2">
+        {moods.map((mood) => (
+            <button
               key={mood.id}
-              variant={selectedMood === mood.id ? "default" : "ghost"}
-              size="sm"
               onClick={() => setSelectedMood(mood.id)}
-              className={`px-4 py-2 text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                 selectedMood === mood.id
                   ? 'bg-gradient-to-r from-orange-400 to-pink-400 text-white shadow-md'
                   : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
               }`}
             >
-              {mood.label}
-            </Button>
-          ))}
-        </div>
+              {language === 'en' ? mood.label : mood.labelEs}
+            </button>
+        ))}
       </div>
     </div>
   );

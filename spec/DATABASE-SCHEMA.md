@@ -106,8 +106,11 @@ CREATE TABLE public.progress (
   game_type TEXT CHECK (game_type IN ('grammar', 'vocabulary', 'pronunciation')) NOT NULL,
   game_id TEXT NOT NULL,
   score INTEGER DEFAULT 0,
+  max_score INTEGER DEFAULT 10,
   completed BOOLEAN DEFAULT FALSE,
   time_spent INTEGER DEFAULT 0,
+  completion_time INTEGER DEFAULT 0,
+  mistakes INTEGER DEFAULT 0,
   achievements JSONB DEFAULT '[]',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -120,8 +123,11 @@ CREATE TABLE public.progress (
 - `game_type`: Type of game completed
 - `game_id`: References `games.id`
 - `score`: Points earned in the game
+- `max_score`: Maximum possible score for the game
 - `completed`: Whether the game was completed
 - `time_spent`: Time taken in seconds
+- `completion_time`: Alias for time_spent (compatibility)
+- `mistakes`: Number of mistakes made
 - `achievements`: JSONB array of achievements earned
 - `created_at`: Record creation timestamp
 - `updated_at`: Last update timestamp
@@ -224,6 +230,25 @@ CREATE TABLE public.verb_conjugations (
 - `created_at`: Record creation timestamp
 - `updated_at`: Last update timestamp
 
+### `public.user_favorites`
+Stores user's favorite verbs for quick access.
+
+```sql
+CREATE TABLE public.user_favorites (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  verb_infinitive TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(user_id, verb_infinitive)
+);
+```
+
+**Fields:**
+- `id`: Primary key (UUID)
+- `user_id`: References `profiles.id`
+- `verb_infinitive`: Spanish verb infinitive (unique per user)
+- `created_at`: Record creation timestamp
+
 ---
 
 ## Row Level Security (RLS)
@@ -303,6 +328,21 @@ CREATE POLICY "Anyone can view verb conjugations" ON public.verb_conjugations
   FOR SELECT USING (true);
 ```
 
+#### `public.user_favorites`
+```sql
+-- Users can view own favorites
+CREATE POLICY "Users can view own favorites" ON public.user_favorites
+  FOR SELECT USING (auth.uid() = user_id);
+
+-- Users can insert own favorites
+CREATE POLICY "Users can insert own favorites" ON public.user_favorites
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Users can delete own favorites
+CREATE POLICY "Users can delete own favorites" ON public.user_favorites
+  FOR DELETE USING (auth.uid() = user_id);
+```
+
 ---
 
 ## Triggers and Functions
@@ -378,6 +418,10 @@ CREATE INDEX idx_verbs_infinitive ON public.verbs(infinitive);
 CREATE INDEX idx_verb_conjugations_verb_id ON public.verb_conjugations(verb_id);
 CREATE INDEX idx_verb_conjugations_infinitive ON public.verb_conjugations(infinitive);
 CREATE INDEX idx_verb_conjugations_mood_tense ON public.verb_conjugations(mood, tense);
+
+-- User favorites indexes
+CREATE INDEX idx_user_favorites_user_id ON public.user_favorites(user_id);
+CREATE INDEX idx_user_favorites_verb_infinitive ON public.user_favorites(verb_infinitive);
 ```
 
 ### Real-time Subscriptions
@@ -442,6 +486,13 @@ INSERT INTO public.games (id, title, type, difficulty, content) VALUES
 - Implemented public read access for verb data
 - Created migration script (`scripts/import-verbs.js`) for CSV to Supabase import
 - Added comprehensive verb database with all tenses and moods
+
+### Version 1.4 - User Favorites System
+- Added `user_favorites` table for persistent verb favoriting
+- Enhanced `progress` table with `max_score`, `completion_time`, and `mistakes` fields
+- Implemented database-backed favorites with RLS policies
+- Added compatibility fields for existing code
+- Created `Favorites` entity for type-safe database operations
 
 ---
 

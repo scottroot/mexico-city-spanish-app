@@ -5,6 +5,34 @@ All notable changes to the Spanish Language Learning App will be documented in t
 ## [Unreleased]
 
 ### Added
+- **User Favorites System**: Database-backed verb favoriting with persistent storage
+  - `entities/Favorites.ts` - TypeScript entity for favorites CRUD operations
+  - `user_favorites` table in database with RLS policies
+  - Heart icon buttons in `app/cverbs/page.js` and `components/verbs/CondensedConjugationDisplay.tsx`
+  - Favorites filter functionality in CVerbs page sidebar
+  - Graceful error handling for missing database tables
+- **Enhanced Progress Tracking**: Extended database schema with compatibility fields
+  - Added `max_score`, `completion_time`, `mistakes` fields to `progress` table
+  - Updated `entities/Progress.ts` with new field mappings
+  - Enhanced `ProgressData` interface with compatibility properties
+  - Improved error handling and authentication checks
+- **CVerbs Page**: Condensed verb conjugation view with responsive grid layout
+  - `app/cverbs/page.js` - New condensed verbs page route
+  - `components/verbs/CondensedConjugationDisplay.tsx` - Grid-based conjugation display component
+  - Responsive grid layout (1 col mobile, 2 col tablet, 3 col desktop, 4 col large screens)
+  - Language-aware tense names and mood tabs (English/Spanish toggle)
+  - Sticky bottom navigation with mood selection (Indicative, Subjunctive, Imperative, Other)
+  - Orange-pink gradient theme integration matching app design
+  - TTS integration for all verb forms and tense names
+- **Global Navigation Redesign**: Enhanced navigation system with responsive layout
+  - `components/Layout.js` - Updated with top navigation bar for desktop screens
+  - Desktop: Top navigation bar with logo, menu items, language toggle, and user menu
+  - Mobile: Bottom navigation bar with floating menu items
+  - Page headers pushed down on desktop to accommodate top navigation
+  - Full-width content area when navigation moves to top
+- **TailwindCSS Configuration**: Added default breakpoints for consistent responsive design
+  - `tailwind.config.ts` - Added official TailwindCSS breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px)
+  - Ensures consistent responsive behavior across all components
 - **Verb Conjugation System**: Complete Spanish verb database integration
   - `verbs` table with 637 unique Spanish verbs and English translations
   - `verb_conjugations` table with 11,466 conjugation records across all tenses and moods
@@ -36,6 +64,19 @@ All notable changes to the Spanish Language Learning App will be documented in t
   - Language preference persistence in localStorage
 
 ### Enhanced
+- **Verb Conjugation Components**: Improved verb display and interaction
+  - `components/verbs/VerbSidebar.tsx` - Enhanced with search functionality and TTS integration
+  - `components/verbs/ConjugationDisplay.tsx` - Updated with app theme integration and improved layout
+  - `components/verbs/TenseTimeline.tsx` - Enhanced with TTS integration for tense names
+  - All verb components now use consistent orange-pink gradient theme
+- **Responsive Design**: Improved mobile and desktop layouts
+  - CVerbs page with responsive search bar (full-width on mobile, sidebar on desktop)
+  - Grid layouts that adapt to screen size (1-4 columns based on breakpoints)
+  - Improved spacing and typography for better readability
+- **Language System**: Enhanced with verb-specific translations
+  - Added tense name translations in `lib/translations/en.json` and `lib/translations/es.json`
+  - Language-aware mood tabs (Indicative/Indicativo, Subjunctive/Subjuntivo, etc.)
+  - Dynamic tense name switching based on language toggle
 - **Progress Tracking**: Complete database integration with compatibility layer
   - Progress entity now connects to Supabase `progress` table
   - Compatibility properties (`completion_time`, `max_score`) for existing code
@@ -53,6 +94,28 @@ All notable changes to the Spanish Language Learning App will be documented in t
   - Enhanced error handling and logging for profile operations
 
 ### Fixed
+- **CVerbs Page Hydration Error**: Resolved nested button HTML structure issue
+  - Changed outer `<button>` to `<div>` with `cursor-pointer` class in `app/cverbs/page.js`
+  - Fixed React hydration error caused by invalid nested button elements
+  - Maintained same visual appearance and functionality
+- **Favorites Database Queries**: Fixed Supabase query errors in favorites system
+  - Changed `.single()` to `.maybeSingle()` in `entities/Favorites.ts`
+  - Resolved 406 "Not Acceptable" errors when checking existing favorites
+  - Added proper error handling for empty result sets
+- **Database Setup Script**: Enhanced idempotency and error handling
+  - Added `DROP POLICY IF EXISTS` statements for all RLS policies in `database/setup.sql`
+  - Fixed realtime publication errors with DO blocks and exception handling
+  - Added missing indexes and triggers for `user_favorites` table
+- **CVerbs Page Layout**: Resolved multiple layout and styling issues
+  - Fixed responsive grid layout to properly display 4 columns on desktop
+  - Corrected pronoun label and conjugation spacing with `justify-between`
+  - Removed overlapping search bar that conflicted with global navigation
+  - Fixed empty state container width constraints that prevented proper grid display
+  - Resolved JSX structure errors and missing closing tags
+- **Navigation System**: Fixed responsive navigation behavior
+  - Resolved navigation overlap issues between global menu and page-specific elements
+  - Fixed mobile/desktop navigation switching and layout consistency
+  - Corrected page header positioning when navigation moves to top bar
 - **Progress Page Loading**: Resolved infinite loading spinner on progress page
   - Fixed Progress entity compatibility with database schema
   - Added proper error handling for missing tables

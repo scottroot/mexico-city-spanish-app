@@ -47,6 +47,8 @@ Spanish-Language-App/
 │   ├── verbs/
 │   │   ├── Verbs.js             # Verb learning component
 │   │   └── page.js              # Verbs page route
+│   ├── cverbs/
+│   │   └── page.js              # Condensed verbs page route
 │   ├── globals.css              # Global styles
 │   ├── Home.tsx                 # Home page component
 │   ├── layout.js                # Root layout with AuthProvider
@@ -63,6 +65,11 @@ Spanish-Language-App/
 │   │   ├── PronunciationGame.js # Pronunciation practice
 │   │   └── VocabularyGame.js    # Vocabulary building
 │   ├── Layout.js                # Main layout wrapper with auth state
+│   ├── verbs/                   # Verb conjugation components
+│   │   ├── VerbSidebar.tsx      # Verb list sidebar component
+│   │   ├── ConjugationDisplay.tsx # Verb conjugation display component
+│   │   ├── TenseTimeline.tsx    # Tense timeline visualization
+│   │   └── CondensedConjugationDisplay.tsx # Condensed verb conjugation grid with favorites
 │   └── ui/                      # Base UI components
 │       ├── badge.jsx            # Badge component
 │       ├── button.jsx           # Button component
@@ -78,6 +85,7 @@ Spanish-Language-App/
 │   ├── Game.json                # Game data structure
 │   ├── Progress.ts              # Progress tracking entity (TypeScript)
 │   ├── Progress.json            # Progress data structure
+│   ├── Favorites.ts             # User favorites entity (TypeScript)
 │   └── User.js                  # User entity definition (Supabase)
 ├── lib/                         # Utility libraries and services
 │   ├── supabase.js.DEPRECATED   # Deprecated Supabase client (replaced by utils/supabase/)
@@ -99,6 +107,13 @@ Spanish-Language-App/
 │   └── README.md                # Database setup instructions
 ├── scripts/                     # Utility scripts
 │   └── import-verbs.js          # Verb data migration script
+├── app/api/                     # API routes
+│   ├── tts/
+│   │   └── route.ts             # Text-to-speech API endpoint
+│   └── verbs/
+│       ├── route.ts             # Verbs list API endpoint
+│       └── [infinitive]/
+│           └── route.ts         # Verb conjugation API endpoint
 ├── spec/                        # Technical documentation
 │   ├── README.md                # This file
 │   ├── TTS-ARCHITECTURE.md      # TTS system architecture
@@ -107,7 +122,7 @@ Spanish-Language-App/
 │   ├── DATABASE-SCHEMA.md       # Database schema documentation
 │   └── CHANGELOG.md             # Change history
 ├── package.json                 # Dependencies and scripts
-├── tailwind.config.ts           # Tailwind CSS configuration
+├── tailwind.config.ts           # Tailwind CSS configuration with default breakpoints
 ├── tsconfig.json                # TypeScript configuration
 └── next.config.ts               # Next.js configuration
 ```
@@ -142,10 +157,11 @@ Spanish-Language-App/
 - **User Authentication**: Complete signup/login system with Supabase and automatic profile creation
 - **Interactive Games**: Grammar, vocabulary, and pronunciation practice
 - **Verb Conjugation System**: Comprehensive Spanish verb database with 637 verbs and 11,466 conjugations
+- **CVerbs Page**: Condensed verb conjugation view with responsive grid layout and language-aware tense names
 - **Progress Tracking**: User learning progress and achievements with persistence
 - **Text-to-Speech**: Real-time audio generation for pronunciation
 - **Multi-language UI**: Toggle between English and Spanish (Latinoamericano) interface
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Responsive Design**: Mobile-first approach with Tailwind CSS and configurable breakpoints
 - **Performance Optimization**: Streaming TTS with network adaptation
 - **Data Security**: Row Level Security (RLS) for user data isolation
 
@@ -278,17 +294,38 @@ The app features three main game types:
 2. **PronunciationGame.js**: Speech practice with TTS feedback
 3. **VocabularyGame.js**: Word learning and memorization
 
+### Verb Conjugation System
+
+The app includes comprehensive verb conjugation functionality:
+
+1. **Verbs Page** (`app/verbs/`): Full verb learning interface with sidebar and detailed conjugation display
+2. **CVerbs Page** (`app/cverbs/`): Condensed verb conjugation view with responsive grid layout and favorites system
+3. **VerbSidebar.tsx**: Searchable verb list with pagination and TTS integration
+4. **ConjugationDisplay.tsx**: Detailed verb conjugation display with tense timeline
+5. **CondensedConjugationDisplay.tsx**: Grid-based conjugation view with mood tabs and heart favorites
+6. **TenseTimeline.tsx**: Visual timeline of Spanish tenses
+
 ### Progress Tracking
 
 - **Progress.js**: Tracks user achievements and learning milestones
 - **Progress.json**: Defines progress data structure
 - Real-time progress updates and persistence
 
+### User Favorites System
+
+- **Favorites.ts**: TypeScript entity for database-backed verb favoriting
+- **user_favorites table**: Database table with RLS policies for user-specific favorites
+- **Heart buttons**: Interactive favorites toggle in `app/cverbs/page.js` and `components/verbs/CondensedConjugationDisplay.tsx`
+- **Favorites filter**: Sidebar filter to show only favorited verbs
+- **Persistent storage**: Favorites survive browser refreshes and sessions
+- **Graceful degradation**: Works without database table (React state fallback)
+
 ### UI Components
 
 - **Base Components**: Button, Card, Input, Badge, Progress
 - **Game Components**: Specialized components for each game type
 - **Layout Components**: Consistent page structure and navigation
+- **Verb Components**: Specialized components for verb conjugation display and interaction
 
 ---
 

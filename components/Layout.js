@@ -66,7 +66,7 @@ export default function Layout({ children, currentPageName, user }) {
       {/* Desktop Layout */}
       <div className="hidden md:flex md:h-screen md:flex-col">
         {/* Top Navigation Bar */}
-        <header className="bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100">
+        <header className="bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100 relative z-50">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               {/* Logo */}
@@ -110,13 +110,13 @@ export default function Layout({ children, currentPageName, user }) {
                       <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
                         <User className="w-5 h-5 text-white" />
                       </div>
-                      <span className="text-sm font-medium text-gray-700">
+                      {/* <span className="text-sm font-medium text-gray-700">
                         {user.email}
-                      </span>
+                      </span> */}
                     </button>
                     
                     {showUserMenu && (
-                      <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-50">
+                      <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-[60]">
                         <div className="px-4 py-2 border-b border-gray-100">
                           <p className="text-sm font-medium text-gray-800">{t('navigation.user')}</p>
                           <p className="text-xs text-gray-500">{user.email}</p>
@@ -146,7 +146,7 @@ export default function Layout({ children, currentPageName, user }) {
         </header>
         
         {/* Page Header */}
-        <div className="bg-white/80 backdrop-blur-sm border-b border-orange-100 px-6 py-3">
+        <div className="bg-white/80 backdrop-blur-sm border-b border-orange-100 px-6 py-3 relative z-40">
           <h2 className="text-xl font-semibold text-gray-800">
             {navigationItems.find(item => item.url === pathname)?.title || 'Dashboard'}
           </h2>
@@ -161,7 +161,7 @@ export default function Layout({ children, currentPageName, user }) {
       {/* Mobile Layout */}
       <div className="md:hidden">
         {/* Mobile Header */}
-        <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-orange-100">
+        <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-orange-100 relative z-50">
           <div className="px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -187,7 +187,7 @@ export default function Layout({ children, currentPageName, user }) {
                     </button>
                     
                     {showUserMenu && (
-                      <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-50">
+                      <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-[60]">
                         <div className="px-4 py-2 border-b border-gray-100">
                           <p className="text-sm font-medium text-gray-800">{t('navigation.user')}</p>
                           <p className="text-xs text-gray-500">{user.email}</p>

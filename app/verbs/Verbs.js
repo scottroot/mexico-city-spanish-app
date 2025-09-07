@@ -19,11 +19,11 @@ export default function VerbsPage() {
     // Load verb list from API
     const loadVerbs = async () => {
       try {
-        console.log('Fetching verbs from API...');
+        // console.log('Fetching verbs from API...');
         const response = await fetch('/api/verbs');
-        console.log('API response status:', response.status);
+        // console.log('API response status:', response.status);
         const data = await response.json();
-        console.log('API response data:', data);
+        // console.log('API response data:', data);
         setVerbs(data);
       } catch (error) {
         console.error('Error loading verbs:', error);

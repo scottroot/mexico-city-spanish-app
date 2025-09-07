@@ -6,8 +6,11 @@ export interface ProgressData {
   game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown'
   game_id: string
   score: number
+  max_score?: number
   completed: boolean
   time_spent: number
+  completion_time?: number
+  mistakes?: number
   achievements: any[]
   created_at?: string
   updated_at?: string
@@ -26,6 +29,7 @@ export interface ProgressResult<T = any> {
   success: boolean
   data?: T
   error?: string
+  message?: string
 }
 
 export class Progress {
@@ -34,15 +38,14 @@ export class Progress {
   public game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown'
   public game_id: string
   public score: number
+  public max_score: number
   public completed: boolean
   public time_spent: number
+  public completion_time: number
+  public mistakes: number
   public achievements: any[]
   public created_at?: string
   public updated_at?: string
-  
-  // Compatibility properties for existing code
-  public completion_time: number
-  public max_score: number
 
   constructor(data: ProgressData) {
     this.id = data.id
@@ -50,15 +53,14 @@ export class Progress {
     this.game_type = data.game_type
     this.game_id = data.game_id
     this.score = data.score || 0
+    this.max_score = data.max_score || 10
     this.completed = data.completed || false
     this.time_spent = data.time_spent || 0
+    this.completion_time = data.completion_time || data.time_spent || 0
+    this.mistakes = data.mistakes || 0
     this.achievements = data.achievements || []
     this.created_at = data.created_at
     this.updated_at = data.updated_at
-    
-    // Add compatibility properties for existing code
-    this.completion_time = this.time_spent
-    this.max_score = 10 // Default max score, can be overridden
   }
 
   // Create a new progress record
@@ -69,8 +71,57 @@ export class Progress {
       // Get current user
       const { data: { user }, error: userError } = await supabase.auth.getUser()
       if (userError || !user) {
-        console.error('Error getting user:', userError)
-        return { success: false, error: 'User not authenticated' }
+        console.log('User not authenticated - progress will not be saved to database')
+        // Return success but don't save to database for unauthenticated users
+        return { success: true, data: undefined, message: 'Progress not saved - user not authenticated' }
+      }
+
+      // Ensure user profile exists before saving progress
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .single()
+
+      if (profileError || !profile) {
+        console.log('Profile does not exist, creating profile for user:', user.id)
+        
+        // Create profile with proper error handling
+        const { data: newProfile, error: createProfileError } = await supabase
+          .from('profiles')
+          .insert([{
+            id: user.id,
+            email: user.email,
+            name: user.user_metadata?.name || user.email?.split('@')[0] || 'User'
+          }])
+          .select()
+          .single()
+
+        if (createProfileError) {
+          console.error('Error creating profile:', createProfileError)
+          // If it's a duplicate key error, the profile might already exist
+          if (createProfileError.code === '23505') {
+            console.log('Profile already exists, continuing...')
+          } else {
+            return { success: false, error: `Failed to create user profile: ${createProfileError.message}` }
+          }
+        } else {
+          console.log('Profile created successfully:', newProfile)
+        }
+
+        // Create user stats
+        const { error: createStatsError } = await supabase
+          .from('user_stats')
+          .insert([{
+            user_id: user.id
+          }])
+
+        if (createStatsError) {
+          console.error('Error creating user stats:', createStatsError)
+          // Don't fail the progress save if stats creation fails
+        } else {
+          console.log('User stats created successfully')
+        }
       }
 
       // Determine game type from game_id
@@ -82,8 +133,11 @@ export class Progress {
         game_type: gameType,
         game_id: progressData.game_id,
         score: progressData.score || 0,
+        max_score: progressData.max_score || 10,
         completed: true, // Assume completed if we're saving progress
         time_spent: progressData.completion_time || 0,
+        completion_time: progressData.completion_time || 0,
+        mistakes: progressData.mistakes || 0,
         achievements: progressData.achievements || []
       }
 
@@ -99,6 +153,11 @@ export class Progress {
         if (error.message.includes('relation "progress" does not exist')) {
           console.log('Progress table does not exist yet, skipping save')
           return { success: true, data: undefined }
+        }
+        // If it's a foreign key constraint error, provide more specific feedback
+        if (error.code === '23503') {
+          console.error('Foreign key constraint error - user profile may not exist')
+          return { success: false, error: 'User profile not found. Please try logging out and back in.' }
         }
         return { success: false, error: error.message }
       }
@@ -244,7 +303,7 @@ export class Progress {
   // Helper method to determine game type from game ID
   static getGameTypeFromId(gameId: string): 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown' {
     if (gameId.includes('grammar')) return 'grammar'
-    if (gameId.includes('vocabulary')) return 'vocabulary'
+    if (gameId.includes('vocab')) return 'vocabulary'
     if (gameId.includes('pronunciation')) return 'pronunciation'
     return 'unknown'
   }

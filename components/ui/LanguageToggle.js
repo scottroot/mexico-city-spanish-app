@@ -50,7 +50,7 @@ export default function LanguageToggle() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-50">
+        <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-[60]">
           {languages.map((lang) => (
             <button
               key={lang.code}
