@@ -17,7 +17,7 @@ async function importVerbs() {
   
   const verbs = new Map();
   const conjugations = [];
-  const csvPath = path.join(__dirname, '../app/external-app-to-integrate/external-app/verbs.csv');
+  const csvPath = path.join(__dirname, '../app/external-app-to-integrate/external-app/verbs_filled.csv');
 
   // Check if CSV file exists
   if (!fs.existsSync(csvPath)) {
@@ -91,6 +91,12 @@ async function importVerbs() {
       form_1p: row.form_1p?.trim() || '',
       form_2p: row.form_2p?.trim() || '',
       form_3p: row.form_3p?.trim() || '',
+      form_1s_english: row.form_1s_english?.trim() || '',
+      form_2s_english: row.form_2s_english?.trim() || '',
+      form_3s_english: row.form_3s_english?.trim() || '',
+      form_1p_english: row.form_1p_english?.trim() || '',
+      form_2p_english: row.form_2p_english?.trim() || '',
+      form_3p_english: row.form_3p_english?.trim() || '',
       gerund: row.gerund?.trim() || '',
       gerund_english: row.gerund_english?.trim() || '',
       pastparticiple: row.pastparticiple?.trim() || '',

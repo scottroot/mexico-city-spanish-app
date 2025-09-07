@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 CREATE TABLE IF NOT EXISTS public.progress (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
-  game_type TEXT CHECK (game_type IN ('grammar', 'vocabulary', 'pronunciation')) NOT NULL,
+  game_type TEXT CHECK (game_type IN ('grammar', 'vocabulary', 'pronunciation', 'custom_quiz')) NOT NULL,
   game_id TEXT NOT NULL,
   score INTEGER DEFAULT 0,
   max_score INTEGER DEFAULT 10, -- maximum possible score for the game
@@ -358,6 +358,11 @@ FROM public.profiles p
 LEFT JOIN public.user_stats us ON p.id = us.user_id
 LEFT JOIN public.progress pr ON p.id = pr.user_id
 GROUP BY p.id, p.email, p.name, p.level, us.total_games_completed, us.total_score, us.current_streak, us.longest_streak, us.last_played;
+
+-- 22a. Secure the user_progress_summary view
+-- Note: Views don't support RLS directly, but we can make them security invoker
+-- and rely on the underlying table RLS policies for security
+ALTER VIEW public.user_progress_summary SET (security_invoker = true);
 
 -- 23. Grant necessary permissions
 GRANT USAGE ON SCHEMA public TO anon, authenticated;

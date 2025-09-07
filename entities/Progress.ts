@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/client'
 export interface ProgressData {
   id?: string
   user_id?: string
-  game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown'
+  game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'custom_quiz' | 'unknown'
   game_id: string
   score: number
   max_score?: number
@@ -35,7 +35,7 @@ export interface ProgressResult<T = any> {
 export class Progress {
   public id?: string
   public user_id?: string
-  public game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown'
+  public game_type: 'grammar' | 'vocabulary' | 'pronunciation' | 'custom_quiz' | 'unknown'
   public game_id: string
   public score: number
   public max_score: number
@@ -127,17 +127,14 @@ export class Progress {
       // Determine game type from game_id
       const gameType = Progress.getGameTypeFromId(progressData.game_id)
       
-      // Prepare data for database
-      const dbData: Omit<ProgressData, 'id' | 'created_at' | 'updated_at'> = {
+      // Prepare data for database (only include columns that exist)
+      const dbData = {
         user_id: user.id,
         game_type: gameType,
         game_id: progressData.game_id,
         score: progressData.score || 0,
-        max_score: progressData.max_score || 10,
         completed: true, // Assume completed if we're saving progress
         time_spent: progressData.completion_time || 0,
-        completion_time: progressData.completion_time || 0,
-        mistakes: progressData.mistakes || 0,
         achievements: progressData.achievements || []
       }
 
@@ -301,10 +298,11 @@ export class Progress {
   }
 
   // Helper method to determine game type from game ID
-  static getGameTypeFromId(gameId: string): 'grammar' | 'vocabulary' | 'pronunciation' | 'unknown' {
+  static getGameTypeFromId(gameId: string): 'grammar' | 'vocabulary' | 'pronunciation' | 'custom_quiz' | 'unknown' {
     if (gameId.includes('grammar')) return 'grammar'
     if (gameId.includes('vocab')) return 'vocabulary'
     if (gameId.includes('pronunciation')) return 'pronunciation'
+    if (gameId === 'custom_quiz') return 'custom_quiz'
     return 'unknown'
   }
 

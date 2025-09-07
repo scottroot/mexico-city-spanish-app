@@ -34,15 +34,20 @@ export async function GET(request: NextRequest): Promise<NextResponse<TTSRespons
   try {
     const { searchParams } = new URL(request.url);
     const text = searchParams.get('text');
+    console.log('TTS request:', text);
     const modelParam = searchParams.get('model');
     
     if (!text) return NextResponse.json({ success: false, error: 'Text query parameter is required' }, { status: 400 });
     
-    const model: DeepgramModel = (modelParam || process.env.DEEPGRAM_VOICE_WOMAN || 'aura-2-luna-es') as DeepgramModel;
+    const model: DeepgramModel = (modelParam || process.env.DEEPGRAM_VOICE_MAN || 'aura-2-luna-es') as DeepgramModel;
 
     const response = await DEEPGRAM_CLIENT.speak.request(
       { text },
-      { model, encoding: DEEPGRAM_ENCODING,  sample_rate: DEEPGRAM_SAMPLE_RATE }
+      { 
+        model, encoding: DEEPGRAM_ENCODING,
+        sample_rate: DEEPGRAM_SAMPLE_RATE,
+        filler_words: false
+      }
     );
 
     const stream = await response.getStream();

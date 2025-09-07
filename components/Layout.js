@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Trophy, User, BookOpen, LogOut, Settings } from "lucide-react";
+import { Home, Trophy, User, BookOpen, LogOut, Settings, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./ui/LanguageToggle";
 
@@ -19,6 +19,7 @@ export default function Layout({ children, currentPageName, user }) {
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'cverbs', title: t('navigation.cverbs'), url: "/cverbs", icon: BookOpen },
+    { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
   ];
 
   const handleSignOut = async () => {
