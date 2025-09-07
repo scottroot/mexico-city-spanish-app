@@ -1,0 +1,39 @@
+{
+    "name": "Progress",
+    "type": "object",
+    "properties": {
+      "game_id": {
+        "type": "string",
+        "description": "ID of the game"
+      },
+      "score": {
+        "type": "number",
+        "description": "Score achieved"
+      },
+      "max_score": {
+        "type": "number",
+        "description": "Maximum possible score"
+      },
+      "completion_time": {
+        "type": "number",
+        "description": "Time taken to complete in seconds"
+      },
+      "mistakes": {
+        "type": "number",
+        "description": "Number of mistakes made"
+      }
+    },
+    "required": [
+      "game_id",
+      "score",
+      "max_score"
+    ],
+    "rls": {
+      "read": {
+        "created_by": "{{user.email}}"
+      },
+      "write": {
+        "created_by": "{{user.email}}"
+      }
+    }
+  }

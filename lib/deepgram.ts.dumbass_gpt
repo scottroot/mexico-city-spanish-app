@@ -1,0 +1,918 @@
+/**
+ * Deepgram Text-to-Speech API Utility
+ * Provides functions to convert text to speech using Deepgram's TTS API
+ */
+
+const { createClient } = require("@deepgram/sdk");
+
+// STEP 1: Create a Deepgram client with your API key
+const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
+
+
+const getAudioBuffer = async (response: { getReader: () => any; }) => {
+  const reader = response.getReader();
+  const chunks = [];
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+  }
+  const dataArray = chunks.reduce(
+    (acc, chunk) => Uint8Array.from([...acc, ...chunk]),
+    new Uint8Array(0)
+  );
+  return Buffer.from(dataArray.buffer);
+};
+
+const getAudio = async (text: string, model?: string, gender?: "man" | "woman") => {
+  const encoding = "linear16";
+  const container = "wav";
+  model = (model 
+    || gender && gender === "man" 
+      ? process.env.DEEPGRAM_VOICE_MAN 
+      : process.env.DEEPGRAM_VOICE_WOMAN 
+    || "aura-2-thalia-en"
+  );
+  const response = await deepgram.speak.request(
+    { text },
+    { model, encoding, container }
+  );
+
+  const stream = await response.getStream();
+  const headers = await response.getHeaders();
+  if (stream) {
+    const buffer = await getAudioBuffer(stream);
+    return buffer;
+  } else {
+    console.error("Error generating audio:", stream);
+    return null;
+  }
+};
+
+
+export interface DeepgramTTSOptions {
+  text: string;
+  model?: string;
+  encoding?: 'mp3' | 'wav' | 'pcm';
+  container?: 'mp3' | 'wav' | 'raw';
+  sample_rate?: number;
+  // Streaming optimization options
+  chunkSize?: number;
+  enableDynamicBuffering?: boolean;
+  targetLatency?: number; // Target latency in milliseconds
+}
+
+export interface DeepgramTTSResponse {
+  success: boolean;
+  audioBuffer?: ArrayBuffer;
+  error?: string;
+  contentType?: string;
+}
+
+/**
+ * Available Deepgram TTS models
+ */
+export const DEEPGRAM_MODELS = {
+  // English models
+  'aura-2-thalia-en': 'aura-2-thalia-en',
+  'aura-2-asteria-en': 'aura-2-asteria-en',
+  'aura-2-luna-en': 'aura-2-luna-en',
+  'aura-2-stella-en': 'aura-2-stella-en',
+  'aura-2-athena-en': 'aura-2-athena-en',
+  'aura-2-hera-en': 'aura-2-hera-en',
+  'aura-2-orion-en': 'aura-2-orion-en',
+  'aura-2-arcas-en': 'aura-2-arcas-en',
+  'aura-2-perseus-en': 'aura-2-perseus-en',
+  'aura-2-angus-en': 'aura-2-angus-en',
+  'aura-2-orpheus-en': 'aura-2-orpheus-en',
+  'aura-2-helios-en': 'aura-2-helios-en',
+  'aura-2-zeus-en': 'aura-2-zeus-en',
+  
+  // Spanish models
+  'aura-2-luna-es': 'aura-2-luna-es',
+  'aura-2-stella-es': 'aura-2-stella-es',
+  'aura-2-athena-es': 'aura-2-athena-es',
+  'aura-2-hera-es': 'aura-2-hera-es',
+  'aura-2-orion-es': 'aura-2-orion-es',
+  'aura-2-arcas-es': 'aura-2-arcas-es',
+  'aura-2-perseus-es': 'aura-2-perseus-es',
+  'aura-2-angus-es': 'aura-2-angus-es',
+  'aura-2-orpheus-es': 'aura-2-orpheus-es',
+  'aura-2-helios-es': 'aura-2-helios-es',
+  'aura-2-zeus-es': 'aura-2-zeus-es',
+} as const;
+
+export type DeepgramModel = keyof typeof DEEPGRAM_MODELS;
+
+/**
+ * Streaming performance metrics
+ */
+export interface StreamingMetrics {
+  totalBytes: number;
+  totalChunks: number;
+  averageChunkSize: number;
+  totalTime: number;
+  averageLatency: number;
+  networkLatency: number;
+  bandwidth: number;
+  bufferSize: number;
+}
+
+/**
+ * Audio format optimization presets
+ */
+export const AUDIO_FORMAT_PRESETS = {
+  // Low bandwidth - efficient compression
+  LOW_BANDWIDTH: {
+    encoding: 'mp3' as const,
+    container: 'mp3' as const,
+    sample_rate: 22050,
+    chunkSize: 1024, // Smaller chunks for faster transmission
+    targetLatency: 200 // 200ms target latency
+  },
+  
+  // Medium bandwidth - balanced quality and efficiency
+  MEDIUM_BANDWIDTH: {
+    encoding: 'mp3' as const,
+    container: 'mp3' as const,
+    sample_rate: 44100,
+    chunkSize: 2048,
+    targetLatency: 150
+  },
+  
+  // High bandwidth - high quality
+  HIGH_BANDWIDTH: {
+    encoding: 'wav' as const,
+    container: 'wav' as const,
+    sample_rate: 48000,
+    chunkSize: 4096,
+    targetLatency: 100
+  },
+  
+  // Real-time - optimized for immediate playback
+  REAL_TIME: {
+    encoding: 'mp3' as const,
+    container: 'mp3' as const,
+    sample_rate: 24000,
+    chunkSize: 512, // Very small chunks for minimal latency
+    targetLatency: 50
+  }
+} as const;
+
+export type AudioFormatPreset = keyof typeof AUDIO_FORMAT_PRESETS;
+
+/**
+ * Dynamic buffer predictor for optimal streaming performance
+ */
+export class BufferPredictor {
+  private bufferSize: number;
+  private readonly minBufferSize: number = 1024;
+  private readonly maxBufferSize: number = 16384;
+  private readonly defaultBufferSize: number = 2048;
+  private networkLatencyHistory: number[] = [];
+  private bandwidthHistory: number[] = [];
+
+  constructor(initialBufferSize: number = 2048) {
+    this.bufferSize = Math.max(this.minBufferSize, Math.min(this.maxBufferSize, initialBufferSize));
+  }
+
+  /**
+   * Adjust buffer size based on network conditions
+   */
+  adjustBufferSize(networkLatency: number, bandwidth: number): number {
+    // Add to history (keep last 10 measurements)
+    this.networkLatencyHistory.push(networkLatency);
+    this.bandwidthHistory.push(bandwidth);
+    
+    if (this.networkLatencyHistory.length > 10) {
+      this.networkLatencyHistory.shift();
+      this.bandwidthHistory.shift();
+    }
+
+    // Calculate averages
+    const avgLatency = this.networkLatencyHistory.reduce((a, b) => a + b, 0) / this.networkLatencyHistory.length;
+    const avgBandwidth = this.bandwidthHistory.reduce((a, b) => a + b, 0) / this.bandwidthHistory.length;
+
+    // Buffer prediction algorithm
+    let predictedBufferSize = this.defaultBufferSize;
+
+    // Adjust based on latency (higher latency = larger buffer)
+    if (avgLatency > 200) {
+      predictedBufferSize *= 1.5;
+    } else if (avgLatency < 50) {
+      predictedBufferSize *= 0.7;
+    }
+
+    // Adjust based on bandwidth (lower bandwidth = smaller buffer for faster transmission)
+    if (avgBandwidth < 1000000) { // < 1 Mbps
+      predictedBufferSize *= 0.6;
+    } else if (avgBandwidth > 10000000) { // > 10 Mbps
+      predictedBufferSize *= 1.3;
+    }
+
+    // Apply constraints
+    this.bufferSize = Math.max(
+      this.minBufferSize,
+      Math.min(this.maxBufferSize, Math.round(predictedBufferSize))
+    );
+
+    return this.bufferSize;
+  }
+
+  getCurrentBufferSize(): number {
+    return this.bufferSize;
+  }
+
+  reset(): void {
+    this.bufferSize = this.defaultBufferSize;
+    this.networkLatencyHistory = [];
+    this.bandwidthHistory = [];
+  }
+}
+
+/**
+ * Streaming performance monitor
+ */
+export class StreamingPerformanceMonitor {
+  private startTime: number = 0;
+  private metrics: StreamingMetrics;
+  private bufferPredictor: BufferPredictor;
+
+  constructor() {
+    this.metrics = {
+      totalBytes: 0,
+      totalChunks: 0,
+      averageChunkSize: 0,
+      totalTime: 0,
+      averageLatency: 0,
+      networkLatency: 0,
+      bandwidth: 0,
+      bufferSize: 0
+    };
+    this.bufferPredictor = new BufferPredictor();
+  }
+
+  startMonitoring(): void {
+    this.startTime = performance.now();
+    this.metrics = {
+      totalBytes: 0,
+      totalChunks: 0,
+      averageChunkSize: 0,
+      totalTime: 0,
+      averageLatency: 0,
+      networkLatency: 0,
+      bandwidth: 0,
+      bufferSize: 0
+    };
+  }
+
+  recordChunk(chunkSize: number): void {
+    this.metrics.totalChunks++;
+    this.metrics.totalBytes += chunkSize;
+    this.metrics.averageChunkSize = this.metrics.totalBytes / this.metrics.totalChunks;
+  }
+
+  updateNetworkMetrics(latency: number, bandwidth: number): void {
+    this.metrics.networkLatency = latency;
+    this.metrics.bandwidth = bandwidth;
+    
+    // Update buffer size based on network conditions
+    this.metrics.bufferSize = this.bufferPredictor.adjustBufferSize(latency, bandwidth);
+  }
+
+  finishMonitoring(): StreamingMetrics {
+    this.metrics.totalTime = performance.now() - this.startTime;
+    this.metrics.averageLatency = this.metrics.totalTime / this.metrics.totalChunks;
+    
+    return { ...this.metrics };
+  }
+
+  getMetrics(): StreamingMetrics {
+    return { ...this.metrics };
+  }
+}
+
+/**
+ * Network performance estimator
+ */
+export class NetworkPerformanceEstimator {
+  private static instance: NetworkPerformanceEstimator;
+  private connectionInfo: NetworkInformation | null = null;
+
+  private constructor() {
+    if (typeof navigator !== 'undefined' && 'connection' in navigator) {
+      this.connectionInfo = (navigator as Navigator & { connection: NetworkInformation }).connection;
+    }
+  }
+
+  static getInstance(): NetworkPerformanceEstimator {
+    if (!NetworkPerformanceEstimator.instance) {
+      NetworkPerformanceEstimator.instance = new NetworkPerformanceEstimator();
+    }
+    return NetworkPerformanceEstimator.instance;
+  }
+
+  /**
+   * Estimate network latency (simplified)
+   */
+  async estimateLatency(): Promise<number> {
+    if (typeof window === 'undefined') {
+      return 100; // Default for server-side
+    }
+
+    try {
+      const start = performance.now();
+      await fetch('https://api.deepgram.com/v1/speak', {
+        method: 'HEAD',
+        mode: 'no-cors'
+      });
+      return performance.now() - start;
+    } catch {
+      // Fallback based on connection type
+      if (this.connectionInfo) {
+        switch (this.connectionInfo.effectiveType) {
+          case 'slow-2g': return 2000;
+          case '2g': return 1000;
+          case '3g': return 500;
+          case '4g': return 100;
+          default: return 100;
+        }
+      }
+      return 100;
+    }
+  }
+
+  /**
+   * Estimate available bandwidth
+   */
+  estimateBandwidth(): number {
+    if (typeof window === 'undefined') {
+      return 1000000; // Default 1 Mbps for server-side
+    }
+
+    if (this.connectionInfo) {
+      // Use connection API if available
+      const downlink = this.connectionInfo.downlink;
+      if (downlink) {
+        return downlink * 1000000; // Convert Mbps to bps
+      }
+    }
+
+    // Fallback estimates based on connection type
+    if (this.connectionInfo) {
+      switch (this.connectionInfo.effectiveType) {
+        case 'slow-2g': return 50000; // 50 Kbps
+        case '2g': return 250000; // 250 Kbps
+        case '3g': return 750000; // 750 Kbps
+        case '4g': return 10000000; // 10 Mbps
+        default: return 1000000; // 1 Mbps
+      }
+    }
+
+    return 1000000; // Default 1 Mbps
+  }
+
+  /**
+   * Get optimal audio format preset based on network conditions
+   */
+  async getOptimalPreset(): Promise<AudioFormatPreset> {
+    const latency = await this.estimateLatency();
+    const bandwidth = this.estimateBandwidth();
+
+    if (latency > 500 || bandwidth < 500000) {
+      return 'LOW_BANDWIDTH';
+    } else if (latency < 100 && bandwidth > 5000000) {
+      return 'HIGH_BANDWIDTH';
+    } else if (latency < 200 && bandwidth > 2000000) {
+      return 'REAL_TIME';
+    } else {
+      return 'MEDIUM_BANDWIDTH';
+    }
+  }
+}
+
+/**
+ * Convert text to speech using Deepgram API
+ * @param options - TTS configuration options
+ * @returns Promise with audio buffer or error
+ */
+export async function textToSpeech(options: DeepgramTTSOptions): Promise<DeepgramTTSResponse> {
+  const {
+    text,
+    model = 'aura-2-thalia-en',
+    encoding = 'mp3',
+    container = 'mp3',
+    sample_rate = 24000
+  } = options;
+
+  // Validate API key
+  const apiKey = process.env.DEEPGRAM_API_KEY;
+  if (!apiKey) {
+    return {
+      success: false,
+      error: 'DEEPGRAM_API_KEY environment variable is not set'
+    };
+  }
+
+  // Validate text input
+  if (!text || text.trim().length === 0) {
+    return {
+      success: false,
+      error: 'Text input is required and cannot be empty'
+    };
+  }
+
+  try {
+    const response = await fetch('https://api.deepgram.com/v1/speak', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${apiKey}`
+      },
+      body: JSON.stringify({
+        text: text.trim(),
+        model,
+        encoding,
+        container,
+        sample_rate
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return {
+        success: false,
+        error: `Deepgram API error: ${response.status} ${response.statusText}. ${errorText}`
+      };
+    }
+
+    const audioBuffer = await response.arrayBuffer();
+    const contentType = response.headers.get('content-type') || 'audio/mpeg';
+
+    return {
+      success: true,
+      audioBuffer,
+      contentType
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      error: `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+
+/**
+ * Convert text to speech and return as a blob URL for audio playback
+ * @param options - TTS configuration options
+ * @returns Promise with blob URL or error
+ */
+export async function textToSpeechBlob(options: DeepgramTTSOptions): Promise<{
+  success: boolean;
+  blobUrl?: string;
+  error?: string;
+}> {
+  const result = await textToSpeech(options);
+  
+  if (!result.success || !result.audioBuffer) {
+    return {
+      success: false,
+      error: result.error
+    };
+  }
+
+  try {
+    const blob = new Blob([result.audioBuffer], { 
+      type: result.contentType || 'audio/mpeg' 
+    });
+    const blobUrl = URL.createObjectURL(blob);
+    
+    return {
+      success: true,
+      blobUrl
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: `Failed to create blob URL: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+
+/**
+ * Convert text to speech and save as a file (Node.js environment)
+ * @param options - TTS configuration options
+ * @param filePath - Path where to save the audio file
+ * @returns Promise with success status or error
+ */
+export async function textToSpeechFile(
+  options: DeepgramTTSOptions, 
+  filePath: string
+): Promise<{
+  success: boolean;
+  error?: string;
+}> {
+  const result = await textToSpeech(options);
+  
+  if (!result.success || !result.audioBuffer) {
+    return {
+      success: false,
+      error: result.error
+    };
+  }
+
+  try {
+    const fs = await import('fs/promises');
+    const buffer = Buffer.from(result.audioBuffer);
+    await fs.writeFile(filePath, buffer);
+    
+    return {
+      success: true
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: `Failed to save file: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+
+/**
+ * Helper function to get Spanish TTS models
+ * @returns Array of Spanish model names
+ */
+export function getSpanishModels(): DeepgramModel[] {
+  return Object.keys(DEEPGRAM_MODELS).filter(model => 
+    model.endsWith('-es')
+  ) as DeepgramModel[];
+}
+
+/**
+ * Helper function to get English TTS models
+ * @returns Array of English model names
+ */
+export function getEnglishModels(): DeepgramModel[] {
+  return Object.keys(DEEPGRAM_MODELS).filter(model => 
+    model.endsWith('-en')
+  ) as DeepgramModel[];
+}/**
+ * Stream text-to-speech audio as it arrives (for immediate playback)
+ * @param options - TTS configuration options
+ * @param onChunk - Callback function called for each audio chunk received
+ * @param performanceMonitor - Optional performance monitor for metrics
+ * @returns Promise with success status or error
+ */
+export async function streamTextToSpeech(
+  options: DeepgramTTSOptions,
+  onChunk: (chunk: Uint8Array) => void,
+  performanceMonitor?: StreamingPerformanceMonitor
+): Promise<{
+  success: boolean;
+  error?: string;
+  totalBytes?: number;
+  metrics?: StreamingMetrics;
+}> {
+  const {
+    text,
+    model = 'aura-2-thalia-en',
+    encoding = 'mp3',
+    container = 'mp3',
+    sample_rate = 24000,
+    enableDynamicBuffering = false
+  } = options;
+
+  // Validate API key
+  const apiKey = process.env.DEEPGRAM_API_KEY;
+  if (!apiKey) {
+    return {
+      success: false,
+      error: 'DEEPGRAM_API_KEY environment variable is not set'
+    };
+  }
+
+  // Validate text input
+  if (!text || text.trim().length === 0) {
+    return {
+      success: false,
+      error: 'Text input is required and cannot be empty'
+    };
+  }
+
+  // Initialize performance monitoring
+  if (performanceMonitor) {
+    performanceMonitor.startMonitoring();
+  }
+
+  // Get network performance estimates if dynamic buffering is enabled
+  let networkEstimator: NetworkPerformanceEstimator | null = null;
+  if (enableDynamicBuffering) {
+    networkEstimator = NetworkPerformanceEstimator.getInstance();
+  }
+
+  try {
+    const response = await fetch('https://api.deepgram.com/v1/speak', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${apiKey}`
+      },
+      body: JSON.stringify({
+        text: text.trim(),
+        model,
+        encoding,
+        container,
+        sample_rate
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return {
+        success: false,
+        error: `Deepgram API error: ${response.status} ${response.statusText}. ${errorText}`
+      };
+    }
+
+    if (!response.body) {
+      return {
+        success: false,
+        error: 'Response body is null'
+      };
+    }
+
+    const reader = response.body.getReader();
+    let totalBytes = 0;
+    let chunkCount = 0;
+
+    // Get initial network metrics if dynamic buffering is enabled
+    if (networkEstimator && performanceMonitor) {
+      const latency = await networkEstimator.estimateLatency();
+      const bandwidth = networkEstimator.estimateBandwidth();
+      performanceMonitor.updateNetworkMetrics(latency, bandwidth);
+    }
+
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          break;
+        }
+
+        if (value) {
+          totalBytes += value.length;
+          chunkCount++;
+          
+          // Record chunk in performance monitor
+          if (performanceMonitor) {
+            performanceMonitor.recordChunk(value.length);
+          }
+          
+          onChunk(value);
+          
+          // Update network metrics periodically (every 10 chunks)
+          if (networkEstimator && performanceMonitor && chunkCount % 10 === 0) {
+            const latency = await networkEstimator.estimateLatency();
+            const bandwidth = networkEstimator.estimateBandwidth();
+            performanceMonitor.updateNetworkMetrics(latency, bandwidth);
+          }
+        }
+      }
+    } finally {
+      reader.releaseLock();
+    }
+
+    // Finish performance monitoring
+    const metrics = performanceMonitor ? performanceMonitor.finishMonitoring() : undefined;
+
+    return {
+      success: true,
+      totalBytes,
+      metrics
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      error: `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+
+/**
+ * Stream text-to-speech and create a MediaSource for immediate browser playback
+ * @param options - TTS configuration options
+ * @returns Promise with MediaSource URL or error
+ */
+export async function streamTextToSpeechForBrowser(
+  options: DeepgramTTSOptions
+): Promise<{
+  success: boolean;
+  mediaSourceUrl?: string;
+  error?: string;
+}> {
+  // Check if we're in a browser environment
+  if (typeof window === 'undefined' || !window.MediaSource) {
+    return {
+      success: false,
+      error: 'MediaSource API is not available (browser environment required)'
+    };
+  }
+
+  try {
+    const mediaSource = new MediaSource();
+    const mediaSourceUrl = URL.createObjectURL(mediaSource);
+
+    mediaSource.addEventListener('sourceopen', async () => {
+      try {
+        const sourceBuffer = mediaSource.addSourceBuffer('audio/mpeg');
+        let isFirstChunk = true;
+
+        const result = await streamTextToSpeech(options, (chunk) => {
+          if (isFirstChunk) {
+            // Start playback as soon as we have the first chunk
+            sourceBuffer.appendBuffer(chunk);
+            isFirstChunk = false;
+          } else {
+            // Queue subsequent chunks
+            sourceBuffer.appendBuffer(chunk);
+          }
+        });
+
+        if (result.success) {
+          mediaSource.endOfStream();
+        } else {
+          mediaSource.endOfStream();
+          // Streaming failed - error is already handled in the result
+        }
+      } catch {
+        mediaSource.endOfStream();
+        // SourceBuffer error - could be handled by the calling code if needed
+      }
+    });
+
+    return {
+      success: true,
+      mediaSourceUrl
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      error: `MediaSource creation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+/**
+ * Segment text by sentence boundaries for chunked streaming
+ * @param text - Input text to segment
+ * @returns Array of text segments
+ */
+export function segmentTextBySentence(text: string): string[] {
+  const sentenceBoundaries = text.match(/(?<=[.!?])\s+/g);
+  if (!sentenceBoundaries) {
+    return [text.trim()];
+  }
+
+  const segments: string[] = [];
+  let start = 0;
+
+  for (const boundary of sentenceBoundaries) {
+    const boundaryIndex = text.indexOf(boundary, start);
+    if (boundaryIndex !== -1) {
+      segments.push(text.slice(start, boundaryIndex + boundary.length).trim());
+      start = boundaryIndex + boundary.length;
+    }
+  }
+
+  // Add the remaining text
+  if (start < text.length) {
+    segments.push(text.slice(start).trim());
+  }
+
+  return segments.filter(segment => segment.length > 0);
+}
+
+/**
+ * Stream chunked text-to-speech for long passages
+ * @param options - TTS configuration options (text will be segmented)
+ * @param onChunk - Callback function called for each audio chunk
+ * @param onSegmentComplete - Optional callback when a text segment is complete
+ * @returns Promise with success status or error
+ */
+export async function streamChunkedTextToSpeech(
+  options: DeepgramTTSOptions,
+  onChunk: (chunk: Uint8Array) => void,
+  onSegmentComplete?: (segmentIndex: number, totalSegments: number) => void
+): Promise<{
+  success: boolean;
+  error?: string;
+  totalBytes?: number;
+  segmentsProcessed?: number;
+}> {
+  const segments = segmentTextBySentence(options.text);
+  let totalBytes = 0;
+  let segmentsProcessed = 0;
+
+  for (let i = 0; i < segments.length; i++) {
+    const segmentOptions = { ...options, text: segments[i] };
+    
+    const result = await streamTextToSpeech(segmentOptions, (chunk) => {
+      totalBytes += chunk.length;
+      onChunk(chunk);
+    });
+
+    if (!result.success) {
+      return {
+        success: false,
+        error: `Failed to process segment ${i + 1}: ${result.error}`,
+        totalBytes,
+        segmentsProcessed
+      };
+    }
+
+    segmentsProcessed++;
+    onSegmentComplete?.(i + 1, segments.length);
+  }
+
+  return {
+    success: true,
+    totalBytes,
+    segmentsProcessed
+  };
+}
+
+/**
+ * Create optimized TTS options using audio format presets
+ * @param text - Text to convert to speech
+ * @param preset - Audio format preset to use
+ * @param model - Optional model override
+ * @returns Optimized TTS options
+ */
+export function createOptimizedTTSOptions(
+  text: string,
+  preset: AudioFormatPreset,
+  model?: DeepgramModel
+): DeepgramTTSOptions {
+  const presetConfig = AUDIO_FORMAT_PRESETS[preset];
+  
+  return {
+    text,
+    model: model || 'aura-2-thalia-en',
+    encoding: presetConfig.encoding,
+    container: presetConfig.container,
+    sample_rate: presetConfig.sample_rate,
+    chunkSize: presetConfig.chunkSize,
+    enableDynamicBuffering: true,
+    targetLatency: presetConfig.targetLatency
+  };
+}
+
+/**
+ * Auto-optimize TTS options based on network conditions
+ * @param text - Text to convert to speech
+ * @param model - Optional model override
+ * @returns Auto-optimized TTS options
+ */
+export async function createAutoOptimizedTTSOptions(
+  text: string,
+  model?: DeepgramModel
+): Promise<DeepgramTTSOptions> {
+  const networkEstimator = NetworkPerformanceEstimator.getInstance();
+  const optimalPreset = await networkEstimator.getOptimalPreset();
+  
+  return createOptimizedTTSOptions(text, optimalPreset, model);
+}
+
+/**
+ * Stream TTS with automatic optimization
+ * @param text - Text to convert to speech
+ * @param onChunk - Callback for audio chunks
+ * @param model - Optional model override
+ * @returns Promise with streaming result and metrics
+ */
+export async function streamOptimizedTTS(
+  text: string,
+  onChunk: (chunk: Uint8Array) => void,
+  model?: DeepgramModel
+): Promise<{
+  success: boolean;
+  error?: string;
+  totalBytes?: number;
+  metrics?: StreamingMetrics;
+  preset?: AudioFormatPreset;
+}> {
+  const options = await createAutoOptimizedTTSOptions(text, model);
+  const performanceMonitor = new StreamingPerformanceMonitor();
+  
+  const result = await streamTextToSpeech(options, onChunk, performanceMonitor);
+  
+  return {
+    ...result,
+    preset: await NetworkPerformanceEstimator.getInstance().getOptimalPreset()
+  };
+}
+
+
+

@@ -1,0 +1,46 @@
+{
+    "name": "Game",
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Game title"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "vocabulary",
+          "grammar",
+          "pronunciation"
+        ],
+        "description": "Type of language learning game"
+      },
+      "difficulty": {
+        "type": "string",
+        "enum": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ],
+        "description": "Difficulty level"
+      },
+      "content": {
+        "type": "object",
+        "description": "Game content and questions"
+      },
+      "icon": {
+        "type": "string",
+        "description": "Icon name for the game"
+      },
+      "color": {
+        "type": "string",
+        "description": "Color theme for the game"
+      }
+    },
+    "required": [
+      "title",
+      "type",
+      "difficulty",
+      "content"
+    ]
+  }

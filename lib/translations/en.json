@@ -1,0 +1,103 @@
+{
+  "app": {
+    "title": "Fun Spanish!",
+    "subtitle": "Learn Latin American Spanish"
+  },
+  "navigation": {
+    "games": "Games",
+    "progress": "Progress",
+    "verbs": "Verbs",
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "user": "User"
+  },
+  "home": {
+    "welcome": "Welcome!",
+    "subtitle": "Learn Latin American Spanish in a fun way with interactive games",
+    "chooseGame": "Choose your favorite game",
+    "noGames": "No games available yet.",
+    "averageScore": "Average Score",
+    "gamesCompleted": "Games Completed",
+    "bestTime": "Best Time"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back!",
+    "loginSubtitle": "Sign in to continue learning",
+    "joinUs": "Join us!",
+    "signupSubtitle": "Create your account and start learning",
+    "forgotPassword": "Forgot your password?",
+    "forgotPasswordSubtitle": "Don't worry, we'll help you recover it",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "Your password",
+    "namePlaceholder": "Your full name",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "minPasswordPlaceholder": "Minimum 6 characters",
+    "loginButton": "Sign In",
+    "loginButtonLoading": "Signing in...",
+    "signupButton": "Create Account",
+    "signupButtonLoading": "Creating account...",
+    "resetButton": "Send Recovery Link",
+    "resetButtonLoading": "Sending...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signupLink": "Sign up here",
+    "loginLink": "Sign in here",
+    "backToLogin": "Back to sign in",
+    "passwordMismatch": "Passwords don't match",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "accountCreated": "Account created successfully! Check your email to confirm your account.",
+    "checkEmail": "Check your email! We've sent you a link to reset your password.",
+    "unexpectedError": "An unexpected error occurred"
+  },
+  "progress": {
+    "title": "Your Progress",
+    "subtitle": "Review your achievements and continuous improvement",
+    "averageScore": "Average Score",
+    "gamesCompleted": "Games Completed",
+    "averageTime": "Average Time",
+    "bestScore": "Best Score",
+    "recentGames": "Recent Games",
+    "noGamesPlayed": "You haven't played any games yet!",
+    "startLearning": "Go to the main page and start your learning adventure.",
+    "points": "points",
+    "errors": "errors",
+    "unknownGame": "Unknown game"
+  },
+  "games": {
+    "vocabulary": "vocabulary",
+    "grammar": "grammar",
+    "pronunciation": "pronunciation",
+    "beginner": "beginner",
+    "intermediate": "intermediate",
+    "advanced": "advanced"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "game": {
+    "gameNotFound": "Game not found",
+    "congratulations": "Congratulations!",
+    "gameCompleted": "You have completed the game",
+    "back": "Back",
+    "playAgain": "Play Again",
+    "unsupportedGameType": "Unsupported game type"
+  },
+  "verbs": {
+    "title": "Spanish Verbs",
+    "subtitle": "Learn Spanish verb conjugations with interactive examples",
+    "listen": "Listen",
+    "learn": "Learn",
+    "presentTense": "Present Tense"
+  }
+}
