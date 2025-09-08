@@ -1,0 +1,56 @@
+{
+    "build_systems":
+    [
+        {
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Miniconda py311 Python Builder",
+            "selector": "source.python",
+            "shell_cmd": "\"/opt/anaconda3/envs/py311/bin/python\" -u \"$file\"",
+            "working_dir": "/Users/scomax/Documents/Git/claude-prompting"
+        },
+        {
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Miniconda web_gpt Python Builder",
+            "selector": "source.python",
+            "shell_cmd": "\"/opt/anaconda3/envs/web_gpt/bin/python\" -u \"$file\"",
+            "working_dir": "/Users/scomax/Documents/Git/claude-prompting"
+        },
+    ],
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "path": ".",
+            "folder_exclude_patterns": ["__pycache__"],
+        }
+    ],
+    "settings":
+    {
+        "LSP":
+        {
+            "LSP-pyright": {
+                "settings": {
+                   "python.pythonPath": "/opt/anaconda3/envs/py311/bin/python",
+                },
+            },
+            "pylsp": {
+                "enabled": true,
+                "command": ["/opt/anaconda3/envs/py311/bin/pylsp"],
+                "settings": {
+                    "pylsp": {
+                        "plugins": {
+                            "jedi_completion": { "enabled": false, },
+                            "rope_completion": { "enabled": false, },
+                            "jedi_hover": { "enabled": true, },
+                        },
+                    },
+                },
+            },
+            "LSP-pylsp":
+            {
+				"enabled": false
+			},
+        },
+    },
+    "conda_environment": "/opt/anaconda3/envs/py311",
+}

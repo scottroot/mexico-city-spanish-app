@@ -525,8 +525,8 @@ export default function CustomQuizPage() {
                     ) : (
                       <p className="text-sm text-gray-500">
                         {language === 'es' 
-                          ? 'No tienes verbos favoritos. Ve a CVerbos para agregar algunos.'
-                          : 'No favorite verbs. Go to CVerbs to add some.'
+                          ? 'No tienes verbos favoritos. Ve a Verbos para agregar algunos.'
+                          : 'No favorite verbs. Go to Verbs to add some.'
                         }
                       </p>
                     )}

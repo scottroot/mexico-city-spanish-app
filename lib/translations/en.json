@@ -7,8 +7,8 @@
     "games": "Games",
     "progress": "Progress",
     "verbs": "Verbs",
-    "cverbs": "CVerbs",
     "quiz": "Custom Quiz",
+    "stories": "Stories",
     "login": "Sign In",
     "logout": "Sign Out",
     "user": "User"
@@ -191,5 +191,34 @@
     "noQuestionsGenerated": "No questions could be generated with the selected criteria",
     "failedToGenerateQuiz": "Failed to generate quiz",
     "failedToStartQuiz": "Failed to start quiz"
+  },
+  "stories": {
+    "title": "Stories",
+    "subtitle": "Immerse yourself in Spanish through engaging stories",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "comingSoon": "Coming Soon",
+    "readStory": "Read Story",
+    "story1": {
+      "title": "La niña y el gato",
+      "subtitle": "A simple story about friendship"
+    },
+    "story2": {
+      "title": "Un sábado en la ciudad",
+      "subtitle": "A day in the city adventure"
+    },
+    "story3": {
+      "title": "El sábado de la feria",
+      "subtitle": "A fair day with unexpected events"
+    },
+    "story4": {
+      "title": "El mapa de papel",
+      "subtitle": "A mysterious paper map leads to adventure"
+    },
+    "story5": {
+      "title": "Cartografía del rumor",
+      "subtitle": "An advanced tale of intrigue and mystery"
+    }
   }
 }

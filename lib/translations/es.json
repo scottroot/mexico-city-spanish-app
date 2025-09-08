@@ -7,8 +7,8 @@
     "games": "Juegos",
     "progress": "Progreso",
     "verbs": "Verbos",
-    "cverbs": "CVerbos",
     "quiz": "Quiz Personalizado",
+    "stories": "Historias",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "user": "Usuario"
@@ -191,5 +191,34 @@
     "noQuestionsGenerated": "No se pudieron generar preguntas con los criterios seleccionados",
     "failedToGenerateQuiz": "Error al generar el quiz",
     "failedToStartQuiz": "Error al iniciar el quiz"
+  },
+  "stories": {
+    "title": "Historias",
+    "subtitle": "Sumérgete en el español a través de historias atractivas",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "comingSoon": "Próximamente",
+    "readStory": "Leer Historia",
+    "story1": {
+      "title": "La niña y el gato",
+      "subtitle": "Una historia simple sobre la amistad"
+    },
+    "story2": {
+      "title": "Un sábado en la ciudad",
+      "subtitle": "Una aventura de un día en la ciudad"
+    },
+    "story3": {
+      "title": "El sábado de la feria",
+      "subtitle": "Un día de feria con eventos inesperados"
+    },
+    "story4": {
+      "title": "El mapa de papel",
+      "subtitle": "Un misterioso mapa de papel lleva a la aventura"
+    },
+    "story5": {
+      "title": "Cartografía del rumor",
+      "subtitle": "Un cuento avanzado de intriga y misterio"
+    }
   }
 }

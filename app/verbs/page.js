@@ -148,43 +148,9 @@ function DefaultMainContent({ t }) {
       <TenseTimeline />
     </div>
   )
-  // return (
-  //   <div className="flex-1 flex items-center justify-center">
-  //     <div className="text-center w-full max-w-4xl mx-auto px-6">
-  //       <div className="flex items-center justify-center gap-2 mb-6">
-  //         <Sparkles className="w-8 h-8 text-orange-500" />
-  //         <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-  //           {t('cverbs.title')}
-  //         </h1>
-  //       </div>
-  //       <p className="text-xl text-gray-600 mb-8">
-  //         {t('cverbs.subtitle')}
-  //       </p>
-        
-  //       <TenseTimeline />
-        
-  //       <motion.div
-  //         initial={{ opacity: 0, y: 20 }}
-  //         animate={{ opacity: 1, y: 0 }}
-  //         className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-8"
-  //       >
-  //         <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-  //           <BookOpen className="w-5 h-5 text-orange-500" />
-  //           {t('cverbs.features')}
-  //         </h2>
-  //         <ul className="text-gray-600 space-y-2 text-left">
-  //           <li>• {t('cverbs.feature1')}</li>
-  //           <li>• {t('cverbs.feature2')}</li>
-  //           <li>• {t('cverbs.feature3')}</li>
-  //           <li>• {t('cverbs.feature4')}</li>
-  //         </ul>
-  //       </motion.div>
-  //     </div>
-  //   </div>
-  // )
 }
 
-export default function CVerbsPage() {
+export default function VerbsPage() {
   const [verbs, setVerbs] = useState([]);
   const [selectedVerb, setSelectedVerb] = useState(null);
   const [loading, setLoading] = useState(true);

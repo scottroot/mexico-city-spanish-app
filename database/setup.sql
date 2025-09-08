@@ -1,5 +1,8 @@
 -- Spanish Language App Database Setup
 -- Run these commands in your Supabase SQL editor
+--
+-- Note: For stories functionality, also run:
+-- database/add_stories_table.sql
 
 -- 1. Create profiles table (extends auth.users)
 CREATE TABLE IF NOT EXISTS public.profiles (
