@@ -46,9 +46,10 @@ Spanish-Language-App/
 │   │   └── page.js              # Progress page route (protected)
 │   ├── verbs/
 │   │   ├── Verbs.js             # Verb learning component
-│   │   └── page.js              # Verbs page route
-│   ├── cverbs/
-│   │   └── page.js              # Condensed verbs page route
+│   │   ├── page.js              # Verbs page route
+│   │   └── tense-timeline.tsx   # Tense timeline component
+│   ├── stories/
+│   │   └── page.tsx             # Stories page route
 │   ├── globals.css              # Global styles
 │   ├── Home.tsx                 # Home page component
 │   ├── layout.js                # Root layout with AuthProvider
@@ -104,16 +105,23 @@ Spanish-Language-App/
 │       └── middleware.ts        # Middleware client
 ├── database/                     # Database setup and documentation
 │   ├── setup.sql                # Complete database schema
+│   ├── add_stories_table.sql    # Stories table creation script
+│   ├── add_stories_summary_columns.sql # Stories summary columns script
 │   └── README.md                # Database setup instructions
 ├── scripts/                     # Utility scripts
-│   └── import-verbs.js          # Verb data migration script
+│   ├── import-verbs.js          # Verb data migration script
+│   └── import-stories.js        # Stories data migration script
 ├── app/api/                     # API routes
 │   ├── tts/
 │   │   └── route.ts             # Text-to-speech API endpoint
-│   └── verbs/
-│       ├── route.ts             # Verbs list API endpoint
-│       └── [infinitive]/
-│           └── route.ts         # Verb conjugation API endpoint
+│   ├── verbs/
+│   │   ├── route.ts             # Verbs list API endpoint
+│   │   └── [infinitive]/
+│   │       └── route.ts         # Verb conjugation API endpoint
+│   └── stories/
+│       ├── route.ts             # Stories list API endpoint
+│       └── [slug]/
+│           └── route.ts         # Individual story API endpoint
 ├── spec/                        # Technical documentation
 │   ├── README.md                # This file
 │   ├── TTS-ARCHITECTURE.md      # TTS system architecture
@@ -157,7 +165,7 @@ Spanish-Language-App/
 - **User Authentication**: Complete signup/login system with Supabase and automatic profile creation
 - **Interactive Games**: Grammar, vocabulary, and pronunciation practice
 - **Verb Conjugation System**: Comprehensive Spanish verb database with 637 verbs and 11,466 conjugations
-- **CVerbs Page**: Condensed verb conjugation view with responsive grid layout and language-aware tense names
+- **Stories System**: Interactive story reading with language-aware summaries and responsive gallery layout
 - **Progress Tracking**: User learning progress and achievements with persistence
 - **Text-to-Speech**: Real-time audio generation for pronunciation
 - **Multi-language UI**: Toggle between English and Spanish (Latinoamericano) interface
@@ -299,11 +307,19 @@ The app features three main game types:
 The app includes comprehensive verb conjugation functionality:
 
 1. **Verbs Page** (`app/verbs/`): Full verb learning interface with sidebar and detailed conjugation display
-2. **CVerbs Page** (`app/cverbs/`): Condensed verb conjugation view with responsive grid layout and favorites system
-3. **VerbSidebar.tsx**: Searchable verb list with pagination and TTS integration
-4. **ConjugationDisplay.tsx**: Detailed verb conjugation display with tense timeline
-5. **CondensedConjugationDisplay.tsx**: Grid-based conjugation view with mood tabs and heart favorites
-6. **TenseTimeline.tsx**: Visual timeline of Spanish tenses
+2. **VerbSidebar.tsx**: Searchable verb list with pagination and TTS integration
+3. **ConjugationDisplay.tsx**: Detailed verb conjugation display with tense timeline
+4. **TenseTimeline.tsx**: Visual timeline of Spanish tenses
+
+### Stories System
+
+The app features an interactive story reading system:
+
+1. **Stories Page** (`app/stories/`): Gallery grid view with story cards and language-aware summaries
+2. **Story API** (`/api/stories`): RESTful endpoints for story data retrieval
+3. **Database Integration**: Stories stored in Supabase with metadata, text, audio, and alignment data
+4. **Language Support**: Bilingual summaries (Spanish/English) with automatic language switching
+5. **Responsive Design**: Adaptive grid layout (1-4 columns based on screen size)
 
 ### Progress Tracking
 

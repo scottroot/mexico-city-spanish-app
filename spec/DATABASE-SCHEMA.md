@@ -277,6 +277,46 @@ CREATE TABLE public.user_quiz_preferences (
 - `created_at`: Record creation timestamp
 - `updated_at`: Last update timestamp
 
+### `public.stories`
+Stores Spanish learning stories with metadata, text, audio, and alignment data.
+
+```sql
+CREATE TABLE public.stories (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  level TEXT NOT NULL,
+  reading_time TEXT,
+  text TEXT NOT NULL,
+  enhanced_text TEXT,
+  featured_image_url TEXT,
+  audio_url TEXT,
+  alignment_data JSONB,
+  normalized_alignment_data JSONB,
+  summary TEXT,
+  summary_english TEXT,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+**Fields:**
+- `id`: Primary key (UUID)
+- `title`: Story title
+- `slug`: URL-friendly identifier (unique)
+- `level`: Story difficulty level (beginner, high_beginner, low_intermediate, high_intermediate, advanced)
+- `reading_time`: Estimated reading time (e.g., "5 minutes")
+- `text`: Original story text
+- `enhanced_text`: Enhanced version with annotations
+- `featured_image_url`: URL to story cover image
+- `audio_url`: URL to story audio file
+- `alignment_data`: JSONB object with text-audio alignment data
+- `normalized_alignment_data`: Processed alignment data for playback
+- `summary`: Brief summary in Spanish
+- `summary_english`: Brief summary in English
+- `created_at`: Record creation timestamp
+- `updated_at`: Last update timestamp
+
 ---
 
 ## Row Level Security (RLS)
@@ -390,6 +430,13 @@ CREATE POLICY "Users can delete own quiz preferences" ON public.user_quiz_prefer
   FOR DELETE USING (auth.uid() = user_id);
 ```
 
+#### `public.stories`
+```sql
+-- Anyone can view stories (public content)
+CREATE POLICY "Anyone can view stories" ON public.stories
+  FOR SELECT USING (true);
+```
+
 ---
 
 ## Triggers and Functions
@@ -472,6 +519,10 @@ CREATE INDEX idx_user_favorites_verb_infinitive ON public.user_favorites(verb_in
 
 -- User quiz preferences indexes
 CREATE INDEX idx_user_quiz_preferences_user_id ON public.user_quiz_preferences(user_id);
+
+-- Stories table indexes
+CREATE INDEX idx_stories_level ON public.stories(level);
+CREATE INDEX idx_stories_slug ON public.stories(slug);
 ```
 
 ### Real-time Subscriptions
@@ -552,6 +603,17 @@ INSERT INTO public.games (id, title, type, difficulty, content) VALUES
 - Enhanced quiz answer comparison to accept answers with or without pronouns
 - Disabled `vosotros` pronoun entirely from application
 - Added comprehensive quiz configuration UI with bottom-sliding modals
+
+### Version 1.6 - Stories System
+- Added `stories` table for Spanish learning stories with metadata, text, audio, and alignment data
+- Created Stories page (`app/stories/`) with responsive gallery grid layout
+- Implemented Stories API endpoints (`/api/stories`, `/api/stories/[slug]`) for story data retrieval
+- Added bilingual summary support (`summary`, `summary_english`) with automatic language switching
+- Created import script (`scripts/import-stories.js`) for populating stories from local files
+- Enhanced navigation system to include Stories page in both desktop and mobile layouts
+- Added database migration scripts (`add_stories_table.sql`, `add_stories_summary_columns.sql`)
+- Implemented language-aware story summaries with fallback logic
+- Added responsive grid layout (1-4 columns based on screen size) with story cards
 
 ---
 

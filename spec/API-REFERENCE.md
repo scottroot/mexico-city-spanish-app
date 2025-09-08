@@ -80,6 +80,24 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - RLS: Public read access
 - Returns: Verb details with all conjugation forms across tenses and moods
 
+### Stories API Endpoints
+
+#### `GET /api/stories`
+- File: `app/api/stories/route.ts`
+- Parameters: `level` (optional), `limit` (optional), `offset` (optional)
+- Returns: `Promise<{ stories: Story[] }>`
+- Database: `public.stories` table
+- RLS: Public read access
+- Returns: Array of stories with `id`, `title`, `slug`, `level`, `reading_time`, `featured_image_url`, `audio_url`, `summary`, `summary_english`, `created_at`
+
+#### `GET /api/stories/[slug]`
+- File: `app/api/stories/[slug]/route.ts`
+- Parameters: `slug` (story slug from URL)
+- Returns: `Promise<{ story: Story }>`
+- Database: `public.stories` table
+- RLS: Public read access
+- Returns: Complete story data including text, enhanced_text, alignment_data, normalized_alignment_data
+
 ### Quiz API Endpoints
 
 #### `POST /api/quiz`
@@ -326,6 +344,7 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - `ProgressResult<T>`: Generic result type with `success`, `data`, `error`
 - `Verb`: Verb entity interface with `id`, `infinitive`, `infinitive_english`
 - `VerbConjugation`: Verb conjugation interface with all tense forms and mood data
+- `Story`: Story entity interface with `id`, `title`, `slug`, `level`, `reading_time`, `featured_image_url`, `audio_url`, `summary`, `summary_english`, `text`, `enhanced_text`, `alignment_data`, `normalized_alignment_data`, `created_at`
 - `QuizConfig`: Quiz configuration interface with `selectedTenseMoods`, `selectedPronouns`, `verbSelection`, `customVerbs`, `questionCount`
 - `QuizQuestion`: Quiz question interface with `id`, `infinitive`, `correctAnswer`, `pronoun`, `pronounEnglish`, `explanation`
 - `PronounOption`: Pronoun option interface with `value`, `label`, `labelEnglish`

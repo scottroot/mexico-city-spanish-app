@@ -16,6 +16,7 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('es') // Default to Spanish
+  const [isInitialized, setIsInitialized] = useState(false)
   
   // Load translations directly
   const translations = {
@@ -32,6 +33,7 @@ export const LanguageProvider = ({ children }) => {
     if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
       setLanguage(savedLanguage)
     }
+    setIsInitialized(true)
   }, [])
 
   // Save language preference to localStorage
@@ -69,7 +71,8 @@ export const LanguageProvider = ({ children }) => {
     language,
     changeLanguage,
     t,
-    translations: translations[language] || {}
+    translations: translations[language] || {},
+    isInitialized
   }
 
   return (

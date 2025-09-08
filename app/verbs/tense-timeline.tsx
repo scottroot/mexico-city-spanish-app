@@ -121,21 +121,21 @@ const SpanishVerbTimeline = () => {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4">
+    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6">
       {/* Minimalist Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
           Spanish Verb Tenses
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm sm:text-base text-gray-600">
           Chronological timeline from past to conditional
         </p>
       </div>
 
-      {/* Compact Timeline */}
-      <div className="relative">
+      {/* Desktop Timeline */}
+      <div className="hidden md:block relative min-h-[600px]">
         {/* Timeline Line */}
-        <div className="absolute top-8 left-4 right-4 h-0.5 bg-gradient-to-r from-red-300 via-blue-300 via-green-300 to-purple-300 rounded-full"></div>
+        <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-red-300 via-blue-300 via-green-300 to-purple-300 rounded-full"></div>
         
         {/* NOW Marker */}
         <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
@@ -146,9 +146,11 @@ const SpanishVerbTimeline = () => {
         </div>
 
         {/* Timeline Items */}
-        <div className="relative pt-16 pb-8">
+        <div className="relative pt-16 pb-20">
           {timelineTenses.map((tense, index) => {
-            const leftPercentage = 50 + (tense.position * 6);
+            // Systematic positioning to prevent overlap
+            const totalItems = timelineTenses.length;
+            const leftPercentage = 20 + (index * (60 / (totalItems - 1))); // Even distribution across 60% of width
             const isAbove = index % 2 === 0;
             
             return (
@@ -159,29 +161,29 @@ const SpanishVerbTimeline = () => {
                 transition={{ delay: index * 0.1 }}
                 className="absolute transform -translate-x-1/2"
                 style={{ 
-                  left: `${Math.max(8, Math.min(92, leftPercentage))}%`,
-                  top: isAbove ? '0' : '120px'
+                  left: `${leftPercentage}%`,
+                  top: isAbove ? '0' : '200px' // Increased vertical spacing
                 }}
               >
                 {/* Timeline Dot */}
                 <div className={`w-3 h-3 ${tense.dotColor} rounded-full border-2 border-white shadow-sm mx-auto mb-2`}></div>
                 
                 {/* Tense Card */}
-                <div className="w-36 group cursor-pointer">
+                <div className="w-20 sm:w-24 group cursor-pointer"> {/* Even smaller width */}
                   <motion.div 
                     whileHover={{ scale: 1.05 }}
                     className={`bg-gradient-to-br ${tense.color} rounded-lg shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden`}
                   >
-                    <div className="p-3 text-white">
-                      <h3 className="font-semibold text-xs leading-tight mb-1">
+                    <div className="p-1.5 text-white"> {/* Reduced padding */}
+                      <h3 className="font-semibold text-xs leading-tight mb-0.5">
                         {tense.name}
                       </h3>
-                      <p className="text-xs opacity-90 italic mb-2">
+                      <p className="text-xs opacity-90 italic mb-1">
                         {tense.spanish}
                       </p>
-                      <div className="bg-white bg-opacity-20 rounded p-2 backdrop-blur-sm">
+                      <div className="bg-white bg-opacity-20 rounded p-1 backdrop-blur-sm">
                         <p className="font-medium text-xs">{tense.example}</p>
-                        <p className="text-xs opacity-80 mt-1">{tense.englishExample}</p>
+                        <p className="text-xs opacity-80 mt-0.5">{tense.englishExample}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -190,25 +192,58 @@ const SpanishVerbTimeline = () => {
             );
           })}
         </div>
+
+        {/* Category Labels */}
+        <div className="flex justify-between items-center mt-8 px-4">
+          <div className="text-center">
+            <div className="w-2 h-2 bg-red-400 rounded-full mx-auto mb-1"></div>
+            <span className="text-xs font-medium text-gray-600">Past</span>
+          </div>
+          <div className="text-center">
+            <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1"></div>
+            <span className="text-xs font-medium text-gray-600">Present</span>
+          </div>
+          <div className="text-center">
+            <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1"></div>
+            <span className="text-xs font-medium text-gray-600">Future</span>
+          </div>
+          <div className="text-center">
+            <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1"></div>
+            <span className="text-xs font-medium text-gray-600">Conditional</span>
+          </div>
+        </div>
       </div>
 
-      {/* Category Labels */}
-      <div className="flex justify-between items-center mt-8 px-4">
-        <div className="text-center">
-          <div className="w-2 h-2 bg-red-400 rounded-full mx-auto mb-1"></div>
-          <span className="text-xs font-medium text-gray-600">Past</span>
-        </div>
-        <div className="text-center">
-          <div className="w-2 h-2 bg-blue-400 rounded-full mx-auto mb-1"></div>
-          <span className="text-xs font-medium text-gray-600">Present</span>
-        </div>
-        <div className="text-center">
-          <div className="w-2 h-2 bg-green-400 rounded-full mx-auto mb-1"></div>
-          <span className="text-xs font-medium text-gray-600">Future</span>
-        </div>
-        <div className="text-center">
-          <div className="w-2 h-2 bg-purple-400 rounded-full mx-auto mb-1"></div>
-          <span className="text-xs font-medium text-gray-600">Conditional</span>
+      {/* Mobile Grid Layout */}
+      <div className="md:hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {timelineTenses.map((tense, index) => (
+            <motion.div
+              key={tense.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className="group cursor-pointer"
+            >
+              <div className={`bg-gradient-to-br ${tense.color} rounded-lg shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden`}>
+                <div className="p-4 text-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className={`w-3 h-3 ${tense.dotColor} rounded-full border-2 border-white shadow-sm`}></div>
+                    <h3 className="font-semibold text-sm">
+                      {tense.name}
+                    </h3>
+                  </div>
+                  <p className="text-sm opacity-90 italic mb-3">
+                    {tense.spanish}
+                  </p>
+                  <div className="bg-white bg-opacity-20 rounded p-3 backdrop-blur-sm">
+                    <p className="font-medium text-sm">{tense.example}</p>
+                    <p className="text-sm opacity-80 mt-1">{tense.englishExample}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
