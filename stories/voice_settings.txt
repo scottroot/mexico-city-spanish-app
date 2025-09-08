@@ -1,6 +1,29 @@
-elevenlabs
+{
+    "voice": "Carlos Mexico City",
+    "voice_id": "JdbWZDoJwUzsEthmexRi",
+    "accent": "Mexico City",
+    "description": "This is the one I made."
+}
+{
+    "voice": "Abril",
+    "voice_id": "98LPJZJtEjmEzEwlnmJP",
+    "description": "This is Abril!!!"
+}
+{
+    "voice": "Fernanda Sanmiguel - Spanish Audiobook Neutral Voice",
+    "voice_id": "1aJyZpkt0vxhGPBnPyrs",
+    "accent": "Mexico
+    "description": "Middle aged male Authentic Mexican accent from the Mexico City region and its surroundings, focused on suspense and drama narrative styles.",
+    "price": "2x"
+}
+{
+    "voice": "Eduardo M. - Mexican Spanish",
+    "voice_id": "W6Z2FAa578IKOGSVo2sA",
+    "accent": "Mexico City",
+    "description": "Middle aged male Authentic Mexican accent from the Mexico City region and its surroundings, focused on suspense and drama narrative styles.",
+    "price": "2x"
+}
 
-Model: Eleven v3 Text to Speech model
-Voice: Fernanda Sanmiguel - Spanish Audiobook Neutral Voice
-Voice ID: 1aJyZpkt0vxhGPBnPyrs
-Stability: 50%
+
+
+

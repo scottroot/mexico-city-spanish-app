@@ -1,10 +1,17 @@
-Write a Spanish story for language learners at the 'Proficient / Near-Native' proficiency level provided below.  Match vocabulary, grammar, and length for that level.
+Write a Spanish story for language learners at the 'Proficient / Near-Native' proficiency level provided below. Match vocabulary, grammar, and length for that level. 
+
+**CRITICAL WORD LIMIT**: Your story must be between 900-1,200 words total. Count words carefully and do not exceed 300 words under any circumstances.
 
 <proficiency_level>
 {
   "Proficient / Near-Native": {
     "description": "Achieves near-native control of the language, using it with precision and nuance across all domains, including abstract, academic, and professional contexts.",
-    "vocabulary_size": "10,000–15,000+ words",
+    "stories": {
+      "min_words": 900,
+      "max_words": 1,200,
+      "note": "Complete short stories or novellas. Full literary style with nuance, idioms, and cultural references."
+    },
+    "vocabulary_size": "10,000–15,000+",
     "tenses_mastered": "All forms and registers of the language, including idiomatic, archaic, and regional variations.",
     "skills": {
       "listening": "Understands virtually all speech, including idioms, cultural references, and subtle humor.",
@@ -23,15 +30,12 @@ Write a Spanish story for language learners at the 'Proficient / Near-Native' pr
       "Discussing philosophy or abstract theories with clarity and cultural references.",
       "Reading poetry aloud and commenting on rhythm, symbolism, and historical context.",
       "Adapting speech register from formal academic lecture to casual storytelling seamlessly."
-    ],
-    "stories": {
-      "min_words": 5000,
-      "max_words": 10000,
-      "note": "Complete short stories or novellas. Full literary style with nuance, idioms, and cultural references."
-    }
+    ]
   }
 }
 </proficiency_level>
+
+WORD COUNT REQUIREMENT: Write exactly 900-1,200 words. After writing, verify your word count stays within this range.
 
 <response_format>
 Return only this JSON (no extra text, no code fences):

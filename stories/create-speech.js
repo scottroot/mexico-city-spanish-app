@@ -193,27 +193,35 @@ async function combineAlignmentData(alignmentDataArray) {
   
   const combined = {
     characters: [],
-    character_start_times_seconds: [],
-    character_end_times_seconds: []
+    characterStartTimesSeconds: [],
+    characterEndTimesSeconds: []
   };
   
   let timeOffset = 0;
   
   for (const alignment of alignmentDataArray) {
-    if (alignment && alignment.characters) {
+    if (alignment && alignment.characters && 
+        alignment.characterStartTimesSeconds && alignment.characterEndTimesSeconds) {
       combined.characters.push(...alignment.characters);
       
       // Adjust timestamps by adding the time offset
-      const adjustedStartTimes = alignment.character_start_times_seconds.map(t => t + timeOffset);
-      const adjustedEndTimes = alignment.character_end_times_seconds.map(t => t + timeOffset);
+      const adjustedStartTimes = alignment.characterStartTimesSeconds.map(t => t + timeOffset);
+      const adjustedEndTimes = alignment.characterEndTimesSeconds.map(t => t + timeOffset);
       
-      combined.character_start_times_seconds.push(...adjustedStartTimes);
-      combined.character_end_times_seconds.push(...adjustedEndTimes);
+      combined.characterStartTimesSeconds.push(...adjustedStartTimes);
+      combined.characterEndTimesSeconds.push(...adjustedEndTimes);
       
       // Update time offset for next chunk
-      if (alignment.character_end_times_seconds.length > 0) {
-        timeOffset = Math.max(...alignment.character_end_times_seconds) + timeOffset;
+      if (alignment.characterEndTimesSeconds.length > 0) {
+        timeOffset = Math.max(...alignment.characterEndTimesSeconds) + timeOffset;
       }
+    } else {
+      console.warn("Skipping alignment data - missing required properties:", {
+        hasAlignment: !!alignment,
+        hasCharacters: !!(alignment && alignment.characters),
+        hasStartTimes: !!(alignment && alignment.characterStartTimesSeconds),
+        hasEndTimes: !!(alignment && alignment.characterEndTimesSeconds)
+      });
     }
   }
   
@@ -275,21 +283,7 @@ async function enhanceTextIfConfigured(text) {
 async function resolveVoiceId(eleven) {
   // If provided, use explicit voice id.
   if (process.env.ELEVENLABS_VOICE_ID) return process.env.ELEVENLABS_VOICE_ID;
-
-  // // Search by display name from your account.
-  // const voices = await eleven.voices.getAll();
-  // const match =
-  //   voices.voices.find(v => v.name === REQUIRED_VOICE_NAME) ||
-  //   voices.voices.find(v => v.name?.toLowerCase().includes("fernanda") && v.name?.toLowerCase().includes("spanish"));
-
-  // if (!match) {
-  //   const available = voices.voices.map(v => v.name).join(", ");
-  //   throw new Error(
-  //     `Voice not found: "${REQUIRED_VOICE_NAME}". Add it to your ElevenLabs account or set ELEVENLABS_VOICE_ID. Available: ${available}`
-  //   );
-  // }
-  // return match.voice_id;
-  return "1aJyZpkt0vxhGPBnPyrs";
+  process.exit("ELEVENLABS_VOICE_ID is not set");
 }
 
 
@@ -403,18 +397,35 @@ async function elevenGenerateMp3({ text, outPath }) {
   console.log("Combined audio saved to:", outPath);
   
   // Combine and save alignment data
+  console.log(`Alignment data collected: ${alignmentData.length} chunks`);
+  console.log(`Normalized alignment data collected: ${normalizedAlignmentData.length} chunks`);
+  
   if (alignmentData.length > 0) {
+    console.log("Combining alignment data...");
     const combinedAlignment = await combineAlignmentData(alignmentData);
-    const alignmentPath = path.join(storyDir, 'alignment.json');
-    await fs.writeFile(alignmentPath, JSON.stringify(combinedAlignment, null, 2));
-    console.log("Combined alignment data saved to:", alignmentPath);
+    if (combinedAlignment) {
+      const alignmentPath = path.join(storyDir, 'alignment.json');
+      await fs.writeFile(alignmentPath, JSON.stringify(combinedAlignment, null, 2));
+      console.log("Combined alignment data saved to:", alignmentPath);
+    } else {
+      console.warn("No valid alignment data to combine");
+    }
+  } else {
+    console.warn("No alignment data collected from any chunks");
   }
   
   if (normalizedAlignmentData.length > 0) {
+    console.log("Combining normalized alignment data...");
     const combinedNormalizedAlignment = await combineAlignmentData(normalizedAlignmentData);
-    const normalizedAlignmentPath = path.join(storyDir, 'normalized_alignment.json');
-    await fs.writeFile(normalizedAlignmentPath, JSON.stringify(combinedNormalizedAlignment, null, 2));
-    console.log("Combined normalized alignment data saved to:", normalizedAlignmentPath);
+    if (combinedNormalizedAlignment) {
+      const normalizedAlignmentPath = path.join(storyDir, 'normalized_alignment.json');
+      await fs.writeFile(normalizedAlignmentPath, JSON.stringify(combinedNormalizedAlignment, null, 2));
+      console.log("Combined normalized alignment data saved to:", normalizedAlignmentPath);
+    } else {
+      console.warn("No valid normalized alignment data to combine");
+    }
+  } else {
+    console.warn("No normalized alignment data collected from any chunks");
   }
 }
 

@@ -1,37 +1,40 @@
-Write a Spanish story for language learners at the 'Beginner' proficiency level provided below.  Match vocabulary, grammar, and length for that level.
+Write a Spanish story for language learners at the 'Beginner' proficiency level provided below. Match vocabulary, grammar, and length for that level. 
+
+**CRITICAL WORD LIMIT**: Your story must be between 150-300 words total. Count words carefully and do not exceed 300 words under any circumstances.
+
 
 <proficiency_level>
 {
-  "Beginner": {
-    "description": "Can use memorized words and formulaic expressions for greetings, introductions, and very simple interactions.",
-    "vocabulary_size": "500–1,000 words",
-    "tenses_mastered": ["present (basic)"],
-    "skills": {
-      "listening": "Understands slow, clear speech on familiar topics.",
-      "speaking": "Produces isolated words and short memorized phrases.",
-      "reading": "Can recognize familiar names, words, and simple notices.",
-      "writing": "Can write simple words, names, and basic expressions."
-    },
-    "typical_tasks": [
-      "Greeting a shop clerk and saying 'hello' or 'goodbye' at a convenience store.",
-      "Introducing oneself to a new classmate by saying their name, nationality, and age.",
-      "Pointing at an item in a café and saying 'coffee, please' to order.",
-      "Answering 'yes' or 'no' when asked if they want a bag at checkout.",
-      "Asking 'Where bathroom?' in a train station to find facilities.",
-      "Responding 'I am from Mexico' when someone asks where they are from.",
-      "Reading a bus timetable and recognizing the word 'Madrid' as the destination.",
-      "Writing their name, address, and nationality on a hotel registration form.",
-      "Saying 'two water' while holding up fingers to indicate quantity in a restaurant.",
-      "Looking at a menu and recognizing the word 'pollo' to know they are ordering chicken."
-    ],
-    "stories": {
-      "min_words": 150,
-      "max_words": 300,
-      "note": "Very short narratives. Heavy use of repetition. Simple sentences. Mostly present tense. One clear plot line."
-    }
-  }
+  "description": "Can use memorized words and formulaic expressions for greetings, introductions, and very simple interactions.",
+  "stories": {
+    "min_words": 150,
+    "max_words": 300,
+    "note": "Very short narratives. Heavy use of repetition. Simple sentences. Mostly present tense. One clear plot line."
+  },
+  "vocabulary_size": "500–1,000",
+  "tenses_mastered": ["present (basic)"],
+  "skills": {
+    "listening": "Understands slow, clear speech on familiar topics.",
+    "speaking": "Produces isolated words and short memorized phrases.",
+    "reading": "Can recognize familiar names, words, and simple notices.",
+    "writing": "Can write simple words, names, and basic expressions."
+  },
+  "typical_tasks": [
+    "Greeting a shop clerk and saying 'hello' or 'goodbye' at a convenience store.",
+    "Introducing oneself to a new classmate by saying their name, nationality, and age.",
+    "Pointing at an item in a café and saying 'coffee, please' to order.",
+    "Answering 'yes' or 'no' when asked if they want a bag at checkout.",
+    "Asking 'Where bathroom?' in a train station to find facilities.",
+    "Responding 'I am from Mexico' when someone asks where they are from.",
+    "Reading a bus timetable and recognizing the word 'Madrid' as the destination.",
+    "Writing their name, address, and nationality on a hotel registration form.",
+    "Saying 'two water' while holding up fingers to indicate quantity in a restaurant.",
+    "Looking at a menu and recognizing the word 'pollo' to know they are ordering chicken."
+  ]
 }
 </proficiency_level>
+
+WORD COUNT REQUIREMENT: Write exactly 150-300 words. After writing, verify your word count stays within this range.
 
 <response_format>
 Return only this JSON (no extra text, no code fences):
