@@ -1,0 +1,6 @@
+elevenlabs
+
+Model: Eleven v3 Text to Speech model
+Voice: Fernanda Sanmiguel - Spanish Audiobook Neutral Voice
+Voice ID: 1aJyZpkt0vxhGPBnPyrs
+Stability: 50%

@@ -1,0 +1,43 @@
+Write a Spanish story for language learners at the 'High Beginner' proficiency level provided below.  Match vocabulary, grammar, and length for that level.
+
+<proficiency_level>
+{
+  "High Beginner": {
+    "description": "Can handle short social exchanges and express immediate needs using simple sentences.",
+    "vocabulary_size": "1,000–2,000 words",
+    "tenses_mastered": ["present", "near future (ir + a + infinitive)"],
+    "skills": {
+      "listening": "Understands common phrases related to shopping, travel, and routine tasks.",
+      "speaking": "Can produce strings of simple sentences about self and immediate surroundings.",
+      "reading": "Reads short, simple texts and personal communications.",
+      "writing": "Writes short notes, forms, and simple letters."
+    },
+    "typical_tasks": [
+      "Asking a taxi driver to take them to the airport and confirming the price.",
+      "Telling a waiter 'I would like chicken with rice' and asking for the bill.",
+      "Describing their family to a new acquaintance: 'I have two brothers and one sister.'",
+      "Telling a colleague 'Tomorrow I go to the doctor' to explain an absence.",
+      "Reading a supermarket flyer and understanding basic product descriptions.",
+      "Writing a postcard saying 'The weather is good, the beach is nice.'",
+      "Asking a shop assistant if they have a shirt in a different size or color.",
+      "Ordering a bus ticket at a station and stating the destination and time.",
+      "Inviting a friend for coffee by saying 'Do you want coffee with me tomorrow?'",
+      "Reading a simple recipe and recognizing instructions like 'add sugar' or 'mix.'"
+    ],
+    "stories": {
+      "min_words": 300,
+      "max_words": 600,
+      "note": "Longer but still straightforward. Introduces past tense with limited variety. Simple sequencing of events."
+    }
+  }
+}
+</proficiency_level>
+
+<response_format>
+Return only this JSON (no extra text, no code fences):
+{
+	“title”: “”,
+	“reading_time”: “ min”,
+	“text”: “\n\n”
+}
+</response_format>

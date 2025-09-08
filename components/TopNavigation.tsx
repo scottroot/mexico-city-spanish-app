@@ -32,7 +32,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
     { id: 'games', title: t('navigation.games'), url: "/", icon: Home },
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
-    { id: 'cverbs', title: t('navigation.cverbs'), url: "/cverbs", icon: BookOpen },
+    // { id: 'cverbs', title: t('navigation.cverbs'), url: "/cverbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
   ];
 

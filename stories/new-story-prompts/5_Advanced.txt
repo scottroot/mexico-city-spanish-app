@@ -1,0 +1,48 @@
+Write a Spanish story for language learners at the 'Advanced' proficiency level provided below.  Match vocabulary, grammar, and length for that level.
+
+<proficiency_level>
+{
+  "Advanced": {
+    "description": "Communicates effectively in academic, social, and professional settings, with flexibility across topics and registers.",
+    "vocabulary_size": "6,000–10,000+ words",
+    "tenses_mastered": [
+      "all indicative moods",
+      "full range of subjunctive tenses",
+      "compound tenses",
+      "imperatives"
+    ],
+    "skills": {
+      "listening": "Understands extended speech, lectures, and most media without difficulty.",
+      "speaking": "Expresses ideas fluently, linking thoughts naturally and persuasively.",
+      "reading": "Reads complex texts, both factual and literary, with full comprehension.",
+      "writing": "Produces well-structured essays, reports, and formal documents."
+    },
+    "typical_tasks": [
+      "Leading a business meeting and explaining project goals in detail.",
+      "Participating in a university seminar and defending their interpretation of a text.",
+      "Explaining abstract ideas such as justice or freedom with clarity.",
+      "Negotiating a rental agreement with complex clauses about maintenance and payments.",
+      "Reading a scientific article and explaining the findings to a peer in simpler terms.",
+      "Writing a persuasive essay about climate change with structured arguments.",
+      "Explaining cultural differences to visiting foreigners in a nuanced way.",
+      "Participating in a televised panel discussion about education policy.",
+      "Summarizing a film or book review and critiquing the reviewer’s perspective.",
+      "Writing a professional cover letter tailored to a specific job posting."
+    ],
+    "stories": {
+      "min_words": 2500,
+      "max_words": 5000,
+      "note": "Longer short stories or excerpts from novels. Dense description, abstract ideas, idiomatic expressions."
+    }
+  }
+}
+</proficiency_level>
+
+<response_format>
+Return only this JSON (no extra text, no code fences):
+{
+	“title”: “”,
+	“reading_time”: “ min”,
+	“text”: “\n\n”
+}
+</response_format>

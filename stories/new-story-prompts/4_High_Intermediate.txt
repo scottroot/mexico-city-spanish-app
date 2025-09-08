@@ -1,0 +1,43 @@
+Write a Spanish story for language learners at the 'High Intermediate' proficiency level provided below.  Match vocabulary, grammar, and length for that level.
+
+<proficiency_level>
+{
+  "High Intermediate": {
+    "description": "Can participate in extended conversations with some fluency, handle work and study contexts, and argue a point of view.",
+    "vocabulary_size": "3,500–6,000 words",
+    "tenses_mastered": ["present", "preterite", "imperfect", "near future", "future simple", "conditional", "present subjunctive (basic)"],
+    "skills": {
+      "listening": "Understands longer speech and main ideas of lectures or broadcasts.",
+      "speaking": "Speaks with relative ease, though occasional errors remain.",
+      "reading": "Can read articles and reports on familiar topics.",
+      "writing": "Writes detailed connected texts with organized ideas."
+    },
+    "typical_tasks": [
+      "Discussing plans for a weekend trip with friends, comparing different options.",
+      "Explaining to a landlord why repairs are needed in their apartment.",
+      "Participating in a class debate about social media use, giving reasons and examples.",
+      "Writing a multi-paragraph email to a professor about a project delay.",
+      "Listening to a radio broadcast about politics and summarizing the main points.",
+      "Explaining to a colleague how to complete a work task with step-by-step detail.",
+      "Giving a short presentation about their hometown and its history.",
+      "Describing a movie they watched, including characters, plot, and personal opinion.",
+      "Negotiating a price with a street vendor, using conditional forms to suggest compromises.",
+      "Writing a review of a restaurant for a travel website, describing food and service."
+    ],
+    "stories": {
+      "min_words": 1200,
+      "max_words": 2500,
+      "note": "Full short stories with character development and multiple events. Variety of tenses including subjunctive in simple contexts."
+    }
+  }
+}
+</proficiency_level>
+
+<response_format>
+Return only this JSON (no extra text, no code fences):
+{
+	“title”: “”,
+	“reading_time”: “ min”,
+	“text”: “\n\n”
+}
+</response_format>

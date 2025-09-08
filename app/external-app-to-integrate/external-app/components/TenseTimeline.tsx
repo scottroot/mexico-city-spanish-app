@@ -21,13 +21,6 @@ function DownArrow(props: any) {
 export default function TenseTimeline() {
   const tenseGroups = {
     Past: [
-      // {
-      //   name: "Past Perfect Continuous",
-      //   example: "I had been eating",
-      //   color: "bg-red-700",
-      //   borderColor: "border-red-700",
-      //   textColor: "text-red-700"
-      // },
       {
         name: "Past Perfect",
         example: "I had eaten",
@@ -52,13 +45,6 @@ export default function TenseTimeline() {
       }
     ],
     Present: [
-      // {
-      //   name: "Present Perfect Continuous",
-      //   example: "I have been eating",
-      //   color: "bg-blue-600",
-      //   borderColor: "border-blue-600",
-      //   textColor: "text-blue-700"
-      // },
       {
         name: "Present Perfect",
         example: "I have eaten",
