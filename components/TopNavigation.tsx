@@ -118,7 +118,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden md:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100 relative z-50">
+      <header className="hidden z-100 md:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100 relative">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}

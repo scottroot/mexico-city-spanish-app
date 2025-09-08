@@ -52,8 +52,11 @@ function LeftSidebar({
   loadingFavorites
 }) {
   return (
-    <div className="w-full md:w-72 border-r border-gray-200 bg-white relative h-full flex flex-col">
-      <div className="p-4 pr-0">
+    <div 
+      className="lg:fixed lg:mt-20 lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col
+      border-r border-gray-200 bg-white relative h-full flex flex-col"
+    >
+      <div className="p-4 pr-0 border-t border-gray-200">
         {/* Search Header */}
         <div className="mb-4 pr-4">
           <div className="flex items-center gap-2 mb-3">
@@ -85,7 +88,7 @@ function LeftSidebar({
         <div className="flex items-center gap-2 mb-4 pr-4">
           <button 
             onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className={`flex items-center gap-2 p-2 rounded transition-colors ${
+            className={`flex items-center gap-2 p-2 rounded text-sm transition-colors ${
               showFavoritesOnly 
                 ? 'bg-red-100 text-red-600' 
                 : 'hover:bg-gray-100 text-gray-600'
@@ -290,7 +293,7 @@ export default function VerbsPage() {
       />
 
       {/* Right Main Content */}
-      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain">
+      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain lg:pl-72">
         {selectedVerb 
           ? <CondensedConjugationDisplay 
               verb={selectedVerb} 
