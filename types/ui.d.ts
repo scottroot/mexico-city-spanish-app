@@ -60,25 +60,7 @@ export interface ProgressProps {
   [key: string]: any;
 }
 
-declare module '@/components/ui/button' {
-  export const Button: React.FC<ButtonProps>;
-}
 
-declare module '@/components/ui/card' {
-  export const Card: React.FC<CardProps>;
-  export const CardHeader: React.FC<CardHeaderProps>;
-  export const CardTitle: React.FC<CardTitleProps>;
-  export const CardContent: React.FC<CardContentProps>;
-}
 
-declare module '@/components/ui/input' {
-  export const Input: React.FC<InputProps>;
-}
 
-declare module '@/components/ui/badge' {
-  export const Badge: React.FC<BadgeProps>;
-}
 
-declare module '@/components/ui/progress' {
-  export const Progress: React.FC<ProgressProps>;
-}

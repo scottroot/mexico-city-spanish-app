@@ -294,6 +294,12 @@ export class StreamingPerformanceMonitor {
 /**
  * Network performance estimator
  */
+interface NetworkInformation {
+  effectiveType?: string;
+  downlink?: number;
+  rtt?: number;
+}
+
 export class NetworkPerformanceEstimator {
   private static instance: NetworkPerformanceEstimator;
   private connectionInfo: NetworkInformation | null = null;
@@ -731,11 +737,11 @@ export async function streamTextToSpeechForBrowser(
         const result = await streamTextToSpeech(options, (chunk) => {
           if (isFirstChunk) {
             // Start playback as soon as we have the first chunk
-            sourceBuffer.appendBuffer(chunk);
+            sourceBuffer.appendBuffer(chunk as BufferSource);
             isFirstChunk = false;
           } else {
             // Queue subsequent chunks
-            sourceBuffer.appendBuffer(chunk);
+            sourceBuffer.appendBuffer(chunk as BufferSource);
           }
         });
 

@@ -29,13 +29,13 @@ export interface VerbConjugation {
 
 export async function GET(
   request: Request,
-  context: { params: { infinitive: string } }
+  context: { params: Promise<{ infinitive: string }> }
 ) {
   try {
-    const { params } = await Promise.resolve(context);
-    const infinitive = decodeURIComponent(params.infinitive);
+    const { infinitive } = await context.params;
+    const decodedInfinitive = decodeURIComponent(infinitive);
     
-    console.log('Loading verb conjugations for:', infinitive);
+    console.log('Loading verb conjugations for:', decodedInfinitive);
     
     const supabase = await createClient();
     
@@ -43,11 +43,11 @@ export async function GET(
     const { data: verbData, error: verbError } = await supabase
       .from('verbs')
       .select('infinitive, infinitive_english')
-      .eq('infinitive', infinitive)
+      .eq('infinitive', decodedInfinitive)
       .single();
 
     if (verbError || !verbData) {
-      console.error('Verb not found:', infinitive, verbError);
+      console.error('Verb not found:', decodedInfinitive, verbError);
       return NextResponse.json(
         { error: 'Verb not found' },
         { status: 404 }
@@ -58,7 +58,7 @@ export async function GET(
     const { data: conjugations, error: conjugationsError } = await supabase
       .from('verb_conjugations')
       .select('*')
-      .eq('infinitive', infinitive)
+      .eq('infinitive', decodedInfinitive)
       .order('mood, tense');
 
     if (conjugationsError) {

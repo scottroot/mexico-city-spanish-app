@@ -218,7 +218,7 @@ export default function CondensedConjugationDisplay({
                   {/* Card Body - Compact List */}
                   <div className="space-y-1">
                     {pronouns.map((pronoun, formIndex) => {
-                      const formValue = conjugation[pronoun.key as keyof VerbConjugation] as string;
+                      const formValue = (conjugation as any)[pronoun.key] as string;
                       if (!formValue || formValue.trim() === '') return null;
                       
                       return (
