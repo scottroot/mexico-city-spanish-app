@@ -43,6 +43,7 @@ function LeftSidebar({
   searchQuery,
   setSearchQuery,
   showFavoritesOnly,
+  setShowFavoritesOnly,
   filteredVerbs,
   handleVerbSelect,
   selectedVerb,
@@ -51,10 +52,10 @@ function LeftSidebar({
   loadingFavorites
 }) {
   return (
-    <div className="w-full md:w-72 border-r border-gray-200 bg-white overflow-y-auto">
-      <div className="p-4">
+    <div className="w-full md:w-72 border-r border-gray-200 bg-white relative h-full flex flex-col">
+      <div className="p-4 pr-0">
         {/* Search Header */}
-        <div className="mb-4">
+        <div className="mb-4 pr-4">
           <div className="flex items-center gap-2 mb-3">
             <button className="p-1 hover:bg-gray-100 rounded">
               <Menu className="w-5 h-5 text-gray-600" />
@@ -81,10 +82,10 @@ function LeftSidebar({
         </div>
         
         {/* Action Buttons */}
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-4 pr-4">
           <button 
             onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className={`p-2 rounded transition-colors ${
+            className={`flex items-center gap-2 p-2 rounded transition-colors ${
               showFavoritesOnly 
                 ? 'bg-red-100 text-red-600' 
                 : 'hover:bg-gray-100 text-gray-600'
@@ -93,14 +94,15 @@ function LeftSidebar({
             <Heart className={`w-4 h-4 ${
               showFavoritesOnly ? 'fill-current' : ''
             }`} />
+            Show Favorites
           </button>
-          <button className="p-2 hover:bg-gray-100 rounded text-gray-600">
+          {/* <button className="p-2 hover:bg-gray-100 rounded text-gray-600">
             <Share2 className="w-4 h-4" />
-          </button>
+          </button> */}
         </div>
         
         {/* Verb List */}
-        <div className="space-y-1">
+        <div className="flex-1 space-y-1 border-t border-gray-200 overflow-y-auto overscroll-contain">
           {filteredVerbs.map((verb) => (
             <div
               key={verb.infinitive}
@@ -269,7 +271,7 @@ export default function VerbsPage() {
 
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row">
+    <div className="relative flex-1 flex flex-col md:flex-row h-full">
       <MobileSearchBar 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -279,6 +281,7 @@ export default function VerbsPage() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         showFavoritesOnly={showFavoritesOnly}
+        setShowFavoritesOnly={setShowFavoritesOnly}
         filteredVerbs={filteredVerbs}
         handleVerbSelect={handleVerbSelect}
         favorites={favorites}
@@ -287,7 +290,7 @@ export default function VerbsPage() {
       />
 
       {/* Right Main Content */}
-      <div className="flex-1 overflow-y-auto bg-gray-50">
+      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain">
         {selectedVerb 
           ? <CondensedConjugationDisplay 
               verb={selectedVerb} 

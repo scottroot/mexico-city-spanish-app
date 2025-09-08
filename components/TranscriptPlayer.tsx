@@ -9,15 +9,75 @@ type Props = {
   autoScroll?: boolean;  // default true
 };
 
-function findActiveIndex(starts: Float64Array, t: number) {
-  // Return index of last start <= t (binary search)
+function findActiveIndex(starts: Float64Array, words: Word[], t: number) {
+  // Return index of last start <= t (binary search), skipping line breaks and bracketed words
   let lo = 0, hi = starts.length - 1, ans = -1;
   while (lo <= hi) {
     const mid = (lo + hi) >> 1;
     if (starts[mid] <= t) { ans = mid; lo = mid + 1; }
     else { hi = mid - 1; }
   }
+  
+  // If we found a line break or bracketed word, find the previous actual word
+  if (ans >= 0 && (words[ans]?.word === '\n' || isBracketedWord(words[ans]?.word))) {
+    for (let i = ans - 1; i >= 0; i--) {
+      if (words[i]?.word !== '\n' && !isBracketedWord(words[i]?.word)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
   return ans;
+}
+
+// Helper function to check if a word is wrapped in square brackets
+function isBracketedWord(word: string | undefined): boolean {
+  if (!word) return false;
+  
+  // Check for exact bracket wrapping
+  if (word.startsWith('[') && word.endsWith(']')) {
+    return true;
+  }
+  
+  // Check for bracket wrapping with quotation marks
+  if ((word.startsWith('"[[') && word.endsWith(']]"')) ||
+      (word.startsWith('"[') && word.endsWith(']"')) ||
+      (word.startsWith("'[") && word.endsWith("]'")) ||
+      (word.startsWith("'[[") && word.endsWith("]]'"))) {
+    return true;
+  }
+  
+  // Check for bracket wrapping with leading quotation mark
+  if ((word.startsWith('"[') && word.endsWith(']')) ||
+      (word.startsWith("'[") && word.endsWith(']'))) {
+    return true;
+  }
+  
+  // Check for bracket wrapping with trailing quotation mark
+  if ((word.startsWith('[') && word.endsWith(']"')) ||
+      (word.startsWith('[') && word.endsWith("]'"))) {
+    return true;
+  }
+  
+  // Check for words that contain bracketed content (like "[thoughtful] Mañana")
+  // This handles cases where the bracket is in the middle of a word
+  if (word.includes('[') && word.includes(']')) {
+    // Extract the bracketed part
+    const bracketMatch = word.match(/\[([^\]]+)\]/);
+    if (bracketMatch) {
+      // If the word is mostly just the bracket with minimal other content, filter it out
+      const bracketContent = bracketMatch[0]; // e.g., "[thoughtful]"
+      const otherContent = word.replace(bracketContent, '').trim();
+      
+      // If there's minimal content outside the brackets, consider it a bracketed word
+      if (otherContent.length <= 2) { // Allow for quotes or minimal punctuation
+        return true;
+      }
+    }
+  }
+  
+  return false;
 }
 
 export default function TranscriptPlayer({ src, words, autoScroll = true }: Props) {
@@ -40,53 +100,90 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
 
     const loop = () => {
       const t = el.currentTime || 0;
-      const idx = findActiveIndex(starts, t);
+      const idx = findActiveIndex(starts, words, t);
       if (idx !== activeIdx) setActiveIdx(idx);
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [starts, activeIdx]);
+  }, [starts, words, activeIdx]);
 
   useEffect(() => {
     if (!autoScroll) return;
     if (activeIdx < 0) return;
     const node = wordRefs.current[activeIdx];
-    const container = containerRef.current;
-    if (!node || !container) return;
+    if (!node) return;
 
     const nodeBox = node.getBoundingClientRect();
-    const contBox = container.getBoundingClientRect();
-    const isVisible = nodeBox.top >= contBox.top + 8 && nodeBox.bottom <= contBox.bottom - 8;
-    if (!isVisible) node.scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" });
+    const viewportHeight = window.innerHeight;
+    const audioPlayerHeight = 100; // Approximate height of fixed audio player
+    const availableHeight = viewportHeight - audioPlayerHeight;
+    
+    // Check if the active word is visible in the viewport (accounting for fixed audio player)
+    const isVisible = nodeBox.top >= 8 && nodeBox.bottom <= availableHeight - 8;
+    
+    if (!isVisible) {
+      // Calculate the scroll position to center the word in the available viewport
+      const scrollY = window.scrollY + nodeBox.top - (availableHeight / 2);
+      window.scrollTo({ top: Math.max(0, scrollY), behavior: "smooth" });
+    }
   }, [activeIdx, autoScroll]);
+
+  // Handle keyboard events for audio control
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle spacebar if not typing in an input field
+      if (e.code === 'Space' && e.target instanceof HTMLElement && 
+          !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        const audio = audioRef.current;
+        if (!audio) return;
+        
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        } else {
+          audio.pause();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const onWordClick = (idx: number) => {
     const el = audioRef.current;
     if (!el) return;
-    const t = words[idx]?.start ?? 0;
+    const word = words[idx];
+    if (!word || word.word === '\n' || isBracketedWord(word.word)) return; // Skip line breaks and bracketed words
+    const t = word.start ?? 0;
     el.currentTime = Math.max(0, t + 0.01); // nudge to trigger highlight
     el.play().catch(() => {});
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <audio 
-        ref={audioRef} 
-        src={src} 
-        controls 
-        preload="metadata" 
-        className="w-full my-6 rounded-lg shadow-md" 
-      />
+      {/* Story Text Area - Full height with normal page scroll */}
       <div
         ref={containerRef}
-        className="h-96 overflow-y-auto rounded-2xl border border-gray-200 p-6 leading-8 text-[16px] bg-white shadow-sm"
-        style={{ wordWrap: "break-word" }}
+        className="overflow-x-hidden rounded-2xl border border-gray-200 p-6 leading-8 text-[16px] bg-white shadow-sm mb-20"
+        style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
         aria-label="Transcript"
       >
         {words.map((w, i) => {
           const currentTime = audioRef.current?.currentTime ?? -1;
           const active = i === activeIdx || (i < activeIdx && words[i+1] && words[i+1].start > currentTime && currentTime <= w.end);
+          
+          // Handle line breaks
+          if (w.word === '\n') {
+            return <br key={i} />;
+          }
+          
+          // Skip words wrapped in square brackets (don't display them)
+          if (isBracketedWord(w.word)) {
+            return null;
+          }
+          
           return (
             <span
               key={i}
@@ -96,9 +193,10 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
               tabIndex={0}
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onWordClick(i); }}
               className={[
-                "cursor-pointer select-none px-1 rounded-md transition-colors duration-150",
+                "cursor-pointer select-none px-1 rounded-md transition-colors duration-150 inline-block",
                 active ? "bg-yellow-200 text-gray-900" : "hover:bg-gray-100 text-gray-700"
               ].join(" ")}
+              style={{ wordBreak: "break-word", overflowWrap: "break-word" }}
               aria-current={active ? "true" : undefined}
               aria-label={`${w.word}, jump to ${w.start.toFixed(2)} seconds`}
             >
@@ -107,6 +205,19 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
             </span>
           );
         })}
+      </div>
+      
+      {/* Fixed Audio Player at Bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10">
+        <div className="container mx-auto px-4 py-4">
+          <audio 
+            ref={audioRef} 
+            src={src} 
+            controls 
+            preload="metadata" 
+            className="w-full rounded-lg" 
+          />
+        </div>
       </div>
     </div>
   );

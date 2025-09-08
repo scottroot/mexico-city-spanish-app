@@ -117,10 +117,10 @@ export default function StoryViewerPage() {
   const levelInfo = getLevelInfo(story.level)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50 pb-20">
+      <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <button 
             onClick={() => router.push('/stories')}
             className="flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors mb-6"
@@ -129,13 +129,20 @@ export default function StoryViewerPage() {
             <span>Back to Stories</span>
           </button>
 
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
-              <BookOpen className="w-8 h-8 text-white" />
+          {/* Featured Image */}
+          {story.featured_image_url && (
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src={story.featured_image_url} 
+                  alt={story.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
               {story.title}
             </h1>
@@ -157,7 +164,7 @@ export default function StoryViewerPage() {
         </div>
 
         {/* Story Content */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto flex-1">
           {story.audio_url && words.length > 0 ? (
             <TranscriptPlayer
               src={story.audio_url}
@@ -187,18 +194,6 @@ export default function StoryViewerPage() {
           )}
         </div>
 
-        {/* Story Image */}
-        {story.featured_image_url && (
-          <div className="max-w-2xl mx-auto mt-12">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <img 
-                src={story.featured_image_url} 
-                alt={story.title}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )

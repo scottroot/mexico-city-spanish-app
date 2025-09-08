@@ -66,8 +66,8 @@ export function normalizeAlignmentData(alignmentData: any): Word[] {
     const startTime = startTimes[i] || 0;
     const endTime = endTimes[i] || startTime;
     
-    if (char === ' ' || char === '\n' || char === '\t') {
-      // End of word
+    if (char === ' ' || char === '\t') {
+      // End of word (space or tab)
       if (currentWord.trim() && wordStart >= 0) {
         words.push({
           word: currentWord.trim(),
@@ -75,6 +75,23 @@ export function normalizeAlignmentData(alignmentData: any): Word[] {
           end: endTime
         });
       }
+      currentWord = '';
+      wordStart = -1;
+    } else if (char === '\n') {
+      // End of word and add line break
+      if (currentWord.trim() && wordStart >= 0) {
+        words.push({
+          word: currentWord.trim(),
+          start: wordStart,
+          end: endTime
+        });
+      }
+      // Add a special line break word
+      words.push({
+        word: '\n',
+        start: endTime,
+        end: endTime
+      });
       currentWord = '';
       wordStart = -1;
     } else {

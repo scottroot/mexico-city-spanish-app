@@ -40,7 +40,7 @@ export default function Layout({ children, currentPageName, user }) {
         <TopNavigation user={user} />
         
         {/* Page Header */}
-        <div className="bg-white/80 backdrop-blur-sm border-b border-orange-100 px-6 py-3 relative z-40">
+        {/* <div className="bg-white/80 backdrop-blur-sm border-b border-orange-100 px-6 py-3 relative z-40">
           <h2 className="text-xl font-semibold text-gray-800">
             {navigationItems.find(item => {
               if (item.url === "/") {
@@ -49,7 +49,7 @@ export default function Layout({ children, currentPageName, user }) {
               return pathname.startsWith(item.url);
             })?.title || 'Dashboard'}
           </h2>
-        </div>
+        </div> */}
         
         {/* Main Content Area - Full Width */}
         <main className="flex-1 overflow-y-auto">
