@@ -5,6 +5,12 @@ All notable changes to the Spanish Language Learning App will be documented in t
 ## [Unreleased]
 
 ### Added
+- **Navigation Component Refactoring**: Extracted and improved top navigation system
+  - `components/TopNavigation.tsx` - New TypeScript component for top navigation bar
+  - `components/Layout.js` - Simplified layout component using TopNavigation
+  - Extracted `UserAccountButton` component within TopNavigation for avatar and user menu
+  - Enhanced page header matching logic to handle nested routes (e.g., `/quiz/game` shows "Quiz")
+  - Fixed avatar dropdown toggle behavior with proper event propagation control
 - **Custom Quiz System**: Complete quiz configuration and persistence system
   - `types/quiz.ts` - Updated `QuizConfig` interface with `selectedTenseMoods: string[]` and `selectedPronouns: string[]`
   - `app/quiz/page.tsx` - Custom quiz setup page with modal-based tense/verb/pronoun selection
@@ -107,6 +113,13 @@ All notable changes to the Spanish Language Learning App will be documented in t
   - Enhanced error handling and logging for profile operations
 
 ### Fixed
+- **Quiz Progression**: Fixed automatic progression to next question after correct answers
+  - `components/games/CustomQuizGame.tsx` - Updated `setTimeout` logic to use functional state updates
+  - Resolved React closure issue where quiz wouldn't advance after correct answers
+- **Navigation Component Issues**: Fixed multiple navigation-related bugs
+  - `components/TopNavigation.tsx` - Fixed avatar dropdown toggle with `onMouseDown` event propagation control
+  - `components/Layout.js` - Fixed page header matching for nested routes (quiz game now shows "Quiz" not "Games")
+  - Resolved race condition between button clicks and ClickAway component
 - **Quiz Answer Comparison**: Fixed answer validation to accept both pronoun-included and pronoun-excluded answers
   - `components/games/CustomQuizGame.tsx` - Updated `isCorrect` logic to check exact match and pronoun+conjugation match
   - Resolved issue where "yo había cogido" was marked wrong when correct answer was "había cogido"

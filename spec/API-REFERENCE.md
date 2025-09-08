@@ -389,6 +389,15 @@ This document provides a comprehensive API reference for the Spanish Language Le
 - Pattern: Quiz config → API calls → Database storage → Quiz generation
 - Features: Bottom-sliding modals, tense/verb/pronoun selection, persistent preferences
 
+### Navigation Component Integration
+- File: `components/TopNavigation.tsx` - TypeScript component for top navigation bar
+- Uses: `UserAccountButton` component for avatar and user menu functionality
+- Pattern: Navigation items → Route matching → Page header display
+- Features: Responsive design, user authentication, language toggle, click-away dropdown handling
+- File: `components/Layout.js` - Main layout wrapper using TopNavigation component
+- Pattern: TopNavigation → Page header → Main content → Mobile navigation
+- Features: Nested route handling, responsive layouts, proper component composition
+
 ### Quiz Game Integration
 - File: `components/games/CustomQuizGame.tsx` - Quiz game component with enhanced answer comparison
 - Uses: `isCorrect` logic with pronoun-included and pronoun-excluded answer validation

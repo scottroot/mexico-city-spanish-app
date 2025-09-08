@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Volume2, Heart } from 'lucide-react';
+import { Volume2, Heart, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -156,7 +156,7 @@ export default function CondensedConjugationDisplay({
   return (
     <div className="h-full flex flex-col">
       {/* Main Content Header */}
-        <div className="py-4 text-center border-b border-orange-200 bg-gradient-to-r from-orange-50 to-pink-50">
+      <div className="py-4 border-b border-orange-200 bg-gradient-to-r from-orange-50 to-pink-50 relative">
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-sm md:text-base lg:text-xl font-bold text-gray-900">
             {verb.infinitive} <span className="text-gray-500">({verb.infinitive_english})</span>
@@ -182,7 +182,18 @@ export default function CondensedConjugationDisplay({
               }`} />
             </button>
           </div>
-        </div>
+      </div>
+        
+        {/* Close Button */}
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 shadow-sm hover:shadow-md"
+            title="Close"
+          >
+            <X className="w-4 h-4 text-gray-600" />
+          </button>
+        )}
       </div>
 
       {/* Conjugation Grid */}
