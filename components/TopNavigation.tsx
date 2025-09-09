@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench } from "lucide-react";
+import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./ui/LanguageToggle";
 import ClickAway from "./ClickAway";
@@ -26,6 +26,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   const router = useRouter();
   const { t } = useLanguage();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
   // const userMenuRef = useRef<HTMLDivElement>(null);
 
   const navigationItems: NavigationItem[] = [
@@ -119,7 +120,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   return (
     <>
       {/* Desktop Header */}
-      <header className="relative hidden z-50 md:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100">
+      <header className="relative hidden z-50 lg:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -161,24 +162,57 @@ export default function TopNavigation({ user }: TopNavigationProps) {
       </header>
 
       {/* Mobile Header */}
-      <header className="md:hidden bg-white/80 backdrop-blur-sm shadow-sm border-b border-orange-100 relative z-50">
-        <div className="px-4 py-4">
+      <header className="lg:hidden bg-white/80 backdrop-blur-sm shadow-sm border-b border-orange-100 relative z-50">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/" className="w-10 h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
-                <BookOpen className="w-6 h-6 text-white" />
+              <Link href="/" className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
+                <BookOpen className="w-5 h-5 text-white" />
               </Link>
               <div>
-                <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
-                <p className="text-xs text-gray-500">{t('app.subtitle')}</p>
+                <h1 className="text-base font-bold text-gray-800">{t('app.title')}</h1>
+                <p className="text-xs text-gray-500 hidden sm:block">{t('app.subtitle')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <LanguageToggle />
               <UserAccountButton />
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="p-2 rounded-lg hover:bg-orange-50 transition-colors"
+              >
+                {showMobileMenu ? (
+                  <X className="w-5 h-5 text-gray-600" />
+                ) : (
+                  <Menu className="w-5 h-5 text-gray-600" />
+                )}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {showMobileMenu && (
+          <div className="absolute top-full left-0 right-0 bg-white border-b border-orange-100 shadow-lg">
+            <nav className="px-4 py-2">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.url}
+                  onClick={() => setShowMobileMenu(false)}
+                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 ${
+                    pathname === item.url
+                      ? 'bg-gradient-to-r from-orange-400 to-pink-400 text-white'
+                      : 'text-gray-600 hover:bg-orange-50 hover:text-orange-600'
+                  }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span className="font-medium">{item.title}</span>
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </header>
     </>
   );
