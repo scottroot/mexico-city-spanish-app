@@ -190,7 +190,8 @@ export default function ShoppingGame({ game, onComplete }) {
       const priceWords = priceToSpanishWords(price);
       const priceText = `cuesta ${priceWords}`;
       // Use the woman voice model specifically for the shopping game
-      await playTTS(priceText, process.env.NEXT_PUBLIC_DEEPGRAM_VOICE_WOMAN);
+      const womanVoice = process.env.NEXT_PUBLIC_DEEPGRAM_VOICE_WOMAN || "aura-2-estrella-es";
+      await playTTS(priceText, womanVoice);
     } catch (error) {
       console.error('TTS failed, using fallback:', error);
       const priceWords = priceToSpanishWords(price);
@@ -264,9 +265,9 @@ export default function ShoppingGame({ game, onComplete }) {
   // Show start screen if user hasn't interacted yet
   if (!hasUserInteracted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex justify-center p-4 pt-8">
+      <div className="bg-gray-50 flex justify-center p-4 pt-8">
         <div className="max-w-4xl w-full flex justify-center">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-3/4">
+          <div className="w-3/4">
             {/* Image Area with Rounded Corners */}
             <div className="relative w-full aspect-[3/2] bg-gray-100 overflow-hidden rounded-2xl shadow-xl">
               <div className="absolute inset-0">
@@ -293,11 +294,9 @@ export default function ShoppingGame({ game, onComplete }) {
                 </motion.div>
               )}
               
-            </div>
-
-            {/* Start Screen Overlay */}
-            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl">
-              <div className="text-center space-y-4 max-w-sm mx-4">
+              {/* Start Screen Overlay */}
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl min-h-full">
+              <div className="text-center space-y-4 max-w-sm mx-4 flex flex-col justify-center">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
                     Tienda Checkout - Price Listening
@@ -322,6 +321,7 @@ export default function ShoppingGame({ game, onComplete }) {
                   <Volume2 className="w-4 h-4 mr-2" />
                   Start Game
                 </Button>
+              </div>
               </div>
             </div>
           </div>
@@ -356,7 +356,7 @@ export default function ShoppingGame({ game, onComplete }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center p-4 pt-8">
+    <div className="bg-gray-50 flex justify-center p-4 pt-8">
       <div className="max-w-4xl w-full flex flex-col items-center">
         {/* Progress Bar */}
         <div className="mb-6 w-full max-w-3xl">
@@ -373,7 +373,7 @@ export default function ShoppingGame({ game, onComplete }) {
         </div>
 
         {/* Game Area */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-3/4">
+        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden w-3/4">
           {/* Image Area with Rounded Corners */}
           <div className="relative w-full aspect-[3/2] bg-gray-100 overflow-hidden rounded-2xl">
             <div className="absolute inset-0">
@@ -401,7 +401,7 @@ export default function ShoppingGame({ game, onComplete }) {
             )}
             
             {/* LCD Display */}
-            <div 
+            {/* <div 
               className="absolute text-green-400 font-mono 
               text-3xl font-bold flex items-center justify-center
               top-[51%] left-[9%] rotate-1"
@@ -413,7 +413,7 @@ export default function ShoppingGame({ game, onComplete }) {
               ) : (
                 <span className="text-green-300">$ ?.??</span>
               )}
-            </div>
+            </div> */}
 
             {/* Replay Audio Button - Top Right Overlay */}
             <div className="absolute top-4 right-4 z-20">

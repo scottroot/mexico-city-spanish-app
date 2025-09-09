@@ -20,7 +20,7 @@ export default function Layout({ children, currentPageName, user }) {
   ];
 
   return (
-    <div className="min-h-full bg-gradient-to-br from-orange-50 via-white to-teal-50">
+    <div className="min-h-full bg-gradient-to-br from-orange-50 via-white to-teal-50 flex flex-col">
       <style>
         {`
           :root {
@@ -35,7 +35,7 @@ export default function Layout({ children, currentPageName, user }) {
       </style>
       
       {/* Desktop Layout */}
-      <div className="hidden md:flex md:h-screen md:flex-col">
+      <div className="hidden md:flex md:flex-col flex-1">
         {/* Top Navigation Bar */}
         <TopNavigation user={user} />
         
@@ -58,7 +58,7 @@ export default function Layout({ children, currentPageName, user }) {
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden">
+      <div className="md:hidden flex flex-col flex-1">
         {/* Mobile Header */}
         <TopNavigation user={user} />
 

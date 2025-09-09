@@ -191,12 +191,12 @@ function DefaultMainContent({ t }) {
     { tense: "Past Simple", text: "I ate", color: "past", icon: Calendar },
     { tense: "Imperfect", text: "I was eating", color: "past", icon: CalendarSync },
     { tense: "Present Perfect", text: "I have eaten", color: "present", icon: Circle },
-    // { tense: "Present Continuous", text: "I am eating", position: "top" },
     { tense: "Present Simple", text: "I eat", color: "present", icon: CircleDot },
     { tense: "Conditional", text: "I would eat", color: "conditional", icon: Orbit },
     { tense: "Conditional Perfect", text: "I would have eaten", color: "conditional", icon: Orbit },
     { tense: "Future Simple", text: "I will eat", color: "future", icon: Sunset },
     { tense: "Future Perfect", text: "I will have eaten", color: "future", icon: Sunset },
+    // { tense: "Present Continuous", text: "I am eating", position: "top" },
     // { tense: "Future Continuous", text: "I will be eating", position: "top" },
   ]
 

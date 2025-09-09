@@ -110,7 +110,20 @@ export default function CondensedConjugationDisplay({
     }
   };
 
-  // Get conjugations for selected mood
+  // Define the tense order as specified - using actual database tense names
+  const tenseOrder = [
+    'Past Perfect',
+    'Preterite', // This is "Past Simple" in the database
+    'Imperfect',
+    'Present Perfect',
+    'Present',
+    'Conditional',
+    'Conditional Perfect',
+    'Future',
+    'Future Perfect'
+  ];
+
+  // Get conjugations for selected mood with proper ordering
   const getConjugationsForMood = (moodId: string) => {
     if (moodId === 'Otros') {
       // For "Other" mood, show gerund and past participle
@@ -137,7 +150,29 @@ export default function CondensedConjugationDisplay({
         }
       ];
     }
-    return verb.conjugations.filter(conj => conj.mood === moodId);
+    
+    const conjugations = verb.conjugations.filter(conj => 
+      conj.mood === moodId && 
+      conj.tense_english !== 'Preterite (Archaic)' // Never show Preterite (Archaic)
+    );
+    
+    // Sort conjugations according to the specified order
+    return conjugations.sort((a, b) => {
+      const aIndex = tenseOrder.indexOf(a.tense_english);
+      const bIndex = tenseOrder.indexOf(b.tense_english);
+      
+      // If both tenses are in the order array, sort by their position
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
+      
+      // If only one is in the order array, prioritize it
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+      
+      // If neither is in the order array, maintain original order
+      return 0;
+    });
   };
 
   const currentConjugations = getConjugationsForMood(selectedMood);
