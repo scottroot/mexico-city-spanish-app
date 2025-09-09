@@ -17,7 +17,7 @@ export interface GameContent {
 export interface GameData {
   id: string
   title: string
-  type: 'grammar' | 'vocabulary' | 'pronunciation'
+  type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping'
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   content: GameContent
   created_at?: string
@@ -27,7 +27,7 @@ export interface GameData {
 export class Game {
   public id: string
   public title: string
-  public type: 'grammar' | 'vocabulary' | 'pronunciation'
+  public type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping'
   public difficulty: 'beginner' | 'intermediate' | 'advanced'
   public content: GameContent
   public created_at?: string

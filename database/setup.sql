@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 CREATE TABLE IF NOT EXISTS public.progress (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
-  game_type TEXT CHECK (game_type IN ('grammar', 'vocabulary', 'pronunciation', 'custom_quiz')) NOT NULL,
+  game_type TEXT CHECK (game_type IN ('grammar', 'vocabulary', 'pronunciation', 'custom_quiz', 'shopping')) NOT NULL,
   game_id TEXT NOT NULL,
   score INTEGER DEFAULT 0,
   max_score INTEGER DEFAULT 10, -- maximum possible score for the game
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS public.progress (
 CREATE TABLE IF NOT EXISTS public.games (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
-  type TEXT CHECK (type IN ('grammar', 'vocabulary', 'pronunciation')) NOT NULL,
+  type TEXT CHECK (type IN ('grammar', 'vocabulary', 'pronunciation', 'shopping')) NOT NULL,
   difficulty TEXT CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')) NOT NULL,
   content JSONB NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -493,5 +493,8 @@ INSERT INTO public.games (id, title, type, difficulty, content) VALUES
       "explanation": "En ''el agua'', la vocal final de ''el'' se conecta con la vocal inicial de ''agua'' formando una sinalefa."
     }
   ]
+}'),
+('shopping-game-001', 'Tienda Checkout - Price Listening', 'shopping', 'intermediate', '{
+  "questions": []
 }')
 ON CONFLICT (id) DO NOTHING;

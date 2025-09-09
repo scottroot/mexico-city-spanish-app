@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Capital Spanish",
+    "title": "Capital Spanish!",
     "subtitle": "Learn Mexico City Spanish"
   },
   "navigation": {
@@ -9,6 +9,7 @@
     "verbs": "Verbs",
     "quiz": "Custom Quiz",
     "stories": "Stories",
+    "tools": "Tools",
     "login": "Sign In",
     "logout": "Sign Out",
     "user": "User"

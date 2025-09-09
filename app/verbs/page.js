@@ -2,11 +2,36 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Sparkles, Menu, Search, Heart, Share2, Volume2 } from 'lucide-react';
+import { 
+  BookOpen,
+  Sparkles,
+  Menu,
+  Search,
+  Heart,
+  Share2, 
+  Orbit,
+  Play,
+  History,
+  Sunrise,
+  Clock,
+  CalendarCheck,Calendar,CalendarSync,
+  ClockFading,
+  SunDim,
+  Clock8,Clock10,Clock12,RotateCw,
+  Sun,
+  Sunset,
+  CircleDotDashed,
+  Circle,
+  LoaderCircle,
+  CircleDashed,
+  // Circle,
+  CircleDot,
+} from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CondensedConjugationDisplay from '../../components/verbs/CondensedConjugationDisplay';
 import TenseTimeline from './tense-timeline';
 import { Favorites } from '../../entities/Favorites';
+import { cn } from '@/lib/cn';
 
 
 function Loading({ t }) {
@@ -53,10 +78,10 @@ function LeftSidebar({
 }) {
   return (
     <div 
-      className="lg:fixed lg:mt-20 lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col
-      border-r border-gray-200 bg-white relative h-full flex flex-col"
+      className="lg:fixed lg:mt-20 lg:inset-y-0 lg:flex lg:w-72 lg:flex-col
+      border-r border-gray-200 bg-white relative h-screen lg:h-full flex flex-col"
     >
-      <div className="p-4 pr-0 border-t border-gray-200">
+      <div className="p-4 pr-0 border-t border-orange-100 flex flex-col h-full">
         {/* Search Header */}
         <div className="mb-4 pr-4">
           <div className="flex items-center gap-2 mb-3">
@@ -105,42 +130,46 @@ function LeftSidebar({
         </div>
         
         {/* Verb List */}
-        <div className="flex-1 space-y-1 border-t border-gray-200 overflow-y-auto overscroll-contain">
-          {filteredVerbs.map((verb) => (
-            <div
-              key={verb.infinitive}
-              onClick={() => handleVerbSelect(verb.infinitive)}
-              className={`w-full p-3 rounded-lg transition-colors cursor-pointer ${
-                selectedVerb?.infinitive === verb.infinitive
-                  ? 'bg-orange-50 border border-orange-200 text-orange-900'
-                  : 'hover:bg-gray-50 text-gray-700'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">{verb.infinitive}</span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleFavorite(verb.infinitive);
-                    }}
-                    className={`p-1 rounded transition-colors ${
-                      favorites.has(verb.infinitive)
-                        ? 'text-red-500 hover:text-red-600'
-                        : 'text-gray-400 hover:text-red-500'
-                    }`}
-                  >
-                    <Heart className={`w-3 h-3 ${
-                      favorites.has(verb.infinitive) ? 'fill-current' : ''
-                    }`} />
-                  </button>
+        <div className="relative overflow-y-auto flex-1 overscroll-contain border-t border-gray-200">
+          <div className="space-y-1 pr-4">
+            {filteredVerbs.map((verb) => (
+              <div
+                key={verb.infinitive}
+                onClick={() => handleVerbSelect(verb.infinitive)}
+                className={`w-full p-2 rounded-lg transition-colors cursor-pointer ${
+                  selectedVerb?.infinitive === verb.infinitive
+                    ? 'bg-orange-50 border border-orange-200 text-orange-900'
+                    : 'hover:bg-gray-50 text-gray-700'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(verb.infinitive);
+                      }}
+                      className={`p-0 rounded transition-colors ${
+                        favorites.has(verb.infinitive)
+                          ? 'text-red-500 hover:text-red-600'
+                          : 'text-gray-400 hover:text-red-500'
+                      }`}
+                    >
+                      <Heart className={`w-4 h-4 ${
+                        favorites.has(verb.infinitive) ? 'fill-current' : ''
+                      }`} />
+                    </button>
+                    <span className="text-sm font-medium">
+                      {verb.infinitive}
+                    </span>
+                  </div>
+                  <span className="text-sm text-gray-500 text-right max-w-[120px] truncate">
+                    {verb.infinitive_english.split(',').slice(0)[0].split(';').slice(0)[0]}
+                  </span>
                 </div>
-                <span className="text-sm text-gray-500 text-right max-w-[120px] truncate">
-                  {verb.infinitive_english}
-                </span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -148,9 +177,144 @@ function LeftSidebar({
 }
 
 function DefaultMainContent({ t }) {
+  const getColorStyles = (color) => {
+    const colorMap = {
+      'past': { bg: 'bg-red-100', text: 'text-neutral-900' },
+      'present': { bg: 'bg-orange-200', text: 'text-neutral-900' },
+      'conditional': { bg: 'bg-blue-100', text: 'text-neutral-900' },
+      'future': { bg: 'bg-slate-200', text: 'text-neutral-900' },
+    }
+    return colorMap[color] || { bg: '#E5E7EB', text: '#374151' }
+  }
+  const tenses = [
+    { tense: "Past Perfect", text: "I had eaten", color: "past", icon: CalendarCheck },
+    { tense: "Past Simple", text: "I ate", color: "past", icon: Calendar },
+    { tense: "Imperfect", text: "I was eating", color: "past", icon: CalendarSync },
+    { tense: "Present Perfect", text: "I have eaten", color: "present", icon: Circle },
+    // { tense: "Present Continuous", text: "I am eating", position: "top" },
+    { tense: "Present Simple", text: "I eat", color: "present", icon: CircleDot },
+    { tense: "Conditional", text: "I would eat", color: "conditional", icon: Orbit },
+    { tense: "Conditional Perfect", text: "I would have eaten", color: "conditional", icon: Orbit },
+    { tense: "Future Simple", text: "I will eat", color: "future", icon: Sunset },
+    { tense: "Future Perfect", text: "I will have eaten", color: "future", icon: Sunset },
+    // { tense: "Future Continuous", text: "I will be eating", position: "top" },
+  ]
+
+  const TimeLineCircle = ({ icon, color }) => {
+    const colorStyles = getColorStyles(color)
+    return (
+      <div className="flex items-center h-6 my-6 xtranslate-x-1/4">
+        <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
+        <div 
+          className={cn(
+            "z-10 flex items-center justify-center w-6 h-6 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0 ",
+            colorStyles.bg
+          )}
+        >
+          {React.createElement(icon, { 
+            className: cn("w-4 h-4 ", colorStyles.text),
+          })}
+        </div>
+        <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700 xnot-last:sm:pe-4"></div>
+      </div>
+    )
+  }
+
+  const TimeLineItemBody = ({ tense, text, color }) => {
+    const colorStyles = getColorStyles(color)
+    const bgClass = `text-center p-2 rounded-lg ${colorStyles.bg}`;
+    const h3Class = `text-base font-semibold leading-5 h-10 flex items-center justify-center ${colorStyles.text}`;
+    const pClass = `text-xs font-normal leading-5 h-10 flex items-center justify-center ${colorStyles.text}`;
+    return (
+      <div 
+        // className="text-center p-2 rounded-lg"
+        // style={{ backgroundColor: colorStyles.bg }}
+        className={cn("text-center p-2 rounded-lg ", colorStyles.bg)}
+        // className={bgClass}
+      >
+        <h3 
+          //  className="text-base font-semibold leading-5 h-10 flex items-center justify-center"
+          // style={{ color: colorStyles.text }}
+          className={cn(
+            "text-base font-semibold leading-5 h-10 flex items-center justify-center",
+            colorStyles.text
+         )}
+       >
+          {tense}
+        </h3>
+        <p 
+          // className="text-xs font-normal leading-5 h-10 flex items-center justify-center"
+          // style={{ color: colorStyles.text }}
+          className={cn(
+            "text-xs font-normal leading-5 h-10 flex items-center justify-center",
+            colorStyles.text
+          )}
+        >
+          {text}
+        </p>
+      </div>
+    )
+  }
+  
+
+  const TimeLineItem = ({ tense, text, position, color, icon }) => {
+    if (position === "top") {
+      return (
+        <li className="relative flex flex-col h-104 flex-1">
+          <div className="flex flex-col flex-shrink-0 h-48 not-first:sm:pl-4 not-last:sm:pr-4 justify-end">
+            <TimeLineItemBody tense={tense} text={text} color={color} icon={icon} />
+          </div>
+          <TimeLineCircle icon={icon} color={color} />
+          <div className="h-48" />
+        </li>
+      )
+    }
+    // Position === bottom
+    return (
+      <li className="relative flex flex-col flex-1">
+        <div className="h-48" />
+        <TimeLineCircle icon={icon} color={color} />
+        <div className="flex flex-col flex-shrink-0 h-48 not-first:sm:pl-4 not-last:sm:pr-8 justify-start">
+          <TimeLineItemBody tense={tense} text={text} color={color} />
+        </div>
+      </li>
+    )
+  }
+
   return (
     <div>
-      <TenseTimeline />
+      {/* <TenseTimeline /> */}
+      <div className="flex items-center px-4">
+        {/* Start Circle */}
+        <div className="flex items-center justify-center w-6 h-6">
+          <Circle className="w-4 h-4 text-gray-400 fill-gray-400" />
+          <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
+        </div>
+        
+        {/* Timeline */}
+        <ol className="items-center sm:flex mb-6 sm:mb-0 flex-1">
+          {tenses.map((tense, idx) => {
+            const position = idx % 2 === 0 ? "top" : "bottom";
+            return (
+              <TimeLineItem 
+                key={idx}
+                position={position}
+                tense={tense.tense}
+                text={tense.text}
+                color={tense.color}
+                // icon={<tense.icon className={cn("w-4 h-4 ", `text-${tense.color}`)} />}
+                icon={tense.icon}
+              />
+            )
+          })}
+        </ol>
+        
+        {/* End Arrow */}
+        <div className="flex items-center justify-center w-6 h-6">
+          <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
+          <Play className="w-4 h-4 text-gray-400 fill-gray-400" />
+        </div>
+      </div>
     </div>
   )
 }

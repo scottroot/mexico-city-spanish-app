@@ -7,8 +7,8 @@ import { createClient } from '@/utils/supabase/server'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: '¡Español Divertido! - Aprende Español Latinoamericano',
-  description: 'Aprende español latinoamericano de forma divertida con juegos interactivos de vocabulario, gramática y pronunciación.',
+  title: 'Capital Spanish! - Learn Mexico City Spanish',
+  description: 'Learn Spanish of Mexico City in a fun way with interactive games of vocabulary, grammar and pronunciation.',
 }
 
 export default async function RootLayout({ children }) {

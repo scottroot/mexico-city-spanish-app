@@ -41,6 +41,7 @@ export default function LanguageToggle() {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 p-2 rounded-lg hover:bg-orange-50 transition-colors"
         aria-label="Change language"
+        // style={{ zIndex: 200 }}
       >
         <Globe className="w-5 h-5 text-gray-600" />
         <span className="text-lg">{currentLanguage?.flag}</span>

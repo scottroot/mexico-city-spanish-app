@@ -1,1 +1,1051 @@
-{}
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "Loading ~/.zshrc\n(base) scomax@Scotts-MacBook-Pro Spanish-Language-App % tree stories\nstories\n├── .DS_Store\n├── 1_Beginner\n│   ├── 01_La niña y el gato.json\n│   └── ElevenLabs_2025-09-08T03_06_34_Fernanda Sanmiguel - Spanish Audiobook Neutral Voice_pvc_sp80_s84_sb75_v3.m​‌​\np3\n├── student_levels.json\n└── voice_settings.txt\n(base) scomax@Scotts-MacBook-Pro Spanish-Language-App % cd stories/new-story-prompts                              \n(base) scomax@Scotts-MacBook-Pro new-story-prompts % ls -lah\ntotal 48\ndrwxr-xr-x@ 8 scomax  staff   256B Sep  7 23:02 .\ndrwxr-xr-x@ 7 scomax  staff   224B Sep  7 23:08 ..\n-rw-r--r--@ 1 scomax  staff   2.0K Sep  7 22:59 1 - Beginner.txt\n-rw-r--r--@ 1 scomax  staff   2.0K Sep  7 23:00 2 - High Beginner.txt\n-rw-r--r--@ 1 scomax  staff   2.1K Sep  7 23:00 3 - Low Intermediate.txt\n-rw-r--r--@ 1 scomax  staff   2.1K Sep  7 23:01 4 - High Intermediate.txt\n-rw-r--r--@ 1 scomax  staff   2.1K Sep  7 23:01 5 - Advanced.txt\n-rw-r--r--@ 1 scomax  staff   2.3K Sep  7 23:02 6 - Proficient-Near-Native.txt\n(base) scomax@Scotts-MacBook-Pro new-story-prompts % ls -l\ntotal 48\n-rw-r--r--@ 1 scomax  staff  1998 Sep  7 22:59 1 - Beginner.txt\n-rw-r--r--@ 1 scomax  staff  2059 Sep  7 23:00 2 - High Beginner.txt\n-rw-r--r--@ 1 scomax  staff  2122 Sep  7 23:00 3 - Low Intermediate.txt\n-rw-r--r--@ 1 scomax  staff  2194 Sep  7 23:01 4 - High Intermediate.txt\n-rw-r--r--@ 1 scomax  staff  2185 Sep  7 23:01 5 - Advanced.txt\n-rw-r--r--@ 1 scomax  staff  2328 Sep  7 23:02 6 - Proficient-Near-Native.txt\n(base) scomax@Scotts-MacBook-Pro new-story-prompts % ls -h\n1 - Beginner.txt                3 - Low Intermediate.txt        5 - Advanced.txt\n2 - High Beginner.txt           4 - High Intermediate.txt       6 - Proficient-Near-Native.txt\n(base) scomax@Scotts-MacBook-Pro new-story-prompts % ",
+			"settings":
+			{
+				"buffer_size": 1813,
+				"line_ending": "Unix",
+				"name": "Login Shell",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "Lara llegó a Santa Aurora a principios de otoño, con una maleta de tela y un cuaderno donde dibujaba puentes cuando se sentía sola. Hacía su práctica de arquitectura en un despacho pequeño, y vivía en un estudio sobre la vieja estación del tranvía. Cada mañana cruzaba el Puente Verde para ir al trabajo; desde allí veía el río como una cinta que partía la ciudad y, al mismo tiempo, la unía. El barrio tenía ese ritmo de campanas, bicicletas y vendedores de pan. Aunque ella hablaba poco al principio, iba aprendiendo los nombres: doña Inés con su perro canoso, Bruno el repartidor, don Mateo, el bibliotecario jubilado que siempre llevaba una bufanda azul.\n\nUna mañana encontró un sobre bajo la puerta. Dentro había un mapa de papel amarillento, con un trazo rojo en forma de X cerca de un descampado junto al río. Había también una nota: “Para que recuerdes lo que fue”. Lara pensó que se habrían equivocado de destinatario, pero la curiosidad pudo más. En el trabajo no se concentró; decidió que por la tarde iba a ir a la biblioteca municipal para preguntar por el mapa. Sentía que, si no lo hacía, el papel se quedaría mudo y su cuaderno también.\n\nEn la biblioteca, don Mateo reconoció el dibujo de un vistazo. “Ese mapa lo hice hace muchos años”, dijo, pasando la yema de los dedos como si siguiera el río con ellos. “La X marca la Huerta del Río. Allí plantábamos tomates, calabazas y árboles de mora. Los sábados había intercambio de semillas. Pero hace unos años, una empresa compró el terreno y lo cercó. Yo archivé los planos, por si un día volvían a servir.” El hombre sonrió con una tristeza leve. “Un puente une dos orillas, pero un plan, mal hecho, separa a la gente. Es mejor que la ciudad escuche antes de cavar.”\n\nLara caminó hasta el descampado al salir del trabajo. El alambrado oxidado dejaba ver trozos de tierra seca y una pila vieja de maderas. Un niño lanzaba una pelota de trapo al otro lado y su hermana reía. Doña Inés, que paseaba al perro, se acercó y señaló una marca en su memoria: “Aquí hacíamos meriendas. Cuando la empresa llegó, dijeron que pronto habría un estacionamiento amplio, con luces y vigilancia. Prometieron que mantenerían una franja de árboles, pero nada pasó. Solo el cartel.” El viento movió el plástico que cubría un montón de arena. Lara se imaginó un plano distinto: senderos, bancas, un pequeño laboratorio de lluvia, un espacio para talleres. Se le encendió una decisión: si el barrio quisiera, ella dibujaría una propuesta.\n\nAl día siguiente, volvió a la biblioteca. “Si tuviéramos un proyecto serio, quizás el concejo lo escucharía”, dijo Lara, con el mapa en la mano. Don Mateo asintió despacio. “Convoca a los vecinos. Yo buscaré fotos y un par de datos: cuántas familias participaban, cuánto se cosechaba. No para mirar atrás con nostalgia, sino para que se entienda lo que se podría recuperar.” Imprimieron volantes que decían: “Reunión comunitaria: imaginemos la Huerta del Río”. Lara, que siempre había sido tímida, respiró hondo antes de pegar el primero en el poste del tranvía. Sabía que esa tarde iba a hablar en voz alta.\n\nEl domingo se llenó el salón del fondo de la biblioteca. Vinieron estudiantes, madres, gente jubilada y curiosos. Bruno propuso un carril para bicicletas que bordease el río. Una profesora sugirió talleres de compostaje. Lara colgó un papel grande y trazó con rotuladores. “Es importante que el plano sea claro y que propongamos costos realistas”, dijo, intentando que no le temblara la voz. “Si la empresa aceptara reducir el estacionamiento y la ciudad cediera una parte del terreno, podríamos convivir. Sería ideal que el jardín se reserve para uso público.” Doña Inés añadió: “Queremos que nuestras nietas tengan un lugar donde ensuciarse las manos con tierra”. Lara concluyó: “Cuando presentemos la propuesta, espero que el alcalde escuche. Aunque haya otras prioridades, esto también es salud y encuentro.” Se formaron comisiones: una para limpiar, otra para recaudar firmas. De pronto, la X del mapa parecía latir.\n\nLa semana avanzó con prisa. En el despacho donde hacía la práctica, su supervisora la llamó aparte: “No te metas mucho, Lara. Esa empresa es cliente del estudio. Si vas a hablar, que sea con cuidado”. Ella sintió un nudo en el estómago. Dudó por una noche entera, mirando el techo. Al final, recordó la frase de don Mateo y decidió ser transparente. Preparó un discurso corto: iba a defender el proyecto con respeto, sin atacar a nadie. Esa misma noche, recibió un correo anónimo con fotografías antiguas: niños con regaderas, abuelos en banquitos, una banderita hecha de retazos. “Para que no se pierda lo que fue”, decía de nuevo. Supo que era don Mateo, y sonrió.\n\nEl miércoles hubo audiencia pública en el concejo. El representante de la empresa habló primero: “El estacionamiento generará empleo y ordenará el tráfico. La zona necesita desarrollo”. Lara pidió la palabra. Sus manos sudaban. “Aunque la obra genere empleo”, dijo, “también debemos proteger el espacio común. Proponemos un diseño mixto: un estacionamiento pequeño con pavimento permeable y, junto a él, la Huerta del Río. Si ustedes aceptaran esa reducción, nosotros nos comprometeríamos a mantener la huerta con voluntarios y talleres. Nuestro barrio será más sano y atractivo. Ojalá podamos demostrarlo.” Un murmullo recorrió la sala. Un concejal preguntó por números; Lara explicó costos, mantenimiento, seguridad. Varios vecinos hicieron promesas concretas: horas de trabajo, donación de herramientas, apoyo de la escuela.\n\nEl concejo decidió postergar la decisión una semana y visitar el sitio. “Queremos ver que sea viable”, dijo la alcaldesa. El grupo no se desanimó. “Cuando vengan, verán que ya empezó”, anunció Bruno. Organizaron una jornada de limpieza para el sábado. Lara no durmió mucho, pero dibujó señales temporales y un boceto del recorrido. “Antes de que lleguen, dejemos todo claro”, pidió. “Es necesario que cada persona explique su parte con calma, para que no se confundan.” El plan no era perfecto, pero era real.\n\nEl sábado amaneció lluvioso. Aun así, la gente llegó con impermeables y baldes. Quitaron basura, levantaron una compostera con pallets, pintaron un letrero: “La Huerta del Río: lugar de aprendizaje”. Don Mateo apareció con una caja de semillas y una sonrisa nueva. “Para que la memoria germine”, dijo, entregando bolsitas con nombres escritos a mano. Los niños enterraron habas cerca de la valla. A media mañana llegó la comitiva municipal. La alcaldesa se detuvo bajo un paraguas y observó a la gente trabajar, empapada pero contenta. “Esto no es solo un plano”, dijo bajito. “Es una voluntad”.\n\nEsa tarde, el concejo aprobó un programa piloto: mitad jardín, mitad estacionamiento reducido. “Si en seis meses funciona —declaró la alcaldesa—, ampliaremos la huerta y haremos del río un corredor verde.” El representante de la empresa, serio pero correcto, aceptó. “Podríamos colaborar con iluminación y cámaras, siempre y cuando haya responsabilidad compartida.” Lara respiró hondo. No era la victoria total, pero sí un puente tendido. Se abrazaron, mojados y felices.\n\nPasaron los meses y el verde se multiplicó. Las abejas volvieron; los sábados olían a café y a tierra húmeda. Lara terminó su práctica y decidió quedarse en Santa Aurora. Dibujaba planos por las mañanas y, por las tardes, daba talleres de diseño para niños en la huerta. Un día, don Mateo le entregó una tarjeta: “Más que líneas, dibujaste un puente”. Ella guardó el mensaje junto con el mapa amarillento. Sabía que, en el futuro, otras X aparecerían en su vida. También sabía que, para que existiera un puente, alguien tendría que imaginarlo y otros tendrían que creer. Y eso, en su ciudad al lado del río, ya estaba ocurriendo.\n",
+			"settings":
+			{
+				"buffer_size": 7723,
+				"line_ending": "Unix",
+				"name": "Lara llegó a Santa Aurora a principios de otoño, c"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAcB4AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"GAAAAPcbAAAAAAAA+BsAAAAAAAACAAAAXG71GwAAAAAAAPYbAAAAAAAAAgAAAFxuHBoAAAAAAAAdGgAAAAAAAAIAAABcbhoaAAAAAAAAGxoAAAAAAAACAAAAXG7FFwAAAAAAAMYXAAAAAAAAAgAAAFxuwxcAAAAAAADEFwAAAAAAAAIAAABcbsQVAAAAAAAAxRUAAAAAAAACAAAAXG7CFQAAAAAAAMMVAAAAAAAAAgAAAFxuhRIAAAAAAACGEgAAAAAAAAIAAABcboMSAAAAAAAAhBIAAAAAAAACAAAAXG7nDwAAAAAAAOgPAAAAAAAAAgAAAFxu5Q8AAAAAAADmDwAAAAAAAAIAAABcbkoMAAAAAAAASwwAAAAAAAACAAAAXG5IDAAAAAAAAEkMAAAAAAAAAgAAAFxu5gkAAAAAAADnCQAAAAAAAAIAAABcbuQJAAAAAAAA5QkAAAAAAAACAAAAXG73BgAAAAAAAPgGAAAAAAAAAgAAAFxu9QYAAAAAAAD2BgAAAAAAAAIAAABcbrIEAAAAAAAAswQAAAAAAAACAAAAXG6wBAAAAAAAALEEAAAAAAAAAgAAAFxuwgIAAAAAAADDAgAAAAAAAAIAAABcbsACAAAAAAAAwQIAAAAAAAACAAAAXG4sAAAAAAAAAC0AAAAAAAAAAgAAAFxuKgAAAAAAAAArAAAAAAAAAAIAAABcbg",
+					"AQAAAAAAAAABAAAAKgAAAAAAAAAsAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
+					"AQAAAAAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					15,
+					1,
+					"left_delete",
+					null,
+					"AQAAAEseAAAAAAAASx4AAAAAAAABAAAAIg",
+					"AQAAAAAAAAABAAAATB4AAAAAAABMHgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAAgAAAARWwgbWFwYSBkZSBwYXBlbCB5IGxhcyBwcm9tZXNhcwo",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					26,
+					1,
+					"right_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"contents": "El sábado de la feria y el perro perdido\n\nMe llamo Lucía y, hace tres meses, me mudé a un pueblo costero que se llama San Flores. El pueblo es pequeño, pero tiene una plaza grande con árboles, bancos y una fuente que siempre suena. Las calles son estrechas y tranquilas; en verano hay turistas, pero en septiembre la vida es más lenta. Trabajo en una panadería que queda en la esquina de la plaza. La dueña se llama Marta y es una mujer paciente que me enseñó a usar el horno, a pesar de que yo no tenía mucha experiencia.\n\nCuando llegué al pueblo, todo me parecía nuevo y un poco difícil. No conocía a nadie, y me perdía en las calles porque muchas casas se parecen. Sin embargo, cada día entendía mejor el mapa de San Flores. Por las tardes, después del trabajo, yo caminaba por el paseo del mar. El olor a pan caliente todavía estaba en mis manos, y el aire salado me calmaba. A veces me encontraba con don Ernesto, mi vecino. Él es jubilado y siempre pasea con su perrita, que se llama Luna. Luna es blanca, pequeña y muy curiosa.\n\nEl viernes por la noche, antes de cerrar la panadería, Marta me dijo: “Mañana habrá una feria artesanal en la plaza. Va a haber música, y la gente va a probar nuestros pasteles. Necesitamos levantarnos temprano.” Yo asentí y sonreí, porque me gustan las ferias. Pensé que sería una buena oportunidad para conocer mejor a los vecinos. En casa, preparé mi mochila con una botella de agua, un suéter, y una libreta para anotar pedidos.\n\nEl sábado me desperté a las seis. El cielo todavía estaba oscuro y la calle estaba muy silenciosa. Mientras me vestía, oí a Luna ladrar en el pasillo. Abrí la puerta y vi a don Ernesto con su correa en la mano. “Buenos días, Lucía”, me dijo. “Hoy la plaza va a estar llena. Vamos a dar un paseo temprano, y luego nos acercamos a la feria.”\n\nLlegué a la panadería a las seis y media. El horno ya estaba caliente, y el olor a canela llenaba el lugar. Marta preparaba el café y ponía etiquetas a los productos: pan de semillas, empanadas de espinaca, tartas de manzana. Yo ayudé a colocar todo en una mesa especial con un mantel rojo. A las ocho, empezaron a llegar los primeros vecinos. Algunos saludaban con la mano; otros se acercaban y preguntaban los precios. Yo respondía con paciencia y sonreía. Pronto la plaza se llenó de colores y de voces. Había puestos de joyas, cerámica, miel, y tamborcitos para niños. La banda municipal tocaba canciones alegres.\n\nTodo iba bien hasta que escuché a don Ernesto gritar mi nombre. Me giré y lo vi con la cara pálida. “Lucía, no encuentro a Luna”, dijo, respirando rápido. “La solté un momento para ajustar mi sombrero, y de pronto ella corrió entre la gente. No la veo.” Sentí un nudo en el estómago. Miré a Marta; ella frunció el ceño, pero dijo: “Ve, ayúdalo. Yo me quedo aquí.” Le agradecí y corrí hacia don Ernesto.\n\nEn la feria había mucha gente. Era difícil mirar al suelo y a los lados al mismo tiempo. Decidimos dividirnos. “Yo voy a buscar hacia la fuente”, dije. “Usted vaya hacia el paseo del mar. Nos encontramos aquí en veinte minutos.” Él asintió. Empecé a caminar con pasos rápidos, llamando en voz baja: “Luna, Luna.” Le pregunté a una señora que vendía flores si había visto a una perrita blanca. “Creo que sí”, respondió. “Hace diez minutos, una perrita pasó por aquí. Olía mis flores y luego se fue hacia la biblioteca.”\n\nCorrí hacia la biblioteca. La puerta estaba abierta porque ese día había cuentacuentos para niños. Dentro, una bibliotecaria joven acomodaba sillas. “Disculpa”, le dije, “¿viste a una perrita blanca?” La chica sonrió y señaló la calle. “La vi hace un momento. Tenía un lazo azul. Cruzó hacia el parque.” Agradecí y seguí el rastro. Sentía calor y mis manos todavía olían a pan. En el parque, escuché risas de niños y el ruido de un carrito de helados. Un señor que vendía helados me dijo que había visto a la perrita olfatear una banca y luego dirigirse al faro pequeño que está al final del paseo.\n\nLlamé a don Ernesto por teléfono. Su voz temblaba, pero trataba de estar tranquilo. “Voy a caminar hacia el faro”, me dijo. “Nos vemos allí.” Mientras avanzaba, yo recordaba las veces que vi a Luna en el edificio, cómo ella se sentaba y me miraba con paciencia cuando yo me agachaba con las llaves de mi puerta. Pensé en lo asustada que podía estar ahora, con tanta gente y ruido. El cielo estaba más claro, y el viento traía olor a algas. Un grupo de turistas hablaba inglés; yo no entendía todo, pero no me importaba. Solo quería encontrar a Luna.\n\nAl final del paseo hay un pequeño muelle y, más allá, el faro. El faro no es muy alto, pero es bonito, pintado de blanco con una franja roja. Caminé despacio, mirando debajo de las bancas, detrás de los botes y cerca de los cubos de pesca. No vi nada. Entonces, escuché un sonido muy suave, como un gemido. Me detuve y guardé silencio. El gemido venía de un lado del faro, donde hay unas escaleras de piedra que bajan a la playa. Me acerqué con cuidado. Entre dos barandas, vi un lazo azul enredado en un clavo. Y debajo, con las patas tensas, estaba Luna. No estaba herida, pero tenía la correa atrapada y no podía subir ni bajar.\n\n“Luna, tranquila”, dije, y le hablé con voz suave. Bajé un par de escalones y traté de desatar la correa. No fue fácil. El clavo estaba oxidado y mi mano temblaba un poco. De pronto, escuché pasos rápidos. Era don Ernesto. Sus ojos brillaron cuando vio a Luna. “¡Ay, mi niña!” exclamó. Entre los dos, levantamos la correa y la liberamos. Luna saltó hacia nosotros y nos lamió las manos. Don Ernesto la abrazó y, por un momento, casi lloró. Yo también solté un suspiro largo.\n\nRegresamos a la plaza con Luna en brazos. La feria seguía animada. Varias personas nos miraron y sonrieron al ver a la perrita de vuelta. Marta nos saludó desde la panadería y levantó el pulgar. “¿La encontraste?” preguntó, cuando llegué al puesto. “Sí”, respondí, todavía un poco cansada. “Estaba cerca del faro. La correa se enganchó.” Marta me dio un vaso de agua y una empanada. “Bien hecho”, dijo. “Tómate un minuto, y luego seguimos. Hoy vamos a vender todo.”\n\nMientras comía, don Ernesto se acercó con Luna en brazos. Me agradeció muchas veces. “Esta tarde”, dijo, “voy a preparar una paella. Te voy a invitar, si quieres. Te lo debo.” Yo sonreí y acepté. Me gustaba la idea de celebrar con comida y con amigos nuevos. Después del susto, la música sonaba más alegre y el sol parecía más cálido.\n\nEl resto del día pasó rápido. Vendimos casi todas las tartas y muchas empanadas. Yo hablé con varias personas. Una chica me recomendó un club de lectura que se reúne los miércoles. Un señor mayor me contó historias del faro cuando él era joven. Al anochecer, la plaza tenía luces colgadas entre los árboles, y los niños corrían con sus tamborcitos.\n\nCuando cerramos, acompañé a don Ernesto a su casa. En el pasillo, Luna se acostó, cansada pero tranquila. “Mañana”, dijo él con una sonrisa, “vamos a comprar una correa nueva. Esta ya cumplió su misión.” Yo respondí que sí, y pensé en todo lo que había pasado. Había sido un día largo, con trabajo, miedo y alegría. Me sentí parte del pueblo por primera vez, como si yo también tuviera raíces en la plaza, en el pan caliente, y en el faro con su franja roja.\n\nEsa noche, mientras escribía en mi libreta, hice una lista de planes. La próxima semana voy a ir al club de lectura. También voy a invitar a Marta a tomar un café. Y el domingo voy a caminar otra vez hasta el faro, pero esta vez con calma, para mirar el mar sin prisa. Sé que todavía estoy aprendiendo y que a veces cometo errores. Sin embargo, en San Flores la gente es amable, y cada día me siento más segura. Y, por supuesto, voy a llevar unas galletas para Luna, la perrita curiosa que me ayudó, sin saberlo, a encontrar mi lugar.\n",
+			"settings":
+			{
+				"buffer_size": 7762,
+				"line_ending": "Unix",
+				"name": "El sábado de la feria y el perro perdido"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAfx4AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
+					"AQAAAAAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					5,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"IAAAAFkcAAAAAAAAWhwAAAAAAAACAAAAXG5XHAAAAAAAAFgcAAAAAAAAAgAAAFxuixoAAAAAAACMGgAAAAAAAAIAAABcbokaAAAAAAAAihoAAAAAAAACAAAAXG4rGQAAAAAAACwZAAAAAAAAAgAAAFxuKRkAAAAAAAAqGQAAAAAAAAIAAABcbtkXAAAAAAAA2hcAAAAAAAACAAAAXG7XFwAAAAAAANgXAAAAAAAAAgAAAFxuBBYAAAAAAAAFFgAAAAAAAAIAAABcbgIWAAAAAAAAAxYAAAAAAAACAAAAXG4mFAAAAAAAACcUAAAAAAAAAgAAAFxuJBQAAAAAAAAlFAAAAAAAAAIAAABcbqsRAAAAAAAArBEAAAAAAAACAAAAXG6pEQAAAAAAAKoRAAAAAAAAAgAAAFxugg8AAAAAAACDDwAAAAAAAAIAAABcboAPAAAAAAAAgQ8AAAAAAAACAAAAXG4oDQAAAAAAACkNAAAAAAAAAgAAAFxuJg0AAAAAAAAnDQAAAAAAAAIAAABcbh4LAAAAAAAAHwsAAAAAAAACAAAAXG4cCwAAAAAAAB0LAAAAAAAAAgAAAFxuiAkAAAAAAACJCQAAAAAAAAIAAABcboYJAAAAAAAAhwkAAAAAAAACAAAAXG4bBwAAAAAAABwHAAAAAAAAAgAAAFxuGQcAAAAAAAAaBwAAAAAAAAIAAABcbsQFAAAAAAAAxQUAAAAAAAACAAAAXG7CBQAAAAAAAMMFAAAAAAAAAgAAAFxuEAQAAAAAAAARBAAAAAAAAAIAAABcbg4EAAAAAAAADwQAAAAAAAACAAAAXG4OAgAAAAAAAA8CAAAAAAAAAgAAAFxuDAIAAAAAAAANAgAAAAAAAAIAAABcbioAAAAAAAAAKwAAAAAAAAACAAAAXG4oAAAAAAAAACkAAAAAAAAAAgAAAFxu",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					2,
+					"left_delete",
+					null,
+					"AgAAAFIeAAAAAAAAUh4AAAAAAAABAAAALFEeAAAAAAAAUR4AAAAAAAABAAAAIg",
+					"AQAAAAAAAAABAAAAUx4AAAAAAABTHgAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"contents": "Generate a featured image for this story. Do not include any text in the image.  The style is a busy, full-color illustration style by Stephen Cartwright with large, detailed scenes filled with lots of objects for children to spot, learn, and discuss.\n\nLa niña y el gato\n\nAna es una niña. Vive en una casa pequeña con su mamá y su papá. Ana tiene un gato. El gato se llama Coco. Es blanco y negro.\n\nCada mañana, Ana dice: “Hola, Coco.” El gato corre a la cocina. Ana come pan y bebe leche. Coco bebe agua. Ana toca al gato y sonríe.\n\nUn día, Coco no está en la cocina. Ana busca en la sala. No está. Busca en el cuarto. No está. Ana está triste.\n\nDespués, escucha un sonido en el jardín. “¡Miau, miau!” Es Coco. El gato corre hacia Ana. Ana abraza a Coco. Está feliz.\n\nPor la noche, Ana dice a sus papás: “Hoy Coco juega en el jardín.” Todos ríen en la mesa. Coco duerme en la silla. Ana también duerme feliz.\n\n",
+			"settings":
+			{
+				"buffer_size": 911,
+				"line_ending": "Unix",
+				"name": "Generate a featured image for this story. Do not i"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAFQkAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					2,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"EQAAANUHAAAAAAAA1gcAAAAAAAACAAAAXG7TBwAAAAAAANQHAAAAAAAAAgAAAFxuXgcAAAAAAABfBwAAAAAAAAIAAABcbkwHAAAAAAAATQcAAAAAAAACAAAAXG4gBwAAAAAAACEHAAAAAAAAAgAAAFxuBwcAAAAAAAAIBwAAAAAAAAIAAABcbq4GAAAAAAAArwYAAAAAAAACAAAAXG4cBgAAAAAAAB0GAAAAAAAAAgAAAFxuGgYAAAAAAAAbBgAAAAAAAAIAAABcbrcEAAAAAAAAuAQAAAAAAAACAAAAXG61BAAAAAAAALYEAAAAAAAAAgAAAFxu3QIAAAAAAADeAgAAAAAAAAIAAABcbtsCAAAAAAAA3AIAAAAAAAACAAAAXG7UAQAAAAAAANUBAAAAAAAAAgAAAFxu0gEAAAAAAADTAQAAAAAAAAIAAABcbiMAAAAAAAAAJAAAAAAAAAACAAAAXG4hAAAAAAAAACIAAAAAAAAAAgAAAFxu",
+					"AQAAAAAAAAABAAAAFQkAAAAAAAAVCQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					5,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
+					"AQAAAAAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					3,
+					"left_delete",
+					null,
+					"AwAAAPgIAAAAAAAA+AgAAAAAAAABAAAACvcIAAAAAAAA9wgAAAAAAAABAAAALPYIAAAAAAAA9ggAAAAAAAABAAAAIg",
+					"AQAAAAAAAAABAAAA+QgAAAAAAAD5CAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					20,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"JgAAALYHAAAAAAAAtgcAAAAAAAACAAAAXCKCBwAAAAAAAIIHAAAAAAAAAgAAAFwifgcAAAAAAAB+BwAAAAAAAAIAAABcIlgHAAAAAAAAWAcAAAAAAAACAAAAXCLQBQAAAAAAANAFAAAAAAAAAgAAAFwiyQUAAAAAAADJBQAAAAAAAAIAAABcIsUFAAAAAAAAxQUAAAAAAAACAAAAXCKlBQAAAAAAAKUFAAAAAAAAAgAAAFwiRAUAAAAAAABEBQAAAAAAAAIAAABcIgcFAAAAAAAABwUAAAAAAAACAAAAXCL6BAAAAAAAAPoEAAAAAAAAAgAAAFwi5wQAAAAAAADnBAAAAAAAAAIAAABcIn0EAAAAAAAAfQQAAAAAAAACAAAAXCJuBAAAAAAAAG4EAAAAAAAAAgAAAFwiagQAAAAAAABqBAAAAAAAAAIAAABcIlMEAAAAAAAAUwQAAAAAAAACAAAAXCIWBAAAAAAAABYEAAAAAAAAAgAAAFwi+QMAAAAAAAD5AwAAAAAAAAIAAABcIvUDAAAAAAAA9QMAAAAAAAACAAAAXCLgAwAAAAAAAOADAAAAAAAAAgAAAFwi3AMAAAAAAADcAwAAAAAAAAIAAABcIrwDAAAAAAAAvAMAAAAAAAACAAAAXCK4AwAAAAAAALgDAAAAAAAAAgAAAFwirAMAAAAAAACsAwAAAAAAAAIAAABcIp0DAAAAAAAAnQMAAAAAAAACAAAAXCKOAwAAAAAAAI4DAAAAAAAAAgAAAFwiigMAAAAAAACKAwAAAAAAAAIAAABcIkoDAAAAAAAASgMAAAAAAAACAAAAXCKeAgAAAAAAAJ4CAAAAAAAAAgAAAFwifQIAAAAAAAB9AgAAAAAAAAIAAABcInkCAAAAAAAAeQIAAAAAAAACAAAAXCJnAgAAAAAAAGcCAAAAAAAAAgAAAFwiSwIAAAAAAABLAgAAAAAAAAIAAABcIhkCAAAAAAAAGQIAAAAAAAACAAAAXCLCAQAAAAAAAMIBAAAAAAAAAgAAAFwiiwEAAAAAAACLAQAAAAAAAAIAAABcInoBAAAAAAAAegEAAAAAAAACAAAAXCJtAQAAAAAAAG0BAAAAAAAAAgAAAFwi",
+					"AQAAAAAAAAABAAAAbQEAAAAAAABvAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAKx4AAAAAAAD/CAAAVW4gc8OhYmFkbyBlbiBsYSBjaXVkYWQKCkVsIHPDoWJhZG8gcGFzYWRvIGZ1aSBhbCBjZW50cm8gZGUgbGEgY2l1ZGFkLiBRdWVyw61hIGNvbXByYXIgdW4gcmVnYWxvIHBhcmEgbWkgaGVybWFuYSwgcG9ycXVlIGVsIGRvbWluZ28gdm95IGEgaXIgYSBzdSBjYXNhIHBvciBzdSBjdW1wbGVhw7Fvcy4gU2Fsw60gZGUgbWkgYXBhcnRhbWVudG8gdGVtcHJhbm8uIFByaW1lcm8sIGNhbWluw6kgYSBsYSBwYXJhZGEgZGUgYXV0b2LDunMuIEVuIGxhIHBhcmFkYSwgbGXDrSBlbCBob3JhcmlvLiBFbCBhdXRvYsO6cyBuw7ptZXJvIDUgbGxlZ8OzIGEgbGFzIG51ZXZlLiBTdWLDrSB5IHBhZ3XDqSBlbCBiaWxsZXRlLiBFbCBjb25kdWN0b3IgZnVlIGFtYWJsZS4gRGlqbzogQnVlbm9zIGTDrWFzLiBZbyByZXNwb25kw606IEJ1ZW5vcyBkw61hcywgcG9yIGZhdm9yLCB1biBiaWxsZXRlIGFsIG1lcmNhZG8gY2VudHJhbC4KCkN1YW5kbyBsbGVndcOpIGFsIG1lcmNhZG8sIGhhYsOtYSBtdWNoYXMgcGVyc29uYXMuIEZ1aSBhIHVuIHB1ZXN0byBkZSBmcnV0YXMuIERpamU6IEJ1ZW5vcyBkw61hcywgwr9jdcOhbnRvIGN1ZXN0YSB1biBraWxvIGRlIG1hbnphbmFzPy4gTGEgdmVuZGVkb3JhIHJlc3BvbmRpw7M6IEN1ZXN0YSBkb3MgZXVyb3MuIFZveSBhIGxsZXZhciB1biBraWxvLCBwb3IgZmF2b3IuIFBhZ3XDqSB5IGd1YXJkw6kgbGFzIG1hbnphbmFzIGVuIG1pIG1vY2hpbGEuCgpEZXNwdcOpcyBmdWkgYSB1bmEgdGllbmRhIGRlIHJvcGEgcGFyYSBidXNjYXIgdW5hIGNhbWlzYSBwYXJhIG1pIGhlcm1hbmEuIE1pcsOpIG11Y2hhcyBjYW1pc2FzLiBMZSBwcmVndW50w6kgYSBsYSBkZXBlbmRpZW50YTogRGlzY3VscGUsIMK/dGllbmUgZXN0YSBjYW1pc2EgZW4gdGFsbGEgbWVkaWFuYSB5IGVuIGNvbG9yIGF6dWw/LiBTw60sIGFxdcOtIGVzdMOhLCByZXNwb25kacOzLiDCv1RlIGd1c3RhPy4gU8OtLCBlcyBib25pdGEuIMK/Q3XDoW50byBjdWVzdGE/LiBDdWVzdGEgdmVpbnRlIGV1cm9zLiBFc3TDoSBiaWVuLiBMYSB2b3kgYSBjb21wcmFyLiBQYWd1w6kgY29uIHRhcmpldGEgeSBwZWTDrSB1bmEgYm9sc2EuIExhIGRlcGVuZGllbnRhIGRpam86IMK/TmVjZXNpdGFzIHVuIHJlY2libz8uIFPDrSwgcG9yIGZhdm9yLiBUb23DqSBlbCByZWNpYm8geSBzYWzDrSBkZSBsYSB0aWVuZGEuCgpEZXNwdcOpcyB0dXZlIGhhbWJyZS4gRW50csOpIGVuIHVuIGNhZsOpIHBlcXVlw7FvLiBFbCBjYW1hcmVybyBkaWpvOiBIb2xhLCDCv3F1w6kgZGVzZWE/LiBZbyBkaWplOiBRdWllcm8gdW4gYm9jYWRpbGxvIGRlIHBvbGxvIHkgdW4gY2Fmw6kgY29uIGxlY2hlLCBwb3IgZmF2b3IuIEVzcGVyw6kgdW5vcyBtaW51dG9zIHkgY29tw60gY29uIGd1c3RvLiBMYSBjb21pZGEgZnVlIHNpbXBsZSB5IGJ1ZW5hLiBBbCBmaW5hbCBwZWTDrSBsYSBjdWVudGE6IMK/TWUgdHJhZSBsYSBjdWVudGEsIHBvciBmYXZvcj8uIENsYXJvLCBkaWpvIGVsIGNhbWFyZXJvLiBQYWd1w6kgeSBkZWrDqSB1bmEgcGVxdWXDsWEgcHJvcGluYS4KCkFudGVzIGRlIHZvbHZlciBhIGNhc2EsIHBhc8OpIHBvciBsYSBlc3RhY2nDs24gZGUgYXV0b2J1c2VzIHBhcmEgY29tcHJhciB1biBiaWxsZXRlIHBhcmEgZWwgZG9taW5nby4gRnVpIGEgbGEgdmVudGFuaWxsYSB5IGhhYmzDqSBjb24gbGEgdmVuZGVkb3JhOgrigJRCdWVuYXMgdGFyZGVzLiBRdWllcm8gdW4gYmlsbGV0ZSBwYXJhIG1hw7FhbmEgYSBsYXMgZGlleiwgZGVzdGlubzogZWwgYmFycmlvIExvcyBQaW5vcy4K4oCURGUgYWN1ZXJkby4gwr9Tb2xvIGlkYT8K4oCUU8OtLCBzb2xvIGlkYS4gVm95IGEgdmlzaXRhciBhIG1pIGZhbWlsaWEuCuKAlFNvbiB0cmVzIGV1cm9zLgpQYWd1w6kgeSBjb25maXJtw6k6IEVsIGF1dG9iw7pzIHNhbGUgYSBsYXMgZGlleiwgwr92ZXJkYWQ/LiBTw60sIHNhbGUgYSBsYXMgZGlleiBlbiBwdW50byBkZSBsYSBwbGF0YWZvcm1hIHRyZXMuCgpDb24gZWwgYmlsbGV0ZSBlbiBlbCBib2xzaWxsbywgbWUgc2VudMOtIHRyYW5xdWlsby4gQ2FtaW7DqSBhbCBwYXJxdWUgeSBkZXNjYW5zw6kgdW4gcG9jbyBlbiB1bmEgYmFuY2EuIFBlbnPDqSBlbiBlbCBkb21pbmdvLiBWb3kgYSB2ZXIgYSBtaSBoZXJtYW5hLCB2b3kgYSBkYXJsZSBsYSBjYW1pc2EgYXp1bCB5IHZhbW9zIGEgY29tZXIganVudG9zIGNvbiBsYSBmYW1pbGlhLiBEZXNwdcOpcywgcmVncmVzw6kgYSBtaSBhcGFydGFtZW50byBlbiBlbCBhdXRvYsO6cy4gRWwgZMOtYSBmdWUgbGFyZ28sIHBlcm8gZnVlIHVuIHPDoWJhZG8gc2VuY2lsbG8geSBmZWxpei4",
+					"AQAAAAAAAAABAAAAAAAAAAAAAACqCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAA/AAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					29,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAPwAAAAAAAAA/QAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/AAAAAAAAAD8AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					39,
+					1,
+					"left_delete",
+					null,
+					"AQAAAP0AAAAAAAAA/QAAAAAAAABLEAAATGFyYSBsbGVnw7MgYSBTYW50YSBBdXJvcmEgYSBwcmluY2lwaW9zIGRlIG90b8OxbywgY29uIHVuYSBtYWxldGEgZGUgdGVsYSB5IHVuIGN1YWRlcm5vIGRvbmRlIGRpYnVqYWJhIHB1ZW50ZXMgY3VhbmRvIHNlIHNlbnTDrWEgc29sYS4gSGFjw61hIHN1IHByw6FjdGljYSBkZSBhcnF1aXRlY3R1cmEgZW4gdW4gZGVzcGFjaG8gcGVxdWXDsW8sIHkgdml2w61hIGVuIHVuIGVzdHVkaW8gc29icmUgbGEgdmllamEgZXN0YWNpw7NuIGRlbCB0cmFudsOtYS4gQ2FkYSBtYcOxYW5hIGNydXphYmEgZWwgUHVlbnRlIFZlcmRlIHBhcmEgaXIgYWwgdHJhYmFqbzsgZGVzZGUgYWxsw60gdmXDrWEgZWwgcsOtbyBjb21vIHVuYSBjaW50YSBxdWUgcGFydMOtYSBsYSBjaXVkYWQgeSwgYWwgbWlzbW8gdGllbXBvLCBsYSB1bsOtYS4gRWwgYmFycmlvIHRlbsOtYSBlc2Ugcml0bW8gZGUgY2FtcGFuYXMsIGJpY2ljbGV0YXMgeSB2ZW5kZWRvcmVzIGRlIHBhbi4gQXVucXVlIGVsbGEgaGFibGFiYSBwb2NvIGFsIHByaW5jaXBpbywgaWJhIGFwcmVuZGllbmRvIGxvcyBub21icmVzOiBkb8OxYSBJbsOpcyBjb24gc3UgcGVycm8gY2Fub3NvLCBCcnVubyBlbCByZXBhcnRpZG9yLCBkb24gTWF0ZW8sIGVsIGJpYmxpb3RlY2FyaW8ganViaWxhZG8gcXVlIHNpZW1wcmUgbGxldmFiYSB1bmEgYnVmYW5kYSBhenVsLgoKVW5hIG1hw7FhbmEgZW5jb250csOzIHVuIHNvYnJlIGJham8gbGEgcHVlcnRhLiBEZW50cm8gaGFiw61hIHVuIG1hcGEgZGUgcGFwZWwgYW1hcmlsbGVudG8sIGNvbiB1biB0cmF6byByb2pvIGVuIGZvcm1hIGRlIFggY2VyY2EgZGUgdW4gZGVzY2FtcGFkbyBqdW50byBhbCByw61vLiBIYWLDrWEgdGFtYmnDqW4gdW5hIG5vdGE6IOKAnFBhcmEgcXVlIHJlY3VlcmRlcyBsbyBxdWUgZnVl4oCdLiBMYXJhIHBlbnPDsyBxdWUgc2UgaGFicsOtYW4gZXF1aXZvY2FkbyBkZSBkZXN0aW5hdGFyaW8sIHBlcm8gbGEgY3VyaW9zaWRhZCBwdWRvIG3DoXMuIEVuIGVsIHRyYWJham8gbm8gc2UgY29uY2VudHLDszsgZGVjaWRpw7MgcXVlIHBvciBsYSB0YXJkZSBpYmEgYSBpciBhIGxhIGJpYmxpb3RlY2EgbXVuaWNpcGFsIHBhcmEgcHJlZ3VudGFyIHBvciBlbCBtYXBhLiBTZW50w61hIHF1ZSwgc2kgbm8gbG8gaGFjw61hLCBlbCBwYXBlbCBzZSBxdWVkYXLDrWEgbXVkbyB5IHN1IGN1YWRlcm5vIHRhbWJpw6luLgoKRW4gbGEgYmlibGlvdGVjYSwgZG9uIE1hdGVvIHJlY29ub2Npw7MgZWwgZGlidWpvIGRlIHVuIHZpc3Rhem8uIOKAnEVzZSBtYXBhIGxvIGhpY2UgaGFjZSBtdWNob3MgYcOxb3PigJ0sIGRpam8sIHBhc2FuZG8gbGEgeWVtYSBkZSBsb3MgZGVkb3MgY29tbyBzaSBzaWd1aWVyYSBlbCByw61vIGNvbiBlbGxvcy4g4oCcTGEgWCBtYXJjYSBsYSBIdWVydGEgZGVsIFLDrW8uIEFsbMOtIHBsYW50w6FiYW1vcyB0b21hdGVzLCBjYWxhYmF6YXMgeSDDoXJib2xlcyBkZSBtb3JhLiBMb3Mgc8OhYmFkb3MgaGFiw61hIGludGVyY2FtYmlvIGRlIHNlbWlsbGFzLiBQZXJvIGhhY2UgdW5vcyBhw7FvcywgdW5hIGVtcHJlc2EgY29tcHLDsyBlbCB0ZXJyZW5vIHkgbG8gY2VyY8OzLiBZbyBhcmNoaXbDqSBsb3MgcGxhbm9zLCBwb3Igc2kgdW4gZMOtYSB2b2x2w61hbiBhIHNlcnZpci7igJ0gRWwgaG9tYnJlIHNvbnJpw7MgY29uIHVuYSB0cmlzdGV6YSBsZXZlLiDigJxVbiBwdWVudGUgdW5lIGRvcyBvcmlsbGFzLCBwZXJvIHVuIHBsYW4sIG1hbCBoZWNobywgc2VwYXJhIGEgbGEgZ2VudGUuIEVzIG1lam9yIHF1ZSBsYSBjaXVkYWQgZXNjdWNoZSBhbnRlcyBkZSBjYXZhci7igJ0KCkxhcmEgY2FtaW7DsyBoYXN0YSBlbCBkZXNjYW1wYWRvIGFsIHNhbGlyIGRlbCB0cmFiYWpvLiBFbCBhbGFtYnJhZG8gb3hpZGFkbyBkZWphYmEgdmVyIHRyb3pvcyBkZSB0aWVycmEgc2VjYSB5IHVuYSBwaWxhIHZpZWphIGRlIG1hZGVyYXMuIFVuIG5pw7FvIGxhbnphYmEgdW5hIHBlbG90YSBkZSB0cmFwbyBhbCBvdHJvIGxhZG8geSBzdSBoZXJtYW5hIHJlw61hLiBEb8OxYSBJbsOpcywgcXVlIHBhc2VhYmEgYWwgcGVycm8sIHNlIGFjZXJjw7MgeSBzZcOxYWzDsyB1bmEgbWFyY2EgZW4gc3UgbWVtb3JpYTog4oCcQXF1w60gaGFjw61hbW9zIG1lcmllbmRhcy4gQ3VhbmRvIGxhIGVtcHJlc2EgbGxlZ8OzLCBkaWplcm9uIHF1ZSBwcm9udG8gaGFicsOtYSB1biBlc3RhY2lvbmFtaWVudG8gYW1wbGlvLCBjb24gbHVjZXMgeSB2aWdpbGFuY2lhLiBQcm9tZXRpZXJvbiBxdWUgbWFudGVuZXLDrWFuIHVuYSBmcmFuamEgZGUgw6FyYm9sZXMsIHBlcm8gbmFkYSBwYXPDsy4gU29sbyBlbCBjYXJ0ZWwu4oCdIEVsIHZpZW50byBtb3Zpw7MgZWwgcGzDoXN0aWNvIHF1ZSBjdWJyw61hIHVuIG1vbnTDs24gZGUgYXJlbmEuIExhcmEgc2UgaW1hZ2luw7MgdW4gcGxhbm8gZGlzdGludG86IHNlbmRlcm9zLCBiYW5jYXMsIHVuIHBlcXVlw7FvIGxhYm9yYXRvcmlvIGRlIGxsdXZpYSwgdW4gZXNwYWNpbyBwYXJhIHRhbGxlcmVzLiBTZSBsZSBlbmNlbmRpw7MgdW5hIGRlY2lzacOzbjogc2kgZWwgYmFycmlvIHF1aXNpZXJhLCBlbGxhIGRpYnVqYXLDrWEgdW5hIHByb3B1ZXN0YS4KCkFsIGTDrWEgc2lndWllbnRlLCB2b2x2acOzIGEgbGEgYmlibGlvdGVjYS4g4oCcU2kgdHV2acOpcmFtb3MgdW4gcHJveWVjdG8gc2VyaW8sIHF1aXrDoXMgZWwgY29uY2VqbyBsbyBlc2N1Y2hhcsOtYeKAnSwgZGlqbyBMYXJhLCBjb24gZWwgbWFwYSBlbiBsYSBtYW5vLiBEb24gTWF0ZW8gYXNpbnRpw7MgZGVzcGFjaW8uIOKAnENvbnZvY2EgYSBsb3MgdmVjaW5vcy4gWW8gYnVzY2Fyw6kgZm90b3MgeSB1biBwYXIgZGUgZGF0b3M6IGN1w6FudGFzIGZhbWlsaWFzIHBhcnRpY2lwYWJhbiwgY3XDoW50byBzZSBjb3NlY2hhYmEuIE5vIHBhcmEgbWlyYXIgYXRyw6FzIGNvbiBub3N0YWxnaWEsIHNpbm8gcGFyYSBxdWUgc2UgZW50aWVuZGEgbG8gcXVlIHNlIHBvZHLDrWEgcmVjdXBlcmFyLuKAnSBJbXByaW1pZXJvbiB2b2xhbnRlcyBxdWUgZGVjw61hbjog4oCcUmV1bmnDs24gY29tdW5pdGFyaWE6IGltYWdpbmVtb3MgbGEgSHVlcnRhIGRlbCBSw61v4oCdLiBMYXJhLCBxdWUgc2llbXByZSBoYWLDrWEgc2lkbyB0w61taWRhLCByZXNwaXLDsyBob25kbyBhbnRlcyBkZSBwZWdhciBlbCBwcmltZXJvIGVuIGVsIHBvc3RlIGRlbCB0cmFudsOtYS4gU2Fiw61hIHF1ZSBlc2EgdGFyZGUgaWJhIGEgaGFibGFyIGVuIHZveiBhbHRhLgoKRWwgZG9taW5nbyBzZSBsbGVuw7MgZWwgc2Fsw7NuIGRlbCBmb25kbyBkZSBsYSBiaWJsaW90ZWNhLiBWaW5pZXJvbiBlc3R1ZGlhbnRlcywgbWFkcmVzLCBnZW50ZSBqdWJpbGFkYSB5IGN1cmlvc29zLiBCcnVubyBwcm9wdXNvIHVuIGNhcnJpbCBwYXJhIGJpY2ljbGV0YXMgcXVlIGJvcmRlYXNlIGVsIHLDrW8uIFVuYSBwcm9mZXNvcmEgc3VnaXJpw7MgdGFsbGVyZXMgZGUgY29tcG9zdGFqZS4gTGFyYSBjb2xnw7MgdW4gcGFwZWwgZ3JhbmRlIHkgdHJhesOzIGNvbiByb3R1bGFkb3Jlcy4g4oCcRXMgaW1wb3J0YW50ZSBxdWUgZWwgcGxhbm8gc2VhIGNsYXJvIHkgcXVlIHByb3BvbmdhbW9zIGNvc3RvcyByZWFsaXN0YXPigJ0sIGRpam8sIGludGVudGFuZG8gcXVlIG5vIGxlIHRlbWJsYXJhIGxhIHZvei4g4oCcU2kgbGEgZW1wcmVzYSBhY2VwdGFyYSByZWR1Y2lyIGVsIGVzdGFjaW9uYW1pZW50byB5IGxhIGNpdWRhZCBjZWRpZXJhIHVuYSBwYXJ0ZSBkZWwgdGVycmVubywgcG9kcsOtYW1vcyBjb252aXZpci4gU2Vyw61hIGlkZWFsIHF1ZSBlbCBqYXJkw61uIHNlIHJlc2VydmUgcGFyYSB1c28gcMO6YmxpY28u4oCdIERvw7FhIEluw6lzIGHDsWFkacOzOiDigJxRdWVyZW1vcyBxdWUgbnVlc3RyYXMgbmlldGFzIHRlbmdhbiB1biBsdWdhciBkb25kZSBlbnN1Y2lhcnNlIGxhcyBtYW5vcyBjb24gdGllcnJh4oCdLiBMYXJhIGNvbmNsdXnDszog4oCcQ3VhbmRvIHByZXNlbnRlbW9zIGxhIHByb3B1ZXN0YSwgZXNwZXJvIHF1ZSBlbCBhbGNhbGRlIGVzY3VjaGUuIEF1bnF1ZSBoYXlhIG90cmFzIHByaW9yaWRhZGVzLCBlc3RvIHRhbWJpw6luIGVzIHNhbHVkIHkgZW5jdWVudHJvLuKAnSBTZSBmb3JtYXJvbiBjb21pc2lvbmVzOiB1bmEgcGFyYSBsaW1waWFyLCBvdHJhIHBhcmEgcmVjYXVkYXIgZmlybWFzLiBEZSBwcm9udG8sIGxhIFggZGVsIG1hcGEgcGFyZWPDrWEgbGF0aXIuCg",
+					"AQAAAAAAAAABAAAA/QAAAAAAAACrEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					42,
+					1,
+					"left_delete",
+					null,
+					"AQAAAP0AAAAAAAAA/QAAAAAAAAAeDwAACkxhIHNlbWFuYSBhdmFuesOzIGNvbiBwcmlzYS4gRW4gZWwgZGVzcGFjaG8gZG9uZGUgaGFjw61hIGxhIHByw6FjdGljYSwgc3Ugc3VwZXJ2aXNvcmEgbGEgbGxhbcOzIGFwYXJ0ZTog4oCcTm8gdGUgbWV0YXMgbXVjaG8sIExhcmEuIEVzYSBlbXByZXNhIGVzIGNsaWVudGUgZGVsIGVzdHVkaW8uIFNpIHZhcyBhIGhhYmxhciwgcXVlIHNlYSBjb24gY3VpZGFkb+KAnS4gRWxsYSBzaW50acOzIHVuIG51ZG8gZW4gZWwgZXN0w7NtYWdvLiBEdWTDsyBwb3IgdW5hIG5vY2hlIGVudGVyYSwgbWlyYW5kbyBlbCB0ZWNoby4gQWwgZmluYWwsIHJlY29yZMOzIGxhIGZyYXNlIGRlIGRvbiBNYXRlbyB5IGRlY2lkacOzIHNlciB0cmFuc3BhcmVudGUuIFByZXBhcsOzIHVuIGRpc2N1cnNvIGNvcnRvOiBpYmEgYSBkZWZlbmRlciBlbCBwcm95ZWN0byBjb24gcmVzcGV0bywgc2luIGF0YWNhciBhIG5hZGllLiBFc2EgbWlzbWEgbm9jaGUsIHJlY2liacOzIHVuIGNvcnJlbyBhbsOzbmltbyBjb24gZm90b2dyYWbDrWFzIGFudGlndWFzOiBuacOxb3MgY29uIHJlZ2FkZXJhcywgYWJ1ZWxvcyBlbiBiYW5xdWl0b3MsIHVuYSBiYW5kZXJpdGEgaGVjaGEgZGUgcmV0YXpvcy4g4oCcUGFyYSBxdWUgbm8gc2UgcGllcmRhIGxvIHF1ZSBmdWXigJ0sIGRlY8OtYSBkZSBudWV2by4gU3VwbyBxdWUgZXJhIGRvbiBNYXRlbywgeSBzb25yacOzLgoKRWwgbWnDqXJjb2xlcyBodWJvIGF1ZGllbmNpYSBww7pibGljYSBlbiBlbCBjb25jZWpvLiBFbCByZXByZXNlbnRhbnRlIGRlIGxhIGVtcHJlc2EgaGFibMOzIHByaW1lcm86IOKAnEVsIGVzdGFjaW9uYW1pZW50byBnZW5lcmFyw6EgZW1wbGVvIHkgb3JkZW5hcsOhIGVsIHRyw6FmaWNvLiBMYSB6b25hIG5lY2VzaXRhIGRlc2Fycm9sbG/igJ0uIExhcmEgcGlkacOzIGxhIHBhbGFicmEuIFN1cyBtYW5vcyBzdWRhYmFuLiDigJxBdW5xdWUgbGEgb2JyYSBnZW5lcmUgZW1wbGVv4oCdLCBkaWpvLCDigJx0YW1iacOpbiBkZWJlbW9zIHByb3RlZ2VyIGVsIGVzcGFjaW8gY29tw7puLiBQcm9wb25lbW9zIHVuIGRpc2XDsW8gbWl4dG86IHVuIGVzdGFjaW9uYW1pZW50byBwZXF1ZcOxbyBjb24gcGF2aW1lbnRvIHBlcm1lYWJsZSB5LCBqdW50byBhIMOpbCwgbGEgSHVlcnRhIGRlbCBSw61vLiBTaSB1c3RlZGVzIGFjZXB0YXJhbiBlc2EgcmVkdWNjacOzbiwgbm9zb3Ryb3Mgbm9zIGNvbXByb21ldGVyw61hbW9zIGEgbWFudGVuZXIgbGEgaHVlcnRhIGNvbiB2b2x1bnRhcmlvcyB5IHRhbGxlcmVzLiBOdWVzdHJvIGJhcnJpbyBzZXLDoSBtw6FzIHNhbm8geSBhdHJhY3Rpdm8uIE9qYWzDoSBwb2RhbW9zIGRlbW9zdHJhcmxvLuKAnSBVbiBtdXJtdWxsbyByZWNvcnJpw7MgbGEgc2FsYS4gVW4gY29uY2VqYWwgcHJlZ3VudMOzIHBvciBuw7ptZXJvczsgTGFyYSBleHBsaWPDsyBjb3N0b3MsIG1hbnRlbmltaWVudG8sIHNlZ3VyaWRhZC4gVmFyaW9zIHZlY2lub3MgaGljaWVyb24gcHJvbWVzYXMgY29uY3JldGFzOiBob3JhcyBkZSB0cmFiYWpvLCBkb25hY2nDs24gZGUgaGVycmFtaWVudGFzLCBhcG95byBkZSBsYSBlc2N1ZWxhLgoKRWwgY29uY2VqbyBkZWNpZGnDsyBwb3N0ZXJnYXIgbGEgZGVjaXNpw7NuIHVuYSBzZW1hbmEgeSB2aXNpdGFyIGVsIHNpdGlvLiDigJxRdWVyZW1vcyB2ZXIgcXVlIHNlYSB2aWFibGXigJ0sIGRpam8gbGEgYWxjYWxkZXNhLiBFbCBncnVwbyBubyBzZSBkZXNhbmltw7MuIOKAnEN1YW5kbyB2ZW5nYW4sIHZlcsOhbiBxdWUgeWEgZW1wZXrDs+KAnSwgYW51bmNpw7MgQnJ1bm8uIE9yZ2FuaXphcm9uIHVuYSBqb3JuYWRhIGRlIGxpbXBpZXphIHBhcmEgZWwgc8OhYmFkby4gTGFyYSBubyBkdXJtacOzIG11Y2hvLCBwZXJvIGRpYnVqw7Mgc2XDsWFsZXMgdGVtcG9yYWxlcyB5IHVuIGJvY2V0byBkZWwgcmVjb3JyaWRvLiDigJxBbnRlcyBkZSBxdWUgbGxlZ3VlbiwgZGVqZW1vcyB0b2RvIGNsYXJv4oCdLCBwaWRpw7MuIOKAnEVzIG5lY2VzYXJpbyBxdWUgY2FkYSBwZXJzb25hIGV4cGxpcXVlIHN1IHBhcnRlIGNvbiBjYWxtYSwgcGFyYSBxdWUgbm8gc2UgY29uZnVuZGFuLuKAnSBFbCBwbGFuIG5vIGVyYSBwZXJmZWN0bywgcGVybyBlcmEgcmVhbC4KCkVsIHPDoWJhZG8gYW1hbmVjacOzIGxsdXZpb3NvLiBBdW4gYXPDrSwgbGEgZ2VudGUgbGxlZ8OzIGNvbiBpbXBlcm1lYWJsZXMgeSBiYWxkZXMuIFF1aXRhcm9uIGJhc3VyYSwgbGV2YW50YXJvbiB1bmEgY29tcG9zdGVyYSBjb24gcGFsbGV0cywgcGludGFyb24gdW4gbGV0cmVybzog4oCcTGEgSHVlcnRhIGRlbCBSw61vOiBsdWdhciBkZSBhcHJlbmRpemFqZeKAnS4gRG9uIE1hdGVvIGFwYXJlY2nDsyBjb24gdW5hIGNhamEgZGUgc2VtaWxsYXMgeSB1bmEgc29ucmlzYSBudWV2YS4g4oCcUGFyYSBxdWUgbGEgbWVtb3JpYSBnZXJtaW5l4oCdLCBkaWpvLCBlbnRyZWdhbmRvIGJvbHNpdGFzIGNvbiBub21icmVzIGVzY3JpdG9zIGEgbWFuby4gTG9zIG5pw7FvcyBlbnRlcnJhcm9uIGhhYmFzIGNlcmNhIGRlIGxhIHZhbGxhLiBBIG1lZGlhIG1hw7FhbmEgbGxlZ8OzIGxhIGNvbWl0aXZhIG11bmljaXBhbC4gTGEgYWxjYWxkZXNhIHNlIGRldHV2byBiYWpvIHVuIHBhcmFndWFzIHkgb2JzZXJ2w7MgYSBsYSBnZW50ZSB0cmFiYWphciwgZW1wYXBhZGEgcGVybyBjb250ZW50YS4g4oCcRXN0byBubyBlcyBzb2xvIHVuIHBsYW5v4oCdLCBkaWpvIGJhaml0by4g4oCcRXMgdW5hIHZvbHVudGFk4oCdLgoKRXNhIHRhcmRlLCBlbCBjb25jZWpvIGFwcm9iw7MgdW4gcHJvZ3JhbWEgcGlsb3RvOiBtaXRhZCBqYXJkw61uLCBtaXRhZCBlc3RhY2lvbmFtaWVudG8gcmVkdWNpZG8uIOKAnFNpIGVuIHNlaXMgbWVzZXMgZnVuY2lvbmEg4oCUZGVjbGFyw7MgbGEgYWxjYWxkZXNh4oCULCBhbXBsaWFyZW1vcyBsYSBodWVydGEgeSBoYXJlbW9zIGRlbCByw61vIHVuIGNvcnJlZG9yIHZlcmRlLuKAnSBFbCByZXByZXNlbnRhbnRlIGRlIGxhIGVtcHJlc2EsIHNlcmlvIHBlcm8gY29ycmVjdG8sIGFjZXB0w7MuIOKAnFBvZHLDrWFtb3MgY29sYWJvcmFyIGNvbiBpbHVtaW5hY2nDs24geSBjw6FtYXJhcywgc2llbXByZSB5IGN1YW5kbyBoYXlhIHJlc3BvbnNhYmlsaWRhZCBjb21wYXJ0aWRhLuKAnSBMYXJhIHJlc3BpcsOzIGhvbmRvLiBObyBlcmEgbGEgdmljdG9yaWEgdG90YWwsIHBlcm8gc8OtIHVuIHB1ZW50ZSB0ZW5kaWRvLiBTZSBhYnJhemFyb24sIG1vamFkb3MgeSBmZWxpY2VzLgoKUGFzYXJvbiBsb3MgbWVzZXMgeSBlbCB2ZXJkZSBzZSBtdWx0aXBsaWPDsy4gTGFzIGFiZWphcyB2b2x2aWVyb247IGxvcyBzw6FiYWRvcyBvbMOtYW4gYSBjYWbDqSB5IGEgdGllcnJhIGjDum1lZGEuIExhcmEgdGVybWluw7Mgc3UgcHLDoWN0aWNhIHkgZGVjaWRpw7MgcXVlZGFyc2UgZW4gU2FudGEgQXVyb3JhLiBEaWJ1amFiYSBwbGFub3MgcG9yIGxhcyBtYcOxYW5hcyB5LCBwb3IgbGFzIHRhcmRlcywgZGFiYSB0YWxsZXJlcyBkZSBkaXNlw7FvIHBhcmEgbmnDsW9zIGVuIGxhIGh1ZXJ0YS4gVW4gZMOtYSwgZG9uIE1hdGVvIGxlIGVudHJlZ8OzIHVuYSB0YXJqZXRhOiDigJxNw6FzIHF1ZSBsw61uZWFzLCBkaWJ1amFzdGUgdW4gcHVlbnRl4oCdLiBFbGxhIGd1YXJkw7MgZWwgbWVuc2FqZSBqdW50byBjb24gZWwgbWFwYSBhbWFyaWxsZW50by4gU2Fiw61hIHF1ZSwgZW4gZWwgZnV0dXJvLCBvdHJhcyBYIGFwYXJlY2Vyw61hbiBlbiBzdSB2aWRhLiBUYW1iacOpbiBzYWLDrWEgcXVlLCBwYXJhIHF1ZSBleGlzdGllcmEgdW4gcHVlbnRlLCBhbGd1aWVuIHRlbmRyw61hIHF1ZSBpbWFnaW5hcmxvIHkgb3Ryb3MgdGVuZHLDrWFuIHF1ZSBjcmVlci4gWSBlc28sIGVuIHN1IGNpdWRhZCBhbCBsYWRvIGRlbCByw61vLCB5YSBlc3RhYmEgb2N1cnJpZW5kby4K",
+					"AQAAAAAAAAABAAAA/QAAAAAAAAB6DwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					43,
+					1,
+					"paste",
+					null,
+					"AQAAAP0AAAAAAAAApAMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/QAAAAAAAAD9AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					46,
+					1,
+					"left_delete",
+					null,
+					"AQAAAP0AAAAAAAAA/QAAAAAAAAALAAAAICAidGV4dCI6ICI",
+					"AQAAAAAAAAABAAAACAEAAAAAAAD9AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					1,
+					"left_delete",
+					null,
+					"AQAAAJcDAAAAAAAAlwMAAAAAAAABAAAAIg",
+					"AQAAAAAAAAABAAAAmAMAAAAAAACYAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAJcDAAAAAAAAmAMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAlwMAAAAAAACXAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					56,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"CgAAAAkDAAAAAAAACgMAAAAAAAACAAAAXG4HAwAAAAAAAAgDAAAAAAAAAgAAAFxujQIAAAAAAACOAgAAAAAAAAIAAABcbosCAAAAAAAAjAIAAAAAAAACAAAAXG4aAgAAAAAAABsCAAAAAAAAAgAAAFxuGAIAAAAAAAAZAgAAAAAAAAIAAABcbpEBAAAAAAAAkgEAAAAAAAACAAAAXG6PAQAAAAAAAJABAAAAAAAAAgAAAFxuEAEAAAAAAAARAQAAAAAAAAIAAABcbg4BAAAAAAAADwEAAAAAAAACAAAAXG4",
+					"AQAAAAAAAAABAAAADgEAAAAAAAAQAQAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "stories/2_High_Beginner/un_viaje_a_la_playa/summary.txt",
+			"settings":
+			{
+				"buffer_size": 172,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "English: Lucía sees the sea for the first time and"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"insert",
+					{
+						"characters": "s"
+					},
+					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					2,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAcw",
+					"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					3,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAArAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
+			"settings":
+			{
+				"buffer_size": 7868,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"contents": "'use client'\n\nimport { useState } from 'react'\nimport { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'\nimport {\n  Bars3Icon,\n  CalendarIcon,\n  ChartPieIcon,\n  DocumentDuplicateIcon,\n  FolderIcon,\n  HomeIcon,\n  UsersIcon,\n  XMarkIcon,\n} from '@heroicons/react/24/outline'\n\nconst navigation = [\n  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },\n  { name: 'Team', href: '#', icon: UsersIcon, current: false },\n  { name: 'Projects', href: '#', icon: FolderIcon, current: false },\n  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },\n  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },\n  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },\n]\nconst teams = [\n  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },\n  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },\n  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },\n]\n\nfunction classNames(...classes) {\n  return classes.filter(Boolean).join(' ')\n}\n\nexport default function Example() {\n  const [sidebarOpen, setSidebarOpen] = useState(false)\n\n  return (\n    <>\n      {/*\n        This example requires updating your template:\n\n        ```\n        <html class=\"h-full bg-white dark:bg-gray-900\">\n        <body class=\"h-full\">\n        ```\n      */}\n      <div>\n        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className=\"relative z-50 lg:hidden\">\n          <DialogBackdrop\n            transition\n            className=\"fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0\"\n          />\n\n          <div className=\"fixed inset-0 flex\">\n            <DialogPanel\n              transition\n              className=\"relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full\"\n            >\n              <TransitionChild>\n                <div className=\"absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0\">\n                  <button type=\"button\" onClick={() => setSidebarOpen(false)} className=\"-m-2.5 p-2.5\">\n                    <span className=\"sr-only\">Close sidebar</span>\n                    <XMarkIcon aria-hidden=\"true\" className=\"size-6 text-white\" />\n                  </button>\n                </div>\n              </TransitionChild>\n\n              {/* Sidebar component, swap this element with another sidebar if you like */}\n              <div className=\"relative flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 dark:bg-gray-900 dark:ring dark:ring-white/10 dark:before:pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-black/10\">\n                <div className=\"relative flex h-16 shrink-0 items-center\">\n                  <img\n                    alt=\"Your Company\"\n                    src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600\"\n                    className=\"h-8 w-auto dark:hidden\"\n                  />\n                  <img\n                    alt=\"Your Company\"\n                    src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500\"\n                    className=\"h-8 w-auto not-dark:hidden\"\n                  />\n                </div>\n                <nav className=\"relative flex flex-1 flex-col\">\n                  <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                    <li>\n                      <ul role=\"list\" className=\"-mx-2 space-y-1\">\n                        {navigation.map((item) => (\n                          <li key={item.name}>\n                            <a\n                              href={item.href}\n                              className={classNames(\n                                item.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <item.icon\n                                aria-hidden=\"true\"\n                                className={classNames(\n                                  item.current\n                                    ? 'text-indigo-600 dark:text-white'\n                                    : 'text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white',\n                                  'size-6 shrink-0',\n                                )}\n                              />\n                              {item.name}\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                    <li>\n                      <div className=\"text-xs/6 font-semibold text-gray-400\">Your teams</div>\n                      <ul role=\"list\" className=\"-mx-2 mt-2 space-y-1\">\n                        {teams.map((team) => (\n                          <li key={team.name}>\n                            <a\n                              href={team.href}\n                              className={classNames(\n                                team.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <span\n                                className={classNames(\n                                  team.current\n                                    ? 'border-indigo-600 text-indigo-600 dark:border-white/20 dark:text-white'\n                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:border-white/10 dark:group-hover:border-white/20 dark:group-hover:text-white',\n                                  'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium dark:bg-white/5',\n                                )}\n                              >\n                                {team.initial}\n                              </span>\n                              <span className=\"truncate\">{team.name}</span>\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                  </ul>\n                </nav>\n              </div>\n            </DialogPanel>\n          </div>\n        </Dialog>\n\n        {/* Static sidebar for desktop */}\n        <div className=\"hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col dark:bg-gray-900\">\n          {/* Sidebar component, swap this element with another sidebar if you like */}\n          <div className=\"flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 dark:border-white/10 dark:bg-black/10\">\n            <div className=\"flex h-16 shrink-0 items-center\">\n              <img\n                alt=\"Your Company\"\n                src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600\"\n                className=\"h-8 w-auto dark:hidden\"\n              />\n              <img\n                alt=\"Your Company\"\n                src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500\"\n                className=\"h-8 w-auto not-dark:hidden\"\n              />\n            </div>\n            <nav className=\"flex flex-1 flex-col\">\n              <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                <li>\n                  <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                    <li>\n                      <ul role=\"list\" className=\"-mx-2 space-y-1\">\n                        {navigation.map((item) => (\n                          <li key={item.name}>\n                            <a\n                              href={item.href}\n                              className={classNames(\n                                item.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <item.icon\n                                aria-hidden=\"true\"\n                                className={classNames(\n                                  item.current\n                                    ? 'text-indigo-600 dark:text-white'\n                                    : 'text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white',\n                                  'size-6 shrink-0',\n                                )}\n                              />\n                              {item.name}\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                    <li>\n                      <div className=\"text-xs/6 font-semibold text-gray-400\">Your teams</div>\n                      <ul role=\"list\" className=\"-mx-2 mt-2 space-y-1\">\n                        {teams.map((team) => (\n                          <li key={team.name}>\n                            <a\n                              href={team.href}\n                              className={classNames(\n                                team.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <span\n                                className={classNames(\n                                  team.current\n                                    ? 'border-indigo-600 text-indigo-600 dark:border-white/20 dark:text-white'\n                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:border-white/10 dark:group-hover:border-white/20 dark:group-hover:text-white',\n                                  'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium dark:bg-white/5',\n                                )}\n                              >\n                                {team.initial}\n                              </span>\n                              <span className=\"truncate\">{team.name}</span>\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                  </ul>\n                </li>\n                <li className=\"-mx-6 mt-auto\">\n                  <a\n                    href=\"#\"\n                    className=\"flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5\"\n                  >\n                    <img\n                      alt=\"\"\n                      src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80\"\n                      className=\"size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10\"\n                    />\n                    <span className=\"sr-only\">Your profile</span>\n                    <span aria-hidden=\"true\">Tom Cook</span>\n                  </a>\n                </li>\n              </ul>\n            </nav>\n          </div>\n        </div>\n\n        <div className=\"sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-xs sm:px-6 lg:hidden dark:bg-gray-900 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:border-b dark:after:border-white/10 dark:after:bg-black/10\">\n          <button\n            type=\"button\"\n            onClick={() => setSidebarOpen(true)}\n            className=\"-m-2.5 p-2.5 text-gray-700 hover:text-gray-900 lg:hidden dark:text-gray-400 dark:hover:text-white\"\n          >\n            <span className=\"sr-only\">Open sidebar</span>\n            <Bars3Icon aria-hidden=\"true\" className=\"size-6\" />\n          </button>\n          <div className=\"flex-1 text-sm/6 font-semibold text-gray-900 dark:text-white\">Dashboard</div>\n          <a href=\"#\">\n            <span className=\"sr-only\">Your profile</span>\n            <img\n              alt=\"\"\n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80\"\n              className=\"size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10\"\n            />\n          </a>\n        </div>\n\n        <main className=\"py-10 lg:pl-72\">\n          <div className=\"px-4 sm:px-6 lg:px-8\">{/* Your content */}</div>\n        </main>\n      </div>\n    </>\n  )\n}\n",
+			"settings":
+			{
+				"buffer_size": 13774,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAzjUAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					34,
+					1,
+					"insert",
+					{
+						"characters": "lg-"
+					},
+					"AwAAAHAbAAAAAAAAcRsAAAAAAAAAAAAAcRsAAAAAAAByGwAAAAAAAAAAAAByGwAAAAAAAHMbAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAcBsAAAAAAABwGwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					35,
+					1,
+					"insert",
+					{
+						"characters": "pt-"
+					},
+					"AwAAAHMbAAAAAAAAdBsAAAAAAAAAAAAAdBsAAAAAAAB1GwAAAAAAAAAAAAB1GwAAAAAAAHYbAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAcxsAAAAAAABzGwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					36,
+					4,
+					"left_delete",
+					null,
+					"BAAAAHUbAAAAAAAAdRsAAAAAAAABAAAALXQbAAAAAAAAdBsAAAAAAAABAAAAdHMbAAAAAAAAcxsAAAAAAAABAAAAcHIbAAAAAAAAchsAAAAAAAABAAAALQ",
+					"AQAAAAAAAAABAAAAdhsAAAAAAAB2GwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					37,
+					1,
+					"insert",
+					{
+						"characters": ":pt-"
+					},
+					"BAAAAHIbAAAAAAAAcxsAAAAAAAAAAAAAcxsAAAAAAAB0GwAAAAAAAAAAAAB0GwAAAAAAAHUbAAAAAAAAAAAAAHUbAAAAAAAAdhsAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAchsAAAAAAAByGwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					38,
+					1,
+					"insert",
+					{
+						"characters": "50"
+					},
+					"AgAAAHYbAAAAAAAAdxsAAAAAAAAAAAAAdxsAAAAAAAB4GwAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAdhsAAAAAAAB2GwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					39,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAHgbAAAAAAAAeRsAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAeBsAAAAAAAB4GwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					42,
+					1,
+					"cut",
+					null,
+					"AQAAAHAbAAAAAAAAcBsAAAAAAAAJAAAAbGc6cHQtNTAg",
+					"AQAAAAAAAAABAAAAeRsAAAAAAABwGwAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"contents": "Cartografía del rumor\n\nLa primera vez que regresé a la ciudad, el viento parecía arrastrar conversaciones ajenas como quien barre migas de pan a la orilla de la mesa. Volví para terminar una investigación que otros consideraban menor: quería trazar la cartografía del rumor, de qué modo nace, se bifurca, se asienta o se pudre. Me llamo Inés y, si bien crecí aquí, decidí escuchar como si fuera extranjera. No para desenmascarar a nadie, sino para que la ciudad, por una vez, se escuchara a sí misma.\n\nEstablecí reglas: no grabaría clandestinamente, ofrecería anonimato, y transcribiría cada testimonio sin adornos, aunque me tentara corregir un lapsus o una hipérbole. Levanté un mapa con alfileres de colores: mercados, cafés, paradas de autobús, peluquerías; lugares donde la palabra circula sin que medie expediente. Pasé mañanas en el puesto de pescado, tardes en la hemeroteca, noches en el bar de las esquinas. No faltó quien me dijera que, si buscaba ciencia, me iba a estrellar con la mala leche del chisme. Aun así, bajo la cháchara menuda, late un sistema.\n\nDe buenas a primeras empezó a repetirse un rumor: el Archivo Histórico había sido purgado tras la gran tormenta; decían que el agua había arruinado cajas enteras y que la alcaldía, aprovechando el desastre, había hecho tabla rasa. La directora me recibió, amable pero a la defensiva, y juró que nada se había perdido. Sin embargo, el conserje, don Mateo, me detuvo en el zaguán. «El rumor no es mentira —murmuró—; es viento con memoria. Si la gente dice que faltan papeles, quizá falte otra cosa: permiso para mirar». Allí puse el primer alfiler rojo.\n\nCon el tiempo reuní transcripciones y gráficas que no convencían ni a los pragmáticos ni a los literatos. Mi directora de tesis pedía números que pudieran presentarse en un congreso: correlaciones, tasas de reproducción, modelos SIR adaptados a la sociolingüística. A mí me incomodaba convertir el zumbido en dígito. Quería que la estadística no aplastara el temblor de quien habla a media voz por miedo a que lo tomen por traidor. «Que no te pueda la ética —me advirtió—; sin método no tendrás defensa». Tenía razón, pero también la tenían quienes, a regañadientes, me abrían sus patios: preferían que se les creyera antes de que se les midiera.\n\nUna tarde, mientras copiaba notas, recordé a mi maestro de literatura de octavo, el que nos leía a Cervantes con una voz que hacía de cada digresión una promesa. Durante una huelga muy sonada, alguien insinuó que él pasaba listas de huelguistas al despacho del alcalde. Lo echaron a patadas del colegio y su nombre quedó manchado durante años. Cuando nos enteramos de que el papelito había salido de una oficina municipal y no del aula, ya era tarde: el maestro había muerto, sin que nadie le limpiara el honor. Si entonces hubiéramos escuchado mejor, si alguien hubiera preguntado con paciencia, tal vez el rumor no lo habría sepultado.\n\nMe concentré en hallar la grieta exacta por donde corría el agua de ese rumor del Archivo. Pedí informes por transparencia; me llegaron carpetas con copias selladas y, entre líneas, un mundo de silencios. No hubo purga: hubo traslado. Un contrato, plagado de cláusulas enrevesadas, cedía en comodato parte de los fondos a una fundación privada «para su preservación y puesta en valor». La letra pequeña permitía restringir el acceso «en caso de riesgo reputacional». ¿Riesgo para quién? Los expedientes, de cabo a rabo, quedaban a merced de un patronato de amigos. La ciudad, al intentar salvar sus papeles del agua, los había ahogado en protocolo.\n\nCon ese hallazgo organicé un foro en la biblioteca: que hablara quien quisiera, que replicara quien supiera. Me ofrecí como moderadora con la ingenua idea de que la conversación ordena lo que la sospecha dispersa. Vinieron abogados, jubilados, periodistas, estudiantes. Un edil, con sonrisa de catálogo, habló de sinergias público-privadas. Cuando alguien mencionó la cláusula del «riesgo reputacional», él hizo la vista gorda y prefirió describir vitrinas climatizadas. «Escúchense», pedí, justo cuando el murmullo se volvió griterío. Una mujer del mercado dijo que la habían amenazado por preguntar. Un estudiante leyó cifras. Don Mateo, discreto, puso el dedo en la llaga: «El miedo archiva más que el cartón».\n\nEl foro terminó sin resoluciones, pero dejó una estela de conversaciones cruzadas que, si bien no eran prueba, eran brújula. Publiqué un informe en el que se mezclaban trayectorias de frases, análisis de redes y fragmentos de voces anónimas. Me acusaron de blanda: ni denunciaba ni absolvía. «Si hubieras exigido nombres, otro gallo cantaría», escribió un columnista. Mientras tanto, en mi puerta apareció una caja vieja. Dentro había recortes de prensa, cartas sin remitente, volantes. Don Mateo los había rescatado «antes de que el viento se los llevara de nuevo», decía una nota.\n\nPasé noches enteras leyendo esos papeles, que olían a salitre y al polvo dulce de la tinta vieja. Había historias que conflictúan cualquier certeza: héroes que se volvían villanos, villanos que habían sido chivos expiatorios. Comprendí que el rumor no es solo una distorsión: es una herramienta para negociar la realidad cuando los canales formales fallan o cuando conviene que fallen. Ojalá hubiéramos sabido escuchar, cuando el maestro fue acusado, con la ternura metódica que merecía; ojalá alguien hubiera dudado a tiempo. Si yo hubiera llegado antes, quizá habría elaborado un mapa distinto; si me hubiera callado, tal vez otros habrían hablado con menos miedo y más detalle.\n\nAhora, cuando camino por el puerto al atardecer, el rumor de las olas y el de la ciudad se confunden en una cadencia que no me hace ruido sino que me afina el oído. Entendí que mi cartografía es parcial, como todas, pero que, si se usa con cuidado, puede servir para que nadie sea triturado por una historia mal contada. Si han de repetir algo, que lo hagan de frente y con nombres; si tuvieran que callar, que sea para proteger, no para encubrir. No todo se puede probar, pero casi todo se puede escuchar.",
+			"settings":
+			{
+				"buffer_size": 6046,
+				"line_ending": "Unix",
+				"name": "Cartografía del rumor"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAvxcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
+					"AQAAAAAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"cut",
+					null,
+					"AQAAALMXAAAAAAAAsxcAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAAtBcAAAAAAACzFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					1,
+					"left_delete",
+					null,
+					"AQAAALIXAAAAAAAAshcAAAAAAAABAAAAIg",
+					"AQAAAAAAAAABAAAAsxcAAAAAAACzFwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					11,
+					1,
+					"replace_all",
+					{
+						"close_panel": true
+					},
+					"FAAAALYVAAAAAAAAtxUAAAAAAAACAAAAXG60FQAAAAAAALUVAAAAAAAAAgAAAFxuChMAAAAAAAALEwAAAAAAAAIAAABcbggTAAAAAAAACRMAAAAAAAACAAAAXG7AEAAAAAAAAMEQAAAAAAAAAgAAAFxuvhAAAAAAAAC/EAAAAAAAAAIAAABcbvMNAAAAAAAA9A0AAAAAAAACAAAAXG7xDQAAAAAAAPINAAAAAAAAAgAAAFxuZwsAAAAAAABoCwAAAAAAAAIAAABcbmULAAAAAAAAZgsAAAAAAAACAAAAXG7mCAAAAAAAAOcIAAAAAAAAAgAAAFxu5AgAAAAAAADlCAAAAAAAAAIAAABcblwGAAAAAAAAXQYAAAAAAAACAAAAXG5aBgAAAAAAAFsGAAAAAAAAAgAAAFxuMQQAAAAAAAAyBAAAAAAAAAIAAABcbi8EAAAAAAAAMAQAAAAAAAACAAAAXG74AQAAAAAAAPkBAAAAAAAAAgAAAFxu9gEAAAAAAAD3AQAAAAAAAAIAAABcbhcAAAAAAAAAGAAAAAAAAAACAAAAXG4VAAAAAAAAABYAAAAAAAAAAgAAAFxu",
+					"AQAAAAAAAAABAAAAFQAAAAAAAAAXAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/scomax/Documents/Git/Spanish-Language-App",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/1_Beginner",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/1_Beginner/La_niña_y_el_gato",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/2_High_Beginner",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/4_High_Intermediate",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts"
+	],
+	"file_history":
+	[
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/2_High_Beginner/playa/story.json",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/generate-featured-image-prompt.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/1_Beginner.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/2_High_Beginner.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/3_Low_Intermediate.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/4_High_Intermediate.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/5_Advanced.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/6_Proficient_Near_Native.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/notes.md",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/create-speech.ts",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/1_Beginner/01_La niña y el gato.json",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/create_new_story_prompt.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/new-story-prompts/6 - Proficient-Near-Native.txt",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/z.sublime-project",
+		"/Users/scomax/Documents/Git/SHARELY-ALL/serve-sample-web-control/public/sharelyai.js",
+		"/Users/scomax/Documents/Git/SHARELY-ALL/serve-sample-web-control/app/page.tsx",
+		"/Users/scomax/Documents/Git/loveable-shit/concise pm portfolio shitty site/_.sublime-project",
+		"/Users/scomax/Documents/Git/SHARELY-ALL/serve-sample-web-control/app/layout.tsx"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"outline",
+			"border",
+			"“",
+			"”",
+			"\\n",
+			"\n",
+			"\\n",
+			"\\\"",
+			"\\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\"",
+			"\n",
+			",",
+			"\n",
+			"",
+			"\n"
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1759,
+								1558
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"auto_complete": false,
+							"auto_complete_commit_on_tab": false,
+							"bracket_highlighter.clone_locations":
+							{
+							},
+							"bracket_highlighter.ignore": true,
+							"color_scheme": "Terminus.hidden-color-scheme",
+							"draw_centered": false,
+							"draw_indent_guides": false,
+							"draw_unicode_white_space": false,
+							"draw_white_space": "none",
+							"gutter": false,
+							"highlight_line": false,
+							"is_widget": true,
+							"lsp_uri": "buffer:513",
+							"result_base_dir": "/Users/scomax/Documents/Git/Spanish-Language-App",
+							"result_file_regex": null,
+							"result_line_regex": null,
+							"rulers":
+							[
+								500
+							],
+							"scroll_past_end": true,
+							"syntax": "Terminus View.sublime-syntax",
+							"terminus_view": true,
+							"terminus_view.args":
+							{
+								"auto_close": true,
+								"cancellable": false,
+								"cmd":
+								[
+									"/bin/zsh",
+									"-i",
+									"-l"
+								],
+								"cwd": "/Users/scomax/Documents/Git/Spanish-Language-App",
+								"default_title": "Login Shell",
+								"env":
+								{
+									"LANG": "en_US.UTF-8",
+									"PROMPT_TOOLKIT_COLOR_DEPTH": "DEPTH_8_BIT",
+									"TERM": "xterm-256color",
+									"TERMINUS_SUBLIME": "1",
+									"TERM_PROGRAM": "Terminus-Sublime"
+								},
+								"file_regex": null,
+								"line_regex": null,
+								"panel_name": "Terminus",
+								"reactivable": true,
+								"show_in_panel": null,
+								"tag": null,
+								"timeit": false,
+								"title": null,
+								"view_settings":
+								{
+								}
+							},
+							"terminus_view.cancellable": false,
+							"terminus_view.key.ctrl+k": true,
+							"terminus_view.key.ctrl+p": true,
+							"terminus_view.natural_keyboard": true,
+							"terminus_view.reactivable": true,
+							"terminus_view.tag": null,
+							"terminus_view.viewport_y": 0.0,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								7723
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Lara llegó a Santa Aurora a principios de otoño, c",
+							"lsp_uri": "buffer:629",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								7762
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"auto_name": "El sábado de la feria y el perro perdido",
+							"lsp_uri": "buffer:635",
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 956.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 911,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								911
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"auto_name": "Generate a featured image for this story. Do not i",
+							"lsp_uri": "buffer:641",
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "stories/2_High_Beginner/un_viaje_a_la_playa/summary.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 172,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								103,
+								172
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"auto_name": "English: Lucía sees the sea for the first time and",
+							"lsp_uri": "file:///Users/scomax/Documents/Git/Spanish-Language-App/stories/2_High_Beginner/un_viaje_a_la_playa/summary.txt",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 7868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								7867
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///Users/scomax/Documents/Git/Spanish-Language-App/stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13774,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7024,
+								7024
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"lsp_uri": "buffer:698",
+							"syntax": "Packages/JavaScript/TSX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 558.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6046,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6046,
+								6046
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"auto_name": "Cartografía del rumor",
+							"lsp_uri": "buffer:650",
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "z.sublime-project",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 266.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

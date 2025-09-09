@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText } from "lucide-react";
+import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./ui/LanguageToggle";
 import ClickAway from "./ClickAway";
@@ -34,6 +34,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
     { id: 'stories', title: t('navigation.stories'), url: "/stories", icon: BookText },
+    { id: 'tools', title: t('navigation.tools'), url: "/tools", icon: Wrench },
   ];
 
   const handleSignOut = async (): Promise<void> => {
@@ -118,7 +119,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   return (
     <>
       {/* Desktop Header */}
-      <header className="hidden z-100 md:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100 relative">
+      <header className="relative hidden z-50 md:block bg-white/90 backdrop-blur-sm shadow-sm border-b border-orange-100">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}

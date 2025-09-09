@@ -2,19 +2,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, MessageSquare, Volume2 } from 'lucide-react';
+import { BookOpen, MessageSquare, Volume2, ShoppingCart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const iconMap = {
   vocabulary: BookOpen,
   grammar: MessageSquare,
-  pronunciation: Volume2
+  pronunciation: Volume2,
+  shopping: ShoppingCart
 };
 
 const colorMap = {
   vocabulary: 'from-blue-400 to-blue-600',
   grammar: 'from-green-400 to-green-600',
-  pronunciation: 'from-purple-400 to-purple-600'
+  pronunciation: 'from-purple-400 to-purple-600',
+  shopping: 'from-orange-400 to-orange-600'
 };
 
 const difficultyColors = {

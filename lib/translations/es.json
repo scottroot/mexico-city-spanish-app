@@ -1,7 +1,7 @@
 {
   "app": {
-    "title": "¡Español Divertido!",
-    "subtitle": "Aprende español latinoamericano"
+    "title": "¡Capital Española!",
+    "subtitle": "Aprende español de CDMX."
   },
   "navigation": {
     "games": "Juegos",
@@ -9,13 +9,14 @@
     "verbs": "Verbos",
     "quiz": "Quiz Personalizado",
     "stories": "Historias",
+    "tools": "Herramientas",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "user": "Usuario"
   },
   "home": {
     "welcome": "¡Bienvenido!",
-    "subtitle": "Aprende español latinoamericano de forma divertida con juegos interactivos",
+    "subtitle": "Aprende español de la Ciudad de México de forma divertida con juegos interactivos",
     "chooseGame": "Elige tu juego favorito",
     "noGames": "No hay juegos disponibles aún.",
     "averageScore": "Puntuación Promedio",

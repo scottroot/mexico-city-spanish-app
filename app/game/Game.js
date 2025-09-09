@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import VocabularyGame from '../../components/games/VocabularyGame';
 import GrammarGame from '../../components/games/GrammarGame';
 import PronunciationGame from '../../components/games/PronunciationGame';
+import ShoppingGame from '../../components/games/ShoppingGame';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function GamePage() {
@@ -28,6 +29,7 @@ export default function GamePage() {
         router.push('/');
         return;
       }
+
 
       try {
         const games = await Game.list();
@@ -122,6 +124,8 @@ export default function GamePage() {
         return <GrammarGame game={game} onComplete={handleGameComplete} />;
       case 'pronunciation':
         return <PronunciationGame game={game} onComplete={handleGameComplete} />;
+      case 'shopping':
+        return <ShoppingGame game={game} onComplete={handleGameComplete} />;
       default:
         return <div>{t('game.unsupportedGameType')}</div>;
     }
@@ -151,7 +155,7 @@ export default function GamePage() {
       </div>
 
       {/* Game Content */}
-      <div className="pt-8">
+      <div className="xpt-8">
         {renderGame()}
       </div>
     </div>
