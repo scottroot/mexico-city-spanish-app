@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X, Crown, CreditCard } from "lucide-react";
+import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X, Crown, CreditCard, Gamepad2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./ui/LanguageToggle";
 import ClickAway from "./ClickAway";
@@ -32,7 +32,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   // const userMenuRef = useRef<HTMLDivElement>(null);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Home },
+    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },

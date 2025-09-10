@@ -1,37 +1,19 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { 
-  BookOpen,
-  Sparkles,
-  Menu,
-  Search,
-  Heart,
-  Share2, 
   Orbit,
   Play,
-  History,
-  Sunrise,
-  Clock,
   CalendarCheck,Calendar,CalendarSync,
-  ClockFading,
-  SunDim,
-  Clock8,Clock10,Clock12,RotateCw,
-  Sun,
   Sunset,
-  CircleDotDashed,
   Circle,
-  LoaderCircle,
-  CircleDashed,
-  // Circle,
   CircleDot,
 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CondensedConjugationDisplay from '../../components/verbs/CondensedConjugationDisplay';
-import TenseTimeline from './tense-timeline';
 import { Favorites } from '../../entities/Favorites';
 import { cn } from '@/lib/cn';
+import LeftSidebar from './LeftSidebar';
 
 
 function Loading({ t }) {
@@ -45,151 +27,10 @@ function Loading({ t }) {
   )
 }
 
-// Mobile Search Bar - Only on small screens
-function MobileSearchBar({ searchQuery, setSearchQuery }) {
-  return (
-    <div className="md:hidden bg-white border-b border-gray-200 p-4">
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-        <input
-          type="text"
-          placeholder="Search verbs..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 bg-gray-50 text-gray-900 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 focus:outline-none"
-        />
-      </div>
-    </div>
-  )
-}
 
-// Left Sidebar - Verb List
-function LeftSidebar({ 
-  searchQuery,
-  setSearchQuery,
-  showFavoritesOnly,
-  setShowFavoritesOnly,
-  filteredVerbs,
-  handleVerbSelect,
-  selectedVerb,
-  favorites,
-  toggleFavorite,
-  loadingFavorites
-}) {
-  const [mobileVerbsExpanded, setMobileVerbsExpanded] = useState(false);
-  return (
-    <div 
-      className="lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col
-      border-r border-gray-200 bg-white relative lg:h-full flex flex-col"
-    >
-      <div className="p-4 pr-0 border-t border-orange-100 flex flex-col h-full">
 
-        {/* All Verbs */}
-        <div id="all-verbs" className="mb-4 pr-4">
-          <div className="flex items-center gap-2 mb-3">
-            <button 
-              className="p-1 hover:bg-gray-100 rounded"
-              onClick={() => setMobileVerbsExpanded(!mobileVerbsExpanded)}
-            >
-              <Menu className="w-5 h-5 text-gray-600" />
-            </button>
-            <h2 className="text-lg font-semibold text-gray-900">
-              {showFavoritesOnly 
-                ? (searchQuery ? `Favorite results for "${searchQuery}"` : 'Favorite Verbs')
-                : (searchQuery ? `Results for "${searchQuery}"` : 'All Verbs')
-              }
-            </h2>
-          </div>
-          
-          {/* Search Input - Hidden on mobile */}
-          <div className="relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <input
-              type="text"
-              placeholder="Search verbs..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 text-gray-900 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 focus:outline-none"
-            />
-          </div>
-        </div>
-        
-        {/* Action Buttons */}
-        <div 
-          id="favorites-only" 
-          className={cn(
-            "flex items-center gap-2 mb-4 pr-4",
-            mobileVerbsExpanded ? "max-md:hidden" : ""
-          )}
-        >
-          <button 
-            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-            className={`flex items-center gap-2 p-2 rounded text-sm transition-colors ${
-              showFavoritesOnly 
-                ? 'bg-red-100 text-red-600' 
-                : 'hover:bg-gray-100 text-gray-600'
-            }`}
-          >
-            <Heart className={`w-4 h-4 ${
-              showFavoritesOnly ? 'fill-current' : ''
-            }`} />
-            Show Favorites
-          </button>
-        </div>
-        
-        {/* Verb List */}
-        <div 
-          className={cn(
-            "relative overflow-y-auto flex-1 overscroll-contain border-t border-gray-200",
-            mobileVerbsExpanded ? "max-md:hidden" : ""
-          )}
-        >
-          <div className="space-y-1 pr-4">
-            {filteredVerbs.map((verb) => (
-              <div
-                key={verb.infinitive}
-                onClick={() => handleVerbSelect(verb.infinitive)}
-                className={`w-full p-2 rounded-lg transition-colors cursor-pointer ${
-                  selectedVerb?.infinitive === verb.infinitive
-                    ? 'bg-orange-50 border border-orange-200 text-orange-900'
-                    : 'hover:bg-gray-50 text-gray-700'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(verb.infinitive);
-                      }}
-                      className={`p-0 rounded transition-colors ${
-                        favorites.has(verb.infinitive)
-                          ? 'text-red-500 hover:text-red-600'
-                          : 'text-gray-400 hover:text-red-500'
-                      }`}
-                    >
-                      <Heart className={`w-4 h-4 ${
-                        favorites.has(verb.infinitive) ? 'fill-current' : ''
-                      }`} />
-                    </button>
-                    <span className="text-sm font-medium">
-                      {verb.infinitive}
-                    </span>
-                  </div>
-                  <span className="text-sm text-gray-500 text-right max-w-[120px] truncate">
-                    {verb.infinitive_english.split(',').slice(0)[0].split(';').slice(0)[0]}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
-function DefaultMainContent({ t }) {
+function Timeline() {
   const getColorStyles = (color) => {
     const colorMap = {
       'past': { bg: 'bg-red-100', text: 'text-neutral-900' },
@@ -293,6 +134,10 @@ function DefaultMainContent({ t }) {
       </li>
     )
   }
+}
+
+function DefaultMainContent({ t }) {
+  
 
   return (
     <div id="verbs-main-content" className="max-xl:scale-50 xl:max-2xl:scale-65">
@@ -452,10 +297,10 @@ export default function VerbsPage() {
 
   return (
     <div className="relative flex-1 flex flex-col md:flex-row h-full">
-      <MobileSearchBar 
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      {/* Mobile Search Bar */}
+      {/* <div className="md:hidden bg-white border-b border-gray-200 p-4">
+        <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} showVerbs={() => {}} />
+      </div> */}
 
       <LeftSidebar 
         searchQuery={searchQuery}
@@ -470,56 +315,60 @@ export default function VerbsPage() {
       />
 
       {/* Right Main Content */}
-      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain lg:pl-72">
+      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain md:pl-72">
         {selectedVerb 
-          ? <CondensedConjugationDisplay 
+          ? (
+            <CondensedConjugationDisplay 
               verb={selectedVerb} 
               loading={loadingVerb} 
               onClose={handleCloseVerb} 
             />
+          )
           // : <DefaultMainContent t={t} />
-          : <div className="flex h-full w-full items-center justify-center mt-20">
-          <div className="max-w-2xl space-y-8 px-6 text-center">
-            <h1 className="text-3xl font-bold tracking-tight">
-              Master Spanish Verbs
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              This page is your hub for exploring Spanish verbs. Choose a verb on the
-              left to see its full conjugations, translations, and usage examples.
-            </p>
-    
-            <div className="grid gap-6 rounded-2xl border p-6 shadow-sm dark:border-zinc-800 sm:grid-cols-2">
-              <div className="space-y-2">
-                <h2 className="text-xl font-semibold">How to use this page</h2>
-                <ul className="list-disc space-y-1 pl-5 text-left text-gray-600 dark:text-gray-400">
-                  <li>Select a verb from the list</li>
-                  <li>Browse its conjugations by tense and mood</li>
-                  <li>Read short usage notes and tips</li>
-                </ul>
-              </div>
-              <div className="space-y-2">
-                <h2 className="text-xl font-semibold">Why focus on verbs?</h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Verbs are the backbone of Spanish sentences. Understanding their
-                  forms makes speaking and reading easier.
+          : (
+            <div className="hidden md:flex h-full w-full items-center justify-center mt-20">
+              <div className="max-w-2xl space-y-8 px-6 text-center">
+                <h1 className="text-3xl font-bold tracking-tight">
+                  Master Spanish Verbs
+                </h1>
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                  This page is your hub for exploring Spanish verbs. Choose a verb on the
+                  left to see its full conjugations, translations, and usage examples.
+                </p>
+        
+                <div className="grid gap-6 rounded-2xl border p-6 shadow-sm dark:border-zinc-800 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <h2 className="text-xl font-semibold">How to use this page</h2>
+                    <ul className="list-disc space-y-1 pl-5 text-left text-gray-600 dark:text-gray-400">
+                      <li>Select a verb from the list</li>
+                      <li>Browse its conjugations by tense and mood</li>
+                      <li>Read short usage notes and tips</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <h2 className="text-xl font-semibold">Why focus on verbs?</h2>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Verbs are the backbone of Spanish sentences. Understanding their
+                      forms makes speaking and reading easier.
+                    </p>
+                  </div>
+                </div>
+        
+                <div className="rounded-2xl border bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+                  <h2 className="mb-3 text-xl font-semibold">Tips for learning</h2>
+                  <ol className="list-decimal space-y-2 pl-5 text-left text-gray-600 dark:text-gray-400">
+                    <li>Start with common verbs like <em>ser</em>, <em>estar</em>, and <em>tener</em>.</li>
+                    <li>Focus on one tense at a time.</li>
+                    <li>Practice with short daily sentences.</li>
+                  </ol>
+                </div>
+        
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Tip: Use the search bar above to quickly find any verb.
                 </p>
               </div>
             </div>
-    
-            <div className="rounded-2xl border bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <h2 className="mb-3 text-xl font-semibold">Tips for learning</h2>
-              <ol className="list-decimal space-y-2 pl-5 text-left text-gray-600 dark:text-gray-400">
-                <li>Start with common verbs like <em>ser</em>, <em>estar</em>, and <em>tener</em>.</li>
-                <li>Focus on one tense at a time.</li>
-                <li>Practice with short daily sentences.</li>
-              </ol>
-            </div>
-    
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Tip: Use the search bar above to quickly find any verb.
-            </p>
-          </div>
-        </div>
+          )
         }
       </div>
     </div>

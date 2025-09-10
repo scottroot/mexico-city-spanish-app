@@ -84,7 +84,7 @@ export default function PronunciationGame({ game, onComplete }) {
   const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="h-full max-w-2xl mx-auto p-4 overflow-y-auto">
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm text-gray-600">

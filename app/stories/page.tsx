@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { BookOpen, Star, Clock, Users, Loader2 } from 'lucide-react'
+import PageHeader from '@/components/ui/page-header'
 
 interface Story {
   id: string
@@ -111,19 +112,7 @@ export default function StoriesPage() {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
-              <BookOpen className="w-8 h-8 text-white" />
-            </div>
-          </div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            {t('stories.title')}
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('stories.subtitle')}
-          </p>
-        </div>
+        <PageHeader icon={BookOpen} title={t('stories.title')} subtitle={t('stories.subtitle')} />
 
         {/* Stories Grid */}
         {stories.length > 0 ? (

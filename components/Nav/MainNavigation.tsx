@@ -16,7 +16,8 @@ import {
   Crown,
   User,
   LogOut,
-  ChevronRight
+  ChevronRight,
+  Gamepad2
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "../ui/LanguageToggle";
@@ -46,7 +47,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Home },
+    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
@@ -56,7 +57,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
 
   // Bottom app bar items for mobile (4 items max)
   const bottomNavItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Home },
+    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
     { id: 'stories', title: t('navigation.stories'), url: "/stories", icon: BookText },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
   ];
@@ -282,7 +283,9 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       </div>
 
       {/* Mobile header - only show on screens smaller than md */}
-      <div className="md:hidden sticky top-0 z-40 flex never:h-16 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8">
+      {/* <div className="md:hidden fixed w-full top-0 z-40 flex h-10 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
+      {/* <div className="md:hidden w-full top-0 z-40 flex h-10 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
+      <div id="mobile-header" className="sticky top-0 z-40 md:hidden h-10 flex shrink-0 items-center gap-x-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200 bg-white shadow-sm">
         <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
           {t('app.title')}
         </div>
@@ -298,7 +301,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       </div>
 
       {/* Bottom app bar for mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200">
+      <div className="md:hidden h-16 fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-gray-200">
         <div className="flex items-center justify-around h-16 px-2">
           {bottomNavItems.map((item) => (
             <Link

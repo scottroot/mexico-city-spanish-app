@@ -12,6 +12,7 @@ import GrammarGame from '../../components/games/GrammarGame';
 import PronunciationGame from '../../components/games/PronunciationGame';
 import ShoppingGame from '../../components/games/ShoppingGame';
 import { useLanguage } from '../../contexts/LanguageContext';
+import Link from 'next/link';
 
 export default function GamePage() {
   const [game, setGame] = useState(null);
@@ -132,31 +133,30 @@ export default function GamePage() {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 px-4 py-2">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => router.push('/')}
-              className="h-8 w-8 p-0"
-            >
-              <ArrowLeft className="w-3 h-3" />
-            </Button>
-            <div>
-              <h1 className="text-sm font-semibold text-gray-800">{game.title}</h1>
-              <p className="text-xs text-gray-500 capitalize">
-                {t(`games.${game.type}`)} • {t(`games.${game.difficulty}`)}
-              </p>
-            </div>
-          </div>
+    // <div id="game-container" className="flex flex-col h-full w-full bg-green-500 overflow-y-hidden">
+    <div id="game-container" className="h-full w-full">
+    {/* Header */}
+      <div className="w-full bg-white/80 backdrop-blur-sm border-b border-gray-200 px-4 h-14 max-w-6xl mx-auto flex items-center justify-start gap-3">
+        <Link href="/games">
+          <Button
+            variant="outline"
+            size="sm"
+            // onClick={() => router.push('/')}
+            className="h-8 w-8 p-0"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+        </Link>
+        <div>
+          <h1 className="text-sm font-semibold text-gray-800">{game.title}</h1>
+          <p className="text-xs text-gray-500 capitalize">
+            {t(`games.${game.type}`)} • {t(`games.${game.difficulty}`)}
+          </p>
         </div>
       </div>
 
       {/* Game Content */}
-      <div className="xpt-8">
+      <div id="game-content" className="flex flex-col h-full flex-1">
         {renderGame()}
       </div>
     </div>

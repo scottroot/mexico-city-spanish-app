@@ -7,23 +7,23 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    // // Original Default
-    // screens: {
-    //   'sm': '640px',
-    //   'md': '768px',
-    //   'lg': '1024px',
-    //   'xl': '1280px',
-    //   '2xl': '1536px',
-    // },
-    // New Breakpoints
+    // Original Default
     screens: {
       'sm': '640px',
-      'md': '700px',
-      'lg': '960px',
-      'xl': '1160px',
-      // 'xl': '1050px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
       '2xl': '1536px',
     },
+    // // New Breakpoints
+    // screens: {
+    //   'sm': '640px',
+    //   'md': '700px',
+    //   'lg': '960px',
+    //   'xl': '1160px',
+    //   // 'xl': '1050px',
+    //   '2xl': '1536px',
+    // },
     extend: {
       colors: {
         background: "var(--background)",

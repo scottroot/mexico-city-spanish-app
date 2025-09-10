@@ -265,9 +265,9 @@ export default function ShoppingGame({ game, onComplete }) {
   // Show start screen if user hasn't interacted yet
   if (!hasUserInteracted) {
     return (
-      <div className="bg-gray-50 flex justify-center p-4 pt-8">
+      <div className="h-full xbg-red-500 xbg-gray-50 flex flex-col items-center p-4 pt-8">
         <div className="max-w-4xl w-full flex justify-center">
-          <div className="w-3/4">
+          <div className="w-full md:w-3/4">
             {/* Image Area with Rounded Corners */}
             <div className="relative w-full aspect-[3/2] bg-gray-100 overflow-hidden rounded-2xl shadow-xl">
               <div className="absolute inset-0">
@@ -280,7 +280,7 @@ export default function ShoppingGame({ game, onComplete }) {
               </div>
               
               {/* Product Overlay - Only show during game, not on start screen */}
-              {currentProduct && hasUserInteracted && (
+              {/* {currentProduct && hasUserInteracted && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -292,26 +292,54 @@ export default function ShoppingGame({ game, onComplete }) {
                     fill
                   />
                 </motion.div>
-              )}
+              )} */}
               
               {/* Start Screen Overlay */}
               <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl min-h-full">
+                <div className="text-center space-y-4 max-w-sm mx-4 flex flex-col justify-center">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                      Tienda Checkout - Price Listening
+                    </h2>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      Listen to the price and type what you hear!
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col space-y-2 text-gray-500 text-xs md:text-sm mx-auto">
+                    <p className="text-left">• You'll hear a price in Spanish</p>
+                    <p className="text-left">• Type the exact amount you heard</p>
+                    <p className="text-left">• Complete 10 questions to finish</p>
+                  </div>
+                  
+                  <Button
+                    onClick={handleStartGame}
+                    className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-6 py-2 text-base"
+                  >
+                    <Volume2 className="w-4 h-4 mr-2" />
+                    Start Game
+                  </Button>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Mobile Start Screen Overlay */}
+            {/* <div className="md:hidden flex items-center justify-center rounded-2xl min-h-full">
               <div className="text-center space-y-4 max-w-sm mx-4 flex flex-col justify-center">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">
                     Tienda Checkout - Price Listening
                   </h2>
-                  <p className="text-gray-600 text-base">
+                  <p className="text-gray-600 text-sm md:text-base">
                     Listen to the price and type what you hear!
                   </p>
                 </div>
                 
-                <div className="space-y-2">
-                  <p className="text-gray-500 text-sm">
-                    • You'll hear a price in Spanish<br/>
-                    • Type the exact amount you heard<br/>
-                    • Complete 10 questions to finish
-                  </p>
+                <div className="flex flex-col space-y-2 text-gray-500 text-xs md:text-sm mx-auto">
+                  <p className="text-left">• You'll hear a price in Spanish</p>
+                  <p className="text-left">• Type the exact amount you heard</p>
+                  <p className="text-left">• Complete 10 questions to finish</p>
                 </div>
                 
                 <Button
@@ -322,8 +350,8 @@ export default function ShoppingGame({ game, onComplete }) {
                   Start Game
                 </Button>
               </div>
-              </div>
-            </div>
+            </div> */}
+            
           </div>
         </div>
       </div>
@@ -332,7 +360,7 @@ export default function ShoppingGame({ game, onComplete }) {
 
   if (gameCompleted) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="h-full flex flex-col items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}

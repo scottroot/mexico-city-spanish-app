@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, BookOpen, HelpCircle, BookText } from "lucide-react";
+import { Home, Trophy, BookOpen, HelpCircle, BookText, Gamepad2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TopNavigation from "./TopNavigation";
 
@@ -12,7 +12,7 @@ export default function Layout({ children, currentPageName, user }) {
   const { t } = useLanguage();
 
   const navigationItems = [
-    { id: 'games', title: t('navigation.games'), url: "/", icon: Home },
+    { id: 'games', title: t('navigation.games'), url: "/", icon: Gamepad2 },
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
