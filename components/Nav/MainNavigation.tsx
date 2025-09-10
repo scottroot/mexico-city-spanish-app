@@ -141,16 +141,18 @@ export default function MainNavigation({ user }: MainNavigationProps) {
   const SidebarContent = () => (
     <div className="flex grow flex-col overflow-y-auto bg-white">
       {/* Logo */}
-      <div className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
-        <Link href="/games" className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
-          <div className="hidden xl:block">
-            <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
-          </div>
-        </Link>
-      </div>
+      <Link href="/">
+        <div className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
+              <BookOpen className="w-5 h-5 text-white" />
+            </div>
+            <div className="hidden xl:block">
+              <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
+            </div>
+          </Link>
+        </div>
+      </Link>
 
       {/* Navigation */}
       <nav className="flex flex-1 flex-col px-2 xl:px-3">
@@ -286,9 +288,11 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       {/* <div className="md:hidden fixed w-full top-0 z-40 flex h-10 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
       {/* <div className="md:hidden w-full top-0 z-40 flex h-10 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
       <div id="mobile-header" className="sticky top-0 z-40 md:hidden h-10 flex shrink-0 items-center gap-x-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200 bg-white shadow-sm">
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
-          {t('app.title')}
-        </div>
+        <Link href="/">
+          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700">
+            {t('app.title')}
+          </div>
+        </Link>
 
         <div className="flex items-center gap-2">
           <LanguageToggle />

@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/client'
+// Removed direct Supabase client import - now using API routes
 
 export interface GameContent {
   questions: Array<{
@@ -47,22 +47,21 @@ export class Game {
   static async list(): Promise<Game[]> {
     try {
       console.log('Game.list: Starting...')
-      const supabase = createClient()
-      console.log('Game.list: Supabase client created')
       
-      const { data, error } = await supabase
-        .from('games')
-        .select('*')
-        .order('created_at', { ascending: true })
+      const response = await fetch('/api/games', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-      console.log('Game.list: Database result:', { data: data?.length, error })
-
-      if (error) {
-        console.error('Error fetching games:', error)
+      if (!response.ok) {
+        console.error('Error fetching games:', response.status)
         return []
       }
 
-      const gamesList = data.map(item => new Game(item))
+      const result = await response.json()
+      const gamesList = result.data.map((item: any) => new Game(item))
       console.log('Game.list: Returning games list:', gamesList.length, 'items')
       return gamesList
     } catch (error) {
@@ -74,20 +73,23 @@ export class Game {
   // Get a specific game by ID
   static async get(id: string): Promise<Game | null> {
     try {
-      const supabase = createClient()
-      
-      const { data, error } = await supabase
-        .from('games')
-        .select('*')
-        .eq('id', id)
-        .single()
+      const response = await fetch(`/api/games/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-      if (error) {
-        console.error('Error fetching game:', error)
+      if (!response.ok) {
+        if (response.status === 404) {
+          return null
+        }
+        console.error('Error fetching game:', response.status)
         return null
       }
 
-      return new Game(data)
+      const result = await response.json()
+      return new Game(result.data)
     } catch (error) {
       console.error('Error in Game.get:', error)
       return null
@@ -97,20 +99,21 @@ export class Game {
   // Create a new game (admin function)
   static async create(gameData: Omit<GameData, 'created_at' | 'updated_at'>): Promise<{ success: boolean; data?: Game; error?: string }> {
     try {
-      const supabase = createClient()
-      
-      const { data, error } = await supabase
-        .from('games')
-        .insert([gameData])
-        .select()
-        .single()
+      const response = await fetch('/api/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData),
+      })
 
-      if (error) {
-        console.error('Error creating game:', error)
-        return { success: false, error: error.message }
+      if (!response.ok) {
+        const errorData = await response.json()
+        return { success: false, error: errorData.error || 'Failed to create game' }
       }
 
-      return { success: true, data: new Game(data) }
+      const result = await response.json()
+      return { success: true, data: new Game(result.data) }
     } catch (error) {
       console.error('Error in Game.create:', error)
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
@@ -120,22 +123,22 @@ export class Game {
   // Update an existing game (admin function)
   async update(updateData: Partial<GameData>): Promise<{ success: boolean; data?: Game; error?: string }> {
     try {
-      const supabase = createClient()
-      
-      const { data, error } = await supabase
-        .from('games')
-        .update(updateData)
-        .eq('id', this.id)
-        .select()
-        .single()
+      const response = await fetch(`/api/games/${this.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData),
+      })
 
-      if (error) {
-        console.error('Error updating game:', error)
-        return { success: false, error: error.message }
+      if (!response.ok) {
+        const errorData = await response.json()
+        return { success: false, error: errorData.error || 'Failed to update game' }
       }
 
+      const result = await response.json()
       // Update local instance
-      Object.assign(this, data)
+      Object.assign(this, result.data)
       return { success: true, data: this }
     } catch (error) {
       console.error('Error in Game.update:', error)
@@ -146,16 +149,16 @@ export class Game {
   // Delete a game (admin function)
   async delete(): Promise<{ success: boolean; error?: string }> {
     try {
-      const supabase = createClient()
-      
-      const { error } = await supabase
-        .from('games')
-        .delete()
-        .eq('id', this.id)
+      const response = await fetch(`/api/games/${this.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-      if (error) {
-        console.error('Error deleting game:', error)
-        return { success: false, error: error.message }
+      if (!response.ok) {
+        const errorData = await response.json()
+        return { success: false, error: errorData.error || 'Failed to delete game' }
       }
 
       return { success: true }

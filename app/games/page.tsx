@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
-import Home from '../Home'
+import GamesComponent from './GamesComponent'
 import { GameData } from '../../entities/Game'
 
 export default async function GamesPage() {
@@ -27,5 +27,5 @@ export default async function GamesPage() {
   }
 
   // Pass games as props to the Home component
-  return <Home initialGames={gamesData} />
+  return <GamesComponent initialGames={gamesData} />
 }

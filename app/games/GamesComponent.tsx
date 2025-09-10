@@ -1,23 +1,23 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Game, GameData } from '../entities/Game';
+import { Game, GameData } from '../../entities/Game';
 import { motion } from 'framer-motion';
 import { Sparkles, Target, Clock, Wrench, Scissors } from 'lucide-react';
-import GameCard from '../components/games/GameCard';
-import { useRouter } from 'next/navigation';
-import { useLanguage } from '../contexts/LanguageContext';
+import GameCard from '../../components/games/GameCard';
+// import { useRouter } from 'next/navigation';
+import { useLanguage } from '../../contexts/LanguageContext';
 import Link from 'next/link';
 
 interface HomeProps {
   initialGames: GameData[];
 }
 
-export default function Home({ initialGames }: HomeProps) {
+export default function GamesComponent({ initialGames }: HomeProps) {
   const [games] = useState<Game[]>(initialGames.map(gameData => new Game(gameData)));
   const [progress] = useState([]);
   const [user] = useState(null);
-  const router = useRouter();
+  // const router = useRouter();
   const { t } = useLanguage();
 
   const getProgressForGame = (gameId: string) => {
@@ -29,9 +29,9 @@ export default function Home({ initialGames }: HomeProps) {
     return Math.round(progress.reduce((sum: number, p: any) => sum + (p.score / p.max_score * 100), 0) / progress.length);
   };
 
-  const handleGameClick = (game: Game) => {
-    router.push(`/game?id=${game.id}`);
-  };
+  // const handleGameClick = (game: Game) => {
+  //   router.push(`/game?id=${game.id}`);
+  // };
 
   return (
     <div className="min-h-screen p-4 md:p-8">
@@ -174,11 +174,14 @@ export default function Home({ initialGames }: HomeProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
               >
-                <GameCard 
-                  game={game}
-                  progress={getProgressForGame(game.id)}
-                  onClick={() => handleGameClick(game)}
-                />
+                <Link href={`/game?id=${game.id}`}>
+                  <GameCard 
+                    game={game}
+                    progress={getProgressForGame(game.id)}
+                    // onClick={() => handleGameClick(game)}
+                    onClick={() => {}}
+                  />
+                </Link>
               </motion.div>
             ))}
           </div>
