@@ -28,7 +28,7 @@ function useOutsideAlerter(ref: any, handleClickAway: any) {
 }
 
 
-export default function OutsideAlerter({children, onClickAway, rootEl="div", as="", containerClass="", ...props}: {children: any, onClickAway?: any, rootEl?: string, as?: string, containerClass?: string, [k:string]: any}) {
+export default function ClickAway({children, onClickAway, rootEl="div", as="", containerClass="", ...props}: {children: any, onClickAway?: any, rootEl?: string, as?: string, containerClass?: string, [k:string]: any}) {
   const wrapperRef = useRef(null);
   let func = onClickAway;
   if(typeof onClickAway === 'undefined') {

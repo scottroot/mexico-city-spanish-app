@@ -76,16 +76,21 @@ function LeftSidebar({
   toggleFavorite,
   loadingFavorites
 }) {
+  const [mobileVerbsExpanded, setMobileVerbsExpanded] = useState(false);
   return (
     <div 
-      className="lg:fixed lg:mt-20 lg:inset-y-0 lg:flex lg:w-72 lg:flex-col
-      border-r border-gray-200 bg-white relative h-screen lg:h-full flex flex-col"
+      className="lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col
+      border-r border-gray-200 bg-white relative lg:h-full flex flex-col"
     >
       <div className="p-4 pr-0 border-t border-orange-100 flex flex-col h-full">
-        {/* Search Header */}
-        <div className="mb-4 pr-4">
+
+        {/* All Verbs */}
+        <div id="all-verbs" className="mb-4 pr-4">
           <div className="flex items-center gap-2 mb-3">
-            <button className="p-1 hover:bg-gray-100 rounded">
+            <button 
+              className="p-1 hover:bg-gray-100 rounded"
+              onClick={() => setMobileVerbsExpanded(!mobileVerbsExpanded)}
+            >
               <Menu className="w-5 h-5 text-gray-600" />
             </button>
             <h2 className="text-lg font-semibold text-gray-900">
@@ -110,7 +115,13 @@ function LeftSidebar({
         </div>
         
         {/* Action Buttons */}
-        <div className="flex items-center gap-2 mb-4 pr-4">
+        <div 
+          id="favorites-only" 
+          className={cn(
+            "flex items-center gap-2 mb-4 pr-4",
+            mobileVerbsExpanded ? "max-md:hidden" : ""
+          )}
+        >
           <button 
             onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
             className={`flex items-center gap-2 p-2 rounded text-sm transition-colors ${
@@ -124,13 +135,15 @@ function LeftSidebar({
             }`} />
             Show Favorites
           </button>
-          {/* <button className="p-2 hover:bg-gray-100 rounded text-gray-600">
-            <Share2 className="w-4 h-4" />
-          </button> */}
         </div>
         
         {/* Verb List */}
-        <div className="relative overflow-y-auto flex-1 overscroll-contain border-t border-gray-200">
+        <div 
+          className={cn(
+            "relative overflow-y-auto flex-1 overscroll-contain border-t border-gray-200",
+            mobileVerbsExpanded ? "max-md:hidden" : ""
+          )}
+        >
           <div className="space-y-1 pr-4">
             {filteredVerbs.map((verb) => (
               <div
@@ -282,7 +295,7 @@ function DefaultMainContent({ t }) {
   }
 
   return (
-    <div>
+    <div id="verbs-main-content" className="max-xl:scale-50 xl:max-2xl:scale-65">
       {/* <TenseTimeline /> */}
       <div className="flex items-center px-4">
         {/* Start Circle */}
@@ -464,7 +477,49 @@ export default function VerbsPage() {
               loading={loadingVerb} 
               onClose={handleCloseVerb} 
             />
-          : <DefaultMainContent t={t} />
+          // : <DefaultMainContent t={t} />
+          : <div className="flex h-full w-full items-center justify-center mt-20">
+          <div className="max-w-2xl space-y-8 px-6 text-center">
+            <h1 className="text-3xl font-bold tracking-tight">
+              Master Spanish Verbs
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              This page is your hub for exploring Spanish verbs. Choose a verb on the
+              left to see its full conjugations, translations, and usage examples.
+            </p>
+    
+            <div className="grid gap-6 rounded-2xl border p-6 shadow-sm dark:border-zinc-800 sm:grid-cols-2">
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">How to use this page</h2>
+                <ul className="list-disc space-y-1 pl-5 text-left text-gray-600 dark:text-gray-400">
+                  <li>Select a verb from the list</li>
+                  <li>Browse its conjugations by tense and mood</li>
+                  <li>Read short usage notes and tips</li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">Why focus on verbs?</h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Verbs are the backbone of Spanish sentences. Understanding their
+                  forms makes speaking and reading easier.
+                </p>
+              </div>
+            </div>
+    
+            <div className="rounded-2xl border bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+              <h2 className="mb-3 text-xl font-semibold">Tips for learning</h2>
+              <ol className="list-decimal space-y-2 pl-5 text-left text-gray-600 dark:text-gray-400">
+                <li>Start with common verbs like <em>ser</em>, <em>estar</em>, and <em>tener</em>.</li>
+                <li>Focus on one tense at a time.</li>
+                <li>Practice with short daily sentences.</li>
+              </ol>
+            </div>
+    
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Tip: Use the search bar above to quickly find any verb.
+            </p>
+          </div>
+        </div>
         }
       </div>
     </div>

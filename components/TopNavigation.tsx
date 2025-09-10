@@ -3,10 +3,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X } from "lucide-react";
+import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X, Crown, CreditCard } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./ui/LanguageToggle";
 import ClickAway from "./ClickAway";
+import { useBilling } from "../hooks/useBilling";
 
 interface TopNavigationProps {
   user: {
@@ -25,12 +26,13 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useLanguage();
+  const { hasAccess, loading: billingLoading, goPro, manageBilling } = useBilling();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
   // const userMenuRef = useRef<HTMLDivElement>(null);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/", icon: Home },
+    { id: 'games', title: t('navigation.games'), url: "/games", icon: Home },
     { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
     { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
     { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
@@ -64,6 +66,32 @@ export default function TopNavigation({ user }: TopNavigationProps) {
   //     document.removeEventListener('mousedown', handleClickOutside);
   //   };
   // }, []);
+
+  const BillingButton = () => {
+    if (!user || billingLoading) return null;
+
+    if (hasAccess) {
+      return (
+        <button
+          onClick={() => manageBilling()}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-sm"
+        >
+          <CreditCard className="w-4 h-4" />
+          <span className="hidden sm:block text-sm font-medium">Manage Billing</span>
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        href="/pro"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600 transition-all duration-200 shadow-sm"
+      >
+        <Crown className="w-4 h-4" />
+        <span className="hidden sm:block text-sm font-medium">Go Pro</span>
+      </Link>
+    );
+  };
 
   const UserAccountButton = () => {
     if (!user) {
@@ -124,7 +152,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/games" className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
@@ -152,9 +180,10 @@ export default function TopNavigation({ user }: TopNavigationProps) {
               ))}
             </nav>
             
-            {/* Right Side - Language Toggle and User Menu */}
+            {/* Right Side - Language Toggle, Billing, and User Menu */}
             <div className="flex items-center gap-3">
               <LanguageToggle />
+              <BillingButton />
               <UserAccountButton />
             </div>
           </div>
@@ -166,7 +195,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
         <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/" className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
+              <Link href="/games" className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg">
                 <BookOpen className="w-5 h-5 text-white" />
               </Link>
               <div>
@@ -176,6 +205,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
             </div>
             <div className="flex items-center gap-2">
               <LanguageToggle />
+              <BillingButton />
               <UserAccountButton />
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}

@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { Game, GameData } from '../entities/Game';
 import { motion } from 'framer-motion';
-import { Sparkles, Target, Clock } from 'lucide-react';
+import { Sparkles, Target, Clock, Wrench, Scissors } from 'lucide-react';
 import GameCard from '../components/games/GameCard';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '../contexts/LanguageContext';
+import Link from 'next/link';
 
 interface HomeProps {
   initialGames: GameData[];
@@ -94,11 +95,72 @@ export default function Home({ initialGames }: HomeProps) {
           </motion.div>
         )}
 
-        {/* Games Grid */}
+        {/* Language Tools Section */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
+          className="mb-12"
+        >
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            Language Tools
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <Link href="/tools/syllabification">
+                <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-orange-300 cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                      <Scissors className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                        Syllabification
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Break Spanish words into syllables and practice pronunciation
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+            
+            {/* Placeholder for future tools */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <Wrench className="w-6 h-6 text-gray-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-400">
+                      More Tools Coming Soon
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      Additional language tools will be added here
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Games Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             {t('home.chooseGame')}

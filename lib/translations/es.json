@@ -16,12 +16,21 @@
   },
   "home": {
     "welcome": "¡Bienvenido!",
-    "subtitle": "Aprende español de la Ciudad de México de forma divertida con juegos interactivos",
+    "subtitle": "Experimenta el futuro del aprendizaje de idiomas con juegos interactivos, historias inmersivas y herramientas inteligentes diseñadas para acelerar tu viaje en español.",
     "chooseGame": "Elige tu juego favorito",
     "noGames": "No hay juegos disponibles aún.",
     "averageScore": "Puntuación Promedio",
     "gamesCompleted": "Juegos Completados",
-    "bestTime": "Mejor Tiempo"
+    "bestTime": "Mejor Tiempo",
+    "startLearning": "Comenzar a Aprender",
+    "goPro": "Hazte Pro",
+    "gamesDescription": "Practica español a través de juegos interactivos y desafíos.",
+    "toolsDescription": "Herramientas de idioma poderosas para mejorar tu experiencia de aprendizaje.",
+    "ctaTitle": "¿Listo para Comenzar tu Viaje en Español?",
+    "ctaDescription": "Únete a miles de estudiantes que están dominando el español con nuestra plataforma impulsada por IA.",
+    "startLearningFree": "Comenzar a Aprender Gratis",
+    "upgradeToPro": "Actualizar a Pro",
+    "gameNumber": "JUEGO"
   },
   "auth": {
     "welcomeBack": "¡Bienvenido de vuelta!",
@@ -87,7 +96,8 @@
     "save": "Guardar",
     "delete": "Eliminar",
     "edit": "Editar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "seeAll": "Ver todo"
   },
   "game": {
     "gameNotFound": "Juego no encontrado",
@@ -198,6 +208,9 @@
     "title": "Historias",
     "subtitle": "Sumérgete en el español a través de historias atractivas",
     "beginner": "Principiante",
+    "high_beginner": "Principiante Alto",
+    "low_intermediate": "Intermedio Bajo",
+    "high_intermediate": "Intermedio Alto",
     "intermediate": "Intermedio",
     "advanced": "Avanzado",
     "comingSoon": "Próximamente",

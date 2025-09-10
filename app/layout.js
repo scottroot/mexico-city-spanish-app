@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Layout from '../components/Layout'
 import { LanguageProvider } from '../contexts/LanguageContext'
 import { createClient } from '@/utils/supabase/server'
+import MainLayout from '@/components/MainLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +20,11 @@ export default async function RootLayout({ children }) {
     <html lang="es">
       <body className={inter.className}>
         <LanguageProvider>
-          <Layout user={user}>
-            {children}
-          </Layout>
+        {/* <Layout user={user}> */}
+        <MainLayout user={user}>
+        {children}
+          {/* </Layout> */}
+          </MainLayout>
         </LanguageProvider>
       </body>
     </html>

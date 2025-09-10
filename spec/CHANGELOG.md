@@ -4,6 +4,16 @@ All notable changes to the Spanish Language Learning App will be documented in t
 
 ## [Unreleased]
 
+### Fixed
+- **Shopping Game TTS Voice**: Fixed shopping game to use woman's voice exclusively
+  - `components/games/ShoppingGame.js` - Updated `playPriceAudio()` function to use `process.env.NEXT_PUBLIC_DEEPGRAM_VOICE_WOMAN` with fallback to `"aura-2-estrella-es"`
+  - Ensures consistent woman's voice for all price announcements in shopping game
+  - Maintains fallback to browser speech synthesis if TTS fails
+- **Layout System**: Refactored main layout to use flexbox instead of fixed heights
+  - `components/Layout.js` - Changed from `h-screen` to `flex flex-col` and `flex-1` for better responsive behavior
+  - Resolves potential CSS conflicts and improves layout flexibility
+  - Prevents overflow issues with Next.js dev toolbar
+
 ### Added
 - **Stories System**: Complete interactive story reading system with database integration
   - `app/stories/page.tsx` - Stories page with responsive gallery grid layout (1-4 columns)

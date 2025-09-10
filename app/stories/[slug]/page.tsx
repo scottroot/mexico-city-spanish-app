@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { ArrowLeft, BookOpen, Clock, Star, Loader2, AlertCircle } from 'lucide-react'
 import TranscriptPlayer from '@/components/TranscriptPlayer'
@@ -10,7 +11,6 @@ import { normalizeAlignmentData } from '@/types/story'
 
 export default function StoryViewerPage() {
   const params = useParams()
-  const router = useRouter()
   const { t, language, isInitialized } = useLanguage()
   const [story, setStory] = useState<Story | null>(null)
   const [words, setWords] = useState<Word[]>([])
@@ -103,12 +103,12 @@ export default function StoryViewerPage() {
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Story Not Found</h2>
           <p className="text-gray-600 mb-4">{error || 'The story you are looking for does not exist.'}</p>
-          <button 
-            onClick={() => router.push('/stories')} 
-            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+          <Link 
+            href="/stories"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors inline-block"
           >
             Back to Stories
-          </button>
+          </Link>
         </div>
       </div>
     )
@@ -121,13 +121,13 @@ export default function StoryViewerPage() {
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
         <div className="mb-6">
-          <button 
-            onClick={() => router.push('/stories')}
+          <Link 
+            href="/stories"
             className="flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Stories</span>
-          </button>
+          </Link>
 
           {/* Featured Image */}
           {story.featured_image_url && (

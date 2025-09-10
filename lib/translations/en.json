@@ -16,12 +16,21 @@
   },
   "home": {
     "welcome": "Welcome!",
-    "subtitle": "Learn Latin American Spanish in a fun way with interactive games",
+    "subtitle": "Experience the future of language learning with interactive games, immersive stories, and intelligent tools designed to accelerate your Spanish journey.",
     "chooseGame": "Choose your favorite game",
     "noGames": "No games available yet.",
     "averageScore": "Average Score",
     "gamesCompleted": "Games Completed",
-    "bestTime": "Best Time"
+    "bestTime": "Best Time",
+    "startLearning": "Start Learning",
+    "goPro": "Go Pro",
+    "gamesDescription": "Practice Spanish through interactive games and challenges.",
+    "toolsDescription": "Powerful language tools to enhance your learning experience.",
+    "ctaTitle": "Ready to Start Your Spanish Journey?",
+    "ctaDescription": "Join thousands of learners who are mastering Spanish with our AI-powered platform.",
+    "startLearningFree": "Start Learning Free",
+    "upgradeToPro": "Upgrade to Pro",
+    "gameNumber": "GAME"
   },
   "auth": {
     "welcomeBack": "Welcome back!",
@@ -87,7 +96,8 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
-    "close": "Close"
+    "close": "Close",
+    "seeAll": "See all"
   },
   "game": {
     "gameNotFound": "Game not found",
@@ -198,6 +208,9 @@
     "title": "Stories",
     "subtitle": "Immerse yourself in Spanish through engaging stories",
     "beginner": "Beginner",
+    "high_beginner": "High Beginner",
+    "low_intermediate": "Low Intermediate",
+    "high_intermediate": "High Intermediate",
     "intermediate": "Intermediate",
     "advanced": "Advanced",
     "comingSoon": "Coming Soon",
