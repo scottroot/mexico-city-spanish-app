@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/utils/supabase/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-06-20" });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2025-08-27.basil" });
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 export async function POST(request: NextRequest) {
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Bad signature' }, { status: 400 });
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Idempotency check
     const { data: existingEvent } = await supabase
@@ -75,8 +75,8 @@ async function processWebhookEvent(event: Stripe.Event, supabase: any) {
       user_id: supabaseUserId,
       price_id: sub.items.data[0]?.price?.id ?? null,
       status: sub.status,
-      current_period_end: sub.current_period_end 
-        ? new Date(sub.current_period_end * 1000).toISOString() 
+      current_period_end: (sub as any).current_period_end 
+        ? new Date((sub as any).current_period_end * 1000).toISOString() 
         : null,
       cancel_at_period_end: sub.cancel_at_period_end ?? false,
       raw: sub as unknown as Record<string, unknown>,

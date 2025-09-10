@@ -153,7 +153,7 @@ export default function ShoppingGame({ game, onComplete }) {
         clearTimeout(audioTimeoutRef.current);
       }
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Prevent multiple audio calls
   const audioTimeoutRef = useRef(null);
