@@ -73,7 +73,7 @@ function GameCard({ game, index }: { game: any; index: number }) {
 
   return (
     <Link 
-      href={`/game?type=${game.type}`}
+      href={`/game?id=${game.id}`}
       className="group relative overflow-hidden rounded-xl hover:shadow-lg transition-all duration-200 h-48"
     >
       {/* Background Image */}
