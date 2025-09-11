@@ -110,7 +110,7 @@ function VerbListContent({
   toggleFavorite: (infinitive: string) => void 
 }) {
   return (
-    <div className="space-y-1 pr-4">
+    <div className="space-y-1 pr-4 overflow-x-hidden">
       {filteredVerbs.map((verb) => (
         <div
           key={verb.infinitive}

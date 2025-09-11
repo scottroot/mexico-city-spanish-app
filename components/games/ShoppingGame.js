@@ -184,8 +184,11 @@ export default function ShoppingGame({ game, onComplete }) {
     }
   };
 
+
   const playPriceAudio = async (price) => {
+    if(isPlayingAudio) return;
     setIsPlayingAudio(true);
+    inputRef.current.focus();
     try {
       const priceWords = priceToSpanishWords(price);
       const priceText = `cuesta ${priceWords}`;
@@ -204,7 +207,7 @@ export default function ShoppingGame({ game, onComplete }) {
 
   const handleSubmit = () => {
     const userPrice = parseFloat(userAnswer);
-    const correct = Math.abs(userPrice - currentPrice) < 0.01; // Allow for small floating point differences
+    const correct = Math.abs(userPrice - currentPrice) < 0.001; // Allow for small floating point differences
     
     setIsCorrect(correct);
     setShowResult(true);
@@ -251,6 +254,9 @@ export default function ShoppingGame({ game, onComplete }) {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSubmit();
+    }
+    else if (e.key === ' ') {
+      playPriceAudio(currentPrice);
     }
   };
 
@@ -401,9 +407,9 @@ export default function ShoppingGame({ game, onComplete }) {
         </div>
 
         {/* Game Area */}
-        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden w-3/4">
+        <div className="relative xbg-white w-3/4 aspect-[3/2]">
           {/* Image Area with Rounded Corners */}
-          <div className="relative w-full aspect-[3/2] bg-gray-100 overflow-hidden rounded-2xl">
+          <div className="relative w-full aspect-[3/2] bg-gray-100 overflow-hidden rounded-2xl shadow-xl">
             <div className="absolute inset-0">
               <Image 
                 src={tiendaBackground} 
@@ -444,7 +450,7 @@ export default function ShoppingGame({ game, onComplete }) {
             </div> */}
 
             {/* Replay Audio Button - Top Right Overlay */}
-            <div className="absolute top-4 right-4 z-20">
+            {/* <div className="absolute top-4 right-4 z-20">
               <Button
                 onClick={() => playPriceAudio(currentPrice)}
                 disabled={isPlayingAudio}
@@ -457,7 +463,26 @@ export default function ShoppingGame({ game, onComplete }) {
                   <Volume2 className="w-3 h-3" />
                 )}
               </Button>
+            </div> */}
+
+            <div 
+              className="absolute inset-0 h-full z-20" 
+              onClick={() => playPriceAudio(currentPrice)} disabled={isPlayingAudio}
+              
+            >
+              <Button
+                size="sm"
+                className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-700 shadow-lg backdrop-blur-sm border border-gray-200 h-8 w-8 p-0"
+              >
+                {isPlayingAudio ? (
+                  <div className="w-3 h-3 border-2 border-gray-700 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Volume2 className="w-3 h-3" />
+                )}
+              </Button>
             </div>
+
+
 
             {/* Feedback Overlay */}
             {showFeedback && (
@@ -504,7 +529,30 @@ export default function ShoppingGame({ game, onComplete }) {
 
                 {/* Input Area */}
                 <div className="w-full max-w-md">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+
+
+                  {/* Result Message - colored bar above input*/}
+                  {showResult && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`text-center p-4 rounded-lg -mt-2 mb-2 ${
+                        isCorrect 
+                          ? 'bg-green-100 text-green-800 border border-green-200' 
+                          : 'bg-red-100 text-red-800 border border-red-200'
+                      }`}
+                    >
+                      {isCorrect ? (
+                        <p className="font-semibold">¡Correcto! 🎉</p>
+                      ) : (
+                        <p className="font-semibold">
+                          Incorrecto. {hasRetried && `La respuesta correcta es ${formatPrice(currentPrice)}`}
+                        </p>
+                      )}
+                    </motion.div>
+                  )}
+                {(!showResult && hasRetried) && <div className="text-red-500 font-bold text-center italic -mt-2 mb-2">Inténtalo una vez más</div>}
+                  <label className="block text-base font-bold text-gray-700 mb-2">
                     ¿Cuánto cuesta? (en pesos)
                   </label>
                   <div className="flex space-x-2">
@@ -534,28 +582,13 @@ export default function ShoppingGame({ game, onComplete }) {
                       )}
                     </Button>
                   </div>
+                  <div className='mt-4 text-gray-500 text-sm italic'>
+                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
+                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar.
+                  </div>
                 </div>
 
-                {/* Result Message */}
-                {showResult && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`text-center p-4 rounded-lg ${
-                      isCorrect 
-                        ? 'bg-green-100 text-green-800 border border-green-200' 
-                        : 'bg-red-100 text-red-800 border border-red-200'
-                    }`}
-                  >
-                    {isCorrect ? (
-                      <p className="font-semibold">¡Correcto! 🎉</p>
-                    ) : (
-                      <p className="font-semibold">
-                        Incorrecto. La respuesta correcta es {formatPrice(currentPrice)}
-                      </p>
-                    )}
-                  </motion.div>
-                )}
+                
               </div>
             </div>
           </div>
