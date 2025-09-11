@@ -141,18 +141,16 @@ export default function MainNavigation({ user }: MainNavigationProps) {
   const SidebarContent = () => (
     <div className="flex grow flex-col overflow-y-auto bg-white">
       {/* Logo */}
-      <Link href="/">
-        <div className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-white" />
-            </div>
-            <div className="hidden xl:block">
-              <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
-            </div>
-          </Link>
-        </div>
-      </Link>
+      <div className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
+            <BookOpen className="w-5 h-5 text-white" />
+          </div>
+          <div className="hidden xl:block">
+            <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
+          </div>
+        </Link>
+      </div>
 
       {/* Navigation */}
       <nav className="flex flex-1 flex-col px-2 xl:px-3">

@@ -15,13 +15,14 @@ export interface GameContent {
 }
 
 export interface GameData {
-  id: string
-  title: string
-  type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping'
-  difficulty: 'beginner' | 'intermediate' | 'advanced'
-  content: GameContent
-  created_at?: string
-  updated_at?: string
+  id: string;
+  title: string;
+  type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping';
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  content: GameContent;
+  created_at?: string;
+  updated_at?: string;
+  image_url?: string;
 }
 
 export class Game {
@@ -32,6 +33,7 @@ export class Game {
   public content: GameContent
   public created_at?: string
   public updated_at?: string
+  public image_url?: string
 
   constructor(data: GameData) {
     this.id = data.id
@@ -41,6 +43,7 @@ export class Game {
     this.content = data.content
     this.created_at = data.created_at
     this.updated_at = data.updated_at
+    this.image_url = data.image_url
   }
 
   // Get all games

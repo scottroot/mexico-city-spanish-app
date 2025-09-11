@@ -14,10 +14,10 @@ interface HomeProps {
 }
 
 export default function GamesComponent({ initialGames }: HomeProps) {
-  const [games] = useState<Game[]>(initialGames.map(gameData => new Game(gameData)));
+  // const [games] = useState<Game[]>(initialGames.map(gameData => new Game(gameData)));
+  const games = initialGames;
   const [progress] = useState([]);
-  const [user] = useState(null);
-  // const router = useRouter();
+
   const { t } = useLanguage();
 
   const getProgressForGame = (gameId: string) => {
@@ -106,14 +106,14 @@ export default function GamesComponent({ initialGames }: HomeProps) {
             Language Tools
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 2xlg:grid-cols-3 gap-6 mb-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
               <Link href="/tools/syllabification">
-                <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-orange-300 cursor-pointer group">
+                <div className="bg-white rounded-xl py-2 px-6 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-orange-300 cursor-pointer group">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                       <Scissors className="w-6 h-6 text-white" />
@@ -122,8 +122,8 @@ export default function GamesComponent({ initialGames }: HomeProps) {
                       <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
                         Syllabification
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Break Spanish words into syllables and practice pronunciation
+                      <p className="text-sm text-gray-600 leading-6 h-12">
+                        Learn pronunciation and how to properly blend togther multiple words and stress the right syllable!
                       </p>
                     </div>
                   </div>
@@ -137,7 +137,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
+              <div className="bg-gray-50 rounded-xl py-2 px-6 border-2 border-dashed border-gray-300">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
                     <Wrench className="w-6 h-6 text-gray-400" />
@@ -146,7 +146,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
                     <h3 className="text-lg font-semibold text-gray-400">
                       More Tools Coming Soon
                     </h3>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400  leading-6 h-12">
                       Additional language tools will be added here
                     </p>
                   </div>
@@ -178,8 +178,6 @@ export default function GamesComponent({ initialGames }: HomeProps) {
                   <GameCard 
                     game={game}
                     progress={getProgressForGame(game.id)}
-                    // onClick={() => handleGameClick(game)}
-                    onClick={() => {}}
                   />
                 </Link>
               </motion.div>

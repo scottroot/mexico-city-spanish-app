@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, MessageSquare, Volume2, ShoppingCart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Image from 'next/image';
 
 const iconMap = {
   vocabulary: BookOpen,
@@ -25,7 +26,7 @@ const difficultyColors = {
   advanced: 'bg-red-100 text-red-700'
 };
 
-export default function GameCard({ game, onClick, progress }) {
+export default function GameCard({ game, progress }) {
   const { t } = useLanguage();
   const Icon = iconMap[game.type];
   const gradientClass = colorMap[game.type];
@@ -40,13 +41,19 @@ export default function GameCard({ game, onClick, progress }) {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       
-      onClick={onClick}
+      // onClick={onClick}
       className="cursor-pointer"
     >
       <Card className="overflow-hidden bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 border-0">
         <div className={`h-24 bg-gradient-to-r ${gradientClass} flex items-center justify-center relative overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10"></div>
-          <Icon className="w-10 h-10 text-white relative z-10" />
+          <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full">
+              <Image fill src={game.image_url} alt={game.title} className="w-10 h-10 object-cover object-top" />
+              {/* {JSON.stringify(game)} */}
+            </div>
+          </div>
+          {/* <Icon className="w-10 h-10 text-white relative z-10" /> */}
           <div className="absolute top-2 right-2">
             <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs`}>
               {t(`games.${game.difficulty}`)}
