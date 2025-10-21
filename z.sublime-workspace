@@ -33,7 +33,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAcB4AAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					7,
@@ -43,7 +43,7 @@
 						"close_panel": true
 					},
 					"GAAAAPcbAAAAAAAA+BsAAAAAAAACAAAAXG71GwAAAAAAAPYbAAAAAAAAAgAAAFxuHBoAAAAAAAAdGgAAAAAAAAIAAABcbhoaAAAAAAAAGxoAAAAAAAACAAAAXG7FFwAAAAAAAMYXAAAAAAAAAgAAAFxuwxcAAAAAAADEFwAAAAAAAAIAAABcbsQVAAAAAAAAxRUAAAAAAAACAAAAXG7CFQAAAAAAAMMVAAAAAAAAAgAAAFxuhRIAAAAAAACGEgAAAAAAAAIAAABcboMSAAAAAAAAhBIAAAAAAAACAAAAXG7nDwAAAAAAAOgPAAAAAAAAAgAAAFxu5Q8AAAAAAADmDwAAAAAAAAIAAABcbkoMAAAAAAAASwwAAAAAAAACAAAAXG5IDAAAAAAAAEkMAAAAAAAAAgAAAFxu5gkAAAAAAADnCQAAAAAAAAIAAABcbuQJAAAAAAAA5QkAAAAAAAACAAAAXG73BgAAAAAAAPgGAAAAAAAAAgAAAFxu9QYAAAAAAAD2BgAAAAAAAAIAAABcbrIEAAAAAAAAswQAAAAAAAACAAAAXG6wBAAAAAAAALEEAAAAAAAAAgAAAFxuwgIAAAAAAADDAgAAAAAAAAIAAABcbsACAAAAAAAAwQIAAAAAAAACAAAAXG4sAAAAAAAAAC0AAAAAAAAAAgAAAFxuKgAAAAAAAAArAAAAAAAAAAIAAABcbg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAqAAAAAAAAACwAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAKgAAAAAAAAAsAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					12,
@@ -51,7 +51,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					15,
@@ -59,7 +59,7 @@
 					"left_delete",
 					null,
 					"AQAAAEseAAAAAAAASx4AAAAAAAABAAAAIg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABMHgAAAAAAAEweAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAATB4AAAAAAABMHgAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					25,
@@ -67,7 +67,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAAgAAAARWwgbWFwYSBkZSBwYXBlbCB5IGxhcyBwcm9tZXNhcwo",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					26,
@@ -75,7 +75,7 @@
 					"right_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAACg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		},
@@ -95,7 +95,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAfx4AAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					4,
@@ -103,7 +103,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					5,
@@ -113,7 +113,7 @@
 						"close_panel": true
 					},
 					"IAAAAFkcAAAAAAAAWhwAAAAAAAACAAAAXG5XHAAAAAAAAFgcAAAAAAAAAgAAAFxuixoAAAAAAACMGgAAAAAAAAIAAABcbokaAAAAAAAAihoAAAAAAAACAAAAXG4rGQAAAAAAACwZAAAAAAAAAgAAAFxuKRkAAAAAAAAqGQAAAAAAAAIAAABcbtkXAAAAAAAA2hcAAAAAAAACAAAAXG7XFwAAAAAAANgXAAAAAAAAAgAAAFxuBBYAAAAAAAAFFgAAAAAAAAIAAABcbgIWAAAAAAAAAxYAAAAAAAACAAAAXG4mFAAAAAAAACcUAAAAAAAAAgAAAFxuJBQAAAAAAAAlFAAAAAAAAAIAAABcbqsRAAAAAAAArBEAAAAAAAACAAAAXG6pEQAAAAAAAKoRAAAAAAAAAgAAAFxugg8AAAAAAACDDwAAAAAAAAIAAABcboAPAAAAAAAAgQ8AAAAAAAACAAAAXG4oDQAAAAAAACkNAAAAAAAAAgAAAFxuJg0AAAAAAAAnDQAAAAAAAAIAAABcbh4LAAAAAAAAHwsAAAAAAAACAAAAXG4cCwAAAAAAAB0LAAAAAAAAAgAAAFxuiAkAAAAAAACJCQAAAAAAAAIAAABcboYJAAAAAAAAhwkAAAAAAAACAAAAXG4bBwAAAAAAABwHAAAAAAAAAgAAAFxuGQcAAAAAAAAaBwAAAAAAAAIAAABcbsQFAAAAAAAAxQUAAAAAAAACAAAAXG7CBQAAAAAAAMMFAAAAAAAAAgAAAFxuEAQAAAAAAAARBAAAAAAAAAIAAABcbg4EAAAAAAAADwQAAAAAAAACAAAAXG4OAgAAAAAAAA8CAAAAAAAAAgAAAFxuDAIAAAAAAAANAgAAAAAAAAIAAABcbioAAAAAAAAAKwAAAAAAAAACAAAAXG4oAAAAAAAAACkAAAAAAAAAAgAAAFxu",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					8,
@@ -121,7 +121,7 @@
 					"left_delete",
 					null,
 					"AgAAAFIeAAAAAAAAUh4AAAAAAAABAAAALFEeAAAAAAAAUR4AAAAAAAABAAAAIg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABTHgAAAAAAAFMeAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAUx4AAAAAAABTHgAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		},
@@ -141,7 +141,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAFQkAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					2,
@@ -151,7 +151,7 @@
 						"close_panel": true
 					},
 					"EQAAANUHAAAAAAAA1gcAAAAAAAACAAAAXG7TBwAAAAAAANQHAAAAAAAAAgAAAFxuXgcAAAAAAABfBwAAAAAAAAIAAABcbkwHAAAAAAAATQcAAAAAAAACAAAAXG4gBwAAAAAAACEHAAAAAAAAAgAAAFxuBwcAAAAAAAAIBwAAAAAAAAIAAABcbq4GAAAAAAAArwYAAAAAAAACAAAAXG4cBgAAAAAAAB0GAAAAAAAAAgAAAFxuGgYAAAAAAAAbBgAAAAAAAAIAAABcbrcEAAAAAAAAuAQAAAAAAAACAAAAXG61BAAAAAAAALYEAAAAAAAAAgAAAFxu3QIAAAAAAADeAgAAAAAAAAIAAABcbtsCAAAAAAAA3AIAAAAAAAACAAAAXG7UAQAAAAAAANUBAAAAAAAAAgAAAFxu0gEAAAAAAADTAQAAAAAAAAIAAABcbiMAAAAAAAAAJAAAAAAAAAACAAAAXG4hAAAAAAAAACIAAAAAAAAAAgAAAFxu",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAVCQAAAAAAABUJAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAFQkAAAAAAAAVCQAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					5,
@@ -159,7 +159,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					8,
@@ -167,7 +167,7 @@
 					"left_delete",
 					null,
 					"AwAAAPgIAAAAAAAA+AgAAAAAAAABAAAACvcIAAAAAAAA9wgAAAAAAAABAAAALPYIAAAAAAAA9ggAAAAAAAABAAAAIg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD5CAAAAAAAAPkIAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA+QgAAAAAAAD5CAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					20,
@@ -177,7 +177,7 @@
 						"close_panel": true
 					},
 					"JgAAALYHAAAAAAAAtgcAAAAAAAACAAAAXCKCBwAAAAAAAIIHAAAAAAAAAgAAAFwifgcAAAAAAAB+BwAAAAAAAAIAAABcIlgHAAAAAAAAWAcAAAAAAAACAAAAXCLQBQAAAAAAANAFAAAAAAAAAgAAAFwiyQUAAAAAAADJBQAAAAAAAAIAAABcIsUFAAAAAAAAxQUAAAAAAAACAAAAXCKlBQAAAAAAAKUFAAAAAAAAAgAAAFwiRAUAAAAAAABEBQAAAAAAAAIAAABcIgcFAAAAAAAABwUAAAAAAAACAAAAXCL6BAAAAAAAAPoEAAAAAAAAAgAAAFwi5wQAAAAAAADnBAAAAAAAAAIAAABcIn0EAAAAAAAAfQQAAAAAAAACAAAAXCJuBAAAAAAAAG4EAAAAAAAAAgAAAFwiagQAAAAAAABqBAAAAAAAAAIAAABcIlMEAAAAAAAAUwQAAAAAAAACAAAAXCIWBAAAAAAAABYEAAAAAAAAAgAAAFwi+QMAAAAAAAD5AwAAAAAAAAIAAABcIvUDAAAAAAAA9QMAAAAAAAACAAAAXCLgAwAAAAAAAOADAAAAAAAAAgAAAFwi3AMAAAAAAADcAwAAAAAAAAIAAABcIrwDAAAAAAAAvAMAAAAAAAACAAAAXCK4AwAAAAAAALgDAAAAAAAAAgAAAFwirAMAAAAAAACsAwAAAAAAAAIAAABcIp0DAAAAAAAAnQMAAAAAAAACAAAAXCKOAwAAAAAAAI4DAAAAAAAAAgAAAFwiigMAAAAAAACKAwAAAAAAAAIAAABcIkoDAAAAAAAASgMAAAAAAAACAAAAXCKeAgAAAAAAAJ4CAAAAAAAAAgAAAFwifQIAAAAAAAB9AgAAAAAAAAIAAABcInkCAAAAAAAAeQIAAAAAAAACAAAAXCJnAgAAAAAAAGcCAAAAAAAAAgAAAFwiSwIAAAAAAABLAgAAAAAAAAIAAABcIhkCAAAAAAAAGQIAAAAAAAACAAAAXCLCAQAAAAAAAMIBAAAAAAAAAgAAAFwiiwEAAAAAAACLAQAAAAAAAAIAAABcInoBAAAAAAAAegEAAAAAAAACAAAAXCJtAQAAAAAAAG0BAAAAAAAAAgAAAFwi",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABtAQAAAAAAAG8BAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAbQEAAAAAAABvAQAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					25,
@@ -185,7 +185,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAKx4AAAAAAAD/CAAAVW4gc8OhYmFkbyBlbiBsYSBjaXVkYWQKCkVsIHPDoWJhZG8gcGFzYWRvIGZ1aSBhbCBjZW50cm8gZGUgbGEgY2l1ZGFkLiBRdWVyw61hIGNvbXByYXIgdW4gcmVnYWxvIHBhcmEgbWkgaGVybWFuYSwgcG9ycXVlIGVsIGRvbWluZ28gdm95IGEgaXIgYSBzdSBjYXNhIHBvciBzdSBjdW1wbGVhw7Fvcy4gU2Fsw60gZGUgbWkgYXBhcnRhbWVudG8gdGVtcHJhbm8uIFByaW1lcm8sIGNhbWluw6kgYSBsYSBwYXJhZGEgZGUgYXV0b2LDunMuIEVuIGxhIHBhcmFkYSwgbGXDrSBlbCBob3JhcmlvLiBFbCBhdXRvYsO6cyBuw7ptZXJvIDUgbGxlZ8OzIGEgbGFzIG51ZXZlLiBTdWLDrSB5IHBhZ3XDqSBlbCBiaWxsZXRlLiBFbCBjb25kdWN0b3IgZnVlIGFtYWJsZS4gRGlqbzogQnVlbm9zIGTDrWFzLiBZbyByZXNwb25kw606IEJ1ZW5vcyBkw61hcywgcG9yIGZhdm9yLCB1biBiaWxsZXRlIGFsIG1lcmNhZG8gY2VudHJhbC4KCkN1YW5kbyBsbGVndcOpIGFsIG1lcmNhZG8sIGhhYsOtYSBtdWNoYXMgcGVyc29uYXMuIEZ1aSBhIHVuIHB1ZXN0byBkZSBmcnV0YXMuIERpamU6IEJ1ZW5vcyBkw61hcywgwr9jdcOhbnRvIGN1ZXN0YSB1biBraWxvIGRlIG1hbnphbmFzPy4gTGEgdmVuZGVkb3JhIHJlc3BvbmRpw7M6IEN1ZXN0YSBkb3MgZXVyb3MuIFZveSBhIGxsZXZhciB1biBraWxvLCBwb3IgZmF2b3IuIFBhZ3XDqSB5IGd1YXJkw6kgbGFzIG1hbnphbmFzIGVuIG1pIG1vY2hpbGEuCgpEZXNwdcOpcyBmdWkgYSB1bmEgdGllbmRhIGRlIHJvcGEgcGFyYSBidXNjYXIgdW5hIGNhbWlzYSBwYXJhIG1pIGhlcm1hbmEuIE1pcsOpIG11Y2hhcyBjYW1pc2FzLiBMZSBwcmVndW50w6kgYSBsYSBkZXBlbmRpZW50YTogRGlzY3VscGUsIMK/dGllbmUgZXN0YSBjYW1pc2EgZW4gdGFsbGEgbWVkaWFuYSB5IGVuIGNvbG9yIGF6dWw/LiBTw60sIGFxdcOtIGVzdMOhLCByZXNwb25kacOzLiDCv1RlIGd1c3RhPy4gU8OtLCBlcyBib25pdGEuIMK/Q3XDoW50byBjdWVzdGE/LiBDdWVzdGEgdmVpbnRlIGV1cm9zLiBFc3TDoSBiaWVuLiBMYSB2b3kgYSBjb21wcmFyLiBQYWd1w6kgY29uIHRhcmpldGEgeSBwZWTDrSB1bmEgYm9sc2EuIExhIGRlcGVuZGllbnRhIGRpam86IMK/TmVjZXNpdGFzIHVuIHJlY2libz8uIFPDrSwgcG9yIGZhdm9yLiBUb23DqSBlbCByZWNpYm8geSBzYWzDrSBkZSBsYSB0aWVuZGEuCgpEZXNwdcOpcyB0dXZlIGhhbWJyZS4gRW50csOpIGVuIHVuIGNhZsOpIHBlcXVlw7FvLiBFbCBjYW1hcmVybyBkaWpvOiBIb2xhLCDCv3F1w6kgZGVzZWE/LiBZbyBkaWplOiBRdWllcm8gdW4gYm9jYWRpbGxvIGRlIHBvbGxvIHkgdW4gY2Fmw6kgY29uIGxlY2hlLCBwb3IgZmF2b3IuIEVzcGVyw6kgdW5vcyBtaW51dG9zIHkgY29tw60gY29uIGd1c3RvLiBMYSBjb21pZGEgZnVlIHNpbXBsZSB5IGJ1ZW5hLiBBbCBmaW5hbCBwZWTDrSBsYSBjdWVudGE6IMK/TWUgdHJhZSBsYSBjdWVudGEsIHBvciBmYXZvcj8uIENsYXJvLCBkaWpvIGVsIGNhbWFyZXJvLiBQYWd1w6kgeSBkZWrDqSB1bmEgcGVxdWXDsWEgcHJvcGluYS4KCkFudGVzIGRlIHZvbHZlciBhIGNhc2EsIHBhc8OpIHBvciBsYSBlc3RhY2nDs24gZGUgYXV0b2J1c2VzIHBhcmEgY29tcHJhciB1biBiaWxsZXRlIHBhcmEgZWwgZG9taW5nby4gRnVpIGEgbGEgdmVudGFuaWxsYSB5IGhhYmzDqSBjb24gbGEgdmVuZGVkb3JhOgrigJRCdWVuYXMgdGFyZGVzLiBRdWllcm8gdW4gYmlsbGV0ZSBwYXJhIG1hw7FhbmEgYSBsYXMgZGlleiwgZGVzdGlubzogZWwgYmFycmlvIExvcyBQaW5vcy4K4oCURGUgYWN1ZXJkby4gwr9Tb2xvIGlkYT8K4oCUU8OtLCBzb2xvIGlkYS4gVm95IGEgdmlzaXRhciBhIG1pIGZhbWlsaWEuCuKAlFNvbiB0cmVzIGV1cm9zLgpQYWd1w6kgeSBjb25maXJtw6k6IEVsIGF1dG9iw7pzIHNhbGUgYSBsYXMgZGlleiwgwr92ZXJkYWQ/LiBTw60sIHNhbGUgYSBsYXMgZGlleiBlbiBwdW50byBkZSBsYSBwbGF0YWZvcm1hIHRyZXMuCgpDb24gZWwgYmlsbGV0ZSBlbiBlbCBib2xzaWxsbywgbWUgc2VudMOtIHRyYW5xdWlsby4gQ2FtaW7DqSBhbCBwYXJxdWUgeSBkZXNjYW5zw6kgdW4gcG9jbyBlbiB1bmEgYmFuY2EuIFBlbnPDqSBlbiBlbCBkb21pbmdvLiBWb3kgYSB2ZXIgYSBtaSBoZXJtYW5hLCB2b3kgYSBkYXJsZSBsYSBjYW1pc2EgYXp1bCB5IHZhbW9zIGEgY29tZXIganVudG9zIGNvbiBsYSBmYW1pbGlhLiBEZXNwdcOpcywgcmVncmVzw6kgYSBtaSBhcGFydGFtZW50byBlbiBlbCBhdXRvYsO6cy4gRWwgZMOtYSBmdWUgbGFyZ28sIHBlcm8gZnVlIHVuIHPDoWJhZG8gc2VuY2lsbG8geSBmZWxpei4",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAKoIAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAACqCAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					28,
@@ -193,7 +193,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAA/AAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					29,
@@ -203,7 +203,7 @@
 						"characters": "\n"
 					},
 					"AQAAAPwAAAAAAAAA/QAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD8AAAAAAAAAPwAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/AAAAAAAAAD8AAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					39,
@@ -211,7 +211,7 @@
 					"left_delete",
 					null,
 					"AQAAAP0AAAAAAAAA/QAAAAAAAABLEAAATGFyYSBsbGVnw7MgYSBTYW50YSBBdXJvcmEgYSBwcmluY2lwaW9zIGRlIG90b8OxbywgY29uIHVuYSBtYWxldGEgZGUgdGVsYSB5IHVuIGN1YWRlcm5vIGRvbmRlIGRpYnVqYWJhIHB1ZW50ZXMgY3VhbmRvIHNlIHNlbnTDrWEgc29sYS4gSGFjw61hIHN1IHByw6FjdGljYSBkZSBhcnF1aXRlY3R1cmEgZW4gdW4gZGVzcGFjaG8gcGVxdWXDsW8sIHkgdml2w61hIGVuIHVuIGVzdHVkaW8gc29icmUgbGEgdmllamEgZXN0YWNpw7NuIGRlbCB0cmFudsOtYS4gQ2FkYSBtYcOxYW5hIGNydXphYmEgZWwgUHVlbnRlIFZlcmRlIHBhcmEgaXIgYWwgdHJhYmFqbzsgZGVzZGUgYWxsw60gdmXDrWEgZWwgcsOtbyBjb21vIHVuYSBjaW50YSBxdWUgcGFydMOtYSBsYSBjaXVkYWQgeSwgYWwgbWlzbW8gdGllbXBvLCBsYSB1bsOtYS4gRWwgYmFycmlvIHRlbsOtYSBlc2Ugcml0bW8gZGUgY2FtcGFuYXMsIGJpY2ljbGV0YXMgeSB2ZW5kZWRvcmVzIGRlIHBhbi4gQXVucXVlIGVsbGEgaGFibGFiYSBwb2NvIGFsIHByaW5jaXBpbywgaWJhIGFwcmVuZGllbmRvIGxvcyBub21icmVzOiBkb8OxYSBJbsOpcyBjb24gc3UgcGVycm8gY2Fub3NvLCBCcnVubyBlbCByZXBhcnRpZG9yLCBkb24gTWF0ZW8sIGVsIGJpYmxpb3RlY2FyaW8ganViaWxhZG8gcXVlIHNpZW1wcmUgbGxldmFiYSB1bmEgYnVmYW5kYSBhenVsLgoKVW5hIG1hw7FhbmEgZW5jb250csOzIHVuIHNvYnJlIGJham8gbGEgcHVlcnRhLiBEZW50cm8gaGFiw61hIHVuIG1hcGEgZGUgcGFwZWwgYW1hcmlsbGVudG8sIGNvbiB1biB0cmF6byByb2pvIGVuIGZvcm1hIGRlIFggY2VyY2EgZGUgdW4gZGVzY2FtcGFkbyBqdW50byBhbCByw61vLiBIYWLDrWEgdGFtYmnDqW4gdW5hIG5vdGE6IOKAnFBhcmEgcXVlIHJlY3VlcmRlcyBsbyBxdWUgZnVl4oCdLiBMYXJhIHBlbnPDsyBxdWUgc2UgaGFicsOtYW4gZXF1aXZvY2FkbyBkZSBkZXN0aW5hdGFyaW8sIHBlcm8gbGEgY3VyaW9zaWRhZCBwdWRvIG3DoXMuIEVuIGVsIHRyYWJham8gbm8gc2UgY29uY2VudHLDszsgZGVjaWRpw7MgcXVlIHBvciBsYSB0YXJkZSBpYmEgYSBpciBhIGxhIGJpYmxpb3RlY2EgbXVuaWNpcGFsIHBhcmEgcHJlZ3VudGFyIHBvciBlbCBtYXBhLiBTZW50w61hIHF1ZSwgc2kgbm8gbG8gaGFjw61hLCBlbCBwYXBlbCBzZSBxdWVkYXLDrWEgbXVkbyB5IHN1IGN1YWRlcm5vIHRhbWJpw6luLgoKRW4gbGEgYmlibGlvdGVjYSwgZG9uIE1hdGVvIHJlY29ub2Npw7MgZWwgZGlidWpvIGRlIHVuIHZpc3Rhem8uIOKAnEVzZSBtYXBhIGxvIGhpY2UgaGFjZSBtdWNob3MgYcOxb3PigJ0sIGRpam8sIHBhc2FuZG8gbGEgeWVtYSBkZSBsb3MgZGVkb3MgY29tbyBzaSBzaWd1aWVyYSBlbCByw61vIGNvbiBlbGxvcy4g4oCcTGEgWCBtYXJjYSBsYSBIdWVydGEgZGVsIFLDrW8uIEFsbMOtIHBsYW50w6FiYW1vcyB0b21hdGVzLCBjYWxhYmF6YXMgeSDDoXJib2xlcyBkZSBtb3JhLiBMb3Mgc8OhYmFkb3MgaGFiw61hIGludGVyY2FtYmlvIGRlIHNlbWlsbGFzLiBQZXJvIGhhY2UgdW5vcyBhw7FvcywgdW5hIGVtcHJlc2EgY29tcHLDsyBlbCB0ZXJyZW5vIHkgbG8gY2VyY8OzLiBZbyBhcmNoaXbDqSBsb3MgcGxhbm9zLCBwb3Igc2kgdW4gZMOtYSB2b2x2w61hbiBhIHNlcnZpci7igJ0gRWwgaG9tYnJlIHNvbnJpw7MgY29uIHVuYSB0cmlzdGV6YSBsZXZlLiDigJxVbiBwdWVudGUgdW5lIGRvcyBvcmlsbGFzLCBwZXJvIHVuIHBsYW4sIG1hbCBoZWNobywgc2VwYXJhIGEgbGEgZ2VudGUuIEVzIG1lam9yIHF1ZSBsYSBjaXVkYWQgZXNjdWNoZSBhbnRlcyBkZSBjYXZhci7igJ0KCkxhcmEgY2FtaW7DsyBoYXN0YSBlbCBkZXNjYW1wYWRvIGFsIHNhbGlyIGRlbCB0cmFiYWpvLiBFbCBhbGFtYnJhZG8gb3hpZGFkbyBkZWphYmEgdmVyIHRyb3pvcyBkZSB0aWVycmEgc2VjYSB5IHVuYSBwaWxhIHZpZWphIGRlIG1hZGVyYXMuIFVuIG5pw7FvIGxhbnphYmEgdW5hIHBlbG90YSBkZSB0cmFwbyBhbCBvdHJvIGxhZG8geSBzdSBoZXJtYW5hIHJlw61hLiBEb8OxYSBJbsOpcywgcXVlIHBhc2VhYmEgYWwgcGVycm8sIHNlIGFjZXJjw7MgeSBzZcOxYWzDsyB1bmEgbWFyY2EgZW4gc3UgbWVtb3JpYTog4oCcQXF1w60gaGFjw61hbW9zIG1lcmllbmRhcy4gQ3VhbmRvIGxhIGVtcHJlc2EgbGxlZ8OzLCBkaWplcm9uIHF1ZSBwcm9udG8gaGFicsOtYSB1biBlc3RhY2lvbmFtaWVudG8gYW1wbGlvLCBjb24gbHVjZXMgeSB2aWdpbGFuY2lhLiBQcm9tZXRpZXJvbiBxdWUgbWFudGVuZXLDrWFuIHVuYSBmcmFuamEgZGUgw6FyYm9sZXMsIHBlcm8gbmFkYSBwYXPDsy4gU29sbyBlbCBjYXJ0ZWwu4oCdIEVsIHZpZW50byBtb3Zpw7MgZWwgcGzDoXN0aWNvIHF1ZSBjdWJyw61hIHVuIG1vbnTDs24gZGUgYXJlbmEuIExhcmEgc2UgaW1hZ2luw7MgdW4gcGxhbm8gZGlzdGludG86IHNlbmRlcm9zLCBiYW5jYXMsIHVuIHBlcXVlw7FvIGxhYm9yYXRvcmlvIGRlIGxsdXZpYSwgdW4gZXNwYWNpbyBwYXJhIHRhbGxlcmVzLiBTZSBsZSBlbmNlbmRpw7MgdW5hIGRlY2lzacOzbjogc2kgZWwgYmFycmlvIHF1aXNpZXJhLCBlbGxhIGRpYnVqYXLDrWEgdW5hIHByb3B1ZXN0YS4KCkFsIGTDrWEgc2lndWllbnRlLCB2b2x2acOzIGEgbGEgYmlibGlvdGVjYS4g4oCcU2kgdHV2acOpcmFtb3MgdW4gcHJveWVjdG8gc2VyaW8sIHF1aXrDoXMgZWwgY29uY2VqbyBsbyBlc2N1Y2hhcsOtYeKAnSwgZGlqbyBMYXJhLCBjb24gZWwgbWFwYSBlbiBsYSBtYW5vLiBEb24gTWF0ZW8gYXNpbnRpw7MgZGVzcGFjaW8uIOKAnENvbnZvY2EgYSBsb3MgdmVjaW5vcy4gWW8gYnVzY2Fyw6kgZm90b3MgeSB1biBwYXIgZGUgZGF0b3M6IGN1w6FudGFzIGZhbWlsaWFzIHBhcnRpY2lwYWJhbiwgY3XDoW50byBzZSBjb3NlY2hhYmEuIE5vIHBhcmEgbWlyYXIgYXRyw6FzIGNvbiBub3N0YWxnaWEsIHNpbm8gcGFyYSBxdWUgc2UgZW50aWVuZGEgbG8gcXVlIHNlIHBvZHLDrWEgcmVjdXBlcmFyLuKAnSBJbXByaW1pZXJvbiB2b2xhbnRlcyBxdWUgZGVjw61hbjog4oCcUmV1bmnDs24gY29tdW5pdGFyaWE6IGltYWdpbmVtb3MgbGEgSHVlcnRhIGRlbCBSw61v4oCdLiBMYXJhLCBxdWUgc2llbXByZSBoYWLDrWEgc2lkbyB0w61taWRhLCByZXNwaXLDsyBob25kbyBhbnRlcyBkZSBwZWdhciBlbCBwcmltZXJvIGVuIGVsIHBvc3RlIGRlbCB0cmFudsOtYS4gU2Fiw61hIHF1ZSBlc2EgdGFyZGUgaWJhIGEgaGFibGFyIGVuIHZveiBhbHRhLgoKRWwgZG9taW5nbyBzZSBsbGVuw7MgZWwgc2Fsw7NuIGRlbCBmb25kbyBkZSBsYSBiaWJsaW90ZWNhLiBWaW5pZXJvbiBlc3R1ZGlhbnRlcywgbWFkcmVzLCBnZW50ZSBqdWJpbGFkYSB5IGN1cmlvc29zLiBCcnVubyBwcm9wdXNvIHVuIGNhcnJpbCBwYXJhIGJpY2ljbGV0YXMgcXVlIGJvcmRlYXNlIGVsIHLDrW8uIFVuYSBwcm9mZXNvcmEgc3VnaXJpw7MgdGFsbGVyZXMgZGUgY29tcG9zdGFqZS4gTGFyYSBjb2xnw7MgdW4gcGFwZWwgZ3JhbmRlIHkgdHJhesOzIGNvbiByb3R1bGFkb3Jlcy4g4oCcRXMgaW1wb3J0YW50ZSBxdWUgZWwgcGxhbm8gc2VhIGNsYXJvIHkgcXVlIHByb3BvbmdhbW9zIGNvc3RvcyByZWFsaXN0YXPigJ0sIGRpam8sIGludGVudGFuZG8gcXVlIG5vIGxlIHRlbWJsYXJhIGxhIHZvei4g4oCcU2kgbGEgZW1wcmVzYSBhY2VwdGFyYSByZWR1Y2lyIGVsIGVzdGFjaW9uYW1pZW50byB5IGxhIGNpdWRhZCBjZWRpZXJhIHVuYSBwYXJ0ZSBkZWwgdGVycmVubywgcG9kcsOtYW1vcyBjb252aXZpci4gU2Vyw61hIGlkZWFsIHF1ZSBlbCBqYXJkw61uIHNlIHJlc2VydmUgcGFyYSB1c28gcMO6YmxpY28u4oCdIERvw7FhIEluw6lzIGHDsWFkacOzOiDigJxRdWVyZW1vcyBxdWUgbnVlc3RyYXMgbmlldGFzIHRlbmdhbiB1biBsdWdhciBkb25kZSBlbnN1Y2lhcnNlIGxhcyBtYW5vcyBjb24gdGllcnJh4oCdLiBMYXJhIGNvbmNsdXnDszog4oCcQ3VhbmRvIHByZXNlbnRlbW9zIGxhIHByb3B1ZXN0YSwgZXNwZXJvIHF1ZSBlbCBhbGNhbGRlIGVzY3VjaGUuIEF1bnF1ZSBoYXlhIG90cmFzIHByaW9yaWRhZGVzLCBlc3RvIHRhbWJpw6luIGVzIHNhbHVkIHkgZW5jdWVudHJvLuKAnSBTZSBmb3JtYXJvbiBjb21pc2lvbmVzOiB1bmEgcGFyYSBsaW1waWFyLCBvdHJhIHBhcmEgcmVjYXVkYXIgZmlybWFzLiBEZSBwcm9udG8sIGxhIFggZGVsIG1hcGEgcGFyZWPDrWEgbGF0aXIuCg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD9AAAAAAAAAKsQAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/QAAAAAAAACrEAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					42,
@@ -219,7 +219,7 @@
 					"left_delete",
 					null,
 					"AQAAAP0AAAAAAAAA/QAAAAAAAAAeDwAACkxhIHNlbWFuYSBhdmFuesOzIGNvbiBwcmlzYS4gRW4gZWwgZGVzcGFjaG8gZG9uZGUgaGFjw61hIGxhIHByw6FjdGljYSwgc3Ugc3VwZXJ2aXNvcmEgbGEgbGxhbcOzIGFwYXJ0ZTog4oCcTm8gdGUgbWV0YXMgbXVjaG8sIExhcmEuIEVzYSBlbXByZXNhIGVzIGNsaWVudGUgZGVsIGVzdHVkaW8uIFNpIHZhcyBhIGhhYmxhciwgcXVlIHNlYSBjb24gY3VpZGFkb+KAnS4gRWxsYSBzaW50acOzIHVuIG51ZG8gZW4gZWwgZXN0w7NtYWdvLiBEdWTDsyBwb3IgdW5hIG5vY2hlIGVudGVyYSwgbWlyYW5kbyBlbCB0ZWNoby4gQWwgZmluYWwsIHJlY29yZMOzIGxhIGZyYXNlIGRlIGRvbiBNYXRlbyB5IGRlY2lkacOzIHNlciB0cmFuc3BhcmVudGUuIFByZXBhcsOzIHVuIGRpc2N1cnNvIGNvcnRvOiBpYmEgYSBkZWZlbmRlciBlbCBwcm95ZWN0byBjb24gcmVzcGV0bywgc2luIGF0YWNhciBhIG5hZGllLiBFc2EgbWlzbWEgbm9jaGUsIHJlY2liacOzIHVuIGNvcnJlbyBhbsOzbmltbyBjb24gZm90b2dyYWbDrWFzIGFudGlndWFzOiBuacOxb3MgY29uIHJlZ2FkZXJhcywgYWJ1ZWxvcyBlbiBiYW5xdWl0b3MsIHVuYSBiYW5kZXJpdGEgaGVjaGEgZGUgcmV0YXpvcy4g4oCcUGFyYSBxdWUgbm8gc2UgcGllcmRhIGxvIHF1ZSBmdWXigJ0sIGRlY8OtYSBkZSBudWV2by4gU3VwbyBxdWUgZXJhIGRvbiBNYXRlbywgeSBzb25yacOzLgoKRWwgbWnDqXJjb2xlcyBodWJvIGF1ZGllbmNpYSBww7pibGljYSBlbiBlbCBjb25jZWpvLiBFbCByZXByZXNlbnRhbnRlIGRlIGxhIGVtcHJlc2EgaGFibMOzIHByaW1lcm86IOKAnEVsIGVzdGFjaW9uYW1pZW50byBnZW5lcmFyw6EgZW1wbGVvIHkgb3JkZW5hcsOhIGVsIHRyw6FmaWNvLiBMYSB6b25hIG5lY2VzaXRhIGRlc2Fycm9sbG/igJ0uIExhcmEgcGlkacOzIGxhIHBhbGFicmEuIFN1cyBtYW5vcyBzdWRhYmFuLiDigJxBdW5xdWUgbGEgb2JyYSBnZW5lcmUgZW1wbGVv4oCdLCBkaWpvLCDigJx0YW1iacOpbiBkZWJlbW9zIHByb3RlZ2VyIGVsIGVzcGFjaW8gY29tw7puLiBQcm9wb25lbW9zIHVuIGRpc2XDsW8gbWl4dG86IHVuIGVzdGFjaW9uYW1pZW50byBwZXF1ZcOxbyBjb24gcGF2aW1lbnRvIHBlcm1lYWJsZSB5LCBqdW50byBhIMOpbCwgbGEgSHVlcnRhIGRlbCBSw61vLiBTaSB1c3RlZGVzIGFjZXB0YXJhbiBlc2EgcmVkdWNjacOzbiwgbm9zb3Ryb3Mgbm9zIGNvbXByb21ldGVyw61hbW9zIGEgbWFudGVuZXIgbGEgaHVlcnRhIGNvbiB2b2x1bnRhcmlvcyB5IHRhbGxlcmVzLiBOdWVzdHJvIGJhcnJpbyBzZXLDoSBtw6FzIHNhbm8geSBhdHJhY3Rpdm8uIE9qYWzDoSBwb2RhbW9zIGRlbW9zdHJhcmxvLuKAnSBVbiBtdXJtdWxsbyByZWNvcnJpw7MgbGEgc2FsYS4gVW4gY29uY2VqYWwgcHJlZ3VudMOzIHBvciBuw7ptZXJvczsgTGFyYSBleHBsaWPDsyBjb3N0b3MsIG1hbnRlbmltaWVudG8sIHNlZ3VyaWRhZC4gVmFyaW9zIHZlY2lub3MgaGljaWVyb24gcHJvbWVzYXMgY29uY3JldGFzOiBob3JhcyBkZSB0cmFiYWpvLCBkb25hY2nDs24gZGUgaGVycmFtaWVudGFzLCBhcG95byBkZSBsYSBlc2N1ZWxhLgoKRWwgY29uY2VqbyBkZWNpZGnDsyBwb3N0ZXJnYXIgbGEgZGVjaXNpw7NuIHVuYSBzZW1hbmEgeSB2aXNpdGFyIGVsIHNpdGlvLiDigJxRdWVyZW1vcyB2ZXIgcXVlIHNlYSB2aWFibGXigJ0sIGRpam8gbGEgYWxjYWxkZXNhLiBFbCBncnVwbyBubyBzZSBkZXNhbmltw7MuIOKAnEN1YW5kbyB2ZW5nYW4sIHZlcsOhbiBxdWUgeWEgZW1wZXrDs+KAnSwgYW51bmNpw7MgQnJ1bm8uIE9yZ2FuaXphcm9uIHVuYSBqb3JuYWRhIGRlIGxpbXBpZXphIHBhcmEgZWwgc8OhYmFkby4gTGFyYSBubyBkdXJtacOzIG11Y2hvLCBwZXJvIGRpYnVqw7Mgc2XDsWFsZXMgdGVtcG9yYWxlcyB5IHVuIGJvY2V0byBkZWwgcmVjb3JyaWRvLiDigJxBbnRlcyBkZSBxdWUgbGxlZ3VlbiwgZGVqZW1vcyB0b2RvIGNsYXJv4oCdLCBwaWRpw7MuIOKAnEVzIG5lY2VzYXJpbyBxdWUgY2FkYSBwZXJzb25hIGV4cGxpcXVlIHN1IHBhcnRlIGNvbiBjYWxtYSwgcGFyYSBxdWUgbm8gc2UgY29uZnVuZGFuLuKAnSBFbCBwbGFuIG5vIGVyYSBwZXJmZWN0bywgcGVybyBlcmEgcmVhbC4KCkVsIHPDoWJhZG8gYW1hbmVjacOzIGxsdXZpb3NvLiBBdW4gYXPDrSwgbGEgZ2VudGUgbGxlZ8OzIGNvbiBpbXBlcm1lYWJsZXMgeSBiYWxkZXMuIFF1aXRhcm9uIGJhc3VyYSwgbGV2YW50YXJvbiB1bmEgY29tcG9zdGVyYSBjb24gcGFsbGV0cywgcGludGFyb24gdW4gbGV0cmVybzog4oCcTGEgSHVlcnRhIGRlbCBSw61vOiBsdWdhciBkZSBhcHJlbmRpemFqZeKAnS4gRG9uIE1hdGVvIGFwYXJlY2nDsyBjb24gdW5hIGNhamEgZGUgc2VtaWxsYXMgeSB1bmEgc29ucmlzYSBudWV2YS4g4oCcUGFyYSBxdWUgbGEgbWVtb3JpYSBnZXJtaW5l4oCdLCBkaWpvLCBlbnRyZWdhbmRvIGJvbHNpdGFzIGNvbiBub21icmVzIGVzY3JpdG9zIGEgbWFuby4gTG9zIG5pw7FvcyBlbnRlcnJhcm9uIGhhYmFzIGNlcmNhIGRlIGxhIHZhbGxhLiBBIG1lZGlhIG1hw7FhbmEgbGxlZ8OzIGxhIGNvbWl0aXZhIG11bmljaXBhbC4gTGEgYWxjYWxkZXNhIHNlIGRldHV2byBiYWpvIHVuIHBhcmFndWFzIHkgb2JzZXJ2w7MgYSBsYSBnZW50ZSB0cmFiYWphciwgZW1wYXBhZGEgcGVybyBjb250ZW50YS4g4oCcRXN0byBubyBlcyBzb2xvIHVuIHBsYW5v4oCdLCBkaWpvIGJhaml0by4g4oCcRXMgdW5hIHZvbHVudGFk4oCdLgoKRXNhIHRhcmRlLCBlbCBjb25jZWpvIGFwcm9iw7MgdW4gcHJvZ3JhbWEgcGlsb3RvOiBtaXRhZCBqYXJkw61uLCBtaXRhZCBlc3RhY2lvbmFtaWVudG8gcmVkdWNpZG8uIOKAnFNpIGVuIHNlaXMgbWVzZXMgZnVuY2lvbmEg4oCUZGVjbGFyw7MgbGEgYWxjYWxkZXNh4oCULCBhbXBsaWFyZW1vcyBsYSBodWVydGEgeSBoYXJlbW9zIGRlbCByw61vIHVuIGNvcnJlZG9yIHZlcmRlLuKAnSBFbCByZXByZXNlbnRhbnRlIGRlIGxhIGVtcHJlc2EsIHNlcmlvIHBlcm8gY29ycmVjdG8sIGFjZXB0w7MuIOKAnFBvZHLDrWFtb3MgY29sYWJvcmFyIGNvbiBpbHVtaW5hY2nDs24geSBjw6FtYXJhcywgc2llbXByZSB5IGN1YW5kbyBoYXlhIHJlc3BvbnNhYmlsaWRhZCBjb21wYXJ0aWRhLuKAnSBMYXJhIHJlc3BpcsOzIGhvbmRvLiBObyBlcmEgbGEgdmljdG9yaWEgdG90YWwsIHBlcm8gc8OtIHVuIHB1ZW50ZSB0ZW5kaWRvLiBTZSBhYnJhemFyb24sIG1vamFkb3MgeSBmZWxpY2VzLgoKUGFzYXJvbiBsb3MgbWVzZXMgeSBlbCB2ZXJkZSBzZSBtdWx0aXBsaWPDsy4gTGFzIGFiZWphcyB2b2x2aWVyb247IGxvcyBzw6FiYWRvcyBvbMOtYW4gYSBjYWbDqSB5IGEgdGllcnJhIGjDum1lZGEuIExhcmEgdGVybWluw7Mgc3UgcHLDoWN0aWNhIHkgZGVjaWRpw7MgcXVlZGFyc2UgZW4gU2FudGEgQXVyb3JhLiBEaWJ1amFiYSBwbGFub3MgcG9yIGxhcyBtYcOxYW5hcyB5LCBwb3IgbGFzIHRhcmRlcywgZGFiYSB0YWxsZXJlcyBkZSBkaXNlw7FvIHBhcmEgbmnDsW9zIGVuIGxhIGh1ZXJ0YS4gVW4gZMOtYSwgZG9uIE1hdGVvIGxlIGVudHJlZ8OzIHVuYSB0YXJqZXRhOiDigJxNw6FzIHF1ZSBsw61uZWFzLCBkaWJ1amFzdGUgdW4gcHVlbnRl4oCdLiBFbGxhIGd1YXJkw7MgZWwgbWVuc2FqZSBqdW50byBjb24gZWwgbWFwYSBhbWFyaWxsZW50by4gU2Fiw61hIHF1ZSwgZW4gZWwgZnV0dXJvLCBvdHJhcyBYIGFwYXJlY2Vyw61hbiBlbiBzdSB2aWRhLiBUYW1iacOpbiBzYWLDrWEgcXVlLCBwYXJhIHF1ZSBleGlzdGllcmEgdW4gcHVlbnRlLCBhbGd1aWVuIHRlbmRyw61hIHF1ZSBpbWFnaW5hcmxvIHkgb3Ryb3MgdGVuZHLDrWFuIHF1ZSBjcmVlci4gWSBlc28sIGVuIHN1IGNpdWRhZCBhbCBsYWRvIGRlbCByw61vLCB5YSBlc3RhYmEgb2N1cnJpZW5kby4K",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD9AAAAAAAAAHoPAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/QAAAAAAAAB6DwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					43,
@@ -227,7 +227,7 @@
 					"paste",
 					null,
 					"AQAAAP0AAAAAAAAApAMAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD9AAAAAAAAAP0AAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/QAAAAAAAAD9AAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					46,
@@ -235,7 +235,7 @@
 					"left_delete",
 					null,
 					"AQAAAP0AAAAAAAAA/QAAAAAAAAALAAAAICAidGV4dCI6ICI",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAIAQAAAAAAAP0AAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACAEAAAAAAAD9AAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					49,
@@ -243,7 +243,7 @@
 					"left_delete",
 					null,
 					"AQAAAJcDAAAAAAAAlwMAAAAAAAABAAAAIg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACYAwAAAAAAAJgDAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAmAMAAAAAAACYAwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					50,
@@ -253,7 +253,7 @@
 						"characters": "\n"
 					},
 					"AQAAAJcDAAAAAAAAmAMAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACXAwAAAAAAAJcDAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAlwMAAAAAAACXAwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					56,
@@ -263,7 +263,7 @@
 						"close_panel": true
 					},
 					"CgAAAAkDAAAAAAAACgMAAAAAAAACAAAAXG4HAwAAAAAAAAgDAAAAAAAAAgAAAFxujQIAAAAAAACOAgAAAAAAAAIAAABcbosCAAAAAAAAjAIAAAAAAAACAAAAXG4aAgAAAAAAABsCAAAAAAAAAgAAAFxuGAIAAAAAAAAZAgAAAAAAAAIAAABcbpEBAAAAAAAAkgEAAAAAAAACAAAAXG6PAQAAAAAAAJABAAAAAAAAAgAAAFxuEAEAAAAAAAARAQAAAAAAAAIAAABcbg4BAAAAAAAADwEAAAAAAAACAAAAXG4",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAOAQAAAAAAABABAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAADgEAAAAAAAAQAQAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		},
@@ -286,7 +286,7 @@
 						"characters": "s"
 					},
 					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					2,
@@ -294,7 +294,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAABAAAAcw",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					3,
@@ -302,18 +302,9 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAArAAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				]
 			]
-		},
-		{
-			"file": "stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
-			"settings":
-			{
-				"buffer_size": 7868,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
 		},
 		{
 			"contents": "'use client'\n\nimport { useState } from 'react'\nimport { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'\nimport {\n  Bars3Icon,\n  CalendarIcon,\n  ChartPieIcon,\n  DocumentDuplicateIcon,\n  FolderIcon,\n  HomeIcon,\n  UsersIcon,\n  XMarkIcon,\n} from '@heroicons/react/24/outline'\n\nconst navigation = [\n  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },\n  { name: 'Team', href: '#', icon: UsersIcon, current: false },\n  { name: 'Projects', href: '#', icon: FolderIcon, current: false },\n  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },\n  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },\n  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },\n]\nconst teams = [\n  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },\n  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },\n  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },\n]\n\nfunction classNames(...classes) {\n  return classes.filter(Boolean).join(' ')\n}\n\nexport default function Example() {\n  const [sidebarOpen, setSidebarOpen] = useState(false)\n\n  return (\n    <>\n      {/*\n        This example requires updating your template:\n\n        ```\n        <html class=\"h-full bg-white dark:bg-gray-900\">\n        <body class=\"h-full\">\n        ```\n      */}\n      <div>\n        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className=\"relative z-50 lg:hidden\">\n          <DialogBackdrop\n            transition\n            className=\"fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0\"\n          />\n\n          <div className=\"fixed inset-0 flex\">\n            <DialogPanel\n              transition\n              className=\"relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full\"\n            >\n              <TransitionChild>\n                <div className=\"absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0\">\n                  <button type=\"button\" onClick={() => setSidebarOpen(false)} className=\"-m-2.5 p-2.5\">\n                    <span className=\"sr-only\">Close sidebar</span>\n                    <XMarkIcon aria-hidden=\"true\" className=\"size-6 text-white\" />\n                  </button>\n                </div>\n              </TransitionChild>\n\n              {/* Sidebar component, swap this element with another sidebar if you like */}\n              <div className=\"relative flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 dark:bg-gray-900 dark:ring dark:ring-white/10 dark:before:pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-black/10\">\n                <div className=\"relative flex h-16 shrink-0 items-center\">\n                  <img\n                    alt=\"Your Company\"\n                    src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600\"\n                    className=\"h-8 w-auto dark:hidden\"\n                  />\n                  <img\n                    alt=\"Your Company\"\n                    src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500\"\n                    className=\"h-8 w-auto not-dark:hidden\"\n                  />\n                </div>\n                <nav className=\"relative flex flex-1 flex-col\">\n                  <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                    <li>\n                      <ul role=\"list\" className=\"-mx-2 space-y-1\">\n                        {navigation.map((item) => (\n                          <li key={item.name}>\n                            <a\n                              href={item.href}\n                              className={classNames(\n                                item.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <item.icon\n                                aria-hidden=\"true\"\n                                className={classNames(\n                                  item.current\n                                    ? 'text-indigo-600 dark:text-white'\n                                    : 'text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white',\n                                  'size-6 shrink-0',\n                                )}\n                              />\n                              {item.name}\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                    <li>\n                      <div className=\"text-xs/6 font-semibold text-gray-400\">Your teams</div>\n                      <ul role=\"list\" className=\"-mx-2 mt-2 space-y-1\">\n                        {teams.map((team) => (\n                          <li key={team.name}>\n                            <a\n                              href={team.href}\n                              className={classNames(\n                                team.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <span\n                                className={classNames(\n                                  team.current\n                                    ? 'border-indigo-600 text-indigo-600 dark:border-white/20 dark:text-white'\n                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:border-white/10 dark:group-hover:border-white/20 dark:group-hover:text-white',\n                                  'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium dark:bg-white/5',\n                                )}\n                              >\n                                {team.initial}\n                              </span>\n                              <span className=\"truncate\">{team.name}</span>\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                  </ul>\n                </nav>\n              </div>\n            </DialogPanel>\n          </div>\n        </Dialog>\n\n        {/* Static sidebar for desktop */}\n        <div className=\"hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col dark:bg-gray-900\">\n          {/* Sidebar component, swap this element with another sidebar if you like */}\n          <div className=\"flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 dark:border-white/10 dark:bg-black/10\">\n            <div className=\"flex h-16 shrink-0 items-center\">\n              <img\n                alt=\"Your Company\"\n                src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600\"\n                className=\"h-8 w-auto dark:hidden\"\n              />\n              <img\n                alt=\"Your Company\"\n                src=\"https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500\"\n                className=\"h-8 w-auto not-dark:hidden\"\n              />\n            </div>\n            <nav className=\"flex flex-1 flex-col\">\n              <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                <li>\n                  <ul role=\"list\" className=\"flex flex-1 flex-col gap-y-7\">\n                    <li>\n                      <ul role=\"list\" className=\"-mx-2 space-y-1\">\n                        {navigation.map((item) => (\n                          <li key={item.name}>\n                            <a\n                              href={item.href}\n                              className={classNames(\n                                item.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <item.icon\n                                aria-hidden=\"true\"\n                                className={classNames(\n                                  item.current\n                                    ? 'text-indigo-600 dark:text-white'\n                                    : 'text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white',\n                                  'size-6 shrink-0',\n                                )}\n                              />\n                              {item.name}\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                    <li>\n                      <div className=\"text-xs/6 font-semibold text-gray-400\">Your teams</div>\n                      <ul role=\"list\" className=\"-mx-2 mt-2 space-y-1\">\n                        {teams.map((team) => (\n                          <li key={team.name}>\n                            <a\n                              href={team.href}\n                              className={classNames(\n                                team.current\n                                  ? 'bg-gray-50 text-indigo-600 dark:bg-white/5 dark:text-white'\n                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white',\n                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',\n                              )}\n                            >\n                              <span\n                                className={classNames(\n                                  team.current\n                                    ? 'border-indigo-600 text-indigo-600 dark:border-white/20 dark:text-white'\n                                    : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:border-white/10 dark:group-hover:border-white/20 dark:group-hover:text-white',\n                                  'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium dark:bg-white/5',\n                                )}\n                              >\n                                {team.initial}\n                              </span>\n                              <span className=\"truncate\">{team.name}</span>\n                            </a>\n                          </li>\n                        ))}\n                      </ul>\n                    </li>\n                  </ul>\n                </li>\n                <li className=\"-mx-6 mt-auto\">\n                  <a\n                    href=\"#\"\n                    className=\"flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5\"\n                  >\n                    <img\n                      alt=\"\"\n                      src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80\"\n                      className=\"size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10\"\n                    />\n                    <span className=\"sr-only\">Your profile</span>\n                    <span aria-hidden=\"true\">Tom Cook</span>\n                  </a>\n                </li>\n              </ul>\n            </nav>\n          </div>\n        </div>\n\n        <div className=\"sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-xs sm:px-6 lg:hidden dark:bg-gray-900 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:border-b dark:after:border-white/10 dark:after:bg-black/10\">\n          <button\n            type=\"button\"\n            onClick={() => setSidebarOpen(true)}\n            className=\"-m-2.5 p-2.5 text-gray-700 hover:text-gray-900 lg:hidden dark:text-gray-400 dark:hover:text-white\"\n          >\n            <span className=\"sr-only\">Open sidebar</span>\n            <Bars3Icon aria-hidden=\"true\" className=\"size-6\" />\n          </button>\n          <div className=\"flex-1 text-sm/6 font-semibold text-gray-900 dark:text-white\">Dashboard</div>\n          <a href=\"#\">\n            <span className=\"sr-only\">Your profile</span>\n            <img\n              alt=\"\"\n              src=\"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80\"\n              className=\"size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10\"\n            />\n          </a>\n        </div>\n\n        <main className=\"py-10 lg:pl-72\">\n          <div className=\"px-4 sm:px-6 lg:px-8\">{/* Your content */}</div>\n        </main>\n      </div>\n    </>\n  )\n}\n",
@@ -330,7 +321,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAzjUAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					34,
@@ -340,7 +331,7 @@
 						"characters": "lg-"
 					},
 					"AwAAAHAbAAAAAAAAcRsAAAAAAAAAAAAAcRsAAAAAAAByGwAAAAAAAAAAAAByGwAAAAAAAHMbAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABwGwAAAAAAAHAbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcBsAAAAAAABwGwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					35,
@@ -350,7 +341,7 @@
 						"characters": "pt-"
 					},
 					"AwAAAHMbAAAAAAAAdBsAAAAAAAAAAAAAdBsAAAAAAAB1GwAAAAAAAAAAAAB1GwAAAAAAAHYbAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABzGwAAAAAAAHMbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcxsAAAAAAABzGwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					36,
@@ -358,7 +349,7 @@
 					"left_delete",
 					null,
 					"BAAAAHUbAAAAAAAAdRsAAAAAAAABAAAALXQbAAAAAAAAdBsAAAAAAAABAAAAdHMbAAAAAAAAcxsAAAAAAAABAAAAcHIbAAAAAAAAchsAAAAAAAABAAAALQ",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB2GwAAAAAAAHYbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdhsAAAAAAAB2GwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					37,
@@ -368,7 +359,7 @@
 						"characters": ":pt-"
 					},
 					"BAAAAHIbAAAAAAAAcxsAAAAAAAAAAAAAcxsAAAAAAAB0GwAAAAAAAAAAAAB0GwAAAAAAAHUbAAAAAAAAAAAAAHUbAAAAAAAAdhsAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAByGwAAAAAAAHIbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAchsAAAAAAAByGwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					38,
@@ -378,7 +369,7 @@
 						"characters": "50"
 					},
 					"AgAAAHYbAAAAAAAAdxsAAAAAAAAAAAAAdxsAAAAAAAB4GwAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB2GwAAAAAAAHYbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdhsAAAAAAAB2GwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					39,
@@ -388,7 +379,7 @@
 						"characters": " "
 					},
 					"AQAAAHgbAAAAAAAAeRsAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB4GwAAAAAAAHgbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAeBsAAAAAAAB4GwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					42,
@@ -396,9 +387,18 @@
 					"cut",
 					null,
 					"AQAAAHAbAAAAAAAAcBsAAAAAAAAJAAAAbGc6cHQtNTAg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAB5GwAAAAAAAHAbAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAeRsAAAAAAABwGwAAAAAAAAAAAAAAAPC/"
 				]
 			]
+		},
+		{
+			"file": "app/Homepage.tsx",
+			"settings":
+			{
+				"buffer_size": 12594,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
 		},
 		{
 			"contents": "Cartografía del rumor\n\nLa primera vez que regresé a la ciudad, el viento parecía arrastrar conversaciones ajenas como quien barre migas de pan a la orilla de la mesa. Volví para terminar una investigación que otros consideraban menor: quería trazar la cartografía del rumor, de qué modo nace, se bifurca, se asienta o se pudre. Me llamo Inés y, si bien crecí aquí, decidí escuchar como si fuera extranjera. No para desenmascarar a nadie, sino para que la ciudad, por una vez, se escuchara a sí misma.\n\nEstablecí reglas: no grabaría clandestinamente, ofrecería anonimato, y transcribiría cada testimonio sin adornos, aunque me tentara corregir un lapsus o una hipérbole. Levanté un mapa con alfileres de colores: mercados, cafés, paradas de autobús, peluquerías; lugares donde la palabra circula sin que medie expediente. Pasé mañanas en el puesto de pescado, tardes en la hemeroteca, noches en el bar de las esquinas. No faltó quien me dijera que, si buscaba ciencia, me iba a estrellar con la mala leche del chisme. Aun así, bajo la cháchara menuda, late un sistema.\n\nDe buenas a primeras empezó a repetirse un rumor: el Archivo Histórico había sido purgado tras la gran tormenta; decían que el agua había arruinado cajas enteras y que la alcaldía, aprovechando el desastre, había hecho tabla rasa. La directora me recibió, amable pero a la defensiva, y juró que nada se había perdido. Sin embargo, el conserje, don Mateo, me detuvo en el zaguán. «El rumor no es mentira —murmuró—; es viento con memoria. Si la gente dice que faltan papeles, quizá falte otra cosa: permiso para mirar». Allí puse el primer alfiler rojo.\n\nCon el tiempo reuní transcripciones y gráficas que no convencían ni a los pragmáticos ni a los literatos. Mi directora de tesis pedía números que pudieran presentarse en un congreso: correlaciones, tasas de reproducción, modelos SIR adaptados a la sociolingüística. A mí me incomodaba convertir el zumbido en dígito. Quería que la estadística no aplastara el temblor de quien habla a media voz por miedo a que lo tomen por traidor. «Que no te pueda la ética —me advirtió—; sin método no tendrás defensa». Tenía razón, pero también la tenían quienes, a regañadientes, me abrían sus patios: preferían que se les creyera antes de que se les midiera.\n\nUna tarde, mientras copiaba notas, recordé a mi maestro de literatura de octavo, el que nos leía a Cervantes con una voz que hacía de cada digresión una promesa. Durante una huelga muy sonada, alguien insinuó que él pasaba listas de huelguistas al despacho del alcalde. Lo echaron a patadas del colegio y su nombre quedó manchado durante años. Cuando nos enteramos de que el papelito había salido de una oficina municipal y no del aula, ya era tarde: el maestro había muerto, sin que nadie le limpiara el honor. Si entonces hubiéramos escuchado mejor, si alguien hubiera preguntado con paciencia, tal vez el rumor no lo habría sepultado.\n\nMe concentré en hallar la grieta exacta por donde corría el agua de ese rumor del Archivo. Pedí informes por transparencia; me llegaron carpetas con copias selladas y, entre líneas, un mundo de silencios. No hubo purga: hubo traslado. Un contrato, plagado de cláusulas enrevesadas, cedía en comodato parte de los fondos a una fundación privada «para su preservación y puesta en valor». La letra pequeña permitía restringir el acceso «en caso de riesgo reputacional». ¿Riesgo para quién? Los expedientes, de cabo a rabo, quedaban a merced de un patronato de amigos. La ciudad, al intentar salvar sus papeles del agua, los había ahogado en protocolo.\n\nCon ese hallazgo organicé un foro en la biblioteca: que hablara quien quisiera, que replicara quien supiera. Me ofrecí como moderadora con la ingenua idea de que la conversación ordena lo que la sospecha dispersa. Vinieron abogados, jubilados, periodistas, estudiantes. Un edil, con sonrisa de catálogo, habló de sinergias público-privadas. Cuando alguien mencionó la cláusula del «riesgo reputacional», él hizo la vista gorda y prefirió describir vitrinas climatizadas. «Escúchense», pedí, justo cuando el murmullo se volvió griterío. Una mujer del mercado dijo que la habían amenazado por preguntar. Un estudiante leyó cifras. Don Mateo, discreto, puso el dedo en la llaga: «El miedo archiva más que el cartón».\n\nEl foro terminó sin resoluciones, pero dejó una estela de conversaciones cruzadas que, si bien no eran prueba, eran brújula. Publiqué un informe en el que se mezclaban trayectorias de frases, análisis de redes y fragmentos de voces anónimas. Me acusaron de blanda: ni denunciaba ni absolvía. «Si hubieras exigido nombres, otro gallo cantaría», escribió un columnista. Mientras tanto, en mi puerta apareció una caja vieja. Dentro había recortes de prensa, cartas sin remitente, volantes. Don Mateo los había rescatado «antes de que el viento se los llevara de nuevo», decía una nota.\n\nPasé noches enteras leyendo esos papeles, que olían a salitre y al polvo dulce de la tinta vieja. Había historias que conflictúan cualquier certeza: héroes que se volvían villanos, villanos que habían sido chivos expiatorios. Comprendí que el rumor no es solo una distorsión: es una herramienta para negociar la realidad cuando los canales formales fallan o cuando conviene que fallen. Ojalá hubiéramos sabido escuchar, cuando el maestro fue acusado, con la ternura metódica que merecía; ojalá alguien hubiera dudado a tiempo. Si yo hubiera llegado antes, quizá habría elaborado un mapa distinto; si me hubiera callado, tal vez otros habrían hablado con menos miedo y más detalle.\n\nAhora, cuando camino por el puerto al atardecer, el rumor de las olas y el de la ciudad se confunden en una cadencia que no me hace ruido sino que me afina el oído. Entendí que mi cartografía es parcial, como todas, pero que, si se usa con cuidado, puede servir para que nadie sea triturado por una historia mal contada. Si han de repetir algo, que lo hagan de frente y con nombres; si tuvieran que callar, que sea para proteger, no para encubrir. No todo se puede probar, pero casi todo se puede escuchar.",
@@ -416,7 +416,7 @@
 					"paste",
 					null,
 					"AQAAAAAAAAAAAAAAvxcAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					4,
@@ -424,7 +424,7 @@
 					"left_delete",
 					null,
 					"AQAAAAAAAAAAAAAAAAAAAAAAAAALAAAAICAidGV4dCI6ICI",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					7,
@@ -432,7 +432,7 @@
 					"cut",
 					null,
 					"AQAAALMXAAAAAAAAsxcAAAAAAAABAAAACg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAC0FwAAAAAAALMXAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtBcAAAAAAACzFwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					8,
@@ -440,7 +440,7 @@
 					"left_delete",
 					null,
 					"AQAAALIXAAAAAAAAshcAAAAAAAABAAAAIg",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACzFwAAAAAAALMXAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAsxcAAAAAAACzFwAAAAAAAAAAAAAAAPC/"
 				],
 				[
 					11,
@@ -450,7 +450,7 @@
 						"close_panel": true
 					},
 					"FAAAALYVAAAAAAAAtxUAAAAAAAACAAAAXG60FQAAAAAAALUVAAAAAAAAAgAAAFxuChMAAAAAAAALEwAAAAAAAAIAAABcbggTAAAAAAAACRMAAAAAAAACAAAAXG7AEAAAAAAAAMEQAAAAAAAAAgAAAFxuvhAAAAAAAAC/EAAAAAAAAAIAAABcbvMNAAAAAAAA9A0AAAAAAAACAAAAXG7xDQAAAAAAAPINAAAAAAAAAgAAAFxuZwsAAAAAAABoCwAAAAAAAAIAAABcbmULAAAAAAAAZgsAAAAAAAACAAAAXG7mCAAAAAAAAOcIAAAAAAAAAgAAAFxu5AgAAAAAAADlCAAAAAAAAAIAAABcblwGAAAAAAAAXQYAAAAAAAACAAAAXG5aBgAAAAAAAFsGAAAAAAAAAgAAAFxuMQQAAAAAAAAyBAAAAAAAAAIAAABcbi8EAAAAAAAAMAQAAAAAAAACAAAAXG74AQAAAAAAAPkBAAAAAAAAAgAAAFxu9gEAAAAAAAD3AQAAAAAAAAIAAABcbhcAAAAAAAAAGAAAAAAAAAACAAAAXG4VAAAAAAAAABYAAAAAAAAAAgAAAFxu",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAVAAAAAAAAABcAAAAAAAAAAAAAAAAA8L8"
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAFQAAAAAAAAAXAAAAAAAAAAAAAAAAAPC/"
 				]
 			]
 		}
@@ -488,6 +488,7 @@
 	"expanded_folders":
 	[
 		"/Users/scomax/Documents/Git/Spanish-Language-App",
+		"/Users/scomax/Documents/Git/Spanish-Language-App/app",
 		"/Users/scomax/Documents/Git/Spanish-Language-App/stories",
 		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/1_Beginner",
 		"/Users/scomax/Documents/Git/Spanish-Language-App/stories/1_Beginner/La_niña_y_el_gato",
@@ -826,39 +827,6 @@
 				},
 				{
 					"buffer": 5,
-					"file": "stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 7868,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								7867
-							]
-						],
-						"settings":
-						{
-							"lsp_uri": "file:///Users/scomax/Documents/Git/Spanish-Language-App/stories/4_High_Intermediate/El_mapa_de_papel_y_las_promesas/story.json",
-							"syntax": "Packages/JSON/JSON.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"stack_multiselect": false,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"selected": true,
 					"semi_transient": false,
 					"settings":
 					{
@@ -893,6 +861,39 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 558.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/Homepage.tsx",
+					"selected": true,
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 12594,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9510,
+								9525
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///Users/scomax/Documents/Git/Spanish-Language-App/app/Homepage.tsx",
+							"syntax": "Packages/JavaScript/TSX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4015.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1039,7 +1040,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 266.0,
 	"status_bar_visible": true,
 	"template_settings":

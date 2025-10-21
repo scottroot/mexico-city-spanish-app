@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
+// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import { signup } from '@/app/auth/signup/actions'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -12,7 +12,7 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isPending, setIsPending] = useState(false)
-  const { t } = useLanguage()
+  // const { t } = useLanguage() // Deprecated - using direct English text
 
   const handleSubmit = async (formData) => {
     setIsPending(true)
@@ -27,14 +27,14 @@ export default function SignupForm() {
           <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('auth.joinUs')}</h1>
-          <p className="text-gray-600">{t('auth.signupSubtitle')}</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Join us!</h1>
+          <p className="text-gray-600">Create your account and start learning</p>
         </div>
 
         <form action={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">
-              {t('auth.fullName')}
+              Full Name
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -42,7 +42,7 @@ export default function SignupForm() {
                 id="name"
                 name="name"
                 type="text"
-                placeholder={t('auth.namePlaceholder')}
+                placeholder="Your full name"
                 className="pl-10"
                 required
               />
@@ -51,7 +51,7 @@ export default function SignupForm() {
 
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">
-              {t('auth.email')}
+              Email
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -59,7 +59,7 @@ export default function SignupForm() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder={t('auth.emailPlaceholder')}
+                placeholder="your@email.com"
                 className="pl-10"
                 required
               />
@@ -68,7 +68,7 @@ export default function SignupForm() {
 
           <div className="space-y-2">
             <label htmlFor="password" className="text-sm font-medium text-gray-700">
-              {t('auth.password')}
+              Password
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -76,7 +76,7 @@ export default function SignupForm() {
                 id="password"
                 name="password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder={t('auth.minPasswordPlaceholder')}
+                placeholder="Minimum 6 characters"
                 className="pl-10 pr-10"
                 required
               />
@@ -92,7 +92,7 @@ export default function SignupForm() {
 
           <div className="space-y-2">
             <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
-              {t('auth.confirmPassword')}
+              Confirm Password
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -100,7 +100,7 @@ export default function SignupForm() {
                 id="confirmPassword"
                 name="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
-                placeholder={t('auth.confirmPasswordPlaceholder')}
+                placeholder="Confirm your password"
                 className="pl-10 pr-10"
                 required
               />
@@ -119,18 +119,18 @@ export default function SignupForm() {
             disabled={isPending}
             className="w-full bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white font-medium py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            {isPending ? t('auth.signupButtonLoading') : t('auth.signupButton')}
+            {isPending ? 'Creating account...' : 'Create Account'}
           </Button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
-            {t('auth.hasAccount')}{' '}
+            Already have an account?{' '}
             <Link 
               href="/auth/login" 
               className="text-orange-600 hover:text-orange-700 font-medium"
             >
-              {t('auth.loginLink')}
+              Sign in here
             </Link>
           </p>
         </div>

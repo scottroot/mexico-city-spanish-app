@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Target, Clock, Wrench, Scissors } from 'lucide-react';
 import GameCard from '../../components/games/GameCard';
 // import { useRouter } from 'next/navigation';
-import { useLanguage } from '../../contexts/LanguageContext';
+// import { useLanguage } from '../../contexts/LanguageContext'; // Deprecated - using direct English text
 import Link from 'next/link';
 
 interface HomeProps {
@@ -18,7 +18,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
   const games = initialGames;
   const [progress] = useState([]);
 
-  const { t } = useLanguage();
+  // const { t } = useLanguage(); // Deprecated - using direct English text
 
   const getProgressForGame = (gameId: string) => {
     return progress.filter((p: any) => p.game_id === gameId);
@@ -45,11 +45,11 @@ export default function GamesComponent({ initialGames }: HomeProps) {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-8 h-8 text-orange-500" />
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-              {t('home.welcome')}
+              Welcome!
             </h1>
           </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('home.subtitle')}
+            Experience Spanish learning with interactive games, immersive stories, and intelligent tools designed to improve your ear and accent.
           </p>
         </motion.div>
 
@@ -65,7 +65,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
               <div className="flex items-center gap-3">
                 <Target className="w-8 h-8" />
                 <div>
-                  <p className="text-blue-100">{t('home.averageScore')}</p>
+                  <p className="text-blue-100">Average Score</p>
                   <p className="text-2xl font-bold">{getTotalScore()}%</p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
               <div className="flex items-center gap-3">
                 <Sparkles className="w-8 h-8" />
                 <div>
-                  <p className="text-green-100">{t('home.gamesCompleted')}</p>
+                  <p className="text-green-100">Games Completed</p>
                   <p className="text-2xl font-bold">{progress.length}</p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
               <div className="flex items-center gap-3">
                 <Clock className="w-8 h-8" />
                 <div>
-                  <p className="text-purple-100">{t('home.bestTime')}</p>
+                  <p className="text-purple-100">Best Time</p>
                   <p className="text-2xl font-bold">
                     {Math.min(...progress.map((p: any) => p.completion_time || 999))}s
                   </p>
@@ -163,7 +163,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
           transition={{ delay: 0.3 }}
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            {t('home.chooseGame')}
+            Choose your favorite game
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
@@ -187,7 +187,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
 
         {games.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">{t('home.noGames')}</p>
+            <p className="text-gray-500 text-lg">No games available yet.</p>
           </div>
         )}
       </div>

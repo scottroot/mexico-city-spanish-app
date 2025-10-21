@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
+// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,7 +14,7 @@ export default function ForgotPasswordForm() {
   const [success, setSuccess] = useState('')
   
   const { resetPassword } = useAuth()
-  const { t } = useLanguage()
+  // const { t } = useLanguage() // Deprecated - using direct English text
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,10 +28,10 @@ export default function ForgotPasswordForm() {
       if (error) {
         setError(error.message)
       } else {
-        setSuccess(t('auth.checkEmail'))
+        setSuccess('Check your email! We\'ve sent you a link to reset your password.')
       }
     } catch (err) {
-      setError(t('auth.unexpectedError'))
+      setError('An unexpected error occurred')
     } finally {
       setLoading(false)
     }
@@ -44,8 +44,8 @@ export default function ForgotPasswordForm() {
           <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-lg mx-auto mb-4">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('auth.forgotPassword')}</h1>
-          <p className="text-gray-600">{t('auth.forgotPasswordSubtitle')}</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Forgot your password?</h1>
+          <p className="text-gray-600">Don't worry, we'll help you recover it</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -63,7 +63,7 @@ export default function ForgotPasswordForm() {
 
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-gray-700">
-              {t('auth.email')}
+              Email
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -72,7 +72,7 @@ export default function ForgotPasswordForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={t('auth.emailPlaceholder')}
+                placeholder="your@email.com"
                 className="pl-10"
                 required
               />
@@ -84,7 +84,7 @@ export default function ForgotPasswordForm() {
             disabled={loading}
             className="w-full bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white font-medium py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            {loading ? t('auth.resetButtonLoading') : t('auth.resetButton')}
+            {loading ? 'Sending...' : 'Send Recovery Link'}
           </Button>
         </form>
 
@@ -94,7 +94,7 @@ export default function ForgotPasswordForm() {
             className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            {t('auth.backToLogin')}
+            Back to sign in
           </Link>
         </div>
       </Card>

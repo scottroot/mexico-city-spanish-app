@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X, Crown, CreditCard, Gamepad2 } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageToggle from "./ui/LanguageToggle";
+// import { useLanguage } from "@/contexts/LanguageContext"; // Deprecated - using direct English text
+// import LanguageToggle from "./ui/LanguageToggle"; // Deprecated - language toggle removed
 import ClickAway from "./ClickAway";
 import { useBilling } from "../hooks/useBilling";
 
@@ -25,19 +25,19 @@ interface NavigationItem {
 export default function TopNavigation({ user }: TopNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { t } = useLanguage();
+  // const { t } = useLanguage(); // Deprecated - using direct English text
   const { hasAccess, loading: billingLoading, goPro, manageBilling } = useBilling();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
   // const userMenuRef = useRef<HTMLDivElement>(null);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
-    { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
-    { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
-    { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
-    { id: 'stories', title: t('navigation.stories'), url: "/stories", icon: BookText },
-    { id: 'tools', title: t('navigation.tools'), url: "/tools", icon: Wrench },
+    { id: 'games', title: 'Games', url: "/games", icon: Gamepad2 },
+    { id: 'progress', title: 'Progress', url: "/progress", icon: Trophy },
+    { id: 'verbs', title: 'Verbs', url: "/verbs", icon: BookOpen },
+    { id: 'quiz', title: 'Custom Quiz', url: "/quiz", icon: HelpCircle },
+    { id: 'stories', title: 'Stories', url: "/stories", icon: BookText },
+    { id: 'tools', title: 'Tools', url: "/tools", icon: Wrench },
   ];
 
   const handleSignOut = async (): Promise<void> => {
@@ -101,7 +101,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-400 to-pink-400 text-white rounded-lg hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl"
         >
           <User className="w-4 h-4" />
-          <span className="text-sm font-medium">{t('navigation.login')}</span>
+          <span className="text-sm font-medium">Sign In</span>
         </Link>
       );
     }
@@ -129,7 +129,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
         {showUserMenu && (
           <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-orange-100 py-2 z-[60]">
             <div className="px-4 py-2 border-b border-gray-100">
-              <p className="text-sm font-medium text-gray-800">{t('navigation.user')}</p>
+              <p className="text-sm font-medium text-gray-800">User</p>
               <p className="text-xs text-gray-500">{user.email}</p>
             </div>
             <button
@@ -137,7 +137,7 @@ export default function TopNavigation({ user }: TopNavigationProps) {
               className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
             >
               <LogOut className="w-4 h-4" />
-              {t('navigation.logout')}
+              Sign Out
             </button>
           </div>
         )}
@@ -157,8 +157,8 @@ export default function TopNavigation({ user }: TopNavigationProps) {
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
-                <p className="text-xs text-gray-500">{t('app.subtitle')}</p>
+                <h1 className="text-lg font-bold text-gray-800">Capital Spanish!</h1>
+                <p className="text-xs text-gray-500">Learn Mexico City Spanish</p>
               </div>
             </Link>
             
@@ -180,9 +180,9 @@ export default function TopNavigation({ user }: TopNavigationProps) {
               ))}
             </nav>
             
-            {/* Right Side - Language Toggle, Billing, and User Menu */}
+            {/* Right Side - Billing and User Menu */}
             <div className="flex items-center gap-3">
-              <LanguageToggle />
+              {/* <LanguageToggle /> */}
               <BillingButton />
               <UserAccountButton />
             </div>
@@ -199,12 +199,12 @@ export default function TopNavigation({ user }: TopNavigationProps) {
                 <BookOpen className="w-5 h-5 text-white" />
               </Link>
               <div>
-                <h1 className="text-base font-bold text-gray-800">{t('app.title')}</h1>
-                <p className="text-xs text-gray-500 hidden sm:block">{t('app.subtitle')}</p>
+                <h1 className="text-base font-bold text-gray-800">Capital Spanish!</h1>
+                <p className="text-xs text-gray-500 hidden sm:block">Learn Mexico City Spanish</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <LanguageToggle />
+              {/* <LanguageToggle /> */}
               <BillingButton />
               <UserAccountButton />
               <button

@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --primary-coral: #FF6B6B;
@@ -9,6 +7,22 @@
   --accent-purple: #A8E6CF;
   --text-dark: #2C3E50;
   --text-light: #7F8C8D;
+}
+
+/* Tailwind v4 custom colors and breakpoints */
+@theme {
+  --color-primary-coral: #FF6B6B;
+  --color-primary-teal: #4ECDC4;
+  --color-accent-yellow: #FFE66D;
+  --color-accent-purple: #A8E6CF;
+  --color-text-dark: #2C3E50;
+  --color-text-light: #7F8C8D;
+  
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 * {
@@ -21,7 +35,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #fef3e2 0%, #ffffff 50%, #e6fffa 100%);
+  /* background: linear-gradient(135deg, #fef3e2 0%, #ffffff 50%, #e6fffa 100%); */
   min-height: 100vh;
 }
 
@@ -64,4 +78,17 @@ body {
 .focus-visible:focus {
   outline: 2px solid var(--primary-coral);
   outline-offset: 2px;
+}
+
+.no-select {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  -moz-user-select: none !important;
+  -o-user-select: none !important;
+  user-drag: none !important;
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
 }

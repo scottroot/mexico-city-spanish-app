@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -17,10 +18,11 @@ import {
   User,
   LogOut,
   ChevronRight,
-  Gamepad2
+  Gamepad2,
+  HomeIcon
 } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageToggle from "../ui/LanguageToggle";
+// import { useLanguage } from "@/contexts/LanguageContext"; // Deprecated - using direct English text
+// import LanguageToggle from "../ui/LanguageToggle"; // Deprecated - language toggle removed
 import ClickAway from "../ClickAway";
 import GoProButton from "./buttons/go-pro";
 import { useBilling } from "../../hooks/useBilling";
@@ -38,28 +40,30 @@ interface NavigationItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
+
 export default function MainNavigation({ user }: MainNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { t } = useLanguage();
+  // const { t } = useLanguage(); // Deprecated - using direct English text
   const { hasAccess } = useBilling();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const navigationItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
-    { id: 'progress', title: t('navigation.progress'), url: "/progress", icon: Trophy },
-    { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
-    { id: 'quiz', title: t('navigation.quiz'), url: "/quiz", icon: HelpCircle },
-    { id: 'stories', title: t('navigation.stories'), url: "/stories", icon: BookText },
-    { id: 'tools', title: t('navigation.tools'), url: "/tools", icon: Wrench },
+    { id: 'home', title: 'Home', url: "/", icon: HomeIcon },
+    { id: 'games', title: 'Games', url: "/games", icon: Gamepad2 },
+    { id: 'progress', title: 'Progress', url: "/progress", icon: Trophy },
+    { id: 'verbs', title: 'Verbs', url: "/verbs", icon: BookOpen },
+    { id: 'quiz', title: 'Custom Quiz', url: "/quiz", icon: HelpCircle },
+    { id: 'stories', title: 'Stories', url: "/stories", icon: BookText },
+    { id: 'tools', title: 'Tools', url: "/tools", icon: Wrench },
   ];
 
   // Bottom app bar items for mobile (4 items max)
   const bottomNavItems: NavigationItem[] = [
-    { id: 'games', title: t('navigation.games'), url: "/games", icon: Gamepad2 },
-    { id: 'stories', title: t('navigation.stories'), url: "/stories", icon: BookText },
-    { id: 'verbs', title: t('navigation.verbs'), url: "/verbs", icon: BookOpen },
+    { id: 'games', title: 'Games', url: "/games", icon: Gamepad2 },
+    { id: 'stories', title: 'Stories', url: "/stories", icon: BookText },
+    { id: 'verbs', title: 'Verbs', url: "/verbs", icon: BookOpen },
   ];
 
   const handleSignOut = async (): Promise<void> => {
@@ -70,8 +74,12 @@ export default function MainNavigation({ user }: MainNavigationProps) {
     });
     
     if (response.ok) {
-      router.push('/auth/login');
+      setShowUserMenu(false);
+      // router.push('/auth/login');
+      router.refresh();
     }
+
+    
   };
 
 
@@ -81,10 +89,10 @@ export default function MainNavigation({ user }: MainNavigationProps) {
         <Link
           href="/auth/login"
           className="flex items-center justify-center xl:justify-start gap-3 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200 w-full"
-          title={t('navigation.login')}
+          title="Sign In"
         >
           <User className="w-4 h-4" />
-          <span className="hidden xl:block text-sm font-medium">{t('navigation.login')}</span>
+          <span className="hidden xl:block text-sm font-medium">Sign In</span>
         </Link>
       );
     }
@@ -109,7 +117,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
             <User className="w-5 h-5 text-gray-600" />
           </div>
           <div className="hidden xl:block flex-1 text-left">
-            <p className="text-sm font-medium text-gray-800">{t('navigation.user')}</p>
+            <p className="text-sm font-medium text-gray-800">User</p>
             <p className="text-xs text-gray-500 truncate">{user.email}</p>
           </div>
           <ChevronRight className={`hidden xl:block w-4 h-4 text-gray-400 transition-transform ${showUserMenu ? 'rotate-90' : ''}`} />
@@ -129,7 +137,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
                 className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                {t('navigation.logout')}
+                Sign Out
               </button>
             </motion.div>
           )}
@@ -139,97 +147,175 @@ export default function MainNavigation({ user }: MainNavigationProps) {
   };
 
   const SidebarContent = () => (
-    <div className="flex grow flex-col overflow-y-auto bg-white">
+    <nav
+      id="sidebar"
+      className="w-[86px] xl:w-64 max-md:hidden 
+      fixed inset-y-0 z-50 flex flex-1 flex-col items-center grow 
+      bg-white border-r border-r-2 border-gray-200 px-4"
+    >
       {/* Logo */}
-      <div className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
-          <div className="hidden xl:block">
-            <h1 className="text-lg font-bold text-gray-800">{t('app.title')}</h1>
-          </div>
+      <div className="pt-9 pb-7">
+        <Link href="/" 
+          // className="relative flex shrink-0 items-start justify-center xl:justify-start px-3 xl:px-6 py-4 w-full h-16"
+          className="relative flex flex-0 xl:justify-start px-3 size-8 h-8 xl:w-8"
+          >
+          <Image src="/wordmark.webp" alt="Hero Image" fill className="object-contain" />
         </Link>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex flex-1 flex-col px-2 xl:px-3">
-        <ul role="list" className="flex flex-1 flex-col gap-y-1">
-          <li>
-            <ul role="list" className="space-y-1">
-              {navigationItems.map((item) => (
-                <li key={item.id}>
+      <ul role="list" className="flex flex-1 flex-col justify-between w-full">
+        {/* Main Navigation Items */}
+        <li>
+          <ul role="list" className="flex flex-col gap-y-2">
+            {navigationItems.map((item, index) => (
+                <li key={`${item.id}-${index}`}>
                   <Link
                     href={item.url}
-                    className={`group flex items-center justify-center xl:justify-start gap-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
-                      pathname === item.url
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-100'
+                    className={`relative group flex items-center justify-center xl:justify-start h-12 p-3 
+                      gap-x-5 rounded-lg text-base font-medium transition-all duration-200 
+                      border border-2
+                      ${pathname === item.url
+                        ? 'bg-blue-100 text-blue-700 border-blue-200'
+                        : 'text-gray-700 hover:bg-gray-100 border-transparent'
                     }`}
-                    title={item.title} // Tooltip for icon-only mode
+                    // title={item.title} // Tooltip for icon-only mode
                   >
                     <item.icon
-                      className={`w-5 h-5 xl:w-6 xl:h-8 shrink-0 ${
+                      className={`size-7 xl:size-8 shrink-0 ${
                         pathname === item.url
                           ? 'text-blue-600'
                           : 'text-gray-500 group-hover:text-gray-700'
                       }`}
                     />
                     <span className="hidden xl:block">{item.title}</span>
+
+                    {/* Tooltip for medium screen */}
+                    <div
+                      id={`tooltip-${item.id}`}
+                      className="xl:hidden max-xl:group-hover:opacity-100 opacity-0 transition-opacity duration-200 
+                      absolute bottom-0 left-0 w-full h-full translate-x-full pointer-events-none"
+                    >
+                      <div className="flex w-fit h-full flex items-center justify-center">
+                        <div className="inline-flex items-center justify-center bg-zinc-500 rounded-md text-white text-sm px-4 py-2 ml-4 whitespace-nowrap shadow-sm">
+                          {item.title}
+                        </div>
+                      </div>
+                    </div>
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </li>
+            ))}
+          </ul>
+        </li>
 
-          {/* Language Toggle */}
-          <li className="mt-auto px-1 xl:px-3 pb-2">
-            <div className="flex justify-center xl:justify-start">
-              <LanguageToggle />
+        {/* Bottom Section - Billing and User Account */}
+        <li>
+          <div className="space-y-2">
+            {/* Billing Section */}
+            <div className="pb-2">
+              <div className="flex justify-center xl:justify-start">
+                <GoProButton user={user} />
+              </div>
             </div>
-          </li>
 
-          {/* Billing Section */}
-          <li className="px-1 xl:px-3 pb-2">
-            <div className="flex justify-center xl:justify-start">
-              <GoProButton user={user} />
+            {/* User Account - Avatar with text on xl+ */}
+            <div className="pb-4">
+              <div className="flex justify-center xl:justify-start">
+                {user ? (
+                  <button
+                    onClick={() => setShowUserMenu(true)}
+                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
+                    title={user.email}
+                  >
+                    <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl">
+                      <User className="w-4 h-4 xl:w-5 xl:h-5 text-white" />
+                    </div>
+                    <span className="hidden xl:block text-sm font-medium text-gray-700">
+                      Profile
+                    </span>
+                  </button>
+                ) : (
+                  <Link
+                    href="/auth/login"
+                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
+                    title="Login"
+                  >
+                    <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-all duration-200">
+                      <User className="w-4 h-4 xl:w-5 xl:h-5 text-gray-600" />
+                    </div>
+                    <span className="hidden xl:block text-sm font-medium text-gray-700">
+                      Login
+                    </span>
+                  </Link>
+                )}
+              </div>
             </div>
-          </li>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  );
 
-          {/* User Account - Avatar with text on xl+ */}
-          <li className="px-1 xl:px-3 pb-4">
-            <div className="flex justify-center xl:justify-start">
-              {user ? (
-                <button
-                  onClick={() => setShowUserMenu(true)}
-                  className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
-                  title={user.email}
-                >
-                  <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl">
-                    <User className="w-4 h-4 xl:w-5 xl:h-5 text-white" />
-                  </div>
-                  <span className="hidden xl:block text-sm font-medium text-gray-700">
-                    Profile
-                  </span>
-                </button>
-              ) : (
-                <Link
-                  href="/auth/login"
-                  className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
-                  title="Login"
-                >
-                  <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-all duration-200">
-                    <User className="w-4 h-4 xl:w-5 xl:h-5 text-gray-600" />
-                  </div>
-                  <span className="hidden xl:block text-sm font-medium text-gray-700">
-                    Login
-                  </span>
-                </Link>
-              )}
-            </div>
-          </li>
-        </ul>
-      </nav>
+  const MobileTopBar = () => (
+    <div 
+      id="mobile-header" 
+      className="sticky top-0 z-40 md:hidden h-10 flex shrink-0 items-center gap-x-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200 bg-white shadow-sm"
+    >
+      <Link href="/">
+        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700">
+          Capital Spanish!
+        </div>
+      </Link>
+
+      <div className="flex items-center gap-2">
+        {/* <LanguageToggle /> */}
+        {user && (
+          <div className="flex items-center gap-2">
+            <GoProButton user={user} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const MobileBottomNav = () => (
+    <div className="md:hidden h-16 fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-gray-200">
+      <div className="flex items-center justify-around h-16 px-2">
+        {bottomNavItems.map((item, index) => (
+          <Link
+            key={`${item.id}-${index}`}
+            href={item.url}
+            className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 ${
+              pathname === item.url
+                ? 'text-blue-600'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            <item.icon className="w-6 h-6" />
+            <span className="text-xs mt-1 font-medium">{item.title}</span>
+          </Link>
+        ))}
+        
+        {/* User Account - 4th item */}
+        <div className="flex flex-col items-center justify-center p-2">
+          {user ? (
+            <button
+              onClick={() => setShowUserMenu(true)}
+              className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
+            >
+              <User className="w-6 h-6" />
+              <span className="text-xs mt-1 font-medium">Account</span>
+            </button>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
+            >
+              <User className="w-6 h-6" />
+              <span className="text-xs mt-1 font-medium">Login</span>
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 
@@ -276,72 +362,24 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       </AnimatePresence>
 
       {/* Static sidebar for desktop - icons only from md, icons+text from xl */}
-      <div className="hidden md:fixed md:inset-y-0 md:z-50 md:flex md:w-16 xl:w-64 md:flex-col">
-        <div className="flex grow flex-col bg-white border-r border-gray-200">
+      {/* <div 
+        // className="max-md:hidden md:fixed md:inset-y-0 md:z-50 md:flex md:w-20 xl:w-64 md:flex-col
+        // bg-white border-r border-gray-200"
+        className="max-md:hidden fixed inset-y-0 z-50 flex flex-col w-20 xl:w-64"
+
+      > */}
+        {/* <div className="flex grow flex-col bg-white border-r border-gray-200"> */}
           <SidebarContent />
-        </div>
-      </div>
+        {/* </div> */}
+      {/* </div> */}
 
       {/* Mobile header - only show on screens smaller than md */}
       {/* <div className="md:hidden fixed w-full top-0 z-40 flex h-10 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
       {/* <div className="md:hidden w-full top-0 z-40 flex h-10 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
-      <div id="mobile-header" className="sticky top-0 z-40 md:hidden h-10 flex shrink-0 items-center gap-x-6 px-4 sm:px-6 lg:px-8 border-b border-gray-200 bg-white shadow-sm">
-        <Link href="/">
-          <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700">
-            {t('app.title')}
-          </div>
-        </Link>
-
-        <div className="flex items-center gap-2">
-          <LanguageToggle />
-          {user && (
-            <div className="flex items-center gap-2">
-              <GoProButton user={user} />
-            </div>
-          )}
-        </div>
-      </div>
+      <MobileTopBar />
 
       {/* Bottom app bar for mobile */}
-      <div className="md:hidden h-16 fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-gray-200">
-        <div className="flex items-center justify-around h-16 px-2">
-          {bottomNavItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.url}
-              className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 ${
-                pathname === item.url
-                  ? 'text-blue-600'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <item.icon className="w-6 h-6" />
-              <span className="text-xs mt-1 font-medium">{item.title}</span>
-            </Link>
-          ))}
-          
-          {/* User Account - 4th item */}
-          <div className="flex flex-col items-center justify-center p-2">
-            {user ? (
-              <button
-                onClick={() => setShowUserMenu(true)}
-                className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
-              >
-                <User className="w-6 h-6" />
-                <span className="text-xs mt-1 font-medium">Account</span>
-              </button>
-            ) : (
-              <Link
-                href="/auth/login"
-                className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
-              >
-                <User className="w-6 h-6" />
-                <span className="text-xs mt-1 font-medium">Login</span>
-              </Link>
-            )}
-          </div>
-        </div>
-      </div>
+      <MobileBottomNav />
 
       {/* Account Modal - All Screen Sizes */}
       <AnimatePresence>
@@ -386,7 +424,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
                       <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <User className="w-10 h-10 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-800">{t('navigation.user')}</h3>
+                      <h3 className="text-lg font-semibold text-gray-800">User</h3>
                       <p className="text-gray-500 mt-1 text-sm">{user.email}</p>
                     </div>
 
@@ -431,7 +469,7 @@ export default function MainNavigation({ user }: MainNavigationProps) {
                   className="w-full flex items-center justify-center gap-3 p-4 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
                 >
                   <LogOut className="w-5 h-5" />
-                  <span className="font-medium">{t('navigation.logout')}</span>
+                  <span className="font-medium">Sign Out</span>
                 </button>
               </div>
             </motion.div>

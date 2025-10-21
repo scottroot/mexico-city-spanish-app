@@ -9,13 +9,13 @@ import { Badge } from '../../components/ui/badge';
 import { Trophy, Clock, Target, TrendingUp } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { useLanguage } from '../../contexts/LanguageContext';
+// import { useLanguage } from '../../contexts/LanguageContext'; // Deprecated - using direct English text
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState([]);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { t } = useLanguage();
+  // const { t } = useLanguage(); // Deprecated - using direct English text
 
   useEffect(() => {
     const loadData = async () => {
@@ -56,7 +56,7 @@ export default function ProgressPage() {
 
   const getGameTitle = (gameId) => {
     const game = games.find(g => g.id === gameId);
-    return game ? game.title : t('progress.unknownGame');
+    return game ? game.title : 'Unknown game';
   };
 
   const getGameType = (gameId) => {
@@ -107,10 +107,10 @@ export default function ProgressPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent mb-4">
-            {t('progress.title')}
+            Your Progress
           </h1>
           <p className="text-xl text-gray-600">
-            {t('progress.subtitle')}
+            Review your achievements and continuous improvement
           </p>
         </motion.div>
 
@@ -130,7 +130,7 @@ export default function ProgressPage() {
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-blue-600 text-sm font-medium">{t('progress.averageScore')}</p>
+                    <p className="text-blue-600 text-sm font-medium">Average Score</p>
                     <p className="text-2xl font-bold text-blue-800">{stats.avgScore}%</p>
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export default function ProgressPage() {
                     <Trophy className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-green-600 text-sm font-medium">{t('progress.gamesCompleted')}</p>
+                    <p className="text-green-600 text-sm font-medium">Games Completed</p>
                     <p className="text-2xl font-bold text-green-800">{stats.totalGames}</p>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export default function ProgressPage() {
                     <Clock className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-purple-600 text-sm font-medium">{t('progress.averageTime')}</p>
+                    <p className="text-purple-600 text-sm font-medium">Average Time</p>
                     <p className="text-2xl font-bold text-purple-800">{stats.avgTime}s</p>
                   </div>
                 </div>
@@ -196,7 +196,7 @@ export default function ProgressPage() {
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-orange-600 text-sm font-medium">{t('progress.bestScore')}</p>
+                    <p className="text-orange-600 text-sm font-medium">Best Score</p>
                     <p className="text-2xl font-bold text-orange-800">{stats.bestScore}%</p>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export default function ProgressPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-gray-800">
-                {t('progress.recentGames')}
+                Recent Games
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -252,10 +252,10 @@ export default function ProgressPage() {
                         </Badge>
                         <div className="text-right">
                           <p className="text-sm font-medium text-gray-700">
-                            {item.score}/{item.max_score} {t('progress.points')}
+                            {item.score}/{item.max_score} points
                           </p>
                           <p className="text-xs text-gray-500">
-                            {item.completion_time}s • {item.mistakes} {t('progress.errors')}
+                            {item.completion_time}s • {item.mistakes} errors
                           </p>
                         </div>
                       </div>
@@ -266,10 +266,10 @@ export default function ProgressPage() {
                 <div className="text-center py-12">
                   <Trophy className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                   <p className="text-gray-500 text-lg">
-                    {t('progress.noGamesPlayed')}
+                    You haven't played any games yet!
                   </p>
                   <p className="text-gray-400">
-                    {t('progress.startLearning')}
+                    Go to the main page and start your learning adventure.
                   </p>
                 </div>
               )}
