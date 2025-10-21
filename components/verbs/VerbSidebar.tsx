@@ -7,7 +7,6 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 
 interface Verb {
@@ -31,7 +30,6 @@ export default function VerbSidebar({
 }: VerbSidebarProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const { t } = useLanguage();
   
   const itemsPerPage = 20;
   
@@ -76,7 +74,9 @@ export default function VerbSidebar({
       <div className="w-80 bg-white border-r border-gray-200 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('verbs.loading')}</p>
+          <p className="text-gray-600">
+            Loading Spanish verbs...
+          </p>
         </div>
       </div>
     );
@@ -89,7 +89,7 @@ export default function VerbSidebar({
         <div className="flex items-center gap-2 mb-4">
           <BookOpen className="w-5 h-5 text-orange-500" />
           <h2 className="text-lg font-semibold text-gray-900">
-            {t('verbs.verbList')}
+            Verb List
           </h2>
         </div>
         
@@ -98,7 +98,7 @@ export default function VerbSidebar({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
             type="text"
-            placeholder={t('verbs.searchPlaceholder')}
+            placeholder="Search verbs..."
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -110,7 +110,7 @@ export default function VerbSidebar({
         
         {/* Results count */}
         <div className="mt-2 text-sm text-gray-600">
-          {filteredVerbs.length} {t('verbs.verbsFound')}
+          {filteredVerbs.length} verbs found
         </div>
       </div>
 
@@ -167,7 +167,7 @@ export default function VerbSidebar({
         {paginatedVerbs.length === 0 && (
           <div className="text-center py-8 text-gray-500">
             <BookOpen className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-            <p>{t('verbs.noVerbsFound')}</p>
+            <p>No verbs found</p>
           </div>
         )}
       </div>
@@ -182,7 +182,7 @@ export default function VerbSidebar({
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              {t('common.previous')}
+              Previous
             </Button>
             
             <div className="flex items-center gap-2">
@@ -208,7 +208,7 @@ export default function VerbSidebar({
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
-              {t('common.next')}
+              Next
             </Button>
           </div>
         </div>

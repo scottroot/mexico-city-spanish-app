@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import { signup } from '@/app/auth/signup/actions'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -12,7 +11,6 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isPending, setIsPending] = useState(false)
-  // const { t } = useLanguage() // Deprecated - using direct English text
 
   const handleSubmit = async (formData) => {
     setIsPending(true)

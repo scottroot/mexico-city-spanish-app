@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { Sparkles, Target, Clock, Wrench, Scissors } from 'lucide-react';
 import GameCard from '../../components/games/GameCard';
 // import { useRouter } from 'next/navigation';
-// import { useLanguage } from '../../contexts/LanguageContext'; // Deprecated - using direct English text
 import Link from 'next/link';
 
 interface HomeProps {
@@ -17,8 +16,6 @@ export default function GamesComponent({ initialGames }: HomeProps) {
   // const [games] = useState<Game[]>(initialGames.map(gameData => new Game(gameData)));
   const games = initialGames;
   const [progress] = useState([]);
-
-  // const { t } = useLanguage(); // Deprecated - using direct English text
 
   const getProgressForGame = (gameId: string) => {
     return progress.filter((p: any) => p.game_id === gameId);

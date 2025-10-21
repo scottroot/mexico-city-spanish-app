@@ -26,8 +26,8 @@ export default function MainLayout({ children, user }: MainLayoutProps) {
       <main 
         // add l-padding for sidebar in MainNavigation.tsx
         className={clsx(
-          "h-full min-h-screen flex flex-col max-w-full overflow-hidden",
-          "max-md:pt-10", // MobileTopBar padding (h-10)
+          "h-full min-h-screen flex flex-col max-w-full overscroll-none",
+          // "max-md:pt-10", // MobileTopBar padding (h-10)
           "max-md:pb-16", // MobileBottomNav padding (h-16)
           "md:pl-[86px]", // md+ desktop sidebar padding
           "xl:pl-64"

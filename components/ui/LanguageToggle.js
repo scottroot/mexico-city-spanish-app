@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { Globe, Check, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ClickAway from '../ClickAway'
@@ -12,7 +11,6 @@ const LANGUAGES = [
 ]
 
 export default function LanguageToggle() {
-  const { language, changeLanguage, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedLanguage, setSelectedLanguage] = useState(null)
   const dropdownRef = useRef(null)
@@ -28,20 +26,6 @@ export default function LanguageToggle() {
       }
     }
   }, [])
-
-  // // Close dropdown when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //       setIsOpen(false)
-  //     }
-  //   }
-
-  //   document.addEventListener('mousedown', handleClickOutside)
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside)
-  //   }
-  // }, [])
 
   const handleCloseModal = () => {
     // Clear any existing timeout
@@ -62,7 +46,8 @@ export default function LanguageToggle() {
     setSelectedLanguage(langCode)
     
     // Change the language immediately
-    changeLanguage(langCode)
+    // TODO: this was the old way to change language from the language context.
+    // changeLanguage(langCode)
     
     // Close the modal after a short delay to show the selection
     timeoutRef.current = setTimeout(() => {

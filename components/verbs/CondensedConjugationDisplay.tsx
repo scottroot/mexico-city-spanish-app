@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 import { Volume2, Heart, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 import { Favorites } from '../../entities/Favorites';
+import Image from "next/image";
+
 
 interface VerbConjugation {
   infinitive: string;
@@ -65,7 +66,6 @@ export default function CondensedConjugationDisplay({
   const [selectedMood, setSelectedMood] = useState('Indicativo');
   const [isFavorite, setIsFavorite] = useState(false);
   const [loadingFavorite, setLoadingFavorite] = useState(false);
-  const { t, language } = useLanguage();
 
   // Load favorite status on mount
   React.useEffect(() => {
@@ -179,12 +179,13 @@ export default function CondensedConjugationDisplay({
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('verbs.loadingConjugations')}</p>
-        </div>
-      </div>
+      <div className="flex justify-center items-center w-full h-screen px-6 lg:mx-auto">
+      {/* Main content area */}
+      <main className="w-full h-full pt-6 flex flex-col items-center justify-center gap-2">
+        <Image src="/images/coyote-running-loading-transparent.gif" alt="" width={150} height={150} className="" />
+        <div className="text-lg  italic text-stone-700 animate-pulse">Loading conjugations...</div>
+      </main>
+    </div>
     );
   }
 
@@ -252,7 +253,7 @@ export default function CondensedConjugationDisplay({
       </div>
 
       {/* Mobile Mood Navigation - Top */}
-      <div className="md:hidden border-b bg-gradient-to-r from-orange-50 to-pink-50 flex justify-center gap-2 p-2">
+      <div className="zmd:hidden border-b border-gray-200 bg-gradient-to-r from-orange-50 to-pink-50 flex flex-wrap justify-center gap-2 p-2">
         {moods.map((mood) => (
           <button
             key={mood.id}
@@ -263,13 +264,13 @@ export default function CondensedConjugationDisplay({
                 : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
             }`}
           >
-            {language === 'en' ? mood.label : mood.labelEs}
+            {mood.label}
           </button>
         ))}
       </div>
 
       {/* Conjugation Grid */}
-      <div className="flex-1 overflow-y-auto bg-white px-12">
+      <div className="flex-1 overflow-y-auto bg-white md:px-6">
         <div className="grid gap-x-12 gap-y-4 p-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {currentConjugations.map((conjugation, index) => (
             <motion.div
@@ -278,11 +279,11 @@ export default function CondensedConjugationDisplay({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className=" bg-white h-full shadow-none border-none">
+              <Card className="max-md:mx-auto max-w-xs bg-white h-full shadow-none border-none">
                 <CardContent className="p-3">
                   {/* Card Header */}
                   <h3 className="font-normal text-gray-900 text-sm md:text-base lg:text-lg  mb-2">
-                    {language === 'en' && 'tense_english' in conjugation 
+                    {'tense_english' in conjugation 
                       ? conjugation.tense_english 
                       : conjugation.tense}
                   </h3>
@@ -319,21 +320,23 @@ export default function CondensedConjugationDisplay({
       </div>
 
       {/* Desktop Bottom Navigation - Sticky Tab Bar */}
-        <div className="hidden md:flex sticky bottom-0 border-t bg-gradient-to-r from-orange-50 to-pink-50 justify-center gap-2 p-2">
+        {/* <div 
+          className="hidden md:flex justify-center fixed w-full bottom-0 border-t bg-gradient-to-r from-orange-50 to-pink-50 gap-2 p-2"
+        >
         {moods.map((mood) => (
             <button
               key={mood.id}
               onClick={() => setSelectedMood(mood.id)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+              className={`flex px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                 selectedMood === mood.id
                   ? 'bg-gradient-to-r from-orange-400 to-pink-400 text-white shadow-md'
                   : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
               }`}
             >
-              {language === 'en' ? mood.label : mood.labelEs}
+              {mood.label}
             </button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

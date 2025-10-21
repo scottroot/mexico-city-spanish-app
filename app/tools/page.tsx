@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BookOpen, Scissors, Volume2, FileText, Brain, Zap } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+
 
 interface Tool {
   id: string;
@@ -15,8 +15,6 @@ interface Tool {
 }
 
 export default function ToolsPage() {
-  const { t } = useLanguage();
-
   const tools: Tool[] = [
     {
       id: 'syllabification',

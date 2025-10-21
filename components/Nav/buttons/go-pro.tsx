@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { Crown, CreditCard } from "lucide-react";
 import { useBilling } from "../../../hooks/useBilling";
-import { useLanguage } from "../../../contexts/LanguageContext";
 
 interface GoProButtonProps {
   user: any;
@@ -12,7 +11,6 @@ interface GoProButtonProps {
 
 const ManageBillingButton: React.FC<GoProButtonProps> = ({ user }) => {
   const { hasAccess, loading: billingLoading, manageBilling } = useBilling();
-  const { t } = useLanguage();
 
   if (!user || billingLoading) return null;
 
@@ -30,7 +28,6 @@ const ManageBillingButton: React.FC<GoProButtonProps> = ({ user }) => {
 
 const GoProButton: React.FC<GoProButtonProps> = ({ user }) => {
   const { hasAccess, loading: billingLoading, manageBilling } = useBilling();
-  const { t } = useLanguage();
 
   if (!user || billingLoading || hasAccess) return null;
 
@@ -38,13 +35,15 @@ const GoProButton: React.FC<GoProButtonProps> = ({ user }) => {
   return (
     <Link
       href="/pro"
-      className="flex items-center gap-3 transition-all duration-200
-      w-auto justify-center hover:bg-gray-50  rounded-lg p-2 
-      xl:w-full xl:justify-start xl:hover:bg-transparent xl:rounded-full xl:p-0 "
+      className="group flex items-center gap-3 transition-all duration-200
+      w-auto justify-center xl:w-full xl:justify-start xl:rounded-full xl:p-0 "
       title="Go Pro"
+      aria-label="Go Pro"
     >
-      <Crown className="w-5 h-5 xl:w-6 xl:h-8 text-gray-500 hover:text-gray-700" />
-      <span className="hidden xl:block text-sm font-medium text-gray-700">Go Pro</span>
+      <div className="flex items-center justify-center w-10 h-10">
+        <Crown className="w-full text-gray-500 group-hover:text-yellow-600" />
+      </div>
+      <span className="hidden xl:block text-sm font-medium text-gray-700 group-hover:text-yellow-600">Go Pro</span>
     </Link>
   );
 };

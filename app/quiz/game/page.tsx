@@ -8,10 +8,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, XCircle, RotateCcw, Home } from 'lucide-react';
 import CustomQuizGame from '@/components/games/CustomQuizGame';
 import { QuizQuestion, QuizResult, QuizConfig } from '@/types/quiz';
-import { useLanguage } from '@/contexts/LanguageContext';
+
 
 export default function QuizGamePage() {
-  const { t, language } = useLanguage();
   const router = useRouter();
   
   const [quizData, setQuizData] = useState<{
@@ -67,7 +66,7 @@ export default function QuizGamePage() {
         <div className="text-center">
           <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">
-            {language === 'es' ? 'Cargando quiz...' : 'Loading quiz...'}
+            Loading quiz...
           </p>
         </div>
       </div>
@@ -79,10 +78,10 @@ export default function QuizGamePage() {
       <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-orange-50 to-pink-50 flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 mb-4">
-            {language === 'es' ? 'No se encontró el quiz' : 'Quiz not found'}
+            Quiz not found
           </p>
           <Button onClick={() => router.push('/quiz')}>
-            {language === 'es' ? 'Crear Nuevo Quiz' : 'Create New Quiz'}
+            Create New Quiz
           </Button>
         </div>
       </div>
@@ -114,7 +113,7 @@ export default function QuizGamePage() {
             </div>
             
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
-              {language === 'es' ? '¡Quiz Completado!' : 'Quiz Completed!'}
+              Quiz Completed!
             </h1>
             
             <div className="text-6xl font-bold mb-4">
@@ -125,10 +124,10 @@ export default function QuizGamePage() {
             
             <p className="text-lg text-gray-600 mb-6">
               {isExcellent 
-                ? (language === 'es' ? '¡Excelente trabajo!' : 'Excellent work!')
+                ? 'Excellent work!'
                 : isGood 
-                ? (language === 'es' ? '¡Buen trabajo!' : 'Good work!')
-                : (language === 'es' ? '¡Sigue practicando!' : 'Keep practicing!')
+                ? 'Good work!'
+                : 'Keep practicing!'
               }
             </p>
           </motion.div>
@@ -141,7 +140,7 @@ export default function QuizGamePage() {
                     {quizResult.score}
                   </div>
                   <div className="text-sm text-gray-600">
-                    {language === 'es' ? 'Correctas' : 'Correct'}
+                    Correct
                   </div>
                 </div>
                 <div>
@@ -149,7 +148,7 @@ export default function QuizGamePage() {
                     {quizResult.mistakes}
                   </div>
                   <div className="text-sm text-gray-600">
-                    {language === 'es' ? 'Incorrectas' : 'Incorrect'}
+                    Incorrect
                   </div>
                 </div>
                 <div>
@@ -157,7 +156,7 @@ export default function QuizGamePage() {
                     {quizResult.totalQuestions}
                   </div>
                   <div className="text-sm text-gray-600">
-                    {language === 'es' ? 'Total' : 'Total'}
+                    Total
                   </div>
                 </div>
                 <div>
@@ -165,7 +164,7 @@ export default function QuizGamePage() {
                     {Math.floor(quizResult.completionTime / 60)}:{(quizResult.completionTime % 60).toString().padStart(2, '0')}
                   </div>
                   <div className="text-sm text-gray-600">
-                    {language === 'es' ? 'Tiempo' : 'Time'}
+                    Time
                   </div>
                 </div>
               </div>
@@ -176,7 +175,7 @@ export default function QuizGamePage() {
           <Card className="mb-6 bg-white shadow-lg">
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold mb-4">
-                {language === 'es' ? 'Revisión de Preguntas' : 'Question Review'}
+                Question Review
               </h3>
               <div className="space-y-3">
                 {quizResult.questions.map((question, index) => {
@@ -197,21 +196,21 @@ export default function QuizGamePage() {
                           <XCircle className="w-4 h-4 text-red-600" />
                         )}
                         <span className="font-medium">
-                          {language === 'es' ? `Pregunta ${index + 1}` : `Question ${index + 1}`}
+                          Question {index + 1}
                         </span>
                       </div>
                       <p className="text-sm text-gray-700 mb-1">
-                        <strong>{language === 'es' ? 'Frase:' : 'Phrase:'}</strong> {question.englishPhrase}
+                        <strong>Phrase:</strong> {question.englishPhrase}
                       </p>
                       <p className="text-sm text-gray-700 mb-1">
-                        <strong>{language === 'es' ? 'Tiempo:' : 'Tense:'}</strong> {language === 'es' ? question.tense : question.tenseEnglish}
+                        <strong>Tense:</strong> {question.tenseEnglish}
                       </p>
                       <p className="text-sm text-gray-700 mb-1">
-                        <strong>{language === 'es' ? 'Tu respuesta:' : 'Your answer:'}</strong> {userAnswer}
+                        <strong>Your answer:</strong> {userAnswer}
                       </p>
                       {!isCorrect && (
                         <p className="text-sm text-gray-700">
-                          <strong>{language === 'es' ? 'Respuesta correcta:' : 'Correct answer:'}</strong> {question.correctAnswer}
+                          <strong>Correct answer:</strong> {question.correctAnswer}
                         </p>
                       )}
                     </div>
@@ -228,20 +227,20 @@ export default function QuizGamePage() {
               className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              {language === 'es' ? 'Jugar de Nuevo' : 'Play Again'}
+              Play Again
             </Button>
             <Button
               onClick={handleNewQuiz}
               variant="outline"
             >
-              {language === 'es' ? 'Nuevo Quiz' : 'New Quiz'}
+              New Quiz
             </Button>
             <Button
               onClick={handleGoHome}
               variant="outline"
             >
               <Home className="w-4 h-4 mr-2" />
-              {language === 'es' ? 'Inicio' : 'Home'}
+              Home
             </Button>
           </div>
         </div>

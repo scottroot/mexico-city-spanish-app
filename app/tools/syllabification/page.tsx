@@ -6,7 +6,7 @@ import { Scissors, Volume2, Copy, Check, ArrowLeft, Info } from 'lucide-react';
 import Link from 'next/link';
 import { syllabifySentence } from '@/utils/syllabify';
 import { playTTS, fallbackTTS } from '@/lib/tts-client';
-import { useLanguage } from '@/contexts/LanguageContext';
+
 
 interface SyllableProps {
   syllable: string;
@@ -54,7 +54,6 @@ export default function SyllabificationTool() {
   const [syllables, setSyllables] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { t } = useLanguage();
 
   const handleAnalyze = () => {
     if (!inputText.trim()) return;

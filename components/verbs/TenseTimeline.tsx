@@ -6,12 +6,9 @@ import { Clock, Volume2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 
 export default function TenseTimeline() {
-  const { t } = useLanguage();
-
   // TTS function using your existing pattern
   const playAudio = async (text: string) => {
     try {
@@ -26,8 +23,8 @@ export default function TenseTimeline() {
 
   const tenseCategories = [
     {
-      title: t('verbs.indicative'),
-      description: t('verbs.indicativeDesc'),
+      title: 'Indicative',
+      description: 'Used for facts, statements, and questions',
       tenses: [
         { spanish: 'Presente', english: 'Present', color: 'bg-blue-500' },
         { spanish: 'Pretérito Perfecto', english: 'Present Perfect', color: 'bg-blue-400' },
@@ -41,8 +38,8 @@ export default function TenseTimeline() {
       ]
     },
     {
-      title: t('verbs.subjunctive'),
-      description: t('verbs.subjunctiveDesc'),
+      title: 'Subjunctive',
+      description: 'Used for desires, doubts, and emotions',
       tenses: [
         { spanish: 'Presente', english: 'Present', color: 'bg-orange-500' },
         { spanish: 'Pretérito Perfecto', english: 'Present Perfect', color: 'bg-orange-400' },
@@ -53,8 +50,8 @@ export default function TenseTimeline() {
       ]
     },
     {
-      title: t('verbs.imperative'),
-      description: t('verbs.imperativeDesc'),
+      title: 'Imperative',
+      description: 'Used for commands and requests',
       tenses: [
         { spanish: 'Afirmativo', english: 'Affirmative', color: 'bg-pink-500' },
         { spanish: 'Negativo', english: 'Negative', color: 'bg-pink-400' }
@@ -68,11 +65,11 @@ export default function TenseTimeline() {
         <div className="flex items-center gap-2">
           <Clock className="w-5 h-5" />
           <CardTitle className="text-xl">
-            {t('verbs.spanishTenses')}
+            Spanish Tenses
           </CardTitle>
         </div>
         <p className="text-orange-100 text-sm">
-          {t('verbs.tenseTimelineDesc')}
+          Explore all Spanish verb tenses and their usage
         </p>
       </CardHeader>
       
@@ -133,7 +130,7 @@ export default function TenseTimeline() {
                         variant="outline" 
                         className="text-xs bg-gray-50 text-gray-600 border-gray-200"
                       >
-                        {t('verbs.tense')}
+                        Tense
                       </Badge>
                     </div>
                   </motion.div>
@@ -146,7 +143,7 @@ export default function TenseTimeline() {
         {/* Timeline Visualization */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <h4 className="text-md font-semibold text-gray-900 mb-4">
-            {t('verbs.timeFlow')}
+            Time Flow
           </h4>
           
           <div className="relative">
@@ -154,9 +151,9 @@ export default function TenseTimeline() {
             
             <div className="space-y-4">
               {[
-                { time: t('verbs.past'), color: 'bg-red-500', position: 'left-0' },
-                { time: t('verbs.present'), color: 'bg-orange-500', position: 'left-2' },
-                { time: t('verbs.future'), color: 'bg-green-500', position: 'left-4' }
+                { time: 'Past', color: 'bg-red-500', position: 'left-0' },
+                { time: 'Present', color: 'bg-orange-500', position: 'left-2' },
+                { time: 'Future', color: 'bg-green-500', position: 'left-4' }
               ].map((item, index) => (
                 <motion.div
                   key={item.time}
@@ -171,9 +168,9 @@ export default function TenseTimeline() {
                       {item.time}
                     </span>
                     <p className="text-sm text-gray-600">
-                      {item.time === t('verbs.past') && t('verbs.pastDesc')}
-                      {item.time === t('verbs.present') && t('verbs.presentDesc')}
-                      {item.time === t('verbs.future') && t('verbs.futureDesc')}
+                      {item.time === 'Past' && 'Actions that happened before now'}
+                      {item.time === 'Present' && 'Actions happening now or general truths'}
+                      {item.time === 'Future' && 'Actions that will happen after now'}
                     </p>
                   </div>
                 </motion.div>

@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,7 +13,6 @@ export default function ForgotPasswordForm() {
   const [success, setSuccess] = useState('')
   
   const { resetPassword } = useAuth()
-  // const { t } = useLanguage() // Deprecated - using direct English text
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Trophy, Wrench, BookText, ArrowRight, Star, Users, Globe } from 'lucide-react'
-// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import { Volume2, VolumeX, ShoppingCart, BookOpen } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -19,7 +18,7 @@ function HomeStats() {
   ]
   return (
     <div className="flex max-w-4xl justify-center py-6">
-      <div className="px-6">
+      <div className="hidden md:block px-6">
         <div 
           // className="grid grid-cols-1 gap-6 sm:grid-cols-3"
           className="flex flex-row gap-4 justify-center items-center"
@@ -48,7 +47,7 @@ function HomeStats() {
 function HeroSection() {
   return (
     <section className="xbg-white">
-      <div className="max-w-full lg:max-w-6xl mx-auto px-6 pt-16">
+      <div className="max-w-full lg:max-w-6xl mx-auto px-6 md:pt-16">
         <div className="relative w-full h-56 py-4 ">
           <Image src="/hero-logo.png" alt="Hero Image" fill className="object-contain" />
         </div>
@@ -226,7 +225,7 @@ function VerbCard({ verb, title, icon }: { verb: string; title: string; icon: st
 function CTASection() {
   return (
     <section className="max-md:pb-16">
-      <div className="max-w-4xl py-16 mx-auto text-center px-6 bg-orange-500">
+      <div className="max-w-4xl py-16 mx-auto text-center px-6 bg-orange-500 rounded-xl">
         <h2 className="text-3xl font-bold text-white mb-4">
           Ready to Start Your Spanish Journey?
         </h2>
@@ -271,7 +270,7 @@ function NewFeaturedSection() {
       <div className="max-w-6xl mx-auto">
         
         {/* Main Hero Card */}
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-8">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">
           {/* <div className="relative block bg-gradient-to-r from-teal-500 to-teal-600 overflow-hidden"> */}
 
           {/* Main CTA */}
@@ -290,6 +289,7 @@ function NewFeaturedSection() {
               </div>
 
               {/* Primary CTA */}
+              <div className="flex flex-col justify-center h-full">
               <Link 
                 className="bg-white hover:bg-gray-50 text-teal-600 font-bold p-4 md:p-6 rounded-2xl text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
                 href="/stories/la-nina-y-el-gato"
@@ -302,17 +302,19 @@ function NewFeaturedSection() {
                   height={48}
                 />
                 <div className="text-left">
-                  <div className="text-lg">
-                    Listen to "La niña y el gato"
+                  <div className="text-base md:text-lg">
+                    <span className="hidden md:inline">Listen to </span>
+                    "La niña y el gato"
                   </div>
                   <div className="text-sm text-gray-500 font-normal">
                     2 minutes • Beginner
                   </div>
                 </div>
               </Link>
+              </div>
             </div>
               
-            <div className="flex flex-col w-1/3 overflow-hidden">
+            <div className="hidden md:flex flex-col w-1/3 overflow-hidden">
               <img 
                   src="/images/coyote-holding-beatz.webp" 
                   alt="Coyote Character" 
@@ -327,7 +329,7 @@ function NewFeaturedSection() {
 
           {/* Secondary CTA Bar */}
           <CTAWrapper className="bg-gradient-to-r from-orange-500 to-red-500">
-            <div className="flex flex-col w-1/3 overflow-hidden">
+            <div className="hidden md:flex flex-col w-1/4 flex-none overflow-hidden">
               <img 
                   src="/images/coyote-holding-groceries-flipped.webp" 
                   alt="Coyote Character" 
@@ -348,39 +350,27 @@ function NewFeaturedSection() {
                 </div>
               </div>
 
-              {/* Primary CTA */}
-              {/* <button className="bg-white hover:bg-gray-50 text-teal-600 font-bold p-4 md:p-6 rounded-2xl text-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3">
-                <Image 
-                  src="/stories-circle-placeholder.webp" 
-                  className="w-12 h-12 no-select" 
-                  alt="Story Circle Placeholder" 
-                  width={48} 
-                  height={48}
-                />
-                <div className="text-left">
-                  <div className="text-base">
-                    Listen to "El Mercado"
-                  </div>
-                  <div className="text-sm text-gray-500 font-normal">
-                    2 minutes • Beginner
-                  </div>
-                </div>
-              </button> */}
               <Link 
                 // className="w-full bg-white hover:bg-gray-50 text-orange-600 font-bold py-5 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 flex items-center justify-between"
-                className="w-full bg-white hover:bg-gray-50 text-orange-600 font-bold p-4 md:p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3"
+                className="w-full bg-white hover:bg-gray-50 text-orange-600 font-bold p-4 md:p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-between gap-3"
                 href="/game?id=shopping-game-001"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 flex-none bg-orange-100 rounded-xl flex items-center justify-center">
                     <ShoppingCart className="w-6 h-6 text-orange-600" />
                   </div>
                   <div className="text-left">
-                    <div className="text-lg">Try the Checkout Game</div>
-                    <div className="text-sm text-gray-500 font-normal">Can you understand prices in real-time?</div>
+                    <div className="text-base md:text-lg">
+                      <span className="hidden md:inline">Try the </span>
+                      Checkout Game
+                    </div>
+                    <div className="text-sm text-gray-500 font-normal">
+                      <span className="md:hidden">Understand prices in real-time</span>
+                      <span className="max-md:hidden">Can you understand prices in real-time?</span>
+                    </div>
                   </div>
                 </div>
-                <div className="text-orange-500 text-2xl">→</div>
+                <div className="hidden md:block text-orange-500 text-2xl">→</div>
               </Link>
             </div>
 
@@ -391,15 +381,19 @@ function NewFeaturedSection() {
         </div>
 
         {/* Supporting Features Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mt-12">
+        <div className="grid md:grid-cols-2 gap-6 mt-16">
           
           {/* Pronunciation Tool */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col justify-between items-start">
             <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
               <span className="text-3xl">🗣️</span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">Master Pronunciation</h3>
-            <p className="text-gray-600 mb-4">See how words merge together (sinalefa) - type any phrase!</p>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">
+              Master Pronunciation
+            </h3>
+            <p className="text-gray-600 mb-4">
+              See how words merge together (sinalefa) - type any phrase!
+            </p>
             <div className="bg-gray-50 rounded-lg p-4 mb-4">
               <div className="text-sm text-gray-500 mb-1">Try it:</div>
               <div className="text-lg font-mono">¿Cómo estás? → <span className="text-purple-600">¿Có-moes-tás?</span></div>
@@ -410,17 +404,23 @@ function NewFeaturedSection() {
           </div>
 
           {/* Verb Database */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col justify-between items-start">
             <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
               <BookOpen className="w-7 h-7 text-blue-600" />
             </div>
             <h3 className="text-2xl font-bold text-gray-800 mb-2">11,000+ Conjugations</h3>
             <p className="text-gray-600 mb-4">Quiz yourself on any verb, tense, or mood combination</p>
             <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <div className="flex gap-2 mb-2">
-                <span className="bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">hablar</span>
-                <span className="bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">comer</span>
-                <span className="bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">vivir</span>
+              <div className="flex gap-2 mb-2 flex-wrap">
+                <span className="bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">
+                  hablar
+                </span>
+                <span className="bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">
+                  comer
+                </span>
+                <span className="zlg:max-xl:hidden bg-blue-200 text-blue-700 px-3 py-1 rounded-full text-sm">
+                  vivir
+                </span>
               </div>
               <div className="text-sm text-gray-500">+ create custom quizzes</div>
             </div>
@@ -438,13 +438,13 @@ function NewFeaturedSection() {
 
 export default function HomePage({ games, stories }: { games: any[], stories: any[] }) {
   return (
-    <div className="min-h-screen h-fit xbg-gray-5 max-w-full">
+    <div className="flex-1 w-full max-w-full overflow-x-hidden">
       <HeroSection />
       <NewFeaturedSection />
 
       {/* Games Section */}
-      <section className="py-12 xbg-white">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="mt-6 py-12">
+        <div className="">
           <SectionHeader 
             title="Games" 
             description="Practice Spanish through interactive games and challenges." 
@@ -452,7 +452,7 @@ export default function HomePage({ games, stories }: { games: any[], stories: an
           />
           
           <div className="grid grid-cols-1 grid-rows-3 auto-rows-[0]
-            md:grid-rows-1 md:auto-rows-[0] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+            md:grid-rows-1 md:auto-rows-[0] md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 
             gap-4 overflow-hidden">
             {games.slice(0, 4).map((game, index) => (
               <GameCard key={game.id} game={game} index={index} />
@@ -462,8 +462,8 @@ export default function HomePage({ games, stories }: { games: any[], stories: an
       </section>
 
       {/* Stories Section */}
-      <section className="py-12 xbg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-12">
+        <div className="">
           <SectionHeader 
             title="Stories" 
             description="Improve your reading skills through immersive Spanish stories." 
@@ -471,7 +471,7 @@ export default function HomePage({ games, stories }: { games: any[], stories: an
           />
           
           <div className="grid grid-cols-1 grid-rows-3 auto-rows-[0]
-            md:grid-rows-1 md:auto-rows-[0] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+            md:grid-rows-1 md:auto-rows-[0] md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 
             gap-4">
             {stories.map((story, index) => (
               <StoryCard key={story.id} story={story} index={index} />
@@ -481,27 +481,27 @@ export default function HomePage({ games, stories }: { games: any[], stories: an
       </section>
 
       {/* Tools Section */}
-      <section className="py-12 xbg-white">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-12">
+        <div className="">
           <SectionHeader 
             title="Tools" 
             description="Powerful language tools to enhance your learning experience." 
             href="/tools" 
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
             <ToolCard 
               title="Syllabification"
               description="Break down Spanish words into syllables and practice pronunciation."
               href="/tools/syllabification"
               icon={Wrench}
             />
-            <ToolCard 
+            {/* <ToolCard 
               title="Translation Tool"
               description="Coming soon - Advanced translation and context analysis."
               icon={Globe}
               comingSoon={true}
-            />
+            /> */}
             <ToolCard 
               title="Conversation Practice"
               description="Coming soon - AI-powered conversation practice."
@@ -513,8 +513,8 @@ export default function HomePage({ games, stories }: { games: any[], stories: an
       </section>
 
       {/* Verbs Section */}
-      <section className="py-12 xbg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-12">
+        <div className="">
           <SectionHeader 
             title="Verbs" 
             description="Master Spanish verb conjugations with interactive practice." 

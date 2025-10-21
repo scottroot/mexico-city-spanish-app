@@ -6,7 +6,6 @@ import { X, Volume2, BookOpen, ChevronDown, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 
 interface VerbConjugation {
@@ -49,7 +48,6 @@ export default function ConjugationDisplay({
   isMobile = false
 }: ConjugationDisplayProps) {
   const [expandedMoods, setExpandedMoods] = useState<Set<string>>(new Set(['Indicativo']));
-  const { t } = useLanguage();
 
   // TTS function using your existing pattern
   const playAudio = async (text: string) => {
@@ -118,7 +116,9 @@ export default function ConjugationDisplay({
       <div className={`${isMobile ? 'w-full' : 'flex-1'} flex items-center justify-center ${isMobile ? 'h-64' : ''}`}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('verbs.loadingConjugations')}</p>
+          <p className="text-gray-600">
+            Loading conjugations...
+          </p>
         </div>
       </div>
     );
@@ -167,11 +167,11 @@ export default function ConjugationDisplay({
                   {verb.infinitive_english}
                 </h2>
                 <p className="text-sm text-gray-600">
-                  {verb.conjugations.length} {t('verbs.conjugations')}
+                  {verb.conjugations.length} conjugations
                 </p>
               </div>
               <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-                {t('verbs.spanishVerb')}
+                Spanish Verb
               </Badge>
             </div>
           </CardContent>
@@ -191,7 +191,7 @@ export default function ConjugationDisplay({
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <Badge variant="secondary" className="bg-white/20 text-white">
-                      {conjugations.length} {t('verbs.tenses')}
+                      {conjugations.length} tenses
                     </Badge>
                     {expandedMoods.has(mood) ? (
                       <ChevronDown className="w-5 h-5" />
@@ -267,7 +267,7 @@ export default function ConjugationDisplay({
                               {conjugation.gerund && (
                                 <div className="flex items-center gap-2 p-2 bg-blue-50 rounded">
                                   <span className="text-sm font-medium text-blue-600">
-                                    {t('verbs.gerund')}:
+                                    Gerund:
                                   </span>
                                   <span className="flex-1 font-medium text-blue-900">
                                     {conjugation.gerund}
@@ -286,7 +286,7 @@ export default function ConjugationDisplay({
                               {conjugation.pastparticiple && (
                                 <div className="flex items-center gap-2 p-2 bg-green-50 rounded">
                                   <span className="text-sm font-medium text-green-600">
-                                    {t('verbs.pastParticiple')}:
+                                    Past Participle:
                                   </span>
                                   <span className="flex-1 font-medium text-green-900">
                                     {conjugation.pastparticiple}

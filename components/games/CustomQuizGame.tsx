@@ -11,7 +11,6 @@ import { Progress as ProgressBar } from '@/components/ui/progress';
 import { CheckCircle, XCircle, Eye, EyeOff, Volume2 } from 'lucide-react';
 import { Progress } from '@/entities/Progress';
 import { QuizQuestion, QuizResult } from '@/types/quiz';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CustomQuizGameProps {
   questions: QuizQuestion[];
@@ -19,7 +18,6 @@ interface CustomQuizGameProps {
 }
 
 export default function CustomQuizGame({ questions, onComplete }: CustomQuizGameProps) {
-  const { t, language } = useLanguage();
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -184,16 +182,10 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm text-gray-600">
-            {language === 'es' 
-              ? `Pregunta ${currentQuestionIndex + 1} de ${questions.length}`
-              : `Question ${currentQuestionIndex + 1} of ${questions.length}`
-            }
+            Question {currentQuestionIndex + 1} of {questions.length}
           </span>
           <span className="text-sm font-medium text-gray-800">
-            {language === 'es' 
-              ? `Puntuación: ${score}/${questions.length}`
-              : `Score: ${score}/${questions.length}`
-            }
+            Score: {score}/{questions.length}
           </span>
         </div>
         <ProgressBar value={progressPercentage} className="h-2" />
@@ -207,11 +199,11 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
             </h2>
             <div className="flex items-center justify-center gap-2 mb-4">
               <span className="text-lg text-gray-600">
-                {language === 'es' ? currentQuestion.tense : currentQuestion.tenseEnglish}
+                {currentQuestion.tenseEnglish}
               </span>
               <span className="text-gray-400">-</span>
               <span className="text-lg text-gray-600">
-                {language === 'es' ? currentQuestion.mood : currentQuestion.moodEnglish}
+                {currentQuestion.moodEnglish}
               </span>
             </div>
             
@@ -225,12 +217,12 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
               {showInfinitive ? (
                 <>
                   <EyeOff className="w-4 h-4 mr-2" />
-                  {language === 'es' ? 'Ocultar Infinitivo' : 'Hide Infinitive'}
+                  Hide Infinitive
                 </>
               ) : (
                 <>
                   <Eye className="w-4 h-4 mr-2" />
-                  {language === 'es' ? 'Revelar Infinitivo' : 'Reveal Infinitive'}
+                  Reveal Infinitive
                 </>
               )}
             </Button>
@@ -270,7 +262,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
               ref={inputRef}
               value={userAnswer}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserAnswer(e.target.value)}
-              placeholder={language === 'es' ? 'Escribe tu respuesta aquí...' : 'Type your answer here...'}
+              placeholder='Type your answer here...'
               className="flex-1 text-base bg-gray-50"
               disabled={showResult}
               onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSubmit()}
@@ -280,7 +272,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
               disabled={showResult || !userAnswer.trim()}
               className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 pt-2 pb-2!"
             >
-              {language === 'es' ? 'Enviar' : 'Submit'}
+              Submit
             </Button>
           </div>
         </CardContent>
@@ -299,14 +291,14 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
               <>
                 <CheckCircle className="w-6 h-6 text-green-600" />
                 <span className="text-green-800 font-semibold text-lg">
-                  {language === 'es' ? '¡Excelente!' : 'Excellent!'}
+                  Excellent!
                 </span>
               </>
             ) : (
               <>
                 <XCircle className="w-6 h-6 text-red-600" />
                 <span className="text-red-800 font-semibold text-lg">
-                  {language === 'es' ? 'No es correcto' : 'Not correct'}
+                  Not correct
                 </span>
               </>
             )}
@@ -315,7 +307,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
           {!isCorrect && (
             <div className="mb-4 flex items-center">
               <p className="text-gray-500 mr-2">
-                <strong>{language === 'es' ? 'Respuesta correcta:' : 'Correct answer:'}</strong>
+                <strong>Correct answer:</strong>
               </p>
               <div className="flex items-center gap-2">
                 <span className="text-lg leading-none font-medium text-gray-800">
@@ -335,14 +327,14 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
           
           <div className="bg-white p-4 rounded-lg border">
             <p className="text-gray-700 mb-2">
-              <strong>{language === 'es' ? 'Explicación:' : 'Explanation:'}</strong>
+              <strong>Explanation:</strong>
             </p>
             <p className="text-gray-600">
               {currentQuestion.explanation}
             </p>
             <div className="mt-2 text-sm text-gray-500">
               <p>
-                <strong>{language === 'es' ? 'Verbo:' : 'Verb:'}</strong> {currentQuestion.infinitive} ({currentQuestion.infinitiveEnglish})
+                <strong>Verb:</strong> {currentQuestion.infinitive} ({currentQuestion.infinitiveEnglish})
               </p>
             </div>
           </div>
@@ -359,7 +351,7 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
                 }}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
               >
-                {language === 'es' ? 'Siguiente Pregunta' : 'Next Question'} 
+                Next Question 
                 <span className="ml-2 text-xs opacity-75">(Enter)</span>
               </Button>
             </div>

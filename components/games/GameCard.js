@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, MessageSquare, Volume2, ShoppingCart } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 
 const iconMap = {
@@ -27,7 +26,6 @@ const difficultyColors = {
 };
 
 export default function GameCard({ game, progress }) {
-  const { t } = useLanguage();
   const Icon = iconMap[game.type];
   const gradientClass = colorMap[game.type];
   
@@ -56,14 +54,20 @@ export default function GameCard({ game, progress }) {
           {/* <Icon className="w-10 h-10 text-white relative z-10" /> */}
           <div className="absolute top-2 right-2">
             <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs`}>
-              {t(`games.${game.difficulty}`)}
+              {/* {t(`games.${game.difficulty}`)} */}
+              {/* TODO: Fix this */}
+              {game.difficulty}
             </Badge>
           </div>
         </div>
         <CardContent className="p-4">
           <h3 className="font-bold text-lg text-gray-800 mb-2">{game.title}</h3>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500 capitalize">{t(`games.${game.type}`)}</span>
+            <span className="text-gray-500 capitalize">
+              {/* {t(`games.${game.type}`)} */}
+              {/* TODO: Fix this */}
+              {game.type}
+            </span>
             {progress.length > 0 && (
               <div className="flex items-center gap-2">
                 <div className="w-12 h-1.5 bg-gray-200 rounded-full overflow-hidden">

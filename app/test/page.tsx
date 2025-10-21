@@ -6,7 +6,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Trophy, Wrench, BookText, ArrowRight, Star, Users, Globe } from 'lucide-react'
-// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 
 
 function HomeStats() {
@@ -371,7 +370,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function TestPage() {
+export function TestPage() {
   return (
     <div className="px-6">
       {/* Main content area */}
@@ -391,6 +390,37 @@ export default function TestPage() {
           </div>
         </div>
       </aside>
+    </div>
+  )
+}
+
+//////////////////////////////////////////////////
+
+import { BellIcon } from '@heroicons/react/24/outline'
+
+export default function Example() {
+  return (
+    <div className="flex min-h-full flex-col">
+
+      <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8">
+        <aside className="sticky top-8 hidden w-44 shrink-0 lg:block">
+          Left column area
+
+        </aside>
+
+        <main className="flex-1">
+          <HomePage games={[]} stories={[]} />
+        </main>
+
+        <aside className="sticky -top-24 hidden w-96 shrink-0 xl:flex xl:flex-col gap-8">
+          Right column area
+          <div className="w-full h-36 bg-green-500"></div>
+          <div className="w-full h-36 bg-green-600"></div>
+          <div className="w-full h-36 bg-green-700"></div>
+          <div className="w-full h-36 bg-green-800"></div>
+          <div className="w-full h-36 bg-green-900"></div>
+        </aside>
+      </div>
     </div>
   )
 }

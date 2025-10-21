@@ -10,12 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { X, Search, Heart, BookOpen, ChevronDown } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Favorites } from '@/entities/Favorites';
 import { QuizConfig, TenseOption, VerbOption, QuestionCountOption, PronounOption } from '@/types/quiz';
 
 export default function CustomQuizPage() {
-  const { language } = useLanguage();
   const router = useRouter();
   
   // State for quiz configuration
@@ -326,13 +324,10 @@ export default function CustomQuizPage() {
           className="text-center mb-8"
         >
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            {language === 'es' ? 'Quiz Personalizado' : 'Custom Quiz'}
+            Custom Quiz
           </h1>
           <p className="text-lg text-gray-600">
-            {language === 'es' 
-              ? 'Crea tu propio quiz de conjugaciones verbales'
-              : 'Create your own verb conjugation quiz'
-            }
+            Create your own verb conjugation quiz
           </p>
         </motion.div>
         
@@ -365,7 +360,7 @@ export default function CustomQuizPage() {
                 <div className="flex w-4 h-4 border-2 border-orange-500 border-t-transparent 
                 rounded-full animate-spin" />
                 <div className="w-[18ch] text-center">
-                  {language === 'es' ? 'Generando Quiz...' : 'Generating Quiz...'}
+                  Generating Quiz...
                 </div>
                 <div className="flex w-4 h-4" />
               </div>
@@ -373,7 +368,7 @@ export default function CustomQuizPage() {
               <div className="flex items-center gap-2">
                 <div className="flex w-4 h-4" />
                 <div className="w-[18ch] text-center">
-                  {language === 'es' ? 'Iniciar Quiz Rápido' : 'Quick Start Quiz'}
+                  Quick Start Quiz
                 </div>
                 <div className="flex w-4 h-4" />
               </div>
@@ -387,7 +382,7 @@ export default function CustomQuizPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-orange-600" />
-                {language === 'es' ? 'Seleccionar Tiempos' : 'Select Tenses'}
+                Select Tenses
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -398,7 +393,7 @@ export default function CustomQuizPage() {
                   className="w-full justify-between"
                 >
                   <span>
-                    {language === 'es' ? 'Seleccionar Tiempos' : 'Select Tenses'}
+                    Select Tenses
                   </span>
                   <ChevronDown className="w-4 h-4" />
                 </Button>
@@ -406,7 +401,7 @@ export default function CustomQuizPage() {
                 {config.selectedTenseMoods.length > 0 && (
                   <div>
                     <p className="text-sm text-gray-600 mb-2">
-                      {language === 'es' ? 'Tiempos seleccionados:' : 'Selected tenses:'} {config.selectedTenseMoods.length}
+                      Selected tenses: {config.selectedTenseMoods.length}
                     </p>
                     <div className="flex flex-wrap gap-1">
                       {config.selectedTenseMoods.slice(0, 6).map((tenseKey) => {
@@ -414,7 +409,7 @@ export default function CustomQuizPage() {
                         const tenseOption = tenseOptions.find(t => t.value === tense && t.mood === mood);
                         return (
                           <Badge key={tenseKey} variant="secondary" className="text-xs">
-                            {language === 'es' ? tenseOption?.label : tenseOption?.labelEnglish}
+                            {tenseOption?.labelEnglish}
                           </Badge>
                         );
                       })}
@@ -435,7 +430,7 @@ export default function CustomQuizPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-pink-600" />
-                {language === 'es' ? 'Seleccionar Verbos' : 'Select Verbs'}
+                Select Verbs
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -448,7 +443,7 @@ export default function CustomQuizPage() {
                     onClick={() => setConfig(prev => ({ ...prev, verbSelection: 'favorites' }))}
                     className={config.verbSelection === 'favorites' ? 'bg-pink-500' : ''}
                   >
-                    {language === 'es' ? 'Favoritos' : 'Favorites'}
+                    Favorites
                     {favoriteVerbs.length > 0 && (
                       <Badge variant="secondary" className="ml-2">
                         {favoriteVerbs.length}
@@ -461,7 +456,7 @@ export default function CustomQuizPage() {
                     onClick={() => setConfig(prev => ({ ...prev, verbSelection: 'custom' }))}
                     className={config.verbSelection === 'custom' ? 'bg-pink-500' : ''}
                   >
-                    {language === 'es' ? 'Personalizado' : 'Custom'}
+                    Custom
                   </Button>
                 </div>
                 
@@ -474,7 +469,7 @@ export default function CustomQuizPage() {
                       className="w-full justify-between"
                     >
                       <span>
-                        {language === 'es' ? 'Seleccionar Verbos' : 'Select Verbs'}
+                        Select Verbs
                       </span>
                       <ChevronDown className="w-4 h-4" />
                     </Button>
@@ -482,7 +477,7 @@ export default function CustomQuizPage() {
                     {config.customVerbs.length > 0 && (
                       <div className="mt-3">
                         <p className="text-sm text-gray-600 mb-2">
-                          {language === 'es' ? 'Verbos seleccionados:' : 'Selected verbs:'} {config.customVerbs.length}
+                          Selected verbs: {config.customVerbs.length}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {config.customVerbs.slice(0, 6).map((verb) => (
@@ -507,7 +502,7 @@ export default function CustomQuizPage() {
                     {favoriteVerbs.length > 0 ? (
                       <div>
                         <p className="text-sm text-gray-600 mb-2">
-                          {language === 'es' ? 'Verbos favoritos:' : 'Favorite verbs:'} {favoriteVerbs.length}
+                          Favorite verbs: {favoriteVerbs.length}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {favoriteVerbs.slice(0, 6).map((verb) => (
@@ -524,10 +519,7 @@ export default function CustomQuizPage() {
                       </div>
                     ) : (
                       <p className="text-sm text-gray-500">
-                        {language === 'es' 
-                          ? 'No tienes verbos favoritos. Ve a Verbos para agregar algunos.'
-                          : 'No favorite verbs. Go to Verbs to add some.'
-                        }
+                        No favorite verbs. Go to Verbs to add some.
                       </p>
                     )}
                   </div>
@@ -542,16 +534,13 @@ export default function CustomQuizPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-blue-600" />
-              {language === 'es' ? 'Seleccionar Pronombres' : 'Select Pronouns'}
+              Select Pronouns
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <p className="text-sm text-gray-600">
-                {language === 'es' 
-                  ? 'Selecciona los pronombres que quieres practicar:'
-                  : 'Select the pronouns you want to practice:'
-                }
+                Select the pronouns you want to practice:
               </p>
               <div className="flex flex-wrap gap-2">
                 {pronounOptions.map((pronoun) => {
@@ -567,7 +556,7 @@ export default function CustomQuizPage() {
                       }`}
                       onClick={() => handlePronounToggle(pronoun)}
                     >
-                      {language === 'es' ? pronoun.label : pronoun.labelEnglish}
+                      {pronoun.labelEnglish}
                     </Badge>
                   );
                 })}
@@ -575,14 +564,14 @@ export default function CustomQuizPage() {
               {/* {config.selectedPronouns.length > 0 && (
                 <div className="mt-3">
                   <p className="text-sm text-gray-600 mb-2">
-                    {language === 'es' ? 'Pronombres seleccionados:' : 'Selected pronouns:'} {config.selectedPronouns.length}
+                    Selected pronouns: {config.selectedPronouns.length}
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {config.selectedPronouns.slice(0, 6).map((pronoun) => {
                       const pronounOption = pronounOptions.find(p => p.value === pronoun);
                       return (
                         <Badge key={pronoun} variant="secondary" className="text-xs">
-                          {language === 'es' ? pronounOption?.label : pronounOption?.labelEnglish}
+                          {pronounOption?.labelEnglish}
                         </Badge>
                       );
                     })}
@@ -602,7 +591,7 @@ export default function CustomQuizPage() {
         <Card className="mt-6 bg-white shadow-lg">
           <CardHeader>
             <CardTitle>
-              {language === 'es' ? 'Número de Preguntas' : 'Number of Questions'}
+              Number of Questions
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -635,10 +624,10 @@ export default function CustomQuizPage() {
             {loading ? (
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                {language === 'es' ? 'Generando Quiz...' : 'Generating Quiz...'}
+                Generating Quiz...
               </div>
             ) : (
-              language === 'es' ? 'Iniciar Quiz' : 'Start Quiz'
+              'Start Quiz'
             )}
           </Button>
         </div>
@@ -665,7 +654,7 @@ export default function CustomQuizPage() {
             <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-gray-800">
-                  {language === 'es' ? 'Seleccionar Tiempos' : 'Select Tenses'}
+                  Select Tenses
                 </h2>
                 <Button
                   variant="ghost"
@@ -692,13 +681,10 @@ export default function CustomQuizPage() {
                     />
                     <div className="flex-1">
                       <div className="font-medium text-gray-900">
-                        {language === 'es' ? 'Seleccionar Todos' : 'Select All'}
+                        Select All
                       </div>
                       <div className="text-sm text-gray-500">
-                        {language === 'es' 
-                          ? 'Seleccionar o deseleccionar todos los tiempos'
-                          : 'Select or deselect all tenses'
-                        }
+                        Select or deselect all tenses
                       </div>
                     </div>
                   </label>
@@ -707,7 +693,7 @@ export default function CustomQuizPage() {
                 {Object.entries(tensesByMood).map(([mood, tenses]) => (
                   <div key={mood}>
                     <h3 className="font-semibold text-gray-800 mb-3 text-lg">
-                      {language === 'es' ? mood : tenses[0].moodEnglish}
+                      {tenses[0].moodEnglish}
                     </h3>
                     <div className="space-y-2">
                       {tenses.map((tense) => {
@@ -726,13 +712,8 @@ export default function CustomQuizPage() {
                             />
                             <div className="flex-1">
                               <div className="font-medium text-gray-900">
-                                {language === 'es' ? tense.label : tense.labelEnglish}
+                                {tense.labelEnglish}
                               </div>
-                              {language === 'es' && (
-                                <div className="text-sm text-gray-500">
-                                  {tense.labelEnglish}
-                                </div>
-                              )}
                             </div>
                           </label>
                         );
@@ -747,13 +728,13 @@ export default function CustomQuizPage() {
             <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">
-                  {config.selectedTenseMoods.length} {language === 'es' ? 'tiempos seleccionados' : 'tenses selected'}
+                  {config.selectedTenseMoods.length} tenses selected
                 </span>
                 <Button
                   onClick={() => setIsTenseModalOpen(false)}
                   className="bg-orange-500 hover:bg-orange-600 text-white"
                 >
-                  {language === 'es' ? 'Confirmar' : 'Confirm'}
+                  Confirm
                 </Button>
               </div>
             </div>
@@ -782,7 +763,7 @@ export default function CustomQuizPage() {
             <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-gray-800">
-                  {language === 'es' ? 'Seleccionar Verbos' : 'Select Verbs'}
+                  Select Verbs
                 </h2>
                 <Button
                   variant="ghost"
@@ -800,7 +781,7 @@ export default function CustomQuizPage() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
-                  placeholder={language === 'es' ? 'Buscar verbos...' : 'Search verbs...'}
+                  placeholder='Search verbs...'
                   value={verbModalSearchTerm}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVerbModalSearchTerm(e.target.value)}
                   className="pl-10"
@@ -848,13 +829,13 @@ export default function CustomQuizPage() {
             <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">
-                  {config.customVerbs.length} {language === 'es' ? 'verbos seleccionados' : 'verbs selected'}
+                  {config.customVerbs.length} verbs selected
                 </span>
                 <Button
                   onClick={() => setIsVerbModalOpen(false)}
                   className="bg-pink-500 hover:bg-pink-600 text-white"
                 >
-                  {language === 'es' ? 'Confirmar' : 'Confirm'}
+                  Confirm
                 </Button>
               </div>
             </div>

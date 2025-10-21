@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { BookOpen, Star, Clock, Users, Loader2 } from 'lucide-react'
 import PageHeader from '@/components/ui/page-header'
 
@@ -21,7 +20,6 @@ interface Story {
 
 export default function StoriesPage() {
   const router = useRouter()
-  const { t, language, isInitialized } = useLanguage()
   const [stories, setStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -51,32 +49,28 @@ export default function StoriesPage() {
   // Helper function to get level display info
   const getLevelInfo = (level: string) => {
     const levelMap = {
-      'beginner': { label: t('stories.beginner'), color: 'bg-green-100 text-green-800' },
-      'high_beginner': { label: t('stories.beginner'), color: 'bg-green-100 text-green-800' },
-      'low_intermediate': { label: t('stories.intermediate'), color: 'bg-yellow-100 text-yellow-800' },
-      'high_intermediate': { label: t('stories.intermediate'), color: 'bg-yellow-100 text-yellow-800' },
-      'advanced': { label: t('stories.advanced'), color: 'bg-red-100 text-red-800' }
+      'beginner': { label: 'Beginner', color: 'bg-green-100 text-green-800' },
+      'high_beginner': { label: 'High Beginner', color: 'bg-green-100 text-green-800' },
+      'low_intermediate': { label: 'Low Intermediate', color: 'bg-yellow-100 text-yellow-800' },
+      'high_intermediate': { label: 'High Intermediate', color: 'bg-yellow-100 text-yellow-800' },
+      'advanced': { label: 'Advanced', color: 'bg-red-100 text-red-800' }
     }
     return levelMap[level as keyof typeof levelMap] || { label: level, color: 'bg-gray-100 text-gray-800' }
   }
 
-  // Helper function to get the appropriate summary based on language
+  // Helper function to get the summary
   const getStorySummary = (story: Story) => {
-    if (language === 'es' && story.summary) {
-      return story.summary
-    } else if (language === 'en' && story.summary_english) {
+    if (story.summary_english) {
       return story.summary_english
     } else if (story.summary) {
-      return story.summary // Fallback to Spanish
-    } else if (story.summary_english) {
-      return story.summary_english // Fallback to English
+      return story.summary
     } else {
-      return t('stories.story1.subtitle') // Final fallback
+      return 'A simple story about friendship'
     }
   }
 
   // Loading state or context not initialized
-  if (loading || !isInitialized) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50 flex items-center justify-center">
         <div className="text-center">
@@ -112,7 +106,11 @@ export default function StoriesPage() {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <PageHeader icon={BookOpen} title={t('stories.title')} subtitle={t('stories.subtitle')} />
+        <PageHeader 
+          icon={BookOpen} 
+          title="Stories" 
+          subtitle="Immerse yourself in Spanish through engaging stories"
+        />
 
         {/* Stories Grid */}
         {stories.length > 0 ? (
@@ -184,7 +182,7 @@ export default function StoriesPage() {
                       }}
                       className="w-full bg-gradient-to-r from-orange-400 to-pink-400 text-white py-3 px-4 rounded-lg font-medium hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-md hover:shadow-lg"
                     >
-                      {t('stories.readStory')}
+                      Read Story
                     </button>
                   </div>
                 </div>
@@ -210,7 +208,7 @@ export default function StoriesPage() {
                 {/* Coming Soon Badge */}
                 <div className="absolute top-4 right-4">
                   <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600">
-                    {t('stories.comingSoon')}
+                    Coming Soon
                   </span>
                 </div>
               </div>
@@ -226,10 +224,7 @@ export default function StoriesPage() {
                 <div className="relative flex text-gray-600 mb-4 line-clamp-3 leading-6 h-[4.5rem]">
 
                 <p>
-                  {language === 'es' 
-                    ? 'Lucía ve el mar por primera vez y vive un día que nunca va a olvidar.' 
-                    : "Lucia has never seen the beach before. Today is a the day."
-                  }
+                  Lucia has never seen the beach before. Today is a the day.
                 </p>
                 </div>
 
@@ -250,7 +245,7 @@ export default function StoriesPage() {
                   className="w-full bg-gradient-to-r from-orange-400 to-pink-400 text-white py-3 px-4 rounded-lg font-medium hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled
                 >
-                  {t('stories.readStory')}
+                  Read Story
                 </button>
               </div>
             </div>
@@ -268,7 +263,7 @@ export default function StoriesPage() {
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto shadow-lg">
             <Star className="w-12 h-12 text-orange-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              {t('stories.comingSoon')}
+              Coming Soon
             </h3>
             <p className="text-gray-600">
               We're working hard to bring you these amazing stories. Stay tuned for updates!

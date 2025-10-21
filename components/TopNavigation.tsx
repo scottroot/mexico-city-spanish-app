@@ -4,8 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Home, Trophy, User, BookOpen, LogOut, HelpCircle, BookText, Wrench, Menu, X, Crown, CreditCard, Gamepad2 } from "lucide-react";
-// import { useLanguage } from "@/contexts/LanguageContext"; // Deprecated - using direct English text
-// import LanguageToggle from "./ui/LanguageToggle"; // Deprecated - language toggle removed
 import ClickAway from "./ClickAway";
 import { useBilling } from "../hooks/useBilling";
 
@@ -25,7 +23,6 @@ interface NavigationItem {
 export default function TopNavigation({ user }: TopNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
-  // const { t } = useLanguage(); // Deprecated - using direct English text
   const { hasAccess, loading: billingLoading, goPro, manageBilling } = useBilling();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);

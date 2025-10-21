@@ -3,15 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
-import { ArrowLeft, BookOpen, Clock, Star, Loader2, AlertCircle } from 'lucide-react'
+import { ArrowLeft, BookOpen, Clock, Loader2, AlertCircle } from 'lucide-react'
 import TranscriptPlayer from '@/components/TranscriptPlayer'
 import type { Story, Word } from '@/types/story'
 import { normalizeAlignmentData } from '@/types/story'
 
+
 export default function StoryViewerPage() {
   const params = useParams()
-  const { t, language, isInitialized } = useLanguage()
   const [story, setStory] = useState<Story | null>(null)
   const [words, setWords] = useState<Word[]>([])
   const [loading, setLoading] = useState(true)
@@ -57,32 +56,28 @@ export default function StoryViewerPage() {
   // Helper function to get level display info
   const getLevelInfo = (level: string) => {
     const levelMap = {
-      'beginner': { label: t('stories.beginner'), color: 'bg-green-100 text-green-800' },
-      'high_beginner': { label: t('stories.beginner'), color: 'bg-green-100 text-green-800' },
-      'low_intermediate': { label: t('stories.intermediate'), color: 'bg-yellow-100 text-yellow-800' },
-      'high_intermediate': { label: t('stories.intermediate'), color: 'bg-yellow-100 text-yellow-800' },
-      'advanced': { label: t('stories.advanced'), color: 'bg-red-100 text-red-800' }
+      'beginner': { label: 'Beginner', color: 'bg-green-100 text-green-800' },
+      'high_beginner': { label: 'High Beginner', color: 'bg-green-100 text-green-800' },
+      'low_intermediate': { label: 'Low Intermediate', color: 'bg-yellow-100 text-yellow-800' },
+      'high_intermediate': { label: 'High Intermediate', color: 'bg-yellow-100 text-yellow-800' },
+      'advanced': { label: 'Advanced', color: 'bg-red-100 text-red-800' }
     }
     return levelMap[level as keyof typeof levelMap] || { label: level, color: 'bg-gray-100 text-gray-800' }
   }
 
   // Helper function to get the appropriate summary based on language
   const getStorySummary = (story: Story) => {
-    if (language === 'es' && story.summary) {
-      return story.summary
-    } else if (language === 'en' && story.summary_english) {
+    if (story.summary_english) {
       return story.summary_english
     } else if (story.summary) {
-      return story.summary // Fallback to Spanish
-    } else if (story.summary_english) {
-      return story.summary_english // Fallback to English
+      return story.summary
     } else {
-      return t('stories.story1.subtitle') // Final fallback
+      return 'A simple story about friendship'
     }
   }
 
   // Loading state or context not initialized
-  if (loading || !isInitialized) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50 flex items-center justify-center">
         <div className="text-center">

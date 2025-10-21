@@ -11,15 +11,14 @@ import VocabularyGame from '../../components/games/VocabularyGame';
 import GrammarGame from '../../components/games/GrammarGame';
 import PronunciationGame from '../../components/games/PronunciationGame';
 import ShoppingGame from '../../components/games/ShoppingGame';
-import { useLanguage } from '../../contexts/LanguageContext';
 import Link from 'next/link';
+
 
 export default function GamePage() {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [gameCompleted, setGameCompleted] = useState(false);
   const router = useRouter();
-  const { t } = useLanguage();
 
   useEffect(() => {
     const loadGame = async () => {

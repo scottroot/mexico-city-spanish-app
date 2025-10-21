@@ -1,181 +1,33 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { 
-  Orbit,
-  Play,
-  CalendarCheck,Calendar,CalendarSync,
-  Sunset,
-  Circle,
-  CircleDot,
-} from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import Image from "next/image";
 import CondensedConjugationDisplay from '../../components/verbs/CondensedConjugationDisplay';
 import { Favorites } from '../../entities/Favorites';
 import { cn } from '@/lib/cn';
 import LeftSidebar from './LeftSidebar';
 
 
-function Loading({ t }) {
+function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-        <p className="text-gray-600">{t('verbs.loading')}</p>
-      </div>
+
+    <div className="relative flex items-center w-full h-[75vh] max-w-6xl px-6 lg:mx-auto">
+      {/* Main content area */}
+      <main className="flex-1 min-w-0 h-full lg:pr-96 pt-6 flex flex-col items-center justify-center gap-2">
+        <Image src="/images/coyote-running-loading-transparent.gif" alt="" width={150} height={150} className="" />
+        <div className="text-lg  italic text-stone-700 animate-pulse">LOADING VERBS...</div>
+      </main>
     </div>
+
+    // {/* <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    //   <div className="text-center">
+    //     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+    //     <p className="text-gray-600">Loading Spanish verbs...</p>
+    //   </div>
+    // </div> */}
   )
 }
 
-
-
-
-// function Timeline() {
-//   const getColorStyles = (color) => {
-//     const colorMap = {
-//       'past': { bg: 'bg-red-100', text: 'text-neutral-900' },
-//       'present': { bg: 'bg-orange-200', text: 'text-neutral-900' },
-//       'conditional': { bg: 'bg-blue-100', text: 'text-neutral-900' },
-//       'future': { bg: 'bg-slate-200', text: 'text-neutral-900' },
-//     }
-//     return colorMap[color] || { bg: '#E5E7EB', text: '#374151' }
-//   }
-//   const tenses = [
-//     { tense: "Past Perfect", text: "I had eaten", color: "past", icon: CalendarCheck },
-//     { tense: "Past Simple", text: "I ate", color: "past", icon: Calendar },
-//     { tense: "Imperfect", text: "I was eating", color: "past", icon: CalendarSync },
-//     { tense: "Present Perfect", text: "I have eaten", color: "present", icon: Circle },
-//     { tense: "Present Simple", text: "I eat", color: "present", icon: CircleDot },
-//     { tense: "Conditional", text: "I would eat", color: "conditional", icon: Orbit },
-//     { tense: "Conditional Perfect", text: "I would have eaten", color: "conditional", icon: Orbit },
-//     { tense: "Future Simple", text: "I will eat", color: "future", icon: Sunset },
-//     { tense: "Future Perfect", text: "I will have eaten", color: "future", icon: Sunset },
-//     // { tense: "Present Continuous", text: "I am eating", position: "top" },
-//     // { tense: "Future Continuous", text: "I will be eating", position: "top" },
-//   ]
-
-//   const TimeLineCircle = ({ icon, color }) => {
-//     const colorStyles = getColorStyles(color)
-//     return (
-//       <div className="flex items-center h-6 my-6 xtranslate-x-1/4">
-//         <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-//         <div 
-//           className={cn(
-//             "z-10 flex items-center justify-center w-6 h-6 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0 ",
-//             colorStyles.bg
-//           )}
-//         >
-//           {React.createElement(icon, { 
-//             className: cn("w-4 h-4 ", colorStyles.text),
-//           })}
-//         </div>
-//         <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700 xnot-last:sm:pe-4"></div>
-//       </div>
-//     )
-//   }
-
-//   const TimeLineItemBody = ({ tense, text, color }) => {
-//     const colorStyles = getColorStyles(color)
-//     const bgClass = `text-center p-2 rounded-lg ${colorStyles.bg}`;
-//     const h3Class = `text-base font-semibold leading-5 h-10 flex items-center justify-center ${colorStyles.text}`;
-//     const pClass = `text-xs font-normal leading-5 h-10 flex items-center justify-center ${colorStyles.text}`;
-//     return (
-//       <div 
-//         // className="text-center p-2 rounded-lg"
-//         // style={{ backgroundColor: colorStyles.bg }}
-//         className={cn("text-center p-2 rounded-lg ", colorStyles.bg)}
-//         // className={bgClass}
-//       >
-//         <h3 
-//           //  className="text-base font-semibold leading-5 h-10 flex items-center justify-center"
-//           // style={{ color: colorStyles.text }}
-//           className={cn(
-//             "text-base font-semibold leading-5 h-10 flex items-center justify-center",
-//             colorStyles.text
-//          )}
-//        >
-//           {tense}
-//         </h3>
-//         <p 
-//           // className="text-xs font-normal leading-5 h-10 flex items-center justify-center"
-//           // style={{ color: colorStyles.text }}
-//           className={cn(
-//             "text-xs font-normal leading-5 h-10 flex items-center justify-center",
-//             colorStyles.text
-//           )}
-//         >
-//           {text}
-//         </p>
-//       </div>
-//     )
-//   }
-  
-
-//   const TimeLineItem = ({ tense, text, position, color, icon }) => {
-//     if (position === "top") {
-//       return (
-//         <li className="relative flex flex-col h-104 flex-1">
-//           <div className="flex flex-col flex-shrink-0 h-48 not-first:sm:pl-4 not-last:sm:pr-4 justify-end">
-//             <TimeLineItemBody tense={tense} text={text} color={color} icon={icon} />
-//           </div>
-//           <TimeLineCircle icon={icon} color={color} />
-//           <div className="h-48" />
-//         </li>
-//       )
-//     }
-//     // Position === bottom
-//     return (
-//       <li className="relative flex flex-col flex-1">
-//         <div className="h-48" />
-//         <TimeLineCircle icon={icon} color={color} />
-//         <div className="flex flex-col flex-shrink-0 h-48 not-first:sm:pl-4 not-last:sm:pr-8 justify-start">
-//           <TimeLineItemBody tense={tense} text={text} color={color} />
-//         </div>
-//       </li>
-//     )
-//   }
-// }
-
-// function DefaultMainContent({ t }) {
-  
-
-//   return (
-//     <div id="verbs-main-content" className="max-xl:scale-50 xl:max-2xl:scale-65">
-//       {/* <TenseTimeline /> */}
-//       <div className="flex items-center px-4">
-//         {/* Start Circle */}
-//         <div className="flex items-center justify-center w-6 h-6">
-//           <Circle className="w-4 h-4 text-gray-400 fill-gray-400" />
-//           <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-//         </div>
-        
-//         {/* Timeline */}
-//         <ol className="items-center sm:flex mb-6 sm:mb-0 flex-1">
-//           {tenses.map((tense, idx) => {
-//             const position = idx % 2 === 0 ? "top" : "bottom";
-//             return (
-//               <TimeLineItem 
-//                 key={idx}
-//                 position={position}
-//                 tense={tense.tense}
-//                 text={tense.text}
-//                 color={tense.color}
-//                 // icon={<tense.icon className={cn("w-4 h-4 ", `text-${tense.color}`)} />}
-//                 icon={tense.icon}
-//               />
-//             )
-//           })}
-//         </ol>
-        
-//         {/* End Arrow */}
-//         <div className="flex items-center justify-center w-6 h-6">
-//           <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-//           <Play className="w-4 h-4 text-gray-400 fill-gray-400" />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
 
 export default function VerbsPage() {
   const [verbs, setVerbs] = useState([]);
@@ -187,7 +39,6 @@ export default function VerbsPage() {
   const [favorites, setFavorites] = useState(new Set());
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [loadingFavorites, setLoadingFavorites] = useState(false);
-  const { t } = useLanguage();
 
   useEffect(() => {
     // Load verb list from API
@@ -292,7 +143,7 @@ export default function VerbsPage() {
     }
   };
 
-  if (loading) return <Loading t={t} />;
+  if (loading) return <Loading />;
 
 
   return (
@@ -326,7 +177,7 @@ export default function VerbsPage() {
           )
           // : <DefaultMainContent t={t} />
           : (
-            <div className="hidden md:flex h-full w-full items-center justify-center mt-20">
+            <div className="hidden md:flex h-screen w-full items-center justify-center mt-20">
               <div className="max-w-2xl space-y-8 px-6 text-center">
                 <h1 className="text-3xl font-bold tracking-tight">
                   Master Spanish Verbs

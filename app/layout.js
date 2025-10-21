@@ -1,7 +1,5 @@
 import './globals.css'
 import { Rubik } from 'next/font/google'
-// import Layout from '../components/Layout'
-import { LanguageProvider } from '../contexts/LanguageContext'
 import { createClient } from '@/utils/supabase/server'
 import MainLayout from '@/components/MainLayout'
 
@@ -10,6 +8,7 @@ const rubik = Rubik({ subsets: ['latin'] })
 export const metadata = {
   title: 'Capital Spanish! - Learn Mexico City Spanish',
   description: 'Learn Spanish of Mexico City in a fun way with interactive games of vocabulary, grammar and pronunciation.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
 export default async function RootLayout({ children }) {
@@ -19,11 +18,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={rubik.className}>
-        <LanguageProvider>
         <MainLayout user={user}>
           {children}
-          </MainLayout>
-        </LanguageProvider>
+        </MainLayout>
       </body>
     </html>
   )

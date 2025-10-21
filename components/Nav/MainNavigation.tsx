@@ -21,8 +21,6 @@ import {
   Gamepad2,
   HomeIcon
 } from "lucide-react";
-// import { useLanguage } from "@/contexts/LanguageContext"; // Deprecated - using direct English text
-// import LanguageToggle from "../ui/LanguageToggle"; // Deprecated - language toggle removed
 import ClickAway from "../ClickAway";
 import GoProButton from "./buttons/go-pro";
 import { useBilling } from "../../hooks/useBilling";
@@ -44,7 +42,6 @@ interface NavigationItem {
 export default function MainNavigation({ user }: MainNavigationProps) {
   const pathname = usePathname();
   const router = useRouter();
-  // const { t } = useLanguage(); // Deprecated - using direct English text
   const { hasAccess } = useBilling();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -154,12 +151,13 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       bg-white border-r border-r-2 border-gray-200 px-4"
     >
       {/* Logo */}
-      <div className="pt-9 pb-7">
+      <div className="flex flex-0 justify-start pt-6 pb-3 w-full xl:pl-4">
         <Link href="/" 
           // className="relative flex shrink-0 items-start justify-center xl:justify-start px-3 xl:px-6 py-4 w-full h-16"
-          className="relative flex flex-0 xl:justify-start px-3 size-8 h-8 xl:w-8"
+          className="relative size-16 xl:size-36 xl:max-h-24"
           >
-          <Image src="/wordmark.webp" alt="Hero Image" fill className="object-contain" />
+          <Image src="/wordmark.webp" alt="Hero Image" fill className="xl:hidden object-contain" />
+          <Image src="/wordmark-horizontal.webp" alt="Hero Image" fill className="max-xl:hidden object-contain" />
         </Link>
       </div>
 
@@ -209,7 +207,20 @@ export default function MainNavigation({ user }: MainNavigationProps) {
 
         {/* Bottom Section - Billing and User Account */}
         <li>
-          <div className="space-y-2">
+          <div className="space-y-2 px-3 py-4">
+            {process.env.NODE_ENV === 'development' && (
+              <div className="pb-2">
+                <div className="bg-blue-500 text-white font-bold aspect-video rounded-md p-0 flex items-center justify-center">
+                  <span className="sm:hidden text-sm">Z</span>
+                  <span className="hidden sm:max-md:block text-base">SM</span>
+                  <span className="hidden md:max-lg:block text-base">MD</span>
+                  <span className="hidden lg:max-xl:block text-base">LG</span>
+                  <span className="hidden xl:max-2xl:block text-2xl">XL</span>
+                  <span className="hidden 2xl:block text-3xl">2XL</span>
+                </div>
+              </div>
+            )}
+
             {/* Billing Section */}
             <div className="pb-2">
               <div className="flex justify-center xl:justify-start">
@@ -219,24 +230,24 @@ export default function MainNavigation({ user }: MainNavigationProps) {
 
             {/* User Account - Avatar with text on xl+ */}
             <div className="pb-4">
-              <div className="flex justify-center xl:justify-start">
+              <div className="group flex justify-center xl:justify-start">
                 {user ? (
                   <button
                     onClick={() => setShowUserMenu(true)}
-                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
+                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full group-hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200 cursor-pointer"
                     title={user.email}
                   >
                     <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl">
                       <User className="w-4 h-4 xl:w-5 xl:h-5 text-white" />
                     </div>
-                    <span className="hidden xl:block text-sm font-medium text-gray-700">
+                    <span className="hidden xl:block text-sm font-medium text-gray-700 group-hover:text-gray-500">
                       Profile
                     </span>
                   </button>
                 ) : (
                   <Link
                     href="/auth/login"
-                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200"
+                    className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200 cursor-pointer"
                     title="Login"
                   >
                     <div className="w-8 h-8 xl:w-10 xl:h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-all duration-200">
@@ -262,7 +273,8 @@ export default function MainNavigation({ user }: MainNavigationProps) {
     >
       <Link href="/">
         <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700">
-          Capital Spanish!
+          {/* Capital Spanish! */}
+          <Image src="/wordmark-horizontal.webp" alt="Hero Image" width={192} height={24} className="object-contain" />
         </div>
       </Link>
 
@@ -374,9 +386,8 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       {/* </div> */}
 
       {/* Mobile header - only show on screens smaller than md */}
-      {/* <div className="md:hidden fixed w-full top-0 z-40 flex h-10 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
-      {/* <div className="md:hidden w-full top-0 z-40 flex h-10 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
-      <MobileTopBar />
+      {/* TODO: Decide if i want a mobile top bar or not... */}
+      {/* <MobileTopBar /> */}
 
       {/* Bottom app bar for mobile */}
       <MobileBottomNav />

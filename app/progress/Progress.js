@@ -9,13 +9,12 @@ import { Badge } from '../../components/ui/badge';
 import { Trophy, Clock, Target, TrendingUp } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-// import { useLanguage } from '../../contexts/LanguageContext'; // Deprecated - using direct English text
+
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState([]);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const { t } = useLanguage(); // Deprecated - using direct English text
 
   useEffect(() => {
     const loadData = async () => {

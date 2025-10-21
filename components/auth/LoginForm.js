@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-// import { useLanguage } from '@/contexts/LanguageContext' // Deprecated - using direct English text
 import { login } from '@/app/auth/login/actions'
 import Link from 'next/link'
 import Image from "next/image";
@@ -12,7 +11,6 @@ import { BookOpen, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isPending, setIsPending] = useState(false)
-  // const { t } = useLanguage() // Deprecated - using direct English text
 
   const handleSubmit = async (formData) => {
     setIsPending(true)

@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { Volume2, Play, RotateCcw, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 import Image from 'next/image';
 
@@ -42,7 +41,6 @@ const productImages = [
 ];
 
 export default function ShoppingGame({ game, onComplete }) {
-  const { t } = useLanguage();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
