@@ -33,11 +33,11 @@
 }
 
 /* Prevent horizontal scrolling and ensure proper mobile scaling */
-html, body {
+/* html, body {
   width: 100vw;
   min-height: 100vh;
   margin: 0;
-}
+} */
 
 /* Ensure all containers respect viewport width */
 * {

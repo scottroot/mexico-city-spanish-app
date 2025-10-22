@@ -54,7 +54,6 @@ export default function GameCard({ game, progress }) {
           {/* <Icon className="w-10 h-10 text-white relative z-10" /> */}
           <div className="absolute top-2 right-2">
             <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs`}>
-              {/* {t(`games.${game.difficulty}`)} */}
               {/* TODO: Fix this */}
               {game.difficulty}
             </Badge>
@@ -64,7 +63,6 @@ export default function GameCard({ game, progress }) {
           <h3 className="font-bold text-lg text-gray-800 mb-2">{game.title}</h3>
           <div className="flex items-center justify-between text-sm">
             <span className="text-gray-500 capitalize">
-              {/* {t(`games.${game.type}`)} */}
               {/* TODO: Fix this */}
               {game.type}
             </span>

@@ -230,7 +230,7 @@ export default async function Page() {
           <Homepage games={games || []} stories={stories || []} />
         </main>
 
-        <aside className="sticky top-6 hidden w-80 xl:w-96 shrink-0 lg:flex lg:flex-col gap-8">
+        <aside className="sticky -top-1/2 hidden w-80 xl:w-96 shrink-0 lg:flex lg:flex-col gap-8">
           <PremiumFeatureCard 
             user={user} 
             dailyProgress={userProgressData?.dailyProgress || { gamesCompletedToday: 0, dailyGoal: 5, progressPercentage: 0 }}

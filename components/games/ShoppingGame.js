@@ -393,8 +393,8 @@ export default function ShoppingGame({ game, onComplete }) {
         {/* Progress Bar */}
         <div className="mb-6 w-full max-w-3xl">
           <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Pregunta {currentQuestion + 1} de {totalQuestions}</span>
-            <span>Puntuación: {score}</span>
+            <span>Question {currentQuestion + 1} of {totalQuestions}</span>
+            <span>Score: {score}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
@@ -551,7 +551,7 @@ export default function ShoppingGame({ game, onComplete }) {
                   )}
                 {(!showResult && hasRetried) && <div className="text-red-500 font-bold text-center italic -mt-2 mb-2">Inténtalo una vez más</div>}
                   <label className="block text-base font-bold text-gray-700 mb-2">
-                    ¿Cuánto cuesta? (en pesos)
+                    How much does it cost?
                   </label>
                   <div className="flex space-x-2">
                     <Input
@@ -581,8 +581,10 @@ export default function ShoppingGame({ game, onComplete }) {
                     </Button>
                   </div>
                   <div className='mt-4 text-gray-500 text-sm italic'>
-                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
-                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar.
+                    {/* Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
+                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar. */}
+                    Press <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">SPACE</code> to hear the price. 
+                    Press <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">ENTER</code> to submit your answer.
                   </div>
                 </div>
 

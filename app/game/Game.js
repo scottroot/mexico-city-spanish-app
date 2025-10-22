@@ -20,6 +20,26 @@ export default function GamePage() {
   const [gameCompleted, setGameCompleted] = useState(false);
   const router = useRouter();
 
+  // Helper function to get game type and difficulty labels
+  const getGameTypeLabel = (type) => {
+    const typeMap = {
+      'vocabulary': 'vocabulary',
+      'grammar': 'grammar', 
+      'pronunciation': 'pronunciation',
+      'shopping': 'shopping'
+    };
+    return typeMap[type] || type;
+  };
+
+  const getDifficultyLabel = (difficulty) => {
+    const difficultyMap = {
+      'beginner': 'beginner',
+      'intermediate': 'intermediate',
+      'advanced': 'advanced'
+    };
+    return difficultyMap[difficulty] || difficulty;
+  };
+
   useEffect(() => {
     const loadGame = async () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -72,7 +92,7 @@ export default function GamePage() {
   if (!game) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">{t('game.gameNotFound')}</p>
+        <p className="text-gray-500">Game not found</p>
       </div>
     );
   }
@@ -90,9 +110,9 @@ export default function GamePage() {
           <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <Trophy className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">{t('game.congratulations')}</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Congratulations!</h2>
           <p className="text-gray-600 mb-8">
-            {t('game.gameCompleted')} <strong>{game.title}</strong>
+            You have completed the game <strong>{game.title}</strong>
           </p>
           <div className="flex gap-3">
             <Button
@@ -101,14 +121,14 @@ export default function GamePage() {
               className="flex-1"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('game.back')}
+              Back
             </Button>
             <Button
               onClick={handlePlayAgain}
               className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              {t('game.playAgain')}
+              Play Again
             </Button>
           </div>
         </motion.div>
@@ -127,7 +147,7 @@ export default function GamePage() {
       case 'shopping':
         return <ShoppingGame game={game} onComplete={handleGameComplete} />;
       default:
-        return <div>{t('game.unsupportedGameType')}</div>;
+        return <div>Unsupported game type</div>;
     }
   };
 
@@ -149,7 +169,7 @@ export default function GamePage() {
         <div>
           <h1 className="text-sm font-semibold text-gray-800">{game.title}</h1>
           <p className="text-xs text-gray-500 capitalize">
-            {t(`games.${game.type}`)} • {t(`games.${game.difficulty}`)}
+            {getGameTypeLabel(game.type)} • {getDifficultyLabel(game.difficulty)}
           </p>
         </div>
       </div>
