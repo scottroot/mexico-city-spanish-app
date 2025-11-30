@@ -51,7 +51,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
     const checkAuth = async () => {
       const supabase = createClient();
       if (!user.isLoggedIn) {
-        router.push('/auth/login?redirect=/game?id=translation-game');
+        router.push('/auth/login?redirect=/game/translation');
         return;
       }
 
@@ -70,7 +70,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, user.isLoggedIn]);
 
   const handleStartDefault = () => {
     onStart(undefined, translationDirection);

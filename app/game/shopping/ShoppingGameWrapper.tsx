@@ -9,7 +9,7 @@ import GameCompletion from '@/components/games/GameCompletion'
 import { Loader2 } from 'lucide-react'
 import { UserData } from '@/utils/supabase/auth'
 
-export default async function ShoppingGameWrapper({ user }: { user: UserData }) {
+export default function ShoppingGameWrapper({ user }: { user: UserData }) {
   const [game, setGame] = useState<GameData | null>(null);
   const [loading, setLoading] = useState(true)
   const [gameCompleted, setGameCompleted] = useState(false)

@@ -126,9 +126,10 @@ export default function TranslationGame({ customFocus, translationDirection, onC
     return () => {
       isMounted = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customFocus, translationDirection, resumeQuizId]);
 
-  const loadQuestion = async () => {
+  const loadQuestion = useCallback(async () => {
     if (loadingRef.current) return;
 
     loadingRef.current = true;
@@ -171,7 +172,7 @@ export default function TranslationGame({ customFocus, translationDirection, onC
     } finally {
       loadingRef.current = false;
     }
-  };
+  }, [questions, customFocus, translationDirection]);
 
   const updateQuizStats = async (questionsCount: number, currentScore: number, updatedHistory?: any[]) => {
     if (!quizId) return;
@@ -260,12 +261,12 @@ export default function TranslationGame({ customFocus, translationDirection, onC
     }
   };
 
-  const handleNext = async () => {
+  const handleNext = useCallback(async () => {
     setUserAnswer('');
     setShowResult(false);
     setFeedback(null);
     await loadQuestion();
-  };
+  }, [loadQuestion]);
 
   const handleFinish = async () => {
     if (quizId) {

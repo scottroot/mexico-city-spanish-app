@@ -1,5 +1,3 @@
-// utils/syllabify.ts
-
 // Spanish syllabification with sinalefa and tonic marking (caps).
 const VOWELS = "aeiouáéíóúü";
 const CLUSTERS = new Set(["pl", "pr", "bl", "br", "fr", "fl", "tr", "dr", "cl", "cr", "gl", "gr", "tl"]);

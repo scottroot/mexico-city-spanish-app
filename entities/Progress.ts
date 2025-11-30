@@ -1,6 +1,3 @@
-import { getUser } from '@/utils/supabase/auth'
-import { createClient } from '@/utils/supabase/client'
-
 export interface ProgressData {
   id?: string
   user_id?: string
@@ -67,101 +64,28 @@ export class Progress {
   // Create a new progress record
   static async create(progressData: ProgressCreateData): Promise<ProgressResult<Progress>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.log('User not authenticated - progress will not be saved to database')
-        // Return success but don't save to database for unauthenticated users
-        return { success: true, data: undefined, message: 'Progress not saved - user not authenticated' }
+      const response = await fetch('/api/progress', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(progressData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error creating progress:', result.error)
+        return { success: false, error: result.error || 'Failed to create progress' }
       }
 
-      // Ensure user profile exists before saving progress
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('id', user.id)
-        .single()
-
-      if (profileError || !profile) {
-        console.log('Profile does not exist, creating profile for user:', user.id)
-        
-        // Create profile with proper error handling
-        const { data: newProfile, error: createProfileError } = await supabase
-          .from('profiles')
-          .insert([{
-            id: user.id,
-            email: user.email,
-            name: user?.name || user.email?.split('@')[0] || 'User'
-          }])
-          .select()
-          .single()
-
-        if (createProfileError) {
-          console.error('Error creating profile:', createProfileError)
-          // If it's a duplicate key error, the profile might already exist
-          if (createProfileError.code === '23505') {
-            console.log('Profile already exists, continuing...')
-          } else {
-            return { success: false, error: `Failed to create user profile: ${createProfileError.message}` }
-          }
-        } else {
-          console.log('Profile created successfully:', newProfile)
-        }
-
-        // Create user stats
-        const { error: createStatsError } = await supabase
-          .from('user_stats')
-          .insert([{
-            user_id: user.id
-          }])
-
-        if (createStatsError) {
-          console.error('Error creating user stats:', createStatsError)
-          // Don't fail the progress save if stats creation fails
-        } else {
-          console.log('User stats created successfully')
-        }
+      // Handle unauthenticated users
+      if (result.success && !result.data) {
+        return { success: true, data: undefined, message: result.message }
       }
 
-      // Determine game type from game_id
-      const gameType = Progress.getGameTypeFromId(progressData.game_id)
-      
-      // Prepare data for database (only include columns that exist)
-      const dbData = {
-        user_id: user.id,
-        game_type: gameType,
-        game_id: progressData.game_id,
-        score: progressData.score || 0,
-        completed: true, // Assume completed if we're saving progress
-        time_spent: progressData.completion_time || 0,
-        achievements: progressData.achievements || []
-      }
-
-      const { data, error } = await supabase
-        .from('progress')
-        .insert([dbData])
-        .select()
-        .single()
-
-      if (error) {
-        console.error('Error creating progress:', error)
-        // If table doesn't exist, just log and return success (no-op)
-        if (error.message.includes('relation "progress" does not exist')) {
-          console.log('Progress table does not exist yet, skipping save')
-          return { success: true, data: undefined }
-        }
-        // If it's a foreign key constraint error, provide more specific feedback
-        if (error.code === '23503') {
-          console.error('Foreign key constraint error - user profile may not exist')
-          return { success: false, error: 'User profile not found. Please try logging out and back in.' }
-        }
-        return { success: false, error: error.message }
-      }
-
-      console.log('Progress created successfully:', data)
-      return { success: true, data: new Progress(data) }
+      console.log('Progress created successfully:', result.data)
+      return { success: true, data: result.data ? new Progress(result.data) : undefined }
     } catch (error) {
       console.error('Error in Progress.create:', error)
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
@@ -172,37 +96,16 @@ export class Progress {
   static async list(): Promise<ProgressResult<Progress[]>> {
     try {
       console.log('Progress.list: Starting...')
-      const supabase = createClient()
-      console.log('Progress.list: Supabase client created')
-      
-      // Get current user
-      console.log('Progress.list: Getting user...')
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.error('Error getting user:', userError)
-        return { success: false, error: 'User not authenticated', data: [] }
+
+      const response = await fetch('/api/progress')
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error fetching progress:', result.error)
+        return { success: false, error: result.error || 'Failed to fetch progress', data: [] }
       }
 
-      console.log('Progress.list: Fetching progress for user:', user.id)
-      const { data, error } = await supabase
-        .from('progress')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-
-      console.log('Progress.list: Database result:', { data: data?.length, error })
-
-      if (error) {
-        console.error('Error fetching progress:', error)
-        // If table doesn't exist, return empty array instead of error
-        if (error.code === 'PGRST116' || error.message.includes('relation "progress" does not exist')) {
-          console.log('Progress table does not exist yet, returning empty array')
-          return { success: true, data: [] }
-        }
-        return { success: false, error: error.message, data: [] }
-      }
-
-      const progressList = data.map(item => new Progress(item))
+      const progressList = result.data.map((item: any) => new Progress(item))
       console.log('Progress.list: Returning progress list:', progressList.length, 'items')
       return { success: true, data: progressList }
     } catch (error) {
@@ -214,34 +117,15 @@ export class Progress {
   // Get progress for a specific game
   static async getByGameId(gameId: string): Promise<ProgressResult<Progress | null>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.error('Error getting user:', userError)
-        return { success: false, error: 'User not authenticated', data: null }
+      const response = await fetch(`/api/progress/game/${gameId}`)
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error fetching progress for game:', result.error)
+        return { success: false, error: result.error || 'Failed to fetch progress', data: null }
       }
 
-      const { data, error } = await supabase
-        .from('progress')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('game_id', gameId)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single()
-
-      if (error) {
-        if (error.code === 'PGRST116') {
-          // No rows found
-          return { success: true, data: null }
-        }
-        console.error('Error fetching progress for game:', error)
-        return { success: false, error: error.message, data: null }
-      }
-
-      return { success: true, data: new Progress(data) }
+      return { success: true, data: result.data ? new Progress(result.data) : null }
     } catch (error) {
       console.error('Error in Progress.getByGameId:', error)
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error', data: null }
@@ -251,22 +135,27 @@ export class Progress {
   // Update existing progress
   async update(updateData: Partial<ProgressData>): Promise<ProgressResult<Progress>> {
     try {
-      const supabase = createClient()
-      
-      const { data, error } = await supabase
-        .from('progress')
-        .update(updateData)
-        .eq('id', this.id)
-        .select()
-        .single()
+      if (!this.id) {
+        return { success: false, error: 'Progress ID is required for update' }
+      }
 
-      if (error) {
-        console.error('Error updating progress:', error)
-        return { success: false, error: error.message }
+      const response = await fetch(`/api/progress/${this.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error updating progress:', result.error)
+        return { success: false, error: result.error || 'Failed to update progress' }
       }
 
       // Update local instance
-      Object.assign(this, data)
+      Object.assign(this, result.data)
       return { success: true, data: this }
     } catch (error) {
       console.error('Error in Progress.update:', error)
@@ -277,16 +166,19 @@ export class Progress {
   // Delete progress record
   async delete(): Promise<ProgressResult<void>> {
     try {
-      const supabase = createClient()
-      
-      const { error } = await supabase
-        .from('progress')
-        .delete()
-        .eq('id', this.id)
+      if (!this.id) {
+        return { success: false, error: 'Progress ID is required for delete' }
+      }
 
-      if (error) {
-        console.error('Error deleting progress:', error)
-        return { success: false, error: error.message }
+      const response = await fetch(`/api/progress/${this.id}`, {
+        method: 'DELETE',
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error deleting progress:', result.error)
+        return { success: false, error: result.error || 'Failed to delete progress' }
       }
 
       return { success: true }
@@ -308,27 +200,15 @@ export class Progress {
   // Get user statistics
   static async getUserStats(): Promise<ProgressResult<any>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.error('Error getting user:', userError)
-        return { success: false, error: 'User not authenticated', data: null }
+      const response = await fetch('/api/progress/stats')
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error fetching user stats:', result.error)
+        return { success: false, error: result.error || 'Failed to fetch user stats', data: null }
       }
 
-      const { data, error } = await supabase
-        .from('user_progress_summary')
-        .select('*')
-        .eq('user_id', user.id)
-        .single()
-
-      if (error) {
-        console.error('Error fetching user stats:', error)
-        return { success: false, error: error.message, data: null }
-      }
-
-      return { success: true, data }
+      return { success: true, data: result.data }
     } catch (error) {
       console.error('Error in Progress.getUserStats:', error)
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error', data: null }

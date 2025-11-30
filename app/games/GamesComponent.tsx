@@ -171,7 +171,7 @@ export default function GamesComponent({ initialGames }: HomeProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
               >
-                <Link href={`/game/${game.type}?id=${game.id}`}>
+                <Link href={`/game/${game.type}`}>
                   <GameCard
                     game={game}
                     progress={getProgressForGame(game.id)}

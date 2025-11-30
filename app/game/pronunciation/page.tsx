@@ -7,9 +7,8 @@ import PronunciationGame from '@/components/games/PronunciationGame'
 import GameHeader from '@/components/games/GameHeader'
 import GameCompletion from '@/components/games/GameCompletion'
 import { Loader2 } from 'lucide-react'
-import { UserData } from '@/utils/supabase/auth'
 
-export default function PronunciationGamePage({ user }: { user: UserData }) {
+export default function PronunciationGamePage() {
   const [game, setGame] = useState<GameData | null>(null)
   const [loading, setLoading] = useState(true)
   const [gameCompleted, setGameCompleted] = useState(false)

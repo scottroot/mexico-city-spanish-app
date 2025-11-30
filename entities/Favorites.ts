@@ -1,6 +1,3 @@
-import { getUser } from '@/utils/supabase/auth'
-import { createClient } from '@/utils/supabase/client'
-
 export interface FavoriteData {
   id?: string
   user_id: string
@@ -30,56 +27,34 @@ export class Favorites {
   // Add a verb to favorites
   static async addFavorite(verbInfinitive: string): Promise<FavoritesResult<FavoriteData>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.log('User not authenticated - favorites will not be saved')
-        return { success: true, data: undefined, error: 'User not authenticated' }
-      }
+      const response = await fetch('/api/favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ verbInfinitive }),
+      })
 
-      // Check if already favorited
-      const { data: existing, error: checkError } = await supabase
-        .from('user_favorites')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('verb_infinitive', verbInfinitive)
-        .maybeSingle()
+      const result = await response.json()
 
-      if (checkError) {
-        console.error('Error checking existing favorite:', checkError)
-        return { success: false, error: checkError.message }
-      }
-
-      if (existing) {
-        return { success: true, data: undefined, error: 'Already favorited' }
-      }
-
-      // Add to favorites
-      const { data, error } = await supabase
-        .from('user_favorites')
-        .insert([{
-          user_id: user.id,
-          verb_infinitive: verbInfinitive
-        }])
-        .select()
-        .single()
-
-      if (error) {
-        // If table doesn't exist yet, return success but don't save (graceful degradation)
-        const errorMessage = error.message || error.toString() || ''
-        if (errorMessage.includes('relation "user_favorites" does not exist') || 
-            errorMessage.includes('does not exist') ||
-            errorMessage.includes('relation')) {
+      if (!response.ok) {
+        // Handle specific error cases
+        if (response.status === 401) {
+          console.log('User not authenticated - favorites will not be saved')
+          return { success: true, data: undefined, error: 'User not authenticated' }
+        }
+        if (response.status === 400 && result.error === 'Already favorited') {
+          return { success: true, data: undefined, error: 'Already favorited' }
+        }
+        if (response.status === 503 && result.error === 'Table not ready') {
           console.log('User favorites table does not exist yet, skipping save')
           return { success: true, data: undefined, error: 'Table not ready' }
         }
-        console.error('Error adding favorite:', error)
-        return { success: false, error: errorMessage }
+        console.error('Error adding favorite:', result.error)
+        return { success: false, error: result.error || 'Failed to add favorite' }
       }
 
-      return { success: true, data }
+      return { success: true, data: result.data }
     } catch (error) {
       console.error('Error in addFavorite:', error)
       return { success: false, error: 'Failed to add favorite' }
@@ -89,33 +64,24 @@ export class Favorites {
   // Remove a verb from favorites
   static async removeFavorite(verbInfinitive: string): Promise<FavoritesResult<null>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.log('User not authenticated - favorites will not be saved')
-        return { success: true, data: undefined, error: 'User not authenticated' }
-      }
+      const response = await fetch('/api/favorites', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ verbInfinitive }),
+      })
 
-      // Remove from favorites
-      const { error } = await supabase
-        .from('user_favorites')
-        .delete()
-        .eq('user_id', user.id)
-        .eq('verb_infinitive', verbInfinitive)
+      const result = await response.json()
 
-      if (error) {
-        // If table doesn't exist yet, return success but don't save (graceful degradation)
-        const errorMessage = error.message || error.toString() || ''
-        if (errorMessage.includes('relation "user_favorites" does not exist') || 
-            errorMessage.includes('does not exist') ||
-            errorMessage.includes('relation')) {
-          console.log('User favorites table does not exist yet, skipping remove')
-          return { success: true, data: null, error: 'Table not ready' }
+      if (!response.ok) {
+        // Handle specific error cases
+        if (response.status === 401) {
+          console.log('User not authenticated - favorites will not be saved')
+          return { success: true, data: undefined, error: 'User not authenticated' }
         }
-        console.error('Error removing favorite:', error)
-        return { success: false, error: errorMessage }
+        console.error('Error removing favorite:', result.error)
+        return { success: false, error: result.error || 'Failed to remove favorite' }
       }
 
       return { success: true, data: null }
@@ -128,37 +94,15 @@ export class Favorites {
   // Get all user favorites
   static async getUserFavorites(): Promise<FavoritesResult<string[]>> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
-        console.log('User not authenticated - returning empty favorites')
-        return { success: true, data: [] }
+      const response = await fetch('/api/favorites')
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error('Error getting favorites:', result.error)
+        return { success: false, error: result.error || 'Failed to get favorites' }
       }
 
-      // Get user favorites
-      const { data, error } = await supabase
-        .from('user_favorites')
-        .select('verb_infinitive')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-
-      if (error) {
-        // If table doesn't exist yet, return empty favorites (graceful degradation)
-        const errorMessage = error.message || error.toString() || ''
-        if (errorMessage.includes('relation "user_favorites" does not exist') || 
-            errorMessage.includes('does not exist') ||
-            errorMessage.includes('relation')) {
-          console.log('User favorites table does not exist yet, returning empty favorites')
-          return { success: true, data: [] }
-        }
-        console.error('Error getting favorites:', error)
-        return { success: false, error: errorMessage }
-      }
-
-      const favorites = data?.map(fav => fav.verb_infinitive) || []
-      return { success: true, data: favorites }
+      return { success: true, data: result.favorites || [] }
     } catch (error) {
       console.error('Error in getUserFavorites:', error)
       return { success: false, error: 'Failed to get favorites' }
@@ -168,33 +112,11 @@ export class Favorites {
   // Check if a verb is favorited
   static async isFavorited(verbInfinitive: string): Promise<boolean> {
     try {
-      const supabase = createClient()
-      
-      // Get current user
-      const { error: userError, ...user } = await getUser();
-      if (userError || !user.isLoggedIn) {
+      const result = await Favorites.getUserFavorites()
+      if (!result.success || !result.data) {
         return false
       }
-
-      // Check if favorited
-      const { data, error } = await supabase
-        .from('user_favorites')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('verb_infinitive', verbInfinitive)
-        .maybeSingle()
-
-      // If table doesn't exist yet, return false (graceful degradation)
-      if (error) {
-        const errorMessage = error.message || error.toString() || ''
-        if (errorMessage.includes('relation "user_favorites" does not exist') || 
-            errorMessage.includes('does not exist') ||
-            errorMessage.includes('relation')) {
-          console.log('User favorites table does not exist yet, returning false')
-          return false
-        }
-      }
-      return !error && !!data
+      return result.data.includes(verbInfinitive)
     } catch (error) {
       console.error('Error checking if favorited:', error)
       return false

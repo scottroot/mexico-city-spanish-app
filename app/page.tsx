@@ -194,7 +194,7 @@ export default async function Page() {
 
   // Fetch user progress data if user is authenticated
   let userProgressData = null;
-  if (user && !userError) {
+  if (user && user?.id) {
     try {
       userProgressData = await getUserProgressData(user.id);
     } catch (error) {

@@ -8,7 +8,7 @@ import { Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
 // import { Progress } from '@/entities/Progress';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 
-export default function PronunciationGame({ user, game, onComplete }) {
+export default function PronunciationGame({ game, onComplete }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);

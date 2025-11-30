@@ -87,8 +87,8 @@ function GameCard({ game, index }: { game: any; index: number }) {
   const description = game.description || 'Interactive Spanish learning game to improve your language skills.'
 
   return (
-    <Link 
-      href={`/game/${game.id}`}
+    <Link
+      href={`/game/${game.type}`}
       className="group relative overflow-hidden rounded-xl hover:shadow-lg transition-all duration-200 h-48"
     >
       {/* Background Image */}

@@ -50,6 +50,7 @@ export async function GET() {
       selectedTenseMoods: preferences.selected_tense_moods || [],
       verbSelection: preferences.verb_selection || 'favorites',
       customVerbs: preferences.custom_verbs || [],
+      presetGroupId: preferences.preset_group_id,
       selectedPronouns: preferences.selected_pronouns || ['yo', 'tú', 'él', 'nosotros', 'ustedes'],
       questionCount: preferences.question_count || 10
     };
@@ -89,7 +90,7 @@ export async function POST(request: Request) {
       );
     }
     
-    if (!config.verbSelection || !['favorites', 'custom'].includes(config.verbSelection)) {
+    if (!config.verbSelection || !['favorites', 'preset', 'custom'].includes(config.verbSelection)) {
       return NextResponse.json(
         { error: 'Invalid verbSelection' },
         { status: 400 }
@@ -123,6 +124,7 @@ export async function POST(request: Request) {
       selected_tense_moods: config.selectedTenseMoods,
       verb_selection: config.verbSelection,
       custom_verbs: config.customVerbs,
+      preset_group_id: config.presetGroupId || null,
       selected_pronouns: config.selectedPronouns,
       question_count: config.questionCount,
       updated_at: new Date().toISOString()

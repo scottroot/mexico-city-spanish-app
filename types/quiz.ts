@@ -2,8 +2,9 @@
 
 export interface QuizConfig {
   selectedTenseMoods: string[]; // Format: "tense-mood" (e.g., "Presente-Indicativo")
-  verbSelection: 'favorites' | 'custom';
+  verbSelection: 'favorites' | 'preset' | 'custom';
   customVerbs: string[];
+  presetGroupId?: string; // ID of the selected preset verb group
   selectedPronouns: string[]; // Array of pronouns to use (e.g., ["yo", "tú", "él"])
   questionCount: number;
 }

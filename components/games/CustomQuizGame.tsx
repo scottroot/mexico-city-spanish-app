@@ -340,20 +340,62 @@ export default function CustomQuizGame({ questions, onComplete }: CustomQuizGame
           </div>
           
           {/* Show Next Question button when answer is wrong */}
-          {!isCorrect && currentQuestionIndex < questions.length - 1 && (
+          {!isCorrect && (
             <div className="mt-4 flex justify-center">
-              <Button
-                onClick={() => {
-                  setCurrentQuestionIndex(currentQuestionIndex + 1);
-                  setUserAnswer('');
-                  setShowResult(false);
-                  setShowInfinitive(false);
-                }}
-                className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
-              >
-                Next Question 
-                <span className="ml-2 text-xs opacity-75">(Enter)</span>
-              </Button>
+              {currentQuestionIndex < questions.length - 1 ? (
+                <Button
+                  onClick={() => {
+                    setCurrentQuestionIndex(currentQuestionIndex + 1);
+                    setUserAnswer('');
+                    setShowResult(false);
+                    setShowInfinitive(false);
+                  }}
+                  className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
+                >
+                  Next Question
+                  <span className="ml-2 text-xs opacity-75">(Enter)</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    const completionTime = Math.round((Date.now() - startTime) / 1000);
+
+                    const result: QuizResult = {
+                      score,
+                      totalQuestions: questions.length,
+                      mistakes: mistakes + 1,
+                      completionTime,
+                      questions,
+                      userAnswers: [...userAnswers, userAnswer],
+                      correctAnswers: [...correctAnswers, false]
+                    };
+
+                    // Save progress to database
+                    Progress.create({
+                      game_id: 'custom_quiz',
+                      score,
+                      max_score: questions.length,
+                      completion_time: completionTime,
+                      mistakes: mistakes + 1
+                    }).then(result => {
+                      if (result.success) {
+                        if (result.message) {
+                          console.log('Progress info:', result.message);
+                        } else {
+                          console.log('Progress saved successfully:', result.data);
+                        }
+                      } else {
+                        console.error('Failed to save progress:', result.error);
+                      }
+                    });
+
+                    onComplete(result);
+                  }}
+                  className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
+                >
+                  Finish Quiz
+                </Button>
+              )}
             </div>
           )}
         </motion.div>

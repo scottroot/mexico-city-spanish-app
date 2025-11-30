@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Scissors, Volume2, Copy, Check, ArrowLeft, Info } from 'lucide-react';
 import Link from 'next/link';
-import { syllabifySentence } from '@/utils/syllabify';
+import { syllabifySentence } from './syllabify';
 import { playTTS, fallbackTTS } from '@/lib/tts-client';
 
 
