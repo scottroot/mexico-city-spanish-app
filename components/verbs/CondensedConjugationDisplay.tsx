@@ -40,6 +40,9 @@ interface CondensedConjugationDisplayProps {
   verb: Verb;
   loading?: boolean;
   onClose?: () => void;
+  favorites?: Set<string>;
+  toggleFavorite?: (infinitive: string) => void;
+  loadingFavorites?: boolean;
 }
 
 const moods = [
@@ -54,27 +57,34 @@ const pronouns = [
   { key: 'form_2s', label: 'tú' },
   { key: 'form_3s', label: 'él/ella' },
   { key: 'form_1p', label: 'nosotros' },
-  { key: 'form_2p', label: 'ustedes' },
   { key: 'form_3p', label: 'ellos/ellas' }
 ];
 
 export default function CondensedConjugationDisplay({ 
   verb, 
   loading = false, 
-  onClose 
+  onClose,
+  favorites = new Set(),
+  toggleFavorite,
+  loadingFavorites = false
 }: CondensedConjugationDisplayProps) {
   const [selectedMood, setSelectedMood] = useState('Indicativo');
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [loadingFavorite, setLoadingFavorite] = useState(false);
+  
+  // Check if current verb is favorited
+  const isFavorite = favorites.has(verb.infinitive);
 
-  // Load favorite status on mount
-  React.useEffect(() => {
-    const checkFavorite = async () => {
-      const favorited = await Favorites.isFavorited(verb.infinitive);
-      setIsFavorite(favorited);
-    };
-    checkFavorite();
-  }, [verb.infinitive]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen px-6 lg:mx-auto">
+      {/* Main content area */}
+      <main className="w-full h-full pt-6 flex flex-col items-center justify-center gap-2">
+        <Image src="/images/coyote-running-loading-transparent.gif" alt="" width={150} height={150} className="" />
+        <div className="text-lg  italic text-stone-700 animate-pulse">Loading conjugations...</div>
+      </main>
+    </div>
+    );
+  }
 
   // TTS function using your existing pattern
   const playAudio = async (text: string) => {
@@ -88,25 +98,10 @@ export default function CondensedConjugationDisplay({
     }
   };
 
-  // Toggle favorite
-  const toggleFavorite = async () => {
-    setLoadingFavorite(true);
-    try {
-      if (isFavorite) {
-        const result = await Favorites.removeFavorite(verb.infinitive);
-        if (result.success) {
-          setIsFavorite(false);
-        }
-      } else {
-        const result = await Favorites.addFavorite(verb.infinitive);
-        if (result.success) {
-          setIsFavorite(true);
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-    } finally {
-      setLoadingFavorite(false);
+  // Handle favorite toggle
+  const handleToggleFavorite = () => {
+    if (toggleFavorite) {
+      toggleFavorite(verb.infinitive);
     }
   };
 
@@ -177,18 +172,6 @@ export default function CondensedConjugationDisplay({
 
   const currentConjugations = getConjugationsForMood(selectedMood);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center w-full h-screen px-6 lg:mx-auto">
-      {/* Main content area */}
-      <main className="w-full h-full pt-6 flex flex-col items-center justify-center gap-2">
-        <Image src="/images/coyote-running-loading-transparent.gif" alt="" width={150} height={150} className="" />
-        <div className="text-lg  italic text-stone-700 animate-pulse">Loading conjugations...</div>
-      </main>
-    </div>
-    );
-  }
-
   return (
     <div className="h-full flex flex-col">
       {/* Main Content Header */}
@@ -200,17 +183,18 @@ export default function CondensedConjugationDisplay({
                 {verb.infinitive}
               </h1>
               <button
-                onClick={toggleFavorite}
-                disabled={loadingFavorite}
-                className={`p-2 rounded-full transition-all duration-200 ${
+                onClick={handleToggleFavorite}
+                disabled={loadingFavorites}
+                className={`cursor-pointer p-2 rounded-full transition-all duration-200 ${
                   isFavorite 
                     ? 'bg-red-500 hover:bg-red-600 shadow-md' 
                     : 'bg-gray-100 hover:bg-gray-200'
-                } ${loadingFavorite ? 'opacity-50 cursor-not-allowed' : ''}`}
+                } ${loadingFavorites ? 'opacity-50 cursor-loading' : ''}`}
               >
-                <Heart className={`w-4 h-4 ${
-                  isFavorite ? 'text-white fill-white' : 'text-gray-600'
-                }`} />
+                {loadingFavorites
+                  ? <div className="w-4 h-4 animate-pulse bg-gray-300 rounded" />
+                  : <Heart className={`w-4 h-4 ${isFavorite ? 'text-white fill-current' : 'text-gray-600'}`} />
+                }
               </button>
             </div>
             <p className="text-xs md:text-sm text-gray-500 mt-1">
@@ -225,16 +209,16 @@ export default function CondensedConjugationDisplay({
               <Volume2 className="w-4 h-4 text-white" />
             </button>
             <button
-              onClick={toggleFavorite}
-              disabled={loadingFavorite}
+              onClick={handleToggleFavorite}
+              disabled={loadingFavorites}
               className={`p-2 rounded-full transition-all duration-200 ${
                 isFavorite 
                   ? 'bg-red-500 hover:bg-red-600 shadow-md' 
                   : 'bg-gray-100 hover:bg-gray-200'
-              } ${loadingFavorite ? 'opacity-50 cursor-not-allowed' : ''}`}
+              } ${loadingFavorites ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <Heart className={`w-4 h-4 ${
-                isFavorite ? 'text-white fill-white' : 'text-gray-600'
+                isFavorite ? 'text-white fill-current' : 'text-gray-600'
               }`} />
             </button>
           </div> */}
@@ -244,7 +228,7 @@ export default function CondensedConjugationDisplay({
         {onClose && (
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 transition-all duration-200 xshadow-sm hover:shadow-md"
+            className="cursor-pointer absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 transition-all duration-200 hover:shadow-md"
             title="Close"
           >
             <X className="w-6 h-6 text-black" />
@@ -253,12 +237,12 @@ export default function CondensedConjugationDisplay({
       </div>
 
       {/* Mobile Mood Navigation - Top */}
-      <div className="zmd:hidden border-b border-gray-200 bg-gradient-to-r from-orange-50 to-pink-50 flex flex-wrap justify-center gap-2 p-2">
+      <div className="border-b border-gray-200 bg-gradient-to-r from-orange-50 to-pink-50 flex flex-wrap justify-center gap-2 p-2">
         {moods.map((mood) => (
           <button
             key={mood.id}
             onClick={() => setSelectedMood(mood.id)}
-            className={`px-3 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+            className={`cursor-pointer px-3 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
               selectedMood === mood.id
                 ? 'bg-gradient-to-r from-orange-400 to-pink-400 text-white shadow-md'
                 : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'

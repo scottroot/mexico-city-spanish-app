@@ -5,10 +5,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress as ProgressBar } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
-import { Progress } from '@/entities/Progress';
+// import { Progress } from '@/entities/Progress';
 import { playTTS, fallbackTTS } from '../../lib/tts-client';
 
-export default function PronunciationGame({ game, onComplete }) {
+export default function PronunciationGame({ user, game, onComplete }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
@@ -57,24 +57,25 @@ export default function PronunciationGame({ game, onComplete }) {
         const finalScore = score + (answer === currentQuestion.correct_answer ? 1 : 0);
         const finalMistakes = mistakes + (answer === currentQuestion.correct_answer ? 0 : 1);
         
+        // TODO: move progress to API so we can run on client
         // Save progress to database
-        Progress.create({
-          game_id: game.id,
-          score: finalScore,
-          max_score: questions.length,
-          completion_time: completionTime,
-          mistakes: finalMistakes
-        }).then(result => {
-          if (result.success) {
-            if (result.message) {
-              console.log('Progress info:', result.message);
-            } else {
-              console.log('Progress saved successfully:', result.data);
-            }
-          } else {
-            console.error('Failed to save progress:', result.error);
-          }
-        });
+        // Progress.create({
+        //   game_id: game.id,
+        //   score: finalScore,
+        //   max_score: questions.length,
+        //   completion_time: completionTime,
+        //   mistakes: finalMistakes
+        // }).then(result => {
+        //   if (result.success) {
+        //     if (result.message) {
+        //       console.log('Progress info:', result.message);
+        //     } else {
+        //       console.log('Progress saved successfully:', result.data);
+        //     }
+        //   } else {
+        //     console.error('Failed to save progress:', result.error);
+        //   }
+        // });
         
         onComplete();
       }

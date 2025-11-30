@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import GamesComponent from './GamesComponent'
-import { GameData } from '../../entities/Game'
+// import { GameData } from '../../entities/Game'
 
 export default async function GamesPage() {
   const supabase = await createClient()

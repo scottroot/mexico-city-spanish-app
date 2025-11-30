@@ -1,12 +1,9 @@
-import { createClient } from '@/utils/supabase/server'
+import { getUser } from '@/utils/supabase/auth';
+// import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
 export default async function AccountPage() {
-  const supabase = await createClient()
-  
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await getUser();
 
   if (!user) {
     redirect('/auth/login')
@@ -37,7 +34,7 @@ export default async function AccountPage() {
               </label>
               <input
                 type="text"
-                value={user.user_metadata?.name || 'Not set'}
+                value={user?.name || 'Not set'}
                 disabled
                 className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
               />
@@ -56,15 +53,15 @@ export default async function AccountPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              {/* <label className="block text-sm font-medium text-gray-700 mb-2">
                 Email Confirmed
-              </label>
-              <input
+              </label> */}
+              {/* <input
                 type="text"
                 value={user.email_confirmed_at ? 'Yes' : 'No'}
                 disabled
                 className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -72,14 +69,3 @@ export default async function AccountPage() {
     </div>
   )
 }
-
-// import AccountForm from './account-form'
-// import { createClient } from '@/utils/supabase/server'
-// export default async function Account() {
-//     const supabase = await createClient()
-//     const {
-//         data: { user },
-//     } = await supabase.auth.getUser()
-//     return <AccountForm user={user} />
-// }
-

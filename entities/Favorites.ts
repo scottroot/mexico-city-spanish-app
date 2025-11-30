@@ -1,3 +1,4 @@
+import { getUser } from '@/utils/supabase/auth'
 import { createClient } from '@/utils/supabase/client'
 
 export interface FavoriteData {
@@ -32,8 +33,8 @@ export class Favorites {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.log('User not authenticated - favorites will not be saved')
         return { success: true, data: undefined, error: 'User not authenticated' }
       }
@@ -91,8 +92,8 @@ export class Favorites {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.log('User not authenticated - favorites will not be saved')
         return { success: true, data: undefined, error: 'User not authenticated' }
       }
@@ -130,8 +131,8 @@ export class Favorites {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.log('User not authenticated - returning empty favorites')
         return { success: true, data: [] }
       }
@@ -170,8 +171,8 @@ export class Favorites {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         return false
       }
 

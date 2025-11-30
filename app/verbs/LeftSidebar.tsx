@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import { Heart, Menu, Search } from "lucide-react";
+import { Heart, Menu, Search, X } from "lucide-react";
 
 
 export function SearchInput({ searchQuery, setSearchQuery, showVerbs }: { searchQuery: string, setSearchQuery: (query: string) => void, showVerbs: (show: boolean) => void }) {
@@ -62,7 +62,7 @@ export function MobileHeader({
           <button 
             onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
             className={cn(
-              "flex items-center gap-2 p-2 rounded text-sm transition-colors",
+              "cursor-pointer flex items-center gap-2 p-2 rounded text-sm transition-colors",
               showFavoritesOnly ? 'bg-red-100 text-red-600' : 'hover:bg-gray-100 text-gray-600'
             )}
           >
@@ -100,17 +100,19 @@ function VerbListContent({
   setMobileVerbsExpanded, 
   selectedVerb, 
   favorites, 
-  toggleFavorite 
+  toggleFavorite,
+  loadingFavorites,
 }: { 
   filteredVerbs: any[], 
   handleVerbSelect: (infinitive: string) => void, 
   setMobileVerbsExpanded: (show: boolean) => void, 
   selectedVerb: any, 
   favorites: Set<string>, 
-  toggleFavorite: (infinitive: string) => void 
+  toggleFavorite: (infinitive: string) => void,
+  loadingFavorites: boolean,
 }) {
   return (
-    <div className="space-y-1 pr-4 overflow-x-hidden">
+    <div className="space-y-1 pr-4 overflow-x-hidden w-full">
       {filteredVerbs.map((verb) => (
         <div
           key={verb.infinitive}
@@ -125,28 +127,38 @@ function VerbListContent({
               : 'hover:bg-gray-50 text-gray-700'
           }`}
         >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(verb.infinitive);
-                }}
-                className={`p-0 rounded transition-colors ${
-                  favorites.has(verb.infinitive)
-                    ? 'text-red-500 hover:text-red-600'
-                    : 'text-gray-400 hover:text-red-500'
-                }`}
-              >
-                <Heart className={`w-4 h-4 ${
-                  favorites.has(verb.infinitive) ? 'fill-current' : ''
-                }`} />
-              </button>
+          <div className="flex items-center justify-between w-full min-w-0">
+            <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(verb.infinitive);
+                  }}
+                  className={`cursor-pointer p-0 rounded transition-colors ${
+                    favorites.has(verb.infinitive)
+                      ? 'text-red-500 hover:text-red-600'
+                      : 'text-gray-400 hover:text-red-500'
+                  }`}
+                >
+                  {/* {loadingFavorites
+                    ? <div className="w-4 h-4 animate-pulse bg-gray-300 rounded" />
+                    : <Heart className={`w-4 h-4 ${favorites.has(verb.infinitive) ? 'fill-current text-red-500' : 'text-gray-400'}`} />
+                  } */}
+                  <Heart 
+                    className={cn(
+                      "w-4 h-4",
+                      loadingFavorites 
+                        ? 'animate-pulse text-gray-300 cursor-loading'
+                        : favorites.has(verb.infinitive) ? 'fill-current text-red-500' : 'text-gray-400'
+                    )} 
+                  />
+                </button>
+              
               <span className="text-sm font-medium">
                 {verb.infinitive}
               </span>
             </div>
-            <span className="text-sm text-gray-500 text-right max-w-[120px] truncate">
+            <span className="text-sm text-gray-500 text-right max-w-[150px] truncate">
               {verb.infinitive_english.split(',').slice(0)[0].split(';').slice(0)[0]}
             </span>
           </div>
@@ -163,17 +175,19 @@ function DesktopVerbList({
   setMobileVerbsExpanded, 
   selectedVerb, 
   favorites, 
-  toggleFavorite 
+  toggleFavorite,
+  loadingFavorites,
 }: { 
   filteredVerbs: any[], 
   handleVerbSelect: (infinitive: string) => void, 
   setMobileVerbsExpanded: (show: boolean) => void, 
   selectedVerb: any, 
   favorites: Set<string>, 
-  toggleFavorite: (infinitive: string) => void 
+  toggleFavorite: (infinitive: string) => void,
+  loadingFavorites: boolean,
 }) {
   return (
-    <div className="relative overflow-y-auto flex-1 overscroll-contain border-t border-gray-200 hidden md:flex">
+    <div className="relative overflow-y-auto flex-1 overscroll-contain border-t w-full border-gray-200 hidden md:flex">
       <VerbListContent
         filteredVerbs={filteredVerbs}
         handleVerbSelect={handleVerbSelect}
@@ -181,6 +195,7 @@ function DesktopVerbList({
         selectedVerb={selectedVerb}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
+        loadingFavorites={loadingFavorites}
       />
     </div>
   )
@@ -192,13 +207,15 @@ export function MobileVerbList({
   handleVerbSelect, 
   selectedVerb, 
   favorites, 
-  toggleFavorite 
+  toggleFavorite,
+  loadingFavorites,
 }: { 
   filteredVerbs: any[], 
   handleVerbSelect: (infinitive: string) => void, 
   selectedVerb: any, 
   favorites: Set<string>, 
-  toggleFavorite: (infinitive: string) => void 
+  toggleFavorite: (infinitive: string) => void,
+  loadingFavorites: boolean,
 }) {
   // Only show on mobile when no verb is selected
   if (selectedVerb) return null;
@@ -216,28 +233,38 @@ export function MobileVerbList({
               }}
               className="w-full p-3 rounded-lg transition-colors cursor-pointer hover:bg-gray-50 text-gray-700 border border-gray-100"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between w-full min-w-0">
+                <div className="flex items-center gap-3 flex-shrink-0">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleFavorite(verb.infinitive);
                     }}
-                    className={`p-1 rounded transition-colors ${
+                    className={`cursor-pointer p-1 rounded transition-colors ${
                       favorites.has(verb.infinitive)
                         ? 'text-red-500 hover:text-red-600'
                         : 'text-gray-400 hover:text-red-500'
                     }`}
                   >
-                    <Heart className={`w-5 h-5 ${
-                      favorites.has(verb.infinitive) ? 'fill-current' : ''
-                    }`} />
+                    {/* {loadingFavorites
+                      ? <div className="w-5 h-5 animate-pulse bg-gray-300 rounded" />
+                      : <Heart className={`w-5 h-5 ${favorites.has(verb.infinitive) ? 'fill-current text-red-500' : 'text-gray-400'}`} />
+                    } */}
+                    <Heart 
+                      className={cn(
+                        "w-4 h-4",
+                        loadingFavorites 
+                          ? 'animate-pulse text-gray-300 cursor-loading'
+                          : favorites.has(verb.infinitive) ? 'fill-current text-red-500' : 'text-gray-400'
+                      )} 
+                    />
                   </button>
                   <span className="text-base font-medium">
                     {verb.infinitive}
                   </span>
                 </div>
-                <span className="text-sm text-gray-500 text-right max-w-[150px] truncate">
+                <span className="text-sm text-gray-500 text-right max-w-[120px] truncate">
+                {/* <span className="text-sm text-gray-500 text-right max-w-[150px] truncate"> */}
                   {verb.infinitive_english.split(',').slice(0)[0].split(';').slice(0)[0]}
                 </span>
               </div>
@@ -308,11 +335,18 @@ export default function LeftSidebar({
               <button 
                 onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
                 className={cn(
-                  "flex items-center gap-2 p-2 rounded text-sm transition-colors",
-                  showFavoritesOnly ? 'bg-red-100 text-red-600' : 'hover:bg-gray-100 text-gray-600'
+                  "cursor-pointer flex items-center gap-2 p-2 rounded text-sm transition-colors",
+                  showFavoritesOnly ? 'bg-red-100 text-red-600' : 'hover:bg-gray-100 text-gray-600',
+                  loadingFavorites ? 'opacity-50 cursor-loading animate-pulse' : ''
                 )}
+                disabled={loadingFavorites}
               >
-                <Heart className={cn("w-4 h-4", showFavoritesOnly ? 'fill-current' : '')} />
+                <Heart 
+                  className={cn(
+                    "w-4 h-4", 
+                    showFavoritesOnly ? 'fill-current' : ''
+                  )}
+                />
                 Show Favorites
               </button>
             </div>
@@ -325,6 +359,7 @@ export default function LeftSidebar({
               selectedVerb={selectedVerb}
               favorites={favorites}
               toggleFavorite={toggleFavorite}
+              loadingFavorites={loadingFavorites}
             />
           </div>
         </div>
@@ -336,6 +371,7 @@ export default function LeftSidebar({
           selectedVerb={selectedVerb}
           favorites={favorites}
           toggleFavorite={toggleFavorite}
+          loadingFavorites={loadingFavorites}
         />
       </>
     )

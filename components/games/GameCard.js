@@ -47,13 +47,16 @@ export default function GameCard({ game, progress }) {
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute inset-0 w-full h-full flex items-center justify-center">
             <div className="relative w-full h-full">
-              <Image fill src={game.image_url} alt={game.title} className="w-10 h-10 object-cover object-top" />
+              {game?.image_url &&
+                <Image fill src={game.image_url} alt={game.title} className="w-10 h-10 object-cover object-top" />
+              }
               {/* {JSON.stringify(game)} */}
             </div>
           </div>
           {/* <Icon className="w-10 h-10 text-white relative z-10" /> */}
           <div className="absolute top-2 right-2">
             <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs`}>
+              {/* {t(`games.${game.difficulty}`)} */}
               {/* TODO: Fix this */}
               {game.difficulty}
             </Badge>
@@ -63,6 +66,7 @@ export default function GameCard({ game, progress }) {
           <h3 className="font-bold text-lg text-gray-800 mb-2">{game.title}</h3>
           <div className="flex items-center justify-between text-sm">
             <span className="text-gray-500 capitalize">
+              {/* {t(`games.${game.type}`)} */}
               {/* TODO: Fix this */}
               {game.type}
             </span>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { QuizConfig } from '@/types/quiz';
+import { getUser } from '@/utils/supabase/auth';
 
 // GET - Load user's quiz preferences
 export async function GET() {
@@ -8,8 +9,8 @@ export async function GET() {
     const supabase = await createClient();
     
     // Get current user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) {
+    const { error, ...user } = await getUser();
+    if (error || !user.isLoggedIn) {
       return NextResponse.json(
         { error: 'User not authenticated' },
         { status: 401 }
@@ -69,8 +70,8 @@ export async function POST(request: Request) {
     const supabase = await createClient();
     
     // Get current user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) {
+    const { error: userError, ...user } = await getUser();
+    if (userError || !user.isLoggedIn) {
       return NextResponse.json(
         { error: 'User not authenticated' },
         { status: 401 }

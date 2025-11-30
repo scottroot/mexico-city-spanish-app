@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
+import { getUser } from '@/utils/supabase/auth';
 import Homepage from './Homepage'
 import Link from "next/link";
 import { navigationItems } from '@/components/Nav/navigation-items';
@@ -188,11 +189,12 @@ const StatsCard = ({ user, userStats }: { user: any, userStats: UserStats | null
 
 export default async function Page() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  // const { data: { user } } = await supabase.auth.getUser();
+  const { error: userError, ...user } = await getUser();
 
   // Fetch user progress data if user is authenticated
   let userProgressData = null;
-  if (user) {
+  if (user && !userError) {
     try {
       userProgressData = await getUserProgressData(user.id);
     } catch (error) {

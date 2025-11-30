@@ -1,3 +1,4 @@
+import { getUser } from '@/utils/supabase/auth'
 import { createClient } from '@/utils/supabase/client'
 
 export interface ProgressData {
@@ -69,8 +70,8 @@ export class Progress {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.log('User not authenticated - progress will not be saved to database')
         // Return success but don't save to database for unauthenticated users
         return { success: true, data: undefined, message: 'Progress not saved - user not authenticated' }
@@ -92,7 +93,7 @@ export class Progress {
           .insert([{
             id: user.id,
             email: user.email,
-            name: user.user_metadata?.name || user.email?.split('@')[0] || 'User'
+            name: user?.name || user.email?.split('@')[0] || 'User'
           }])
           .select()
           .single()
@@ -176,10 +177,8 @@ export class Progress {
       
       // Get current user
       console.log('Progress.list: Getting user...')
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      console.log('Progress.list: User result:', { user: user?.id, error: userError })
-      
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.error('Error getting user:', userError)
         return { success: false, error: 'User not authenticated', data: [] }
       }
@@ -218,8 +217,8 @@ export class Progress {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.error('Error getting user:', userError)
         return { success: false, error: 'User not authenticated', data: null }
       }
@@ -312,8 +311,8 @@ export class Progress {
       const supabase = createClient()
       
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         console.error('Error getting user:', userError)
         return { success: false, error: 'User not authenticated', data: null }
       }

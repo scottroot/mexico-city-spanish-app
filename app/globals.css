@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --primary-coral: #FF6B6B;
@@ -9,6 +10,7 @@
   --text-light: #7F8C8D;
 }
 
+/* Tailwind v4 custom colors and breakpoints */
 @theme {
   --color-primary-coral: #FF6B6B;
   --color-primary-teal: #4ECDC4;
@@ -18,28 +20,21 @@
   --color-text-light: #7F8C8D;
   
   /* Original Tailwind breakpoints */
-  /* --breakpoint-sm: 640px;
+  --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px; */
+  --breakpoint-2xl: 1536px;
 
   --breakpoint-sm: 640px;
   --breakpoint-md: 700px;
   --breakpoint-lg: 960px;
   /* --breakpoint-xl: 1160px; */
   --breakpoint-xl: 1200px;
-  --breakpoint-2xl: 1500px;
+  --breakpoint-2xl: 1536px;
+
 }
 
-/* Prevent horizontal scrolling and ensure proper mobile scaling */
-/* html, body {
-  width: 100vw;
-  min-height: 100vh;
-  margin: 0;
-} */
-
-/* Ensure all containers respect viewport width */
 * {
   box-sizing: border-box;
 }
@@ -52,7 +47,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background: linear-gradient(135deg, #fef3e2 0%, #ffffff 50%, #e6fffa 100%); */
   min-height: 100vh;
-  width: 100%;
 }
 
 /* Custom scrollbar */

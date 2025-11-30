@@ -3,35 +3,35 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, Play, RotateCcw, CheckCircle, XCircle } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { playTTS, fallbackTTS } from '../../lib/tts-client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { playTTS, fallbackTTS } from '@/lib/tts-client';
 import Image from 'next/image';
 
 // Import all product images
-import product001 from '../../app/game/products/001.png';
-import product002 from '../../app/game/products/002.png';
-import product003 from '../../app/game/products/003.png';
-import product004 from '../../app/game/products/004.png';
-import product005 from '../../app/game/products/005.png';
-import product006 from '../../app/game/products/006.png';
-import product007 from '../../app/game/products/007.png';
-import product008 from '../../app/game/products/008.png';
-import product009 from '../../app/game/products/009.png';
-import product010 from '../../app/game/products/010.png';
-import product011 from '../../app/game/products/011.png';
-import product012 from '../../app/game/products/012.png';
-import product013 from '../../app/game/products/013.png';
-import product014 from '../../app/game/products/014.png';
-import product015 from '../../app/game/products/015.png';
-import product016 from '../../app/game/products/016.png';
-import product017 from '../../app/game/products/017.png';
-import product018 from '../../app/game/products/018.png';
-import product019 from '../../app/game/products/019.png';
-import product020 from '../../app/game/products/020.png';
+import product001 from '@/app/game/shopping/(images)/products/001.png';
+import product002 from '@/app/game/shopping/(images)/products/002.png';
+import product003 from '@/app/game/shopping/(images)/products/003.png';
+import product004 from '@/app/game/shopping/(images)/products/004.png';
+import product005 from '@/app/game/shopping/(images)/products/005.png';
+import product006 from '@/app/game/shopping/(images)/products/006.png';
+import product007 from '@/app/game/shopping/(images)/products/007.png';
+import product008 from '@/app/game/shopping/(images)/products/008.png';
+import product009 from '@/app/game/shopping/(images)/products/009.png';
+import product010 from '@/app/game/shopping/(images)/products/010.png';
+import product011 from '@/app/game/shopping/(images)/products/011.png';
+import product012 from '@/app/game/shopping/(images)/products/012.png';
+import product013 from '@/app/game/shopping/(images)/products/013.png';
+import product014 from '@/app/game/shopping/(images)/products/014.png';
+import product015 from '@/app/game/shopping/(images)/products/015.png';
+import product016 from '@/app/game/shopping/(images)/products/016.png';
+import product017 from '@/app/game/shopping/(images)/products/017.png';
+import product018 from '@/app/game/shopping/(images)/products/018.png';
+import product019 from '@/app/game/shopping/(images)/products/019.png';
+import product020 from '@/app/game/shopping/(images)/products/020.png';
 
 // Import the tienda background
-import tiendaBackground from '../../app/game/tienda-checkout.png';
+import tiendaBackground from '@/app/game/shopping/(images)/tienda-checkout.png';
 
 const productImages = [
   product001, product002, product003, product004, product005,
@@ -40,7 +40,7 @@ const productImages = [
   product016, product017, product018, product019, product020
 ];
 
-export default function ShoppingGame({ game, onComplete }) {
+export default function ShoppingGame({ user, game, onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -282,22 +282,7 @@ export default function ShoppingGame({ game, onComplete }) {
                   priority
                 />
               </div>
-              
-              {/* Product Overlay - Only show during game, not on start screen */}
-              {/* {currentProduct && hasUserInteracted && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute inset-0 -top-1/3 z-10"
-                >
-                  <Image 
-                    src={currentProduct} 
-                    alt="Product" 
-                    fill
-                  />
-                </motion.div>
-              )} */}
-              
+                            
               {/* Start Screen Overlay */}
               <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-2xl min-h-full">
                 <div className="text-center space-y-4 max-w-sm mx-4 flex flex-col justify-center">
@@ -393,8 +378,8 @@ export default function ShoppingGame({ game, onComplete }) {
         {/* Progress Bar */}
         <div className="mb-6 w-full max-w-3xl">
           <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Question {currentQuestion + 1} of {totalQuestions}</span>
-            <span>Score: {score}</span>
+            <span>Pregunta {currentQuestion + 1} de {totalQuestions}</span>
+            <span>Puntuación: {score}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
@@ -551,7 +536,7 @@ export default function ShoppingGame({ game, onComplete }) {
                   )}
                 {(!showResult && hasRetried) && <div className="text-red-500 font-bold text-center italic -mt-2 mb-2">Inténtalo una vez más</div>}
                   <label className="block text-base font-bold text-gray-700 mb-2">
-                    How much does it cost?
+                    ¿Cuánto cuesta? (en pesos)
                   </label>
                   <div className="flex space-x-2">
                     <Input
@@ -581,10 +566,8 @@ export default function ShoppingGame({ game, onComplete }) {
                     </Button>
                   </div>
                   <div className='mt-4 text-gray-500 text-sm italic'>
-                    {/* Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
-                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar. */}
-                    Press <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">SPACE</code> to hear the price. 
-                    Press <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">ENTER</code> to submit your answer.
+                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
+                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar.
                   </div>
                 </div>
 

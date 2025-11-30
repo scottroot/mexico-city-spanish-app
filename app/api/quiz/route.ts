@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { QuizConfig, QuizQuestion, VerbOption } from '@/types/quiz';
+import { getUser } from '@/utils/supabase/auth';
 
 export async function POST(request: Request) {
   try {
@@ -16,8 +17,8 @@ export async function POST(request: Request) {
     
     if (config.verbSelection === 'favorites') {
       // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      if (userError || !user) {
+      const { error: userError, ...user } = await getUser();
+      if (userError || !user.isLoggedIn) {
         return NextResponse.json(
           { error: 'User not authenticated' },
           { status: 401 }

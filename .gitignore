@@ -1,4 +1,3 @@
-*.psd
 archive/
 Private_*
 
@@ -9,6 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*.original
 
 # Next.js
 .next/
