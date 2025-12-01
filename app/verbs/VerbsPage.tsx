@@ -49,7 +49,7 @@ export default function VerbsPage({ user }: { user?: any }) {
       />
 
       {/* Right Main Content */}
-      <div className="flex-1 overflow-y-auto bg-gray-50 h-full overscroll-contain md:pl-72">
+      <div className="flex-1 overflow-y-auto bg-gray-50 max-md:h-full overscroll-contain md:pl-72">
         {selectedVerb 
           ? (
             <CondensedConjugationDisplay 

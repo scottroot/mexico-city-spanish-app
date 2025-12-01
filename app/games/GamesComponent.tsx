@@ -92,67 +92,6 @@ export default function GamesComponent({ initialGames }: HomeProps) {
           </motion.div>
         )}
 
-        {/* Language Tools Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            Language Tools
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 2xlg:grid-cols-3 gap-6 mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <Link href="/tools/syllabification">
-                <div className="bg-white rounded-xl py-2 px-6 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-orange-300 cursor-pointer group">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                      <Scissors className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
-                        Syllabification
-                      </h3>
-                      <p className="text-sm text-gray-600 leading-6 h-12">
-                        Learn pronunciation and how to properly blend togther multiple words and stress the right syllable!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-            
-            {/* Placeholder for future tools */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="bg-gray-50 rounded-xl py-2 px-6 border-2 border-dashed border-gray-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <Wrench className="w-6 h-6 text-gray-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-400">
-                      More Tools Coming Soon
-                    </h3>
-                    <p className="text-sm text-gray-400  leading-6 h-12">
-                      Additional language tools will be added here
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
         {/* Games Grid */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -179,6 +118,67 @@ export default function GamesComponent({ initialGames }: HomeProps) {
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Language Tools Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mb-12"
+        >
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+            Language Tools
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 2xlg:grid-cols-3 gap-6 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <Link href="/tools/syllabification">
+                <div className="bg-white rounded-xl py-2 px-4 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-orange-300 cursor-pointer group">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex flex-none items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                      <Scissors className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                        Syllabification
+                      </h3>
+                      <p className="text-sm text-gray-600 leading-6 h-18">
+                        Learn to stress the right syllables and sound like a pro!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+            
+            {/* Placeholder for future tools */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="bg-gray-50 rounded-xl py-2 px-4 border-2 border-dashed border-gray-300">
+                <div className="flex items-start gap-4">
+                  <div className="size-10 bg-gray-200 rounded-lg flex flex-none items-center justify-center">
+                    <Wrench className="w-6 h-6 text-gray-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-400">
+                      Coming Soon
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-6 h-18">
+                      Additional language tools are coming soon!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 

@@ -5,7 +5,8 @@ export type UserData = {
   isLoggedIn: boolean, 
   id: string | undefined, 
   name: string | undefined,
-  email: string | undefined, 
+  email: string | undefined,
+  emailVerified: boolean | undefined,
   tier: "free" | "premium" | "pro",
   error?: string,
 }
@@ -14,24 +15,22 @@ export async function getUser(): Promise<{
   isLoggedIn: boolean, 
   id: string | undefined, 
   name: string | undefined,
-  email: string | undefined, 
+  email: string | undefined,
+  emailVerified: boolean | undefined,
   tier: "free" | "premium" | "pro",
   error?: string,
 } | UserData> {
   try {
     const supabase = await createClient();
     const { data } = await supabase.auth.getClaims();
-    const isLoggedIn = data?.claims?.sub ? true : false;
-    const userId = data?.claims?.sub;
-    const userName = data?.claims?.name;
-    const userEmail = data?.claims?.email;
-    const userTier = data?.claims?.user_tier || "free";
+
     return { 
-      isLoggedIn, 
-      id: userId,
-      name: userName,
-      email: userEmail, 
-      tier: userTier as "free" | "premium" | "pro"
+      isLoggedIn: data?.claims?.sub ? true : false, 
+      id: data?.claims?.sub,
+      name: data?.claims?.name || data?.claims?.user_metadata?.name,
+      email: data?.claims?.email,
+      emailVerified: String(data?.claims?.user_metadata?.email_verified) === 'true',
+      tier: data?.claims?.user_tier || "free" as "free" | "premium" | "pro",
     }
   } catch (error) {
     return { 
@@ -40,6 +39,7 @@ export async function getUser(): Promise<{
       id: undefined,
       name: undefined, 
       email: undefined, 
+      emailVerified: undefined,
       tier: "free",
     };
   }

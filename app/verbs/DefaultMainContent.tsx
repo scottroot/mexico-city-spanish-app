@@ -17,7 +17,7 @@ export default function DefaultMainContent({ user }: { user?: any }) {
       </header>
 
       {/* Feature highlights */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 lg:grid-cols-3">
         <div className="rounded-2xl border border-gray-200 dark:border-gray-800 p-4">
           <div className="flex items-center gap-2">
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
