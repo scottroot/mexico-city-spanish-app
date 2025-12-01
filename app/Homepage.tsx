@@ -87,8 +87,8 @@ function GameCard({ game, index }: { game: any; index: number }) {
   const description = game.description || 'Interactive Spanish learning game to improve your language skills.'
 
   return (
-    <Link 
-      href={`/game?id=${game.id}`}
+    <Link
+      href={`/game/${game.type}`}
       className="group relative overflow-hidden rounded-xl hover:shadow-lg transition-all duration-200 h-48"
     >
       {/* Background Image */}
@@ -353,7 +353,7 @@ function NewFeaturedSection() {
               <Link 
                 // className="w-full bg-white hover:bg-gray-50 text-orange-600 font-bold py-5 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 flex items-center justify-between"
                 className="w-full bg-white hover:bg-gray-50 text-orange-600 font-bold p-4 md:p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 flex items-center justify-between gap-3"
-                href="/game?id=shopping-game-001"
+                href="/game/shopping"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 flex-none bg-orange-100 rounded-xl flex items-center justify-center">

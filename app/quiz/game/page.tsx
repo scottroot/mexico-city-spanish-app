@@ -52,7 +52,7 @@ export default function QuizGamePage() {
   
   const handleGoHome = () => {
     sessionStorage.removeItem('customQuiz');
-    router.push('/');
+    router.push('/quiz');
   };
   
   const handleNewQuiz = () => {
@@ -240,7 +240,7 @@ export default function QuizGamePage() {
               variant="outline"
             >
               <Home className="w-4 h-4 mr-2" />
-              Home
+              Create A New Quiz
             </Button>
           </div>
         </div>

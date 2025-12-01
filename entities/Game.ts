@@ -1,5 +1,7 @@
 // Removed direct Supabase client import - now using API routes
 
+import { GameType, GameDifficulty } from '@/components/games/types'
+
 export interface GameContent {
   questions: Array<{
     question?: string
@@ -17,8 +19,8 @@ export interface GameContent {
 export interface GameData {
   id: string;
   title: string;
-  type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping';
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  type: GameType;
+  difficulty: GameDifficulty;
   content: GameContent;
   created_at?: string;
   updated_at?: string;
@@ -28,8 +30,8 @@ export interface GameData {
 export class Game {
   public id: string
   public title: string
-  public type: 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping'
-  public difficulty: 'beginner' | 'intermediate' | 'advanced'
+  public type: GameType
+  public difficulty: GameDifficulty
   public content: GameContent
   public created_at?: string
   public updated_at?: string

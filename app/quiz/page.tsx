@@ -9,9 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { X, Search, Heart, BookOpen, ChevronDown } from 'lucide-react';
+import { X, Search, Heart, BookOpen, ChevronDown, PanelBottomOpen, ListChevronsUpDown, ChevronsUpDown, Sparkles } from 'lucide-react';
 import { Favorites } from '@/entities/Favorites';
 import { QuizConfig, TenseOption, VerbOption, QuestionCountOption, PronounOption } from '@/types/quiz';
+import { VERB_GROUPS, getVerbGroupById } from './verb-groups';
+import PresetGroupSelector from './_components/PresetGroupSelector';
 
 export default function CustomQuizPage() {
   const router = useRouter();
@@ -32,6 +34,7 @@ export default function CustomQuizPage() {
   const [error, setError] = useState<string | null>(null);
   const [isTenseModalOpen, setIsTenseModalOpen] = useState(false);
   const [isVerbModalOpen, setIsVerbModalOpen] = useState(false);
+  const [isPresetModalOpen, setIsPresetModalOpen] = useState(false);
   const [verbModalSearchTerm, setVerbModalSearchTerm] = useState('');
   
   // Available tense options - ordered by ranking within each mood
@@ -235,7 +238,7 @@ export default function CustomQuizPage() {
   
   const handlePronounToggle = (pronoun: PronounOption) => {
     const isSelected = config.selectedPronouns.includes(pronoun.value);
-    
+
     if (isSelected) {
       setConfig(prev => ({
         ...prev,
@@ -248,18 +251,33 @@ export default function CustomQuizPage() {
       }));
     }
   };
-  
+
+  const handlePresetGroupSelect = (group: typeof VERB_GROUPS[0]) => {
+    setConfig(prev => ({
+      ...prev,
+      verbSelection: 'preset',
+      presetGroupId: group.id,
+      customVerbs: group.verbs
+    }));
+    setIsPresetModalOpen(false);
+  };
+
   const handleStartQuiz = async () => {
     if (config.selectedTenseMoods.length === 0) {
       setError('Please select at least one tense and mood');
       return;
     }
-    
+
     if (config.verbSelection === 'custom' && config.customVerbs.length === 0) {
       setError('Please select at least one verb');
       return;
     }
-    
+
+    if (config.verbSelection === 'preset' && !config.presetGroupId) {
+      setError('Please select a preset verb group');
+      return;
+    }
+
     if (config.selectedPronouns.length === 0) {
       setError('Please select at least one pronoun');
       return;
@@ -348,11 +366,12 @@ export default function CustomQuizPage() {
         <div className="text-center mb-8">
           <Button
             onClick={handleStartQuiz}
-            disabled={loading || config.selectedTenseMoods.length === 0 || 
+            disabled={loading || config.selectedTenseMoods.length === 0 ||
                      (config.verbSelection === 'custom' && config.customVerbs.length === 0) ||
                      (config.verbSelection === 'favorites' && favoriteVerbs.length === 0) ||
+                     (config.verbSelection === 'preset' && !config.presetGroupId) ||
                      config.selectedPronouns.length === 0}
-            className="rounded-full border border-orange-500 text-orange-500 hover:text-orange-600 
+            className="rounded-full border border-orange-500 text-orange-500 hover:text-orange-600
             leading-none text-lg"
           >
             {loading ? (
@@ -390,12 +409,12 @@ export default function CustomQuizPage() {
                 <Button
                   onClick={() => setIsTenseModalOpen(true)}
                   variant="outline"
-                  className="w-full justify-between"
+                  className="gap-3"
                 >
                   <span>
                     Select Tenses
                   </span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronsUpDown className="w-4 h-4" />
                 </Button>
                 
                 {config.selectedTenseMoods.length > 0 && (
@@ -436,7 +455,7 @@ export default function CustomQuizPage() {
             <CardContent>
               <div className="space-y-4">
                 {/* Verb Selection Type */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap">
                   <Button
                     variant={config.verbSelection === 'favorites' ? 'default' : 'outline'}
                     size="sm"
@@ -449,6 +468,15 @@ export default function CustomQuizPage() {
                         {favoriteVerbs.length}
                       </Badge>
                     )}
+                  </Button>
+                  <Button
+                    variant={config.verbSelection === 'preset' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setIsPresetModalOpen(true)}
+                    className={config.verbSelection === 'preset' ? 'bg-pink-500' : ''}
+                  >
+                    <Sparkles className="w-4 h-4 mr-1" />
+                    Preset Groups
                   </Button>
                   <Button
                     variant={config.verbSelection === 'custom' ? 'default' : 'outline'}
@@ -471,7 +499,7 @@ export default function CustomQuizPage() {
                       <span>
                         Select Verbs
                       </span>
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronsUpDown className="w-4 h-4" />
                     </Button>
                     
                     {config.customVerbs.length > 0 && (
@@ -495,7 +523,52 @@ export default function CustomQuizPage() {
                     )}
                   </div>
                 )}
-                
+
+                {/* Preset Groups Info */}
+                {config.verbSelection === 'preset' && (
+                  <div>
+                    {config.presetGroupId ? (
+                      <div>
+                        <p className="text-sm text-gray-600 mb-2">
+                          Selected group: {getVerbGroupById(config.presetGroupId)?.name}
+                        </p>
+                        <p className="text-sm text-gray-500 mb-2">
+                          {getVerbGroupById(config.presetGroupId)?.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {config.customVerbs.slice(0, 6).map((verb) => (
+                            <Badge key={verb} variant="secondary" className="text-xs">
+                              {verb}
+                            </Badge>
+                          ))}
+                          {config.customVerbs.length > 6 && (
+                            <Badge variant="secondary" className="text-xs">
+                              +{config.customVerbs.length - 6} verbs
+                            </Badge>
+                          )}
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setIsPresetModalOpen(true)}
+                          className="mt-3"
+                        >
+                          Change Group
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button
+                        onClick={() => setIsPresetModalOpen(true)}
+                        variant="outline"
+                        className="w-full"
+                      >
+                        <Sparkles className="w-4 h-4 mr-2" />
+                        Select Preset Group
+                      </Button>
+                    )}
+                  </div>
+                )}
+
                 {/* Favorites Info */}
                 {config.verbSelection === 'favorites' && (
                   <div>
@@ -615,9 +688,10 @@ export default function CustomQuizPage() {
         <div className="mt-8 text-center">
           <Button
             onClick={handleStartQuiz}
-            disabled={loading || config.selectedTenseMoods.length === 0 || 
+            disabled={loading || config.selectedTenseMoods.length === 0 ||
                      (config.verbSelection === 'custom' && config.customVerbs.length === 0) ||
                      (config.verbSelection === 'favorites' && favoriteVerbs.length === 0) ||
+                     (config.verbSelection === 'preset' && !config.presetGroupId) ||
                      config.selectedPronouns.length === 0}
             className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-8 py-3 text-lg"
           >
@@ -638,7 +712,7 @@ export default function CustomQuizPage() {
         <div className="fixed inset-0 z-50 flex items-end justify-center">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black bg-opacity-50"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsTenseModalOpen(false)}
           />
           
@@ -668,8 +742,8 @@ export default function CustomQuizPage() {
             </div>
             
             {/* Content */}
-            <div className="px-6 py-4 max-h-[60vh] overflow-y-auto">
-              <div className="space-y-6">
+            <div className="px-6 py-4 max-h-[60vh] overflow-y-auto prose-sm">
+              <div className="space-y-2">
                 {/* Select All Tenses */}
                 <div className="border-b border-gray-200 pb-4">
                   <label className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
@@ -679,11 +753,11 @@ export default function CustomQuizPage() {
                       onChange={handleSelectAllTenses}
                       className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                     />
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">
+                    <div className="flex flex-row items-center justify-between w-full">
+                      <div className="text-gray-900">
                         Select All
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-gray-500">
                         Select or deselect all tenses
                       </div>
                     </div>
@@ -691,8 +765,10 @@ export default function CustomQuizPage() {
                 </div>
                 
                 {Object.entries(tensesByMood).map(([mood, tenses]) => (
-                  <div key={mood}>
-                    <h3 className="font-semibold text-gray-800 mb-3 text-lg">
+                  <div key={mood} className="">
+                    <h3 
+                    className="font-medium text-gray-800 mb-3"
+                    >
                       {tenses[0].moodEnglish}
                     </h3>
                     <div className="space-y-2">
@@ -711,7 +787,7 @@ export default function CustomQuizPage() {
                               className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
                             />
                             <div className="flex-1">
-                              <div className="font-medium text-gray-900">
+                              <div className="text-gray-900">
                                 {tense.labelEnglish}
                               </div>
                             </div>
@@ -747,7 +823,7 @@ export default function CustomQuizPage() {
         <div className="fixed inset-0 z-50 flex items-end justify-center">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black bg-opacity-50"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsVerbModalOpen(false)}
           />
           
@@ -842,6 +918,15 @@ export default function CustomQuizPage() {
           </motion.div>
         </div>
       )}
+
+      {/* Preset Group Selection Modal */}
+      <PresetGroupSelector
+        isOpen={isPresetModalOpen}
+        onClose={() => setIsPresetModalOpen(false)}
+        groups={VERB_GROUPS}
+        selectedGroupId={config.presetGroupId}
+        onSelectGroup={handlePresetGroupSelect}
+      />
     </div>
   );
 }

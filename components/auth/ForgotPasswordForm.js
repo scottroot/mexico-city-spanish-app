@@ -5,14 +5,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { BookOpen, Mail, ArrowLeft } from 'lucide-react'
+import { createClient } from '@/utils/supabase/client'
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  
-  const { resetPassword } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -21,8 +20,11 @@ export default function ForgotPasswordForm() {
     setSuccess('')
 
     try {
-      const { data, error } = await resetPassword(email)
-      
+      const supabase = createClient()
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
+      })
+
       if (error) {
         setError(error.message)
       } else {

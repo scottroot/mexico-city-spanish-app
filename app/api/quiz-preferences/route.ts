@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { QuizConfig } from '@/types/quiz';
+import { getUser } from '@/utils/supabase/auth';
 
 // GET - Load user's quiz preferences
 export async function GET() {
@@ -8,8 +9,8 @@ export async function GET() {
     const supabase = await createClient();
     
     // Get current user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) {
+    const { error, ...user } = await getUser();
+    if (error || !user.isLoggedIn) {
       return NextResponse.json(
         { error: 'User not authenticated' },
         { status: 401 }
@@ -49,6 +50,7 @@ export async function GET() {
       selectedTenseMoods: preferences.selected_tense_moods || [],
       verbSelection: preferences.verb_selection || 'favorites',
       customVerbs: preferences.custom_verbs || [],
+      presetGroupId: preferences.preset_group_id,
       selectedPronouns: preferences.selected_pronouns || ['yo', 'tú', 'él', 'nosotros', 'ustedes'],
       questionCount: preferences.question_count || 10
     };
@@ -69,8 +71,8 @@ export async function POST(request: Request) {
     const supabase = await createClient();
     
     // Get current user
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    if (userError || !user) {
+    const { error: userError, ...user } = await getUser();
+    if (userError || !user.isLoggedIn) {
       return NextResponse.json(
         { error: 'User not authenticated' },
         { status: 401 }
@@ -88,7 +90,7 @@ export async function POST(request: Request) {
       );
     }
     
-    if (!config.verbSelection || !['favorites', 'custom'].includes(config.verbSelection)) {
+    if (!config.verbSelection || !['favorites', 'preset', 'custom'].includes(config.verbSelection)) {
       return NextResponse.json(
         { error: 'Invalid verbSelection' },
         { status: 400 }
@@ -122,6 +124,7 @@ export async function POST(request: Request) {
       selected_tense_moods: config.selectedTenseMoods,
       verb_selection: config.verbSelection,
       custom_verbs: config.customVerbs,
+      preset_group_id: config.presetGroupId || null,
       selected_pronouns: config.selectedPronouns,
       question_count: config.questionCount,
       updated_at: new Date().toISOString()

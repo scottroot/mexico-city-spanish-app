@@ -23,13 +23,8 @@ import {
 } from "lucide-react";
 import ClickAway from "../ClickAway";
 import GoProButton from "./buttons/go-pro";
-import { useBilling } from "../../hooks/useBilling";
+import { UserData } from "@/utils/supabase/auth";
 
-interface MainNavigationProps {
-  user: {
-    email: string;
-  } | null;
-}
 
 interface NavigationItem {
   id: string;
@@ -38,11 +33,10 @@ interface NavigationItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-
-export default function MainNavigation({ user }: MainNavigationProps) {
+export default function MainNavigation({ user }: { user: UserData }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { hasAccess } = useBilling();
+  const hasAccess = user?.isLoggedIn;
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
@@ -151,13 +145,13 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       bg-white border-r border-r-2 border-gray-200 px-4"
     >
       {/* Logo */}
-      <div className="flex flex-0 justify-start pt-6 pb-3 w-full xl:pl-4">
+      <div className="flex flex-0 justify-start pt-9 pb-7 xl:px-4 w-full">
+        
         <Link href="/" 
           // className="relative flex shrink-0 items-start justify-center xl:justify-start px-3 xl:px-6 py-4 w-full h-16"
-          className="relative size-16 xl:size-36 xl:max-h-24"
-          >
-          <Image src="/wordmark.webp" alt="Hero Image" fill className="xl:hidden object-contain" />
-          <Image src="/wordmark-horizontal.webp" alt="Hero Image" fill className="max-xl:hidden object-contain" />
+          className="relative w-24 h-16"
+        >
+          <Image src="/wordmark.webp" alt="Hero Image" fill className="object-contain" />
         </Link>
       </div>
 
@@ -208,25 +202,14 @@ export default function MainNavigation({ user }: MainNavigationProps) {
         {/* Bottom Section - Billing and User Account */}
         <li>
           <div className="space-y-2 px-3 py-4">
-            {process.env.NODE_ENV === 'development' && (
+            {/* Billing Section */}
+            {["premium", "pro"].includes(user?.tier) &&
               <div className="pb-2">
-                <div className="bg-blue-500 text-white font-bold aspect-video rounded-md p-0 flex items-center justify-center">
-                  <span className="sm:hidden text-sm">Z</span>
-                  <span className="hidden sm:max-md:block text-base">SM</span>
-                  <span className="hidden md:max-lg:block text-base">MD</span>
-                  <span className="hidden lg:max-xl:block text-base">LG</span>
-                  <span className="hidden xl:max-2xl:block text-2xl">XL</span>
-                  <span className="hidden 2xl:block text-3xl">2XL</span>
+                <div className="flex justify-center xl:justify-start">
+                  <GoProButton user={user} />
                 </div>
               </div>
-            )}
-
-            {/* Billing Section */}
-            <div className="pb-2">
-              <div className="flex justify-center xl:justify-start">
-                <GoProButton user={user} />
-              </div>
-            </div>
+            }
 
             {/* User Account - Avatar with text on xl+ */}
             <div className="pb-4">
@@ -386,7 +369,8 @@ export default function MainNavigation({ user }: MainNavigationProps) {
       {/* </div> */}
 
       {/* Mobile header - only show on screens smaller than md */}
-      {/* TODO: Decide if i want a mobile top bar or not... */}
+      {/* <div className="md:hidden fixed w-full top-0 z-40 flex h-10 shrink-0 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
+      {/* <div className="md:hidden w-full top-0 z-40 flex h-10 items-center gap-x-6 border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8"> */}
       {/* <MobileTopBar /> */}
 
       {/* Bottom app bar for mobile */}
