@@ -214,7 +214,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
             {/* User Account - Avatar with text on xl+ */}
             <div className="pb-4">
               <div className="group flex justify-center xl:justify-start">
-                {user ? (
+                {user?.isLoggedIn ? (
                   <button
                     onClick={() => setShowUserMenu(true)}
                     className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full group-hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200 cursor-pointer"
@@ -412,7 +412,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
 
               {/* Content */}
               <div className="p-6">
-                {user && (
+                {user?.isLoggedIn && (
                   <div className="space-y-6">
                     {/* User Info */}
                     <div className="text-center py-4">
@@ -461,7 +461,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
               <div className="p-6 border-t border-gray-200">
                 <button
                   onClick={handleSignOut}
-                  className="w-full flex items-center justify-center gap-3 p-4 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors cursor-pointer"
                 >
                   <LogOut className="w-5 h-5" />
                   <span className="font-medium">Sign Out</span>

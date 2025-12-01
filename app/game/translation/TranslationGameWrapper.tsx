@@ -5,13 +5,14 @@ import TranslationGameStart, { TranslationDirection } from './TranslationGameSta
 import TranslationGame from './TranslationGame';
 import { UserData } from '@/utils/supabase/auth';
 
+
 export default function TranslationGameWrapper({ user }: { user: UserData }) {
   const [started, setStarted] = useState(false);
   const [customFocus, setCustomFocus] = useState<string | undefined>();
   const [resumeQuizId, setResumeQuizId] = useState<string | null>(null);
   // Temporarily disabled: Spanish to English option - fixed to English to Spanish only
   const [translationDirection, setTranslationDirection] = useState<TranslationDirection>('en_to_es');
-
+  
   const handleStart = (focus?: string, direction?: TranslationDirection) => {
     setCustomFocus(focus);
     setTranslationDirection(direction || 'en_to_es'); // Default to English to Spanish

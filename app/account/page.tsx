@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation'
 export default async function AccountPage() {
   const user: UserData = await getUser();
 
-  if (!user) {
-    redirect('/auth/login')
+  if (!user?.isLoggedIn) {
+    redirect('/auth/login?redirect=/account')
   }
 
   return (

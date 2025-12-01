@@ -8,13 +8,13 @@ import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { BookOpen, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 
-export default function LoginForm() {
+export default function LoginForm({ redirectTo }) {
   const [showPassword, setShowPassword] = useState(false)
   const [isPending, setIsPending] = useState(false)
 
   const handleSubmit = async (formData) => {
     setIsPending(true)
-    await login(formData)
+    await login(formData, redirectTo)
     setIsPending(false)
   }
 

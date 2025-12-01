@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -44,17 +43,9 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
   const [pastQuizzes, setPastQuizzes] = useState<PastQuiz[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewStudyGuideQuizId, setViewStudyGuideQuizId] = useState<string | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
-      const supabase = createClient();
-      if (!user.isLoggedIn) {
-        router.push('/auth/login?redirect=/game/translation');
-        return;
-      }
-
       // Load past quizzes
       try {
         const response = await fetch('/api/translation/quizzes');
@@ -70,7 +61,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
     };
 
     checkAuth();
-  }, [router, user.isLoggedIn]);
+  }, [user.isLoggedIn]);
 
   const handleStartDefault = () => {
     onStart(undefined, translationDirection);
