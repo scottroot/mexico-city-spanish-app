@@ -1,18 +1,22 @@
 'use client'
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { signup } from '@/app/auth/signup/actions'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
-import { BookOpen, Mail, Lock, Eye, EyeOff, User } from 'lucide-react'
+import { BookOpen, Mail, Lock, Eye, EyeOff, User, AlertCircle, Info } from 'lucide-react'
 
 export default function SignupForm() {
+  const searchParams = useSearchParams()
+  const error = searchParams.get('error')
+  const message = searchParams.get('message')
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isPending, setIsPending] = useState(false)
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async (formData: FormData) => {
     setIsPending(true)
     await signup(formData)
     setIsPending(false)
@@ -30,6 +34,24 @@ export default function SignupForm() {
         </div>
 
         <form action={handleSubmit} className="space-y-6">
+          {error && (
+            <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-red-800">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {message && !error && (
+            <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-blue-800">{message}</p>
+              </div>
+            </div>
+          )}
+
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">
               Full Name
@@ -124,8 +146,8 @@ export default function SignupForm() {
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Already have an account?{' '}
-            <Link 
-              href="/auth/login" 
+            <Link
+              href="/auth/login"
               className="text-orange-600 hover:text-orange-700 font-medium"
             >
               Sign in here

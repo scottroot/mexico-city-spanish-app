@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   // Create a response object that we can modify
-  let response = NextResponse.redirect(new URL("/", req.url), {
+  const response = NextResponse.redirect(new URL("/", req.url), {
     status: 302,
   });
 

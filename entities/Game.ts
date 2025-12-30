@@ -1,36 +1,13 @@
 // Removed direct Supabase client import - now using API routes
 
-import { GameType, GameDifficulty } from '@/components/games/types'
+import { GameType, GameDifficulty } from '@/components/games/types';
+import type { GameContent, GameData } from '@/app/types';
 
-export interface GameContent {
-  questions: Array<{
-    question?: string
-    instruction?: string
-    sentence?: string
-    type?: string
-    phrase?: string
-    options?: string[]
-    correct_answer: string
-    hint?: string
-    explanation: string
-  }>
-}
-
-export interface GameData {
-  id: string;
-  title: string;
-  type: GameType;
-  difficulty: GameDifficulty;
-  content: GameContent;
-  created_at?: string;
-  updated_at?: string;
-  image_url?: string;
-}
 
 export class Game {
   public id: string
   public title: string
-  public type: GameType
+  public type: string
   public difficulty: GameDifficulty
   public content: GameContent
   public created_at?: string

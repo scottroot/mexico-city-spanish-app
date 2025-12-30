@@ -1,12 +1,14 @@
-import { createClient } from '@/utils/supabase/server'
-import GamesComponent from './GamesComponent'
-// import { GameData } from '../../entities/Game'
+import { createClient } from '@/utils/supabase/server';
+import GamesComponent from './GamesComponent';
+import { GameData } from '../types';
+import { getUser } from '@/utils/supabase/auth';
+
 
 export default async function GamesPage() {
   const supabase = await createClient()
+  const user = await getUser()
   
-  // Fetch games server-side with error handling
-  let gamesData = []
+  let gamesData: GameData[] = []
   try {
     const { data, error } = await supabase
       .from('games')
@@ -15,17 +17,16 @@ export default async function GamesPage() {
 
     if (error) {
       console.error('Error fetching games:', error)
-      // If games table doesn't exist yet, use empty array
       gamesData = []
-    } else {
+    } 
+    else {
       gamesData = data || []
     }
-  } catch (err) {
+  }
+  catch (err) {
     console.error('Database connection error:', err)
-    // Fallback to empty array if database is not ready
     gamesData = []
   }
 
-  // Pass games as props to the Home component
-  return <GamesComponent initialGames={gamesData} />
+  return <GamesComponent initialGames={gamesData} user={user} />
 }

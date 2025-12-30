@@ -1,25 +1,25 @@
 import { createClient } from './server'
+import type { UserData } from '@/app/types'
 
-
-export type UserData = {
-  isLoggedIn: boolean, 
-  id: string | undefined, 
-  name: string | undefined,
-  email: string | undefined,
-  emailVerified: boolean | undefined,
-  tier: "free" | "premium" | "pro",
-  error?: string,
-}
-
-export async function getUser(): Promise<{ 
-  isLoggedIn: boolean, 
-  id: string | undefined, 
-  name: string | undefined,
-  email: string | undefined,
-  emailVerified: boolean | undefined,
-  tier: "free" | "premium" | "pro",
-  error?: string,
-} | UserData> {
+/**
+ * @returns UserData
+ *    - isLoggedIn: boolean
+ *    - id: string | undefined
+ *    - name: string | undefined
+ *    - email: string | undefined
+ *    - emailVerified: boolean | undefined
+ *    - tier: "free" | "premium" | "pro"
+ *    - error?: string
+ */
+export async function getUser(): Promise<UserData>{ 
+//   isLoggedIn: boolean, 
+//   id: string | undefined, 
+//   name: string | undefined,
+//   email: string | undefined,
+//   emailVerified: boolean | undefined,
+//   tier: "free" | "premium" | "pro",
+//   error?: string,
+// } | UserData> {
   try {
     const supabase = await createClient();
     const { data } = await supabase.auth.getClaims();

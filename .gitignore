@@ -9,7 +9,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 *.original
-
+*.original*
+*.*copy*.ts*
 # Next.js
 .next/
 out/
@@ -125,6 +126,8 @@ dist
 # IDE and editor files
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 *.swp
 *.swo
 *~

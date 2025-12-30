@@ -1,6 +1,7 @@
 import { getUser } from '@/utils/supabase/auth';
 import TranslationGameWrapper from './TranslationGameWrapper'
-import { redirect, RedirectType } from 'next/navigation';
+import { redirect } from 'next/navigation';
+
 
 export default async function TranslationGamePage() {
   const { error: userError, ...user } = await getUser();

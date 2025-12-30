@@ -2,10 +2,22 @@
  * Client-side TTS utility that calls our server-side API
  */
 
-export async function playTTS(text, model = null) {
+interface TTSError extends Error {
+  fallback?: boolean
+}
+
+interface TTSResponse {
+  success?: boolean
+  audioData?: string
+  contentType?: string
+  error?: string
+  fallback?: boolean
+}
+
+export async function playTTS(text: string, model: string | null = null): Promise<void> {
   try {
     console.log('Client-side TTS request:', { text, model });
-    
+
     const params = new URLSearchParams({ text });
     if (model) params.append('model', model);
 
@@ -14,9 +26,9 @@ export async function playTTS(text, model = null) {
     if (!response.ok) {
       // If there's error, the route returns JSON with message...
       try {
-        const errorResult = await response.json();
+        const errorResult: TTSResponse = await response.json();
         if (errorResult.fallback) {
-          const error = new Error('TTS service unavailable, using fallback');
+          const error = new Error('TTS service unavailable, using fallback') as TTSError;
           error.fallback = true;
           throw error;
         }
@@ -25,7 +37,7 @@ export async function playTTS(text, model = null) {
         throw new Error(`TTS API request failed: ${response.status} ${response.statusText}`);
       }
     }
-    
+
     // Check if response is audio content
     const contentType = response.headers.get('content-type');
     if (contentType && contentType.includes('audio/')) {
@@ -33,11 +45,11 @@ export async function playTTS(text, model = null) {
       const arrayBuffer = await response.arrayBuffer();
       const blob = new Blob([arrayBuffer], { type: contentType });
       const blobUrl = URL.createObjectURL(blob);
-      
+
       // Create and play audio
       const audio = new Audio(blobUrl);
-      
-      return new Promise((resolve, reject) => {
+
+      return new Promise<void>((resolve, reject) => {
         audio.onended = () => {
           URL.revokeObjectURL(blobUrl);
           resolve();
@@ -60,7 +72,7 @@ export async function playTTS(text, model = null) {
       });
     } else {
       // Fallback: try to parse as JSON (for backward compatibility)
-      const result = await response.json();
+      const result: TTSResponse = await response.json();
       if (result.success && result.audioData) {
         // Convert base64 back to blob
         const binaryString = atob(result.audioData);
@@ -70,11 +82,11 @@ export async function playTTS(text, model = null) {
         }
         const blob = new Blob([bytes], { type: result.contentType || 'audio/mpeg' });
         const blobUrl = URL.createObjectURL(blob);
-        
+
         // Create and play audio
         const audio = new Audio(blobUrl);
-        
-        return new Promise((resolve, reject) => {
+
+        return new Promise<void>((resolve, reject) => {
           audio.onended = () => {
             URL.revokeObjectURL(blobUrl);
             resolve();
@@ -95,12 +107,12 @@ export async function playTTS(text, model = null) {
   }
 }
 
-export function fallbackTTS(text) {
+export function fallbackTTS(text: string): void {
   if (!('speechSynthesis' in window)) {
     console.error('Speech synthesis not supported in this browser');
     return;
   }
-  
+
   try {
     speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);

@@ -1,3 +1,6 @@
+import { QuizConfig } from "@/types/quiz";
+
+
 export interface VerbGroup {
   id: string
   name: string
@@ -198,3 +201,12 @@ export function validateVerbGroups(): { valid: boolean; errors: string[] } {
     errors
   }
 }
+
+export const defaultConfig: QuizConfig = {
+  selectedTenseMoods: [],
+  verbSelection: 'preset',
+  customVerbs: getVerbGroupById('top-100')?.verbs || [],
+  presetGroupId: 'top-100',
+  selectedPronouns: ['yo', 'tú', 'él', 'nosotros', 'ustedes', 'ellos'],
+  questionCount: 10
+};

@@ -226,7 +226,7 @@ export default async function Page() {
   return (
     <div className="flex w-full min-h-full flex-col">
       <div 
-        className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-5xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8"
       >
         <main className="flex-1">
           <Homepage games={games || []} stories={stories || []} />

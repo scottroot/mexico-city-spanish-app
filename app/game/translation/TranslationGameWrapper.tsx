@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import TranslationGameStart, { TranslationDirection } from './TranslationGameStart';
 import TranslationGame from './TranslationGame';
-import { UserData } from '@/utils/supabase/auth';
+import type { UserData } from '@/app/types';
+import GameCompletion from '../_components/GameCompletion';
 
 
 export default function TranslationGameWrapper({ user }: { user: UserData }) {
@@ -12,6 +13,11 @@ export default function TranslationGameWrapper({ user }: { user: UserData }) {
   const [resumeQuizId, setResumeQuizId] = useState<string | null>(null);
   // Temporarily disabled: Spanish to English option - fixed to English to Spanish only
   const [translationDirection, setTranslationDirection] = useState<TranslationDirection>('en_to_es');
+  const [completed, setCompleted] = useState(false)
+
+  if (completed) {
+    return <GameCompletion gameTitle="Translation Game" onPlayAgain={() => setCompleted(false)} user={user} />
+  }
   
   const handleStart = (focus?: string, direction?: TranslationDirection) => {
     setCustomFocus(focus);
@@ -29,7 +35,8 @@ export default function TranslationGameWrapper({ user }: { user: UserData }) {
     setStarted(false);
     setCustomFocus(undefined);
     setResumeQuizId(null);
-    setTranslationDirection('en_to_es'); // Default to English to Spanish
+    setTranslationDirection('en_to_es');
+    setCompleted(true);
   };
 
   if (!started) {

@@ -1,31 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { Verb } from '@/app/types';
 
-export interface Verb {
-  infinitive: string;
-  infinitive_english: string;
-  conjugations: VerbConjugation[];
-}
-
-export interface VerbConjugation {
-  infinitive: string;
-  infinitive_english: string;
-  mood: string;
-  mood_english: string;
-  tense: string;
-  tense_english: string;
-  verb_english: string;
-  form_1s: string;
-  form_2s: string;
-  form_3s: string;
-  form_1p: string;
-  form_2p: string;
-  form_3p: string;
-  gerund: string;
-  gerund_english: string;
-  pastparticiple: string;
-  pastparticiple_english: string;
-}
 
 export async function GET() {
   try {

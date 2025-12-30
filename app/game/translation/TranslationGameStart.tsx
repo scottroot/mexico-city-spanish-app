@@ -10,7 +10,7 @@ import PastQuizzesList from './PastQuizzesList';
 import StudyGuideModal from './StudyGuideModal';
 import { createClient } from '@/utils/supabase/client';
 import { focusAreas } from './focus-areas';
-import { UserData } from '@/utils/supabase/auth';
+import type { UserData } from '@/app/types';
 
 
 export interface PastQuiz {
@@ -188,7 +188,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" />
       </div>
     );
   }
