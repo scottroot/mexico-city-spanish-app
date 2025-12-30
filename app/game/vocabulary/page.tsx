@@ -1,9 +1,10 @@
 import { getUser } from '@/utils/supabase/auth'
 import VocabularyGame from './VocabularyGame'
 import { fetchGame } from '../fetchGame'
-import GameWrapper from '../_components/GameWrapper'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+
+
+export const dynamic = "force-dynamic";
 
 const GAME_ID = 'vocab-colors';
 

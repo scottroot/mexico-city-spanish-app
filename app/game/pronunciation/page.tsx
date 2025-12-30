@@ -5,6 +5,8 @@ import GameWrapper from '../_components/GameWrapper'
 import { notFound } from 'next/navigation'
 
 
+export const dynamic = "force-dynamic";
+
 const GAME_ID = 'pronunciation-sinalefa';
 
 export default async function PronunciationGamePage() {

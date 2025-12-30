@@ -4,6 +4,8 @@ import { fetchGame } from '../fetchGame'
 import { notFound } from 'next/navigation'
 
 
+export const dynamic = "force-dynamic";
+
 const GAME_ID = 'shopping-game-001';
 
 export default async function ShoppingGamePage() {
