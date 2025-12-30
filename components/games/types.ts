@@ -5,7 +5,7 @@
 
 export type GameType = 'grammar' | 'vocabulary' | 'pronunciation' | 'shopping' | 'translation';
 
-export type GameDifficulty = 'beginner' | 'intermediate' | 'advanced';
+export type GameDifficulty = 'beginner' | 'intermediate' | 'advanced' | string;
 
 export const GAME_TYPES: GameType[] = [
   'grammar',

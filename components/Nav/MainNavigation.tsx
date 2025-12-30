@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import ClickAway from "../ClickAway";
 import GoProButton from "./buttons/go-pro";
-import { UserData } from "@/utils/supabase/auth";
+import type { UserData } from "@/app/types";
 
 
 interface NavigationItem {
@@ -142,7 +142,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
       id="sidebar"
       className="w-[86px] xl:w-64 max-md:hidden 
       fixed inset-y-0 z-50 flex flex-1 flex-col items-center grow 
-      bg-white border-r border-r-2 border-gray-200 px-4"
+      bg-white border-r border-r-2 border-gray-200 px-4 no-print"
     >
       {/* Logo */}
       <div className="flex flex-0 justify-start pt-9 pb-7 xl:px-4 w-full">
@@ -151,7 +151,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
           // className="relative flex shrink-0 items-start justify-center xl:justify-start px-3 xl:px-6 py-4 w-full h-16"
           className="relative w-24 h-16"
         >
-          <Image src="/wordmark.webp" alt="Hero Image" fill className="object-contain" />
+          <Image src="/wordmark.webp" alt="Hero Image" fill sizes="200px" className="object-contain" />
         </Link>
       </div>
 
@@ -214,7 +214,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
             {/* User Account - Avatar with text on xl+ */}
             <div className="pb-4">
               <div className="group flex justify-center xl:justify-start">
-                {user ? (
+                {user?.isLoggedIn ? (
                   <button
                     onClick={() => setShowUserMenu(true)}
                     className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full group-hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200 cursor-pointer"
@@ -229,7 +229,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
                   </button>
                 ) : (
                   <Link
-                    href="/auth/login"
+                    href={`/auth/login?redirect=${pathname}`}
                     className="flex items-center justify-center xl:justify-start gap-3 w-auto xl:w-full hover:bg-gray-50 xl:hover:bg-transparent rounded-lg xl:rounded-full p-2 xl:p-0 transition-all duration-200 cursor-pointer"
                     title="Login"
                   >
@@ -262,7 +262,6 @@ export default function MainNavigation({ user }: { user: UserData }) {
       </Link>
 
       <div className="flex items-center gap-2">
-        {/* <LanguageToggle /> */}
         {user && (
           <div className="flex items-center gap-2">
             <GoProButton user={user} />
@@ -334,7 +333,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="fixed inset-y-0 left-0 z-50 w-72 xl:hidden"
+              className="fixed inset-y-0 left-0 z-50 w-72 xl:hidden no-print"
             >
               <div className="relative flex h-full w-full flex-col bg-white shadow-xl">
                 {/* Close button */}
@@ -412,7 +411,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
 
               {/* Content */}
               <div className="p-6">
-                {user && (
+                {user?.isLoggedIn && (
                   <div className="space-y-6">
                     {/* User Info */}
                     <div className="text-center py-4">
@@ -461,7 +460,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
               <div className="p-6 border-t border-gray-200">
                 <button
                   onClick={handleSignOut}
-                  className="w-full flex items-center justify-center gap-3 p-4 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors cursor-pointer"
                 >
                   <LogOut className="w-5 h-5" />
                   <span className="font-medium">Sign Out</span>

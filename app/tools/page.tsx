@@ -25,12 +25,12 @@ export default function ToolsPage() {
       available: true
     },
     {
-      id: 'pronunciation',
-      name: 'Pronunciation Guide',
-      description: 'Get pronunciation help with phonetic breakdowns',
+      id: 'conjunctions',
+      name: 'Conjunctions Cheat Sheet',
+      description: 'A comprehensive guide to Spanish conjunctions',
       icon: Volume2,
-      href: '/tools/pronunciation',
-      available: false
+      href: '/tools/conjunctions',
+      available: true
     },
     {
       id: 'text-analysis',

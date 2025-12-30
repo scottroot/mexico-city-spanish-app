@@ -35,35 +35,37 @@ export default function GameCard({ game, progress }) {
 
   return (
     <motion.div
-      
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      
       // onClick={onClick}
       className="cursor-pointer"
     >
       <Card className="overflow-hidden bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 border-0">
-        <div className={`h-24 bg-gradient-to-r ${gradientClass} flex items-center justify-center relative overflow-hidden`}>
+        <div className={`h-30 bg-gradient-to-r ${gradientClass} shadow-sm shadow-inner flex items-center justify-center relative overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute inset-0 w-full h-full flex items-center justify-center">
             <div className="relative w-full h-full">
               {game?.image_url &&
                 <Image fill src={game.image_url} alt={game.title} className="w-10 h-10 object-cover object-top" />
               }
-              {/* {JSON.stringify(game)} */}
             </div>
           </div>
-          {/* <Icon className="w-10 h-10 text-white relative z-10" /> */}
-          <div className="absolute top-2 right-2">
-            <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs`}>
-              {/* {t(`games.${game.difficulty}`)} */}
-              {/* TODO: Fix this */}
+          {/* <div className="absolute top-2 right-2 mt-36">
+            <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs shadow-lg`}>
+              {game.difficulty}
+            </Badge>
+          </div> */}
+        </div>
+        <div className="absolute top-4 right-2 mt-30">
+            <Badge className={`${difficultyColors[game.difficulty]} border-0 text-xs shadow-sm`}>
               {game.difficulty}
             </Badge>
           </div>
-        </div>
-        <CardContent className="p-4">
-          <h3 className="font-bold text-lg text-gray-800 mb-2">{game.title}</h3>
+        <CardContent className="relative p-4 prose">
+          
+          <h3 className=" text-gray-800 mb-2">
+            {game.title}
+          </h3>
           <div className="flex items-center justify-between text-sm">
             <span className="text-gray-500 capitalize">
               {/* {t(`games.${game.type}`)} */}

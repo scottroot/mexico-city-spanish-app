@@ -1,12 +1,20 @@
-import { getUser } from "@/utils/supabase/auth";
-import ShoppingGameWrapper from "./ShoppingGameWrapper";
+import { getUser } from '@/utils/supabase/auth'
+import ShoppingGame from './ShoppingGame'
+import { fetchGame } from '../fetchGame'
+import { notFound } from 'next/navigation'
 
+
+export const dynamic = "force-dynamic";
+
+const GAME_ID = 'shopping-game-001';
 
 export default async function ShoppingGamePage() {
-  const { error: userError, ...user } = await getUser();
+  const user = await getUser()
+  const game = await fetchGame(GAME_ID)
+
+  if (!game) notFound()
+
   return (
-    <div id="game-container" className="h-full w-full">
-      <ShoppingGameWrapper user={user} />
-    </div>
+    <ShoppingGame game={game} user={user} />
   )
 }

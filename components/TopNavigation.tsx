@@ -50,20 +50,6 @@ export default function TopNavigation({ user }: TopNavigationProps) {
     }
   };
 
-  // // Close user menu when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-  //       setShowUserMenu(false);
-  //     }
-  //   };
-
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
-
   const BillingButton = () => {
     if (!user || billingLoading) return null;
 
@@ -90,11 +76,11 @@ export default function TopNavigation({ user }: TopNavigationProps) {
     );
   };
 
-  const UserAccountButton = () => {
+  const UserAccountButton = ({ pathname }: { pathname: string }) => {
     if (!user) {
       return (
         <Link
-          href="/auth/login"
+          href={`/auth/login?redirect=${pathname}`}
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-400 to-pink-400 text-white rounded-lg hover:from-orange-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl"
         >
           <User className="w-4 h-4" />
@@ -179,9 +165,8 @@ export default function TopNavigation({ user }: TopNavigationProps) {
             
             {/* Right Side - Billing and User Menu */}
             <div className="flex items-center gap-3">
-              {/* <LanguageToggle /> */}
               <BillingButton />
-              <UserAccountButton />
+              <UserAccountButton pathname={pathname} />
             </div>
           </div>
         </div>
@@ -201,9 +186,8 @@ export default function TopNavigation({ user }: TopNavigationProps) {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {/* <LanguageToggle /> */}
               <BillingButton />
-              <UserAccountButton />
+              <UserAccountButton pathname={pathname} />
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
                 className="p-2 rounded-lg hover:bg-orange-50 transition-colors"

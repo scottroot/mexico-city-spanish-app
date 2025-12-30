@@ -101,7 +101,7 @@ export class Progress {
       const result = await response.json()
 
       if (!response.ok) {
-        console.error('Error fetching progress:', result.error)
+        console.info('Error fetching progress:', result.error)
         return { success: false, error: result.error || 'Failed to fetch progress', data: [] }
       }
 

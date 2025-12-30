@@ -1,8 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
-export async function createClient() {
-  const cookieStore = await cookies();
+
+// export async function createClient() {
+// TODO: should this be using cache? found this approach on google...
+export const createClient = cache(async () => {
+    const cookieStore = await cookies();
 
   // Create a server's supabase client with newly configured cookie,
   // which could be used to maintain user's session
@@ -16,16 +20,14 @@ export async function createClient() {
         },
         setAll(cookiesToSet) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            );
-          } catch {
+            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+          } 
+          catch {
             // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
+            // This can be ignored if you have middleware refreshing user sessions.
           }
         },
       },
     }
   );
-}
+});

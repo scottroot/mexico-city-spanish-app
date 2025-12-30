@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,7 +10,7 @@ import PastQuizzesList from './PastQuizzesList';
 import StudyGuideModal from './StudyGuideModal';
 import { createClient } from '@/utils/supabase/client';
 import { focusAreas } from './focus-areas';
-import { UserData } from '@/utils/supabase/auth';
+import type { UserData } from '@/app/types';
 
 
 export interface PastQuiz {
@@ -44,17 +43,9 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
   const [pastQuizzes, setPastQuizzes] = useState<PastQuiz[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewStudyGuideQuizId, setViewStudyGuideQuizId] = useState<string | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
-      const supabase = createClient();
-      if (!user.isLoggedIn) {
-        router.push('/auth/login?redirect=/game/translation');
-        return;
-      }
-
       // Load past quizzes
       try {
         const response = await fetch('/api/translation/quizzes');
@@ -70,7 +61,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
     };
 
     checkAuth();
-  }, [router, user.isLoggedIn]);
+  }, [user.isLoggedIn]);
 
   const handleStartDefault = () => {
     onStart(undefined, translationDirection);
@@ -197,7 +188,7 @@ export default function TranslationGameStart({ user, onStart, onResumeQuiz }: Tr
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" />
       </div>
     );
   }

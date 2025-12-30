@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Volume2, Play, RotateCcw, CheckCircle, XCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { playTTS, fallbackTTS } from '@/lib/tts-client';
-import Image from 'next/image';
+import React, { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { Volume2, Play, RotateCcw, CheckCircle, XCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { playTTS, fallbackTTS } from '@/lib/tts-client'
+import Image, { StaticImageData } from 'next/image'
+
+export const GAME_ID = 'shopping-game-001'
 
 // Import all product images
 import product001 from '@/app/game/shopping/(images)/products/001.png';
@@ -32,6 +34,9 @@ import product020 from '@/app/game/shopping/(images)/products/020.png';
 
 // Import the tienda background
 import tiendaBackground from '@/app/game/shopping/(images)/tienda-checkout.png';
+import type { GameProps } from '@/app/types';
+import GameCompletion from '../_components/GameCompletion'
+
 
 const productImages = [
   product001, product002, product003, product004, product005,
@@ -40,13 +45,13 @@ const productImages = [
   product016, product017, product018, product019, product020
 ];
 
-export default function ShoppingGame({ user, game, onComplete }) {
+export default function ShoppingGame({ game, user }: GameProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState<StaticImageData | null>(null);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
@@ -54,7 +59,12 @@ export default function ShoppingGame({ user, game, onComplete }) {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackType, setFeedbackType] = useState(''); // 'correct' or 'incorrect'
   const [hasRetried, setHasRetried] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [completed, setCompleted] = useState(false)
+
+  if (completed) {
+    return <GameCompletion gameTitle={game.title} onPlayAgain={() => setCompleted(false)} user={user} />
+  }
 
   const totalQuestions = 10;
   const minPrice = 5.00;
@@ -66,12 +76,12 @@ export default function ShoppingGame({ user, game, onComplete }) {
   };
 
   // Format price for display
-  const formatPrice = (price) => {
+  const formatPrice = (price: number) => {
     return `$${price.toFixed(2)}`;
   };
 
   // Convert price to Spanish words
-  const priceToSpanishWords = (price) => {
+  const priceToSpanishWords = (price: number) => {
     const dollars = Math.floor(price);
     const cents = Math.round((price - dollars) * 100);
     
@@ -123,7 +133,7 @@ export default function ShoppingGame({ user, game, onComplete }) {
   };
 
   // Format user input
-  const formatUserInput = (value) => {
+  const formatUserInput = (value: string) => {
     // Remove all non-numeric characters except decimal point
     let cleaned = value.replace(/[^0-9.]/g, '');
     
@@ -154,7 +164,7 @@ export default function ShoppingGame({ user, game, onComplete }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Prevent multiple audio calls
-  const audioTimeoutRef = useRef(null);
+  const audioTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const generateNewQuestion = () => {
     const randomProductIndex = Math.floor(Math.random() * productImages.length);
@@ -183,10 +193,10 @@ export default function ShoppingGame({ user, game, onComplete }) {
   };
 
 
-  const playPriceAudio = async (price) => {
+  const playPriceAudio = async (price: number) => {
     if(isPlayingAudio) return;
     setIsPlayingAudio(true);
-    inputRef.current.focus();
+    inputRef.current?.focus();
     try {
       const priceWords = priceToSpanishWords(price);
       const priceText = `cuesta ${priceWords}`;
@@ -218,7 +228,7 @@ export default function ShoppingGame({ user, game, onComplete }) {
       setTimeout(() => {
         if (currentQuestion + 1 >= totalQuestions) {
           setGameCompleted(true);
-          onComplete();
+          setCompleted(true);
         } else {
           setCurrentQuestion(currentQuestion + 1);
           generateNewQuestion();
@@ -239,7 +249,7 @@ export default function ShoppingGame({ user, game, onComplete }) {
         setTimeout(() => {
           if (currentQuestion + 1 >= totalQuestions) {
             setGameCompleted(true);
-            onComplete();
+            setCompleted(true);
           } else {
             setCurrentQuestion(currentQuestion + 1);
             generateNewQuestion();
@@ -249,7 +259,7 @@ export default function ShoppingGame({ user, game, onComplete }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSubmit();
     }
@@ -450,12 +460,12 @@ export default function ShoppingGame({ user, game, onComplete }) {
 
             <div 
               className="absolute inset-0 h-full z-20" 
-              onClick={() => playPriceAudio(currentPrice)} disabled={isPlayingAudio}
-              
+              onClick={() => playPriceAudio(currentPrice)}
             >
               <Button
                 size="sm"
                 className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-700 shadow-lg backdrop-blur-sm border border-gray-200 h-8 w-8 p-0"
+                disabled={isPlayingAudio}
               >
                 {isPlayingAudio ? (
                   <div className="w-3 h-3 border-2 border-gray-700 border-t-transparent rounded-full animate-spin" />

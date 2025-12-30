@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, XCircle, RotateCcw, Home } from 'lucide-react';
-import CustomQuizGame from '@/components/games/CustomQuizGame';
+import CustomQuizGame from './CustomQuizGame';
 import { QuizQuestion, QuizResult, QuizConfig } from '@/types/quiz';
 
 
@@ -97,10 +97,11 @@ export default function QuizGamePage() {
     return (
       <div className="min-h-full bg-gradient-to-br from-orange-50 to-pink-50 p-4">
         <div className="max-w-2xl mx-auto">
+          TEST
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
+            className="text-center mb-8 bg-white"
           >
             <div className={`w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center ${
               isExcellent ? 'bg-green-100' : isGood ? 'bg-yellow-100' : 'bg-red-100'
@@ -250,7 +251,7 @@ export default function QuizGamePage() {
   
   // Quiz in progress
   return (
-    <div className="min-h-full bg-gradient-to-br from-orange-50 to-pink-50">
+    <div className="min-h-full bg-white zbg-gradient-to-br from-orange-50 to-pink-50">
       <CustomQuizGame
         questions={quizData.questions}
         onComplete={handleQuizComplete}
