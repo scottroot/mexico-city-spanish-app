@@ -33,6 +33,14 @@ export default function ToolsPage() {
       available: true
     },
     {
+      id: 'prepositions',
+      name: 'Prepositions Cheat Sheet',
+      description: 'A comprehensive guide to Spanish prepositions',
+      icon: Volume2,
+      href: '/tools/prepositions',
+      available: true
+    },
+    {
       id: 'text-analysis',
       name: 'Text Analysis',
       description: 'Analyze Spanish text for grammar and structure',
