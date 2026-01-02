@@ -282,7 +282,7 @@ function ConjunctionsCheatSheet() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white print:p-4 print:max-w-full">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg print:p-4 print:max-w-full">
       {/* Header */}
       <div className="mb-8 text-center print:mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 print:text-2xl">
@@ -402,25 +402,6 @@ function ConjunctionsCheatSheet() {
         </div>
         {renderTable(correlative)}
       </section>
-
-      {/* Print styles */}
-      <style jsx>{`
-        @media print {
-          @page {
-            margin: 1cm;
-          }
-          body {
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
-          }
-          table {
-            page-break-inside: avoid;
-          }
-          section {
-            page-break-inside: avoid;
-          }
-        }
-      `}</style>
     </div>
   );
 }
