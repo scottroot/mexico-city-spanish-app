@@ -1,107 +1,19 @@
-import PrepositionsCheatSheet from '@/assets/cheat-sheets/prepositions'
+import { prepositionsData } from '@/assets/prepositions'
+import CheatSheet from '../CheatSheet'
 import LayoutWrapper from '../LayoutWrapper'
 import FlashCardsToggle from './PrepositionsContent'
 import { FlashCard } from '../FlashCardsComponent'
 
-// Prepositions data shared between cheat sheet and flash cards
-const prepositionsData = [
-  { spanish: "a", english: "to / at" },
-  { spanish: "a base de", english: "by means of, made from" },
-  { spanish: "a bordo de", english: "aboard, on board" },
-  { spanish: "a cambio de", english: "in exchange for" },
-  { spanish: "a cargo de", english: "in charge of" },
-  { spanish: "a causa de", english: "because of" },
-  { spanish: "a consecuencia de", english: "as a consequence of" },
-  { spanish: "a costa de", english: "at the cost of" },
-  { spanish: "a falta de", english: "lacking, in the absence of" },
-  { spanish: "a favor de", english: "in favor of" },
-  { spanish: "a fin de", english: "in order to" },
-  { spanish: "a fuerza de", english: "by force of" },
-  { spanish: "a lo largo de", english: "along" },
-  { spanish: "a partir de", english: "starting from" },
-  { spanish: "a partir desde", english: "starting from (colloquial variant)" },
-  { spanish: "a pesar de", english: "despite" },
-  { spanish: "a punta de", english: "by force of, using" },
-  { spanish: "a raíz de", english: "as a result of" },
-  { spanish: "a través de", english: "through" },
-  { spanish: "abajo de", english: "below" },
-  { spanish: "adentro de", english: "inside" },
-  { spanish: "afuera de", english: "outside" },
-  { spanish: "al lado de", english: "beside" },
-  { spanish: "alrededor de", english: "around" },
-  { spanish: "ante", english: "before / in the presence of" },
-  { spanish: "antes de", english: "before" },
-  { spanish: "arriba de", english: "above" },
-  { spanish: "bajo", english: "under / below" },
-  { spanish: "basado en", english: "based on" },
-  { spanish: "cerca de", english: "near" },
-  { spanish: "con", english: "with" },
-  { spanish: "con base en", english: "based on" },
-  { spanish: "con respecto a", english: "regarding" },
-  { spanish: "con rumbo a", english: "heading toward" },
-  { spanish: "contra", english: "against" },
-  { spanish: "de", english: "of / from" },
-  { spanish: "de acuerdo con", english: "according to" },
-  { spanish: "de lado de", english: "on the side of" },
-  { spanish: "debajo de", english: "underneath" },
-  { spanish: "debido a", english: "due to" },
-  { spanish: "delante de", english: "in front of" },
-  { spanish: "dentro de", english: "inside" },
-  { spanish: "desde", english: "from / since (time)" },
-  { spanish: "después de", english: "after" },
-  { spanish: "detrás de", english: "behind" },
-  { spanish: "durante", english: "during" },
-  { spanish: "en", english: "in / on / at / into" },
-  { spanish: "en busca de", english: "in search of" },
-  { spanish: "en caso de", english: "in case of" },
-  { spanish: "en contra de", english: "against" },
-  { spanish: "en cuanto a", english: "regarding" },
-  { spanish: "en dirección a", english: "in the direction of" },
-  { spanish: "en frente de", english: "in front of" },
-  { spanish: "en función de", english: "depending on, according to" },
-  { spanish: "en lugar de", english: "instead of" },
-  { spanish: "en medio de", english: "in the middle of" },
-  { spanish: "en nombre de", english: "in the name of" },
-  { spanish: "en torno a", english: "around, about" },
-  { spanish: "en vez de", english: "instead of" },
-  { spanish: "en vista de", english: "in view of" },
-  { spanish: "entre", english: "between / among" },
-  { spanish: "excepto", english: "except" },
-  { spanish: "frente a", english: "facing" },
-  { spanish: "hacia", english: "toward / about" },
-  { spanish: "hasta", english: "until / up to" },
-  { spanish: "junto a", english: "next to" },
-  { spanish: "junto con", english: "together with" },
-  { spanish: "lejos de", english: "far from" },
-  { spanish: "mediante", english: "via / through" },
-  { spanish: "para", english: "for / in order to" },
-  { spanish: "por", english: "for / through / by" },
-  { spanish: "por alrededor de", english: "around (quantity estimate)" },
-  { spanish: "por causa de", english: "because of" },
-  { spanish: "por culpa de", english: "because of, due to someone or something" },
-  { spanish: "por debajo de", english: "below" },
-  { spanish: "por delante de", english: "ahead of" },
-  { spanish: "por dentro", english: "inside" },
-  { spanish: "por dentro de", english: "inside of" },
-  { spanish: "por detrás de", english: "behind" },
-  { spanish: "por encima de", english: "above" },
-  { spanish: "por fuera", english: "outside" },
-  { spanish: "por fuera de", english: "outside of" },
-  { spanish: "por medio de", english: "by means of" },
-  { spanish: "por motivo de", english: "due to" },
-  { spanish: "por parte de", english: "on the part of" },
-  { spanish: "por razón de", english: "on account of" },
-  { spanish: "rumbo a", english: "toward" },
-  { spanish: "salvo", english: "except" },
-  { spanish: "según", english: "according to" },
-  { spanish: "sin", english: "without" },
-  { spanish: "sobre", english: "on / upon / about" },
-  { spanish: "tras", english: "behind / after" },
-  { spanish: "vía", english: "via, through" },
-]
+// Flatten prepositions for flashcards
+const getAllPrepositions = () => {
+  const items: Array<{ spanish: string; english: string }> = []
+  prepositionsData.sections.forEach(section => {
+    if (section.items) items.push(...section.items)
+  })
+  return items
+}
 
-// Convert to flash card format
-const flashCards: FlashCard[] = prepositionsData.map(p => ({
+const flashCards: FlashCard[] = getAllPrepositions().map(p => ({
   front: p.spanish,
   back: p.english,
 }))
@@ -115,7 +27,7 @@ export default function DocsPage() {
 
         {/* Cheat Sheet Section - Server Rendered */}
         <section>
-          <PrepositionsCheatSheet />
+          <CheatSheet data={prepositionsData} columnName="Preposition" />
         </section>
       </div>
     </LayoutWrapper>
