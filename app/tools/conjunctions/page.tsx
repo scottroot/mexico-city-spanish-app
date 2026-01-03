@@ -6,7 +6,7 @@ import { FlashCard } from '../FlashCardsComponent'
 
 // Flatten conjunctions for flashcards
 const getAllConjunctions = () => {
-  const items: Array<{ spanish: string; english: string }> = []
+  const items: Array<{ spanish: string; english: string; examples?: Array<{ spanish: string; translation: string }> }> = []
   conjunctionsData.sections.forEach(section => {
     if (section.items) items.push(...section.items)
     if (section.subsections) {
@@ -19,6 +19,7 @@ const getAllConjunctions = () => {
 const flashCards: FlashCard[] = getAllConjunctions().map(c => ({
   front: c.spanish,
   back: c.english,
+  examples: c.examples,
 }))
 
 export default function DocsPage() {
