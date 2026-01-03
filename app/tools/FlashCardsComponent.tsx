@@ -8,6 +8,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 export type FlashCard = {
   front: string;
   back: string;
+  examples?: Array<{
+    spanish: string;
+    translation: string;
+  }>;
 }
 
 /**
@@ -268,7 +272,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
               }}
             >
               <div
-                className="relative w-full h-64 transition-transform duration-500"
+                className="relative w-full h-80 transition-transform duration-500"
                 style={{
                   transformStyle: 'preserve-3d',
                   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
@@ -302,7 +306,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                   <h2 className="text-4xl md:text-5xl font-bold text-orange-600 no-select">
                     {currentCard.front}
                   </h2>
-                  <p className="absolute bottom-4 right-6 text-orange-500/60 text-xs mt-4">Click to flip</p>
+                  <p className="absolute bottom-4 text-center w-full right-0 text-orange-500/60 text-xs mt-4">Click to flip</p>
                 </div>
               </div>
             </div>
@@ -316,14 +320,14 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                 transform: 'rotateY(180deg)',
               }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center p-8 relative">
+              <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center p-4 md:p-8 relative">
                 {/* Left edge navigation - Previous */}
                 <div
                   onClick={(e) => {
                     e.stopPropagation()
                     handlePrevious()
                   }}
-                  className={`absolute left-0 top-0 h-full w-16 rounded-l-xl flex items-center justify-center transition-all duration-200 ${
+                  className={`absolute left-0 top-0 h-full w-8 md:w-16 rounded-l-xl flex items-center justify-center transition-all duration-200 ${
                     currentIndex === 0
                       ? 'opacity-20 cursor-not-allowed'
                       : 'cursor-pointer bg-blue-100 hover:bg-blue-200/30 opacity-50 hover:opacity-100'
@@ -339,12 +343,59 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                 </div>
 
                 {/* Center content */}
-                <div className="text-center px-16 cursor-pointer">
-                  <p className="text-blue-500 text-sm mb-2">&ldquo;{currentCard.front}&rdquo;</p>
-                  <h2 className="text-4xl md:text-5xl font-bold text-blue-600 no-select">
-                    {currentCard.back}
-                  </h2>
-                  <p className="text-blue-500/60 text-xs mt-4">Click center to flip</p>
+                <div className="text-center px-8 md:px-16 cursor-pointer overflow-y-auto max-h-full py-4">
+                  <p className="text-slate-500/50 text-base md:text-xl mb-2 ">
+                    &ldquo;<span className="font-bold">{currentCard.front}</span>&rdquo;
+                  </p>
+                  {(() => {
+                    // Parse translation to separate main text from parenthetical
+                    const match = currentCard.back.match(/^([^(]+)(\(.+\))(.*)$/)
+                    if (match) {
+                      const [, mainText, parenthetical, afterText] = match
+                      return (
+                        <>
+                          <h2 className="text-3xl md:text-5xl font-bold text-blue-600 no-select">
+                            {mainText.trim()}{afterText.trim()}
+                          </h2>
+                          <p className="text-lg text-blue-500 mt-2">
+                            {parenthetical}
+                          </p>
+                        </>
+                      )
+                    }
+                    return (
+                      <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-blue-600 no-select">
+                        {currentCard.back}
+                      </h2>
+                    )
+                  })()}
+
+                  {/* Example sentences */}
+                  {currentCard.examples && currentCard.examples.length > 0 && (
+                    <div className="relative mt-6 space-y-2">
+                      <div className="absolute left-0 -top-3 text-xs text-slate-400 font-light tracking-loose">
+                        EXAMPLE
+                      </div>
+                      {currentCard.examples.map((example, idx) => (
+                        <div key={idx} className="bg-white/40 rounded-lg p-3 text-center">
+                          <p className="text-xs md:text-sm text-slate-700">
+                            {/* &ldquo; */}
+                            {/* <span className="text-slate-700 mr-1">✏️</span> */}
+                            {/* {example.spanish} */}
+                            <span 
+                              dangerouslySetInnerHTML={{ 
+                                __html: example.spanish.replace(currentCard.front, `<strong>${currentCard.front}</strong>`) 
+                              }}
+                            />
+                            {/* &rdquo; */}
+                          </p>
+                          <p className="text-sm text-blue-600/80 mt-1">{example.translation}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <p className="absolute bottom-4 right-0 text-center w-full text-blue-500/60 text-xs mt-4">Click center to flip</p>
                 </div>
 
                 {/* Right edge navigation - Next */}
@@ -353,7 +404,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                     e.stopPropagation()
                     handleNext()
                   }}
-                  className={`absolute right-0 top-0 h-full w-16 rounded-r-xl flex items-center justify-center transition-all duration-200 ${
+                  className={`absolute right-0 top-0 h-full w-8 md:w-16 rounded-r-xl flex items-center justify-center transition-all duration-200 ${
                     currentIndex === shuffledCards.length - 1
                       ? 'opacity-20 cursor-not-allowed'
                       : 'cursor-pointer bg-blue-100 hover:bg-blue-200/30 opacity-50 hover:opacity-100'

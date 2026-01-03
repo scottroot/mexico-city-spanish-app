@@ -39,6 +39,7 @@ export default function MainNavigation({ user }: { user: UserData }) {
   const hasAccess = user?.isLoggedIn;
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
   const navigationItems: NavigationItem[] = [
     { id: 'home', title: 'Home', url: "/", icon: HomeIcon },
@@ -50,11 +51,19 @@ export default function MainNavigation({ user }: { user: UserData }) {
     { id: 'tools', title: 'Tools', url: "/tools", icon: Wrench },
   ];
 
-  // Bottom app bar items for mobile (4 items max)
+  // Bottom app bar items for mobile (3 main items + More button)
   const bottomNavItems: NavigationItem[] = [
     { id: 'games', title: 'Games', url: "/games", icon: Gamepad2 },
     { id: 'stories', title: 'Stories', url: "/stories", icon: BookText },
     { id: 'verbs', title: 'Verbs', url: "/verbs", icon: BookOpen },
+  ];
+
+  // Items shown in the "More" menu
+  const moreMenuItems: NavigationItem[] = [
+    { id: 'home', title: 'Home', url: "/", icon: HomeIcon },
+    { id: 'progress', title: 'Progress', url: "/progress", icon: Trophy },
+    { id: 'quiz', title: 'Custom Quiz', url: "/quiz", icon: HelpCircle },
+    { id: 'tools', title: 'Tools', url: "/tools", icon: Wrench },
   ];
 
   const handleSignOut = async (): Promise<void> => {
@@ -288,29 +297,125 @@ export default function MainNavigation({ user }: { user: UserData }) {
             <span className="text-xs mt-1 font-medium">{item.title}</span>
           </Link>
         ))}
-        
-        {/* User Account - 4th item */}
-        <div className="flex flex-col items-center justify-center p-2">
-          {user ? (
-            <button
-              onClick={() => setShowUserMenu(true)}
-              className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
-            >
-              <User className="w-6 h-6" />
-              <span className="text-xs mt-1 font-medium">Account</span>
-            </button>
-          ) : (
-            <Link
-              href="/auth/login"
-              className="flex flex-col items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
-            >
-              <User className="w-6 h-6" />
-              <span className="text-xs mt-1 font-medium">Login</span>
-            </Link>
-          )}
-        </div>
+
+        {/* More Menu - 4th item */}
+        <button
+          onClick={() => setShowMobileMenu(true)}
+          className="flex flex-col items-center justify-center p-2 text-gray-500 hover:text-gray-700 transition-all duration-200"
+        >
+          <Menu className="w-6 h-6" />
+          <span className="text-xs mt-1 font-medium">More</span>
+        </button>
       </div>
     </div>
+  );
+
+  const MobileMoreMenu = () => (
+    <AnimatePresence>
+      {showMobileMenu && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[60]"
+            onClick={() => setShowMobileMenu(false)}
+          />
+
+          {/* Bottom Sheet */}
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-white rounded-t-2xl shadow-2xl max-h-[70vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between rounded-t-2xl z-10">
+              <h2 className="text-base font-semibold text-gray-800">Menu</h2>
+              <button
+                onClick={() => setShowMobileMenu(false)}
+                className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Navigation Items */}
+            <div className="px-3 py-3 space-y-1">
+              {moreMenuItems.map((item, index) => (
+                <Link
+                  key={`${item.id}-${index}`}
+                  href={item.url}
+                  onClick={() => setShowMobileMenu(false)}
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
+                    pathname === item.url
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                    pathname === item.url ? 'bg-blue-100' : 'bg-gray-100'
+                  }`}>
+                    <item.icon className={`w-5 h-5 ${
+                      pathname === item.url ? 'text-blue-600' : 'text-gray-600'
+                    }`} />
+                  </div>
+                  <span className="font-medium text-sm">{item.title}</span>
+                </Link>
+              ))}
+
+              {/* Account Section */}
+              <div className="pt-2 mt-2 border-t border-gray-200">
+                {user?.isLoggedIn ? (
+                  <>
+                    <Link
+                      href="/account"
+                      onClick={() => setShowMobileMenu(false)}
+                      className="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                    >
+                      <div className="w-9 h-9 bg-gradient-to-r from-orange-400 to-pink-400 rounded-lg flex items-center justify-center">
+                        <User className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-sm">Account</p>
+                        <p className="text-xs text-gray-500 truncate max-w-[200px]">{user.email}</p>
+                      </div>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setShowMobileMenu(false);
+                        handleSignOut();
+                      }}
+                      className="w-full flex items-center gap-3 p-3 mt-1 rounded-lg text-red-600 hover:bg-red-50 transition-all duration-200"
+                    >
+                      <div className="w-9 h-9 bg-red-100 rounded-lg flex items-center justify-center">
+                        <LogOut className="w-5 h-5 text-red-600" />
+                      </div>
+                      <span className="font-medium text-sm">Sign Out</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href={`/auth/login?redirect=${pathname}`}
+                    onClick={() => setShowMobileMenu(false)}
+                    className="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                  >
+                    <div className="w-9 h-9 bg-gray-200 rounded-lg flex items-center justify-center">
+                      <User className="w-5 h-5 text-gray-600" />
+                    </div>
+                    <span className="font-medium text-sm">Login</span>
+                  </Link>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 
   return (
@@ -374,6 +479,9 @@ export default function MainNavigation({ user }: { user: UserData }) {
 
       {/* Bottom app bar for mobile */}
       <MobileBottomNav />
+
+      {/* Mobile More Menu */}
+      <MobileMoreMenu />
 
       {/* Account Modal - All Screen Sizes */}
       <AnimatePresence>

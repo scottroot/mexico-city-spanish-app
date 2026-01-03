@@ -373,9 +373,9 @@ export default function ShoppingGame({ game, user }: GameProps) {
             Puntuación: <strong>{score}/{totalQuestions}</strong>
           </p>
           <p className="text-gray-600 mb-8">
-            {score >= totalQuestions * 0.8 ? '¡Muy bien! Eres un experto en precios.' : 
-             score >= totalQuestions * 0.6 ? 'Buen trabajo. Sigue practicando.' : 
-             'Sigue practicando para mejorar.'}
+            {score >= totalQuestions * 0.8 ? '¡Muy bien! You are a price expert.' : 
+             score >= totalQuestions * 0.6 ? 'Good job. Keep practicing.' : 
+             'Keep practicing to improve.'}
           </p>
         </motion.div>
       </div>
@@ -388,8 +388,8 @@ export default function ShoppingGame({ game, user }: GameProps) {
         {/* Progress Bar */}
         <div className="mb-6 w-full max-w-3xl">
           <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Pregunta {currentQuestion + 1} de {totalQuestions}</span>
-            <span>Puntuación: {score}</span>
+            <span>Question {currentQuestion + 1} de {totalQuestions}</span>
+            <span>Score: {score}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
@@ -544,9 +544,9 @@ export default function ShoppingGame({ game, user }: GameProps) {
                       )}
                     </motion.div>
                   )}
-                {(!showResult && hasRetried) && <div className="text-red-500 font-bold text-center italic -mt-2 mb-2">Inténtalo una vez más</div>}
+                {(!showResult && hasRetried) && <div className="text-red-500 font-bold text-center italic -mt-2 mb-2">Try again!</div>}
                   <label className="block text-base font-bold text-gray-700 mb-2">
-                    ¿Cuánto cuesta? (en pesos)
+                    What price did you hear?
                   </label>
                   <div className="flex space-x-2">
                     <Input
@@ -571,13 +571,17 @@ export default function ShoppingGame({ game, user }: GameProps) {
                           <XCircle className="w-5 h-5 text-red-400" />
                         )
                       ) : (
-                        'Enviar'
+                        'Submit'
                       )}
                     </Button>
                   </div>
-                  <div className='mt-4 text-gray-500 text-sm italic'>
-                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">espacio</code> para escuchar el precio. 
-                    Pulsa <code className="bg-gray-400 text-white text-xs px-1 rounded-sm">enter</code> para enviar.
+                  <div className='flex flex-col mt-4 text-gray-500 text-sm italic space-y-2'>
+                    <div>
+                      Press <code className="bg-gray-400 text-white text-xs p-1 rounded-sm">SPACE</code> to hear the price.
+                    </div>
+                    <div>
+                      Press <code className="bg-gray-400 text-white text-xs p-1 rounded-sm">ENTER</code> to submit your answer.
+                    </div>
                   </div>
                 </div>
 
