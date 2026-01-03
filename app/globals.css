@@ -132,6 +132,25 @@ body {
   .no-print, .no-print * {
       display: none !important;
   }
+
+  /* Print page settings */
+  @page {
+    margin: 1cm;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Prevent page breaks inside tables and sections */
+  table {
+    page-break-inside: avoid;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
 }
 
 /* Animation utilities */
