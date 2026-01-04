@@ -272,7 +272,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
               }}
             >
               <div
-                className="relative w-full h-80 transition-transform duration-500"
+                className="relative w-full min-h-80 h-fit transition-transform duration-500"
                 style={{
                   transformStyle: 'preserve-3d',
                   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
@@ -343,7 +343,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                 </div>
 
                 {/* Center content */}
-                <div className="text-center px-8 md:px-16 cursor-pointer overflow-y-auto max-h-full py-4">
+                <div className="text-center px-8 md:px-16 cursor-pointer max-h-full py-4">
                   <p className="text-slate-500/50 text-base md:text-xl mb-2 ">
                     &ldquo;<span className="font-bold">{currentCard.front}</span>&rdquo;
                   </p>
@@ -377,19 +377,20 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
                         EXAMPLE
                       </div>
                       {currentCard.examples.map((example, idx) => (
-                        <div key={idx} className="bg-white/40 rounded-lg p-3 text-center">
+                        <div key={idx} className="bg-white/40 rounded-lg py-2 px-3 text-center h-fit md:h-14 space-y-1">
                           <p className="text-xs md:text-sm text-slate-700">
-                            {/* &ldquo; */}
-                            {/* <span className="text-slate-700 mr-1">✏️</span> */}
-                            {/* {example.spanish} */}
                             <span 
                               dangerouslySetInnerHTML={{ 
-                                __html: example.spanish.replace(currentCard.front, `<strong>${currentCard.front}</strong>`) 
+                                __html: example.spanish.replace(
+                                  new RegExp(currentCard.front.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
+                                  (match) => `<strong>${match}</strong>`
+                                )
                               }}
                             />
-                            {/* &rdquo; */}
                           </p>
-                          <p className="text-sm text-blue-600/80 mt-1">{example.translation}</p>
+                          <p className="text-xs md:text-sm text-blue-600/80">
+                            {example.translation}
+                          </p>
                         </div>
                       ))}
                     </div>
