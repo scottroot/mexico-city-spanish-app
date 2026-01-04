@@ -353,6 +353,7 @@ export const conjunctionsData = {
           english: "and",
           examples: [
             { spanish: "Fuimos al cine y cenamos tacos.", translation: "We went to the movies and ate tacos." },
+            { spanish: "Días y días pasaban...", translation: "Days and days passed..." },
           ],
         },
         {
@@ -373,7 +374,7 @@ export const conjunctionsData = {
           spanish: "u",
           english: "or (before o, ho)",
           examples: [
-            { spanish: "Es blanco u oscuro, da igual.", translation: "It’s white or dark, it doesn’t matter." },
+            { spanish: "Es blanco u oscuro, da igual.", translation: "It's white or dark, it doesn't matter." },
           ],
         },
         {
@@ -387,21 +388,21 @@ export const conjunctionsData = {
           spanish: "mas",
           english: "but (formal/literary)",
           examples: [
-            { spanish: "Lo intenté, mas no fue posible.", translation: "I tried, but it wasn’t possible." },
+            { spanish: "Lo intenté, mas no fue posible.", translation: "I tried, but it wasn't possible." },
           ],
         },
         {
           spanish: "sino",
           english: "but rather (after negation)",
           examples: [
-            { spanish: "No quiero pizza, sino pasta.", translation: "I don’t want pizza, but rather pasta." },
+            { spanish: "No quiero pizza, sino pasta.", translation: "I don't want pizza, but rather pasta." },
           ],
         },
         {
           spanish: "sino que",
           english: "but rather that (introduces a clause)",
           examples: [
-            { spanish: "No fue que se enojara, sino que estaba cansado.", translation: "It wasn’t that he got mad, but rather that he was tired." },
+            { spanish: "No fue que se enojara, sino que estaba cansado.", translation: "It wasn't that he got mad, but rather that he was tired." },
           ],
         },
         {
@@ -424,7 +425,7 @@ export const conjunctionsData = {
               spanish: "porque",
               english: "because",
               examples: [
-                { spanish: "No fui porque tenía trabajo.", translation: "I didn’t go because I had work." },
+                { spanish: "No fui porque tenía trabajo.", translation: "I didn't go because I had work." },
               ],
             },
             {
@@ -445,21 +446,21 @@ export const conjunctionsData = {
               spanish: "ya que",
               english: "since / because",
               examples: [
-                { spanish: "Ya que estás aquí, ayúdame tantito.", translation: "Since you’re here, help me a little." },
+                { spanish: "Ya que estás aquí, ayúdame tantito.", translation: "Since you're here, help me a little." },
               ],
             },
             {
               spanish: "pues",
               english: "since / because (often explanatory)",
               examples: [
-                { spanish: "Vámonos, pues ya es tarde.", translation: "Let’s go, since it’s already late." },
+                { spanish: "Vámonos, pues ya es tarde.", translation: "Let's go, since it's already late." },
               ],
             },
             // {
             //   spanish: "de ahí que",
-            //   english: "hence / that’s why (typically + subjunctive)",
+            //   english: "hence / that's why (typically + subjunctive)",
             //   examples: [
-            //     { spanish: "Se fue la luz; de ahí que no podamos cargar el celular.", translation: "The power went out; that’s why we can’t charge the phone." },
+            //     { spanish: "Se fue la luz; de ahí que no podamos cargar el celular.", translation: "The power went out; that's why we can't charge the phone." },
             //   ],
             // },
           ],
@@ -471,28 +472,28 @@ export const conjunctionsData = {
               spanish: "si",
               english: "if",
               examples: [
-                { spanish: "Si llueve, pedimos algo a domicilio.", translation: "If it rains, we’ll order delivery." },
+                { spanish: "Si llueve, pedimos algo a domicilio.", translation: "If it rains, we'll order delivery." },
               ],
             },
             {
               spanish: "siempre que",
               english: "as long as / provided that",
               examples: [
-                { spanish: "Te presto el coche siempre que lo regreses con gasolina.", translation: "I’ll lend you the car as long as you return it with gas." },
+                { spanish: "Te presto el coche siempre que lo regreses con gasolina.", translation: "I'll lend you the car as long as you return it with gas." },
               ],
             },
             {
               spanish: "a menos que",
               english: "unless",
               examples: [
-                { spanish: "No salgo a menos que sea urgente.", translation: "I’m not going out unless it’s urgent." },
+                { spanish: "No salgo a menos que sea urgente.", translation: "I'm not going out unless it's urgent." },
               ],
             },
             {
               spanish: "a no ser que",
               english: "unless",
               examples: [
-                { spanish: "Vamos al parque, a no ser que prefieras quedarte.", translation: "We’ll go to the park, unless you’d rather stay." },
+                { spanish: "Vamos al parque, a no ser que prefieras quedarte.", translation: "We'll go to the park, unless you'd rather stay." },
               ],
             },
           ],
@@ -504,14 +505,14 @@ export const conjunctionsData = {
               spanish: "aunque",
               english: "although / even if",
               examples: [
-                { spanish: "Aunque esté lejos, sí voy.", translation: "Even if it’s far, I’m going." },
+                { spanish: "Aunque esté lejos, sí voy.", translation: "Even if it's far, I'm going." },
               ],
             },
             {
               spanish: "aun cuando",
               english: "even when / although",
               examples: [
-                { spanish: "Aun cuando no te responda, sí lo vi.", translation: "Even if I don’t reply, I did see it." },
+                { spanish: "Aun cuando no te responda, sí lo vi.", translation: "Even if I don't reply, I did see it." },
               ],
             },
           ],
@@ -530,19 +531,19 @@ export const conjunctionsData = {
               spanish: "tan pronto como",
               english: "as soon as",
               examples: [
-                { spanish: "Tan pronto como termine, te aviso.", translation: "As soon as I finish, I’ll let you know." },
+                { spanish: "Tan pronto como termine, te aviso.", translation: "As soon as I finish, I'll let you know." },
               ],
             },
             {
               spanish: "en cuanto",
               english: "as soon as",
               examples: [
-                { spanish: "En cuanto lo vea, se lo digo.", translation: "As soon as I see him, I’ll tell him." },
+                { spanish: "En cuanto lo vea, se lo digo.", translation: "As soon as I see him, I'll tell him." },
               ],
             },
             {
               spanish: "apenas",
-              english: "as soon as / hardly when",
+              english: "as soon as ('hardly when' - not to be confused with 'hardly' adverb)",
               examples: [
                 { spanish: "Apenas llegué, me marcaste.", translation: "As soon as I arrived, you called me." },
               ],
@@ -551,14 +552,14 @@ export const conjunctionsData = {
               spanish: "mientras",
               english: "while",
               examples: [
-                { spanish: "Mientras cocinas, yo pongo la mesa.", translation: "While you cook, I’ll set the table." },
+                { spanish: "Mientras cocinas, yo pongo la mesa.", translation: "While you cook, I'll set the table." },
               ],
             },
             {
               spanish: "mientras que",
               english: "whereas",
               examples: [
-                { spanish: "Yo manejo, mientras que tú vas checando la ruta.", translation: "I’ll drive, whereas you check the route." },
+                { spanish: "Yo manejo, mientras que tú vas checando la ruta.", translation: "I'll drive, whereas you check the route." },
               ],
             },
           ],
@@ -571,6 +572,7 @@ export const conjunctionsData = {
               english: "so that (in order that)",
               examples: [
                 { spanish: "Lo repetí a fin de que quedara claro.", translation: "I repeated it so that it would be clear." },
+                { spanish: "Te mando la ubicación a fin de que llegues sin perderte.", translation: "I'm sending you the location so that you arrive without getting lost." },
               ],
             },
             {
@@ -596,7 +598,7 @@ export const conjunctionsData = {
               spanish: "como si",
               english: "as if",
               examples: [
-                { spanish: "Me habló como si no me conociera.", translation: "He spoke to me as if he didn’t know me." },
+                { spanish: "Me habló como si no me conociera.", translation: "He spoke to me as if he didn't know me." },
               ],
             },
             {
@@ -615,7 +617,7 @@ export const conjunctionsData = {
               spanish: "así que",
               english: "so / therefore",
               examples: [
-                { spanish: "No contestó, así que me fui.", translation: "He didn’t answer, so I left." },
+                { spanish: "No contestó, así que me fui.", translation: "He didn't answer, so I left." },
               ],
             },
           ],
@@ -675,7 +677,7 @@ export const conjunctionsData = {
           spanish: "no solo… sino…",
           english: "not only… but…",
           examples: [
-            { spanish: "No solo llegó tarde, sino que ni avisó.", translation: "Not only did he arrive late, but he didn’t even let us know." },
+            { spanish: "No solo llegó tarde, sino que ni avisó.", translation: "Not only did he arrive late, but he didn't even let us know." },
           ],
         },
         {
@@ -696,7 +698,7 @@ export const conjunctionsData = {
           spanish: "ya sea… ya sea…",
           english: "whether… or…",
           examples: [
-            { spanish: "Ya sea hoy, ya sea mañana, lo resolvemos.", translation: "Whether today or tomorrow, we’ll solve it." },
+            { spanish: "Ya sea hoy, ya sea mañana, lo resolvemos.", translation: "Whether today or tomorrow, we'll solve it." },
           ],
         },
       ],
@@ -713,14 +715,15 @@ export const conjunctionsData = {
               spanish: "además",
               english: "furthermore / also",
               examples: [
-                { spanish: "No tengo tiempo; además, estoy cansado.", translation: "I don’t have time; besides, I’m tired." },
+                { spanish: "Vamos por unos tacos y además nos echamos un postre.", translation: "Let's go get some tacos and also have dessert." },
+                { spanish: "No quiero manejar hoy y además está lloviendo.", translation: "I don't want to drive today and on top of that it's raining." },
               ],
             },
             {
               spanish: "incluso",
               english: "even",
               examples: [
-                { spanish: "Estaba lleno; incluso dejaron comida.", translation: "It was packed; they even left food behind." },
+                { spanish: "A todos les gustó la salsa, incluso a mi mamá.", translation: "Everyone liked the salsa, even my mom." },
               ],
             },
           ],
@@ -732,28 +735,29 @@ export const conjunctionsData = {
               spanish: "sin embargo",
               english: "however",
               examples: [
-                { spanish: "Quería ir; sin embargo, no pude.", translation: "I wanted to go; however, I couldn’t." },
+                { spanish: "Quería ir; sin embargo, no pude.", translation: "I wanted to go; however, I couldn't." },
               ],
             },
             {
               spanish: "no obstante",
               english: "however / nevertheless",
               examples: [
-                { spanish: "Es caro. No obstante, vale la pena.", translation: "It’s expensive. Nevertheless, it’s worth it." },
+                { spanish: "Es caro. No obstante, vale la pena.", translation: "It's expensive. Nevertheless, it's worth it." },
+                { spanish: "Estaba cansado, pero no obstante fui al gym.", translation: "I was tired, but nevertheless I went to the gym." },
               ],
             },
             {
               spanish: "en cambio",
               english: "on the other hand / whereas",
               examples: [
-                { spanish: "A mí me queda cerca; en cambio, a ti te queda lejísimos.", translation: "It’s close for me; on the other hand, it’s really far for you." },
+                { spanish: "A mí me queda cerca; en cambio, a ti te queda lejísimos.", translation: "It's close for me; on the other hand, it's really far for you." },
               ],
             },
             {
               spanish: "al contrario",
               english: "on the contrary",
               examples: [
-                { spanish: "No me molestó; al contrario, me dio gusto.", translation: "It didn’t bother me; on the contrary, it made me happy." },
+                { spanish: "No me molestó; al contrario, me dio gusto.", translation: "It didn't bother me; on the contrary, it made me happy." },
               ],
             },
             {
@@ -767,14 +771,14 @@ export const conjunctionsData = {
               spanish: "de cualquier manera",
               english: "in any case / anyway",
               examples: [
-                { spanish: "No contestes ahorita; de cualquier manera, lo vemos mañana.", translation: "Don’t reply right now; anyway, we’ll look at it tomorrow." },
+                { spanish: "No contestes ahorita; de cualquier manera, lo vemos mañana.", translation: "Don't reply right now; anyway, we'll look at it tomorrow." },
               ],
             },
             {
               spanish: "de cualquier modo",
               english: "in any case / anyway",
               examples: [
-                { spanish: "No quedó perfecto; de cualquier modo, ya salió.", translation: "It didn’t turn out perfect; anyway, it’s done." },
+                { spanish: "No quedó perfecto; de cualquier modo, ya salió.", translation: "It didn't turn out perfect; anyway, it's done." },
               ],
             },
             {
@@ -788,7 +792,7 @@ export const conjunctionsData = {
               spanish: "de todas formas",
               english: "in any case",
               examples: [
-                { spanish: "De todas formas, te marco al rato.", translation: "In any case, I’ll call you later." },
+                { spanish: "De todas formas, te marco al rato.", translation: "In any case, I'll call you later." },
               ],
             },
           ],
@@ -800,7 +804,7 @@ export const conjunctionsData = {
               spanish: "entonces",
               english: "so / then",
               examples: [
-                { spanish: "¿No puedes? Entonces lo hago yo.", translation: "You can’t? Then I’ll do it." },
+                { spanish: "¿No puedes? Entonces lo hago yo.", translation: "You can't? Then I'll do it." },
               ],
             },
             {
@@ -812,23 +816,24 @@ export const conjunctionsData = {
             },
             {
               spanish: "por eso",
-              english: "that’s why / so",
+              english: "that's why / so",
               examples: [
-                { spanish: "Se me fue el camión; por eso llegué tarde.", translation: "I missed the bus; that’s why I arrived late." },
+                { spanish: "Se me fue el camión; por eso llegué tarde.", translation: "I missed the bus; that's why I arrived late." },
               ],
             },
             {
               spanish: "por lo tanto",
               english: "therefore",
               examples: [
-                { spanish: "No hay saldo; por lo tanto, no puedo llamar.", translation: "There’s no credit; therefore, I can’t call." },
+                { spanish: "No hay saldo; por lo tanto, no puedo llamar.", translation: "There's no credit; therefore, I can't call." },
               ],
             },
             {
               spanish: "por tanto",
               english: "therefore",
               examples: [
-                { spanish: "No firmó el contrato; por tanto, no procede.", translation: "He didn’t sign the contract; therefore, it can’t proceed." },
+                { spanish: "No firmó el contrato; por tanto, no procede.", translation: "He didn't sign the contract; therefore, it can't proceed." },
+                { spanish: "No tengo efectivo; por tanto, pagare con tarjeta.", translation: "I don't have cash; therefore, I'll pay by card." }
               ],
             },
             {
@@ -854,7 +859,8 @@ export const conjunctionsData = {
               spanish: "mientras tanto",
               english: "meanwhile",
               examples: [
-                { spanish: "Tú ve pidiendo; mientras tanto, yo estaciono.", translation: "You go ahead and order; meanwhile, I’ll park." },
+                { spanish: "Tú ve pidiendo; mientras tanto, yo estaciono.", translation: "You go ahead and order; meanwhile, I'll park." },
+                { spanish: "Yo preparo la cena; mientras tanto, tú pones la mesa.", translation: "I'll prepare dinner; meanwhile, you set the table." },
               ],
             },
           ],
@@ -866,21 +872,22 @@ export const conjunctionsData = {
               spanish: "esto es",
               english: "that is",
               examples: [
-                { spanish: "Llego en media hora, esto es, como a las seis.", translation: "I’ll be there in half an hour, that is, around six." },
+                { spanish: "Llego en media hora, esto es, como a las seis.", translation: "I'll be there in half an hour, that is, around six." },
               ],
             },
             {
               spanish: "es decir",
               english: "that is / namely",
               examples: [
-                { spanish: "Vamos a vernos temprano, es decir, antes de las ocho.", translation: "Let’s meet early, that is, before eight." },
+                { spanish: "Vamos a vernos temprano, es decir, antes de las ocho.", translation: "Let's meet early, that is, before eight." },
               ],
             },
             {
               spanish: "o sea",
               english: "that is / I mean",
               examples: [
-                { spanish: "No alcanzo hoy, o sea, lo termino mañana.", translation: "I won’t manage today, I mean, I’ll finish it tomorrow." },
+                { spanish: "No alcanzo hoy, o sea, lo termino mañana.", translation: "I won't manage today, I mean, I'll finish it tomorrow." },
+                { spanish: "No traigo efectivo, o sea, voy a pagar con tarjeta.", translation: "I don't have cash on me, I mean, I'm going to pay with card." },
               ],
             },
           ],
@@ -892,7 +899,7 @@ export const conjunctionsData = {
               spanish: "aunque sí",
               english: "although yes",
               examples: [
-                { spanish: "No es fácil; aunque sí se puede.", translation: "It’s not easy; although yes, it can be done." },
+                { spanish: "No es fácil; aunque sí se puede.", translation: "It's not easy; although yes, it can be done." },
               ],
             },
             {
@@ -915,7 +922,7 @@ export const conjunctionsData = {
           spanish: "según",
           english: "according to / allegedly",
           examples: [
-            { spanish: "Según me dijo, llegan en diez minutos.", translation: "According to what he told me, they’ll arrive in ten minutes." },
+            { spanish: "Según me dijo, llegan en diez minutos.", translation: "According to what he told me, they'll arrive in ten minutes." },
           ],
         },
         {
@@ -951,13 +958,16 @@ export const conjunctionsData = {
           english: "despite the fact that",
           examples: [
             { spanish: "Pese a que no había señal, logró mandar el mensaje.", translation: "Despite there being no signal, he managed to send the message." },
+            { spanish: "Pese a que llueve, salimos.", translation: "Even though it's raining, we're going out. (Indicative, factual)" },
+            { spanish: "Pese a que llueva, vamos a salir.", translation: "Even if it rains, we're going to go out. (Subjunctive, hypothetical)" },
           ],
         },
         {
           spanish: "después de que",
           english: "after",
           examples: [
-            { spanish: "Después de que terminó la película, nos fuimos.", translation: "After the movie ended, we left." },
+            { spanish: "Después de que llegaste, pedimos tacos.", translation: "After you arrived, we ordered tacos. (Indicative, completed)" },
+            { spanish: "Después de que llegues, te marco.", translation: "After you arrive, I'll call you. (Subjunctive, pending)" },
           ],
         },
       ],
