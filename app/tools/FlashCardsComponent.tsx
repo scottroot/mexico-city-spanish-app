@@ -235,18 +235,23 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
           <motion.div
             key={currentIndex}
             custom={currentIndex > prevIndexRef.current ? 'left' : 'right'}
-            initial={(direction: string) => ({
-              x: direction === 'left' ? 300 : -300,
-              opacity: 0
-            })}
-            animate={{
-              x: 0,
-              opacity: 1
+            variants={{
+              enter: (direction: string) => ({
+                x: direction === 'left' ? 300 : -300,
+                opacity: 0
+              }),
+              center: {
+                x: 0,
+                opacity: 1
+              },
+              exit: (direction: string) => ({
+                x: direction === 'left' ? -300 : 300,
+                opacity: 0
+              })
             }}
-            exit={(direction: string) => ({
-              x: direction === 'left' ? -300 : 300,
-              opacity: 0
-            })}
+            initial="enter"
+            animate="center"
+            exit="exit"
             transition={{
               x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 }

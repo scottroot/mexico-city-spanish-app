@@ -1,7 +1,8 @@
 import { proxyActivities } from '@temporalio/workflow';
 import type * as activities from '../activities';
+import { validateVocabularyContent } from '../activities/validate';
 
-const { generateStructuredContent, validateVocabularyContent, saveGame } =
+const { generateStructuredContent, saveGame } =
   proxyActivities<typeof activities>({
     startToCloseTimeout: '5 minutes',
     retry: {
@@ -44,7 +45,7 @@ Focus on Mexico City Spanish expressions and vocabulary.`;
   });
 
   // Step 2: Validate the generated content
-  const validation = await validateVocabularyContent(content);
+  const validation = validateVocabularyContent(content);
 
   if (!validation.valid) {
     throw new Error(`Validation failed: ${validation.errors.join(', ')}`);

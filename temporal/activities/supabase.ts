@@ -38,33 +38,59 @@ export async function saveGame(params: SaveGameParams): Promise<{ id: string }> 
   return { id: data.id };
 }
 
-export interface SaveStoryParams {
-  title: string;
-  content: string;
-  difficulty: string;
-  audio_url?: string;
-  created_by?: string;
+function slugifyTitle(title: string): string {
+  return title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9 _.-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(/ /g, '-');
 }
 
-export async function saveStory(params: SaveStoryParams): Promise<{ id: string }> {
-  console.log(`Saving story: ${params.title} (${params.difficulty})`);
+export interface SaveStoryParams {
+  title: string;
+  text: string;
+  level: string;
+  reading_time: string;
+  enhanced_text?: string;
+  audio_url?: string;
+  featured_image_url?: string;
+  alignment_data?: any;
+  normalized_alignment_data?: any;
+  summary?: string;
+  summary_english?: string;
+}
+
+export async function saveStory(params: SaveStoryParams): Promise<{ id: string; slug: string }> {
+  console.log(`Saving story: ${params.title} (${params.level})`);
+
+  const slug = slugifyTitle(params.title);
 
   const { data, error } = await supabase
     .from('stories')
     .insert({
       title: params.title,
-      content: params.content,
-      difficulty: params.difficulty,
+      slug,
+      text: params.text,
+      level: params.level,
+      reading_time: params.reading_time,
+      enhanced_text: params.enhanced_text,
       audio_url: params.audio_url,
-      created_by: params.created_by,
+      featured_image_url: params.featured_image_url,
+      alignment_data: params.alignment_data,
+      normalized_alignment_data: params.normalized_alignment_data,
+      summary: params.summary,
+      summary_english: params.summary_english,
     })
-    .select('id')
+    .select('id, slug')
     .single();
 
   if (error) {
     throw new Error(`Failed to save story: ${error.message}`);
   }
 
-  console.log(`Story saved with ID: ${data.id}`);
-  return { id: data.id };
+  console.log(`Story saved with ID: ${data.id}, slug: ${data.slug}`);
+  return { id: data.id, slug: data.slug };
 }
