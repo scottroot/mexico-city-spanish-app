@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ChevronLeft, ChevronRight, RotateCcw, Shuffle, Volume2 } from 'lucide-react'
 import { playTTS, fallbackTTS } from '@/lib/tts-client'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -28,7 +28,7 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
   const [autoAdvance, setAutoAdvance] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null)
+  const prevIndexRef = useRef(currentIndex)
 
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50
@@ -90,14 +90,12 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
 
   const handleNext = () => {
     if (currentIndex < shuffledCards.length - 1) {
-      setSlideDirection('left') // Slide out to left, new card comes from right
       setCurrentIndex(currentIndex + 1)
     }
   }
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      setSlideDirection('right') // Slide out to right, new card comes from left
       setCurrentIndex(currentIndex - 1)
     }
   }
@@ -233,33 +231,29 @@ export default function FlashCardsComponent({ flashCards }: { flashCards: FlashC
 
       {/* Flash Card */}
       <div className="relative mb-6 overflow-hidden">
-        <AnimatePresence mode="wait" initial={false} custom={slideDirection}>
+        <AnimatePresence mode="wait" initial={false} custom={currentIndex > prevIndexRef.current ? 'left' : 'right'}>
           <motion.div
             key={currentIndex}
-            custom={slideDirection}
-            variants={{
-              enter: (direction: 'left' | 'right' | null) => ({
-                x: direction === 'left' ? 300 : direction === 'right' ? -300 : 0,
-                opacity: 0
-              }),
-              center: {
-                x: 0,
-                opacity: 1
-              },
-              exit: (direction: 'left' | 'right' | null) => ({
-                x: direction === 'left' ? -300 : direction === 'right' ? 300 : 0,
-                opacity: 0
-              })
+            custom={currentIndex > prevIndexRef.current ? 'left' : 'right'}
+            initial={(direction: string) => ({
+              x: direction === 'left' ? 300 : -300,
+              opacity: 0
+            })}
+            animate={{
+              x: 0,
+              opacity: 1
             }}
-            initial="enter"
-            animate="center"
-            exit="exit"
+            exit={(direction: string) => ({
+              x: direction === 'left' ? -300 : 300,
+              opacity: 0
+            })}
             transition={{
-              type: 'spring',
-              stiffness: 300,
-              damping: 30
+              x: { type: 'spring', stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
             }}
-            onAnimationComplete={() => setSlideDirection(null)}
+            onAnimationComplete={() => {
+              prevIndexRef.current = currentIndex
+            }}
           >
             <div
               onClick={handleCardClick}

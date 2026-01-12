@@ -735,7 +735,8 @@ export const conjunctionsData = {
               spanish: "sin embargo",
               english: "however",
               examples: [
-                { spanish: "Quería ir; sin embargo, no pude.", translation: "I wanted to go; however, I couldn't." },
+                { spanish: "Quería ir al cine, sin embargo ya estoy muerto de sueño.", translation: "I wanted to go to the movies, however I'm already dead tired." },
+                { spanish: "Te dije que llegaba temprano, sin embargo se me fue el tráfico horrible.", translation: "I told you I'd get there early, however the traffic was awful and it threw me off." },
               ],
             },
             {
