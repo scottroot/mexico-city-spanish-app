@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getTemporalClient } from '@/utils/temporal-client';
 import { createClient } from '@/utils/supabase/server';
 
+
 const VALID_LEVELS = [
   'beginner',
   'high_beginner',
@@ -54,8 +55,9 @@ async function getLevelWithFewestStories(): Promise<string> {
   return minLevel;
 }
 
+
 export async function GET(req: NextRequest) {
-  if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (process.env.NODE_ENV !== 'development' && req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
     return new NextResponse('Unauthorized', { status: 401 });
   }
 

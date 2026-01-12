@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { readFile } from 'fs/promises';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -8,7 +9,7 @@ const supabase = createClient(
 const STORIES_BUCKET = 'stories';
 
 export interface UploadAudioParams {
-  audioBuffer: Buffer;
+  filePath: string; // Local path to the audio file
   fileName: string; // e.g., "story-slug/audio.mp3"
 }
 
@@ -23,7 +24,10 @@ export interface UploadResult {
 }
 
 export async function uploadAudio(params: UploadAudioParams): Promise<UploadResult> {
-  const { audioBuffer, fileName } = params;
+  const { filePath, fileName } = params;
+
+  console.log(`Reading audio file from: ${filePath}`);
+  const audioBuffer = await readFile(filePath);
 
   console.log(`Uploading audio to: ${fileName}`);
 

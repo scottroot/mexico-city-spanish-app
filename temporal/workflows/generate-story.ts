@@ -85,14 +85,20 @@ The story should feel like it naturally takes place in Mexico City, not like a t
   });
 
   // Step 8: Combine audio chunks if needed
-  let finalAudioBuffer: Buffer;
-  if (ttsResult.audioBuffers.length > 1) {
-    const combinedResult = await combineAudio({
-      audioBuffers: ttsResult.audioBuffers,
-    });
-    finalAudioBuffer = combinedResult.combinedAudioBuffer;
-  } else {
-    finalAudioBuffer = ttsResult.audioBuffers[0];
+  let combinedResult: {
+    audioFile: string;
+    alignmentFile?: string;
+    normalizedAlignmentFile?: string;
+  };
+  if (ttsResult.audioFiles.length > 1) {
+    combinedResult = await combineAudio(ttsResult);
+  }
+  else {
+    combinedResult = {
+      audioFile: ttsResult.audioFiles[0],
+      alignmentFile: ttsResult.alignmentFiles[0],
+      normalizedAlignmentFile: ttsResult.normalizedAlignmentFiles[0],
+    }
   }
 
   // Step 9: Generate cover image with DALL-E
@@ -114,7 +120,7 @@ The story should feel like it naturally takes place in Mexico City, not like a t
 
   // Step 12: Upload audio to Supabase Storage
   const audioUpload = await uploadAudio({
-    audioBuffer: finalAudioBuffer,
+    filePath: combinedResult.audioFile,
     fileName: `${slugTemp}/audio.mp3`,
   });
 
@@ -133,8 +139,8 @@ The story should feel like it naturally takes place in Mexico City, not like a t
     enhanced_text: enhancedText,
     audio_url: audioUpload.publicUrl,
     featured_image_url: imageUpload.publicUrl,
-    alignment_data: ttsResult.alignment,
-    normalized_alignment_data: ttsResult.normalizedAlignment,
+    alignment_data: combinedResult.alignmentFile,
+    normalized_alignment_data: combinedResult.normalizedAlignmentFile,
   });
 
   return { storyId: result.id, slug: result.slug };
