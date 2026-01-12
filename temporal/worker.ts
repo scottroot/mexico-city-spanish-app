@@ -1,12 +1,10 @@
 import { NativeConnection, Worker } from '@temporalio/worker';
-import { config } from 'dotenv';
 import * as activities from './activities';
 
-config();
 
 async function run() {
   const connection = await NativeConnection.connect({
-    address: process.env.TEMPORAL_ADDRESS || '54.161.138.231:7233',
+    address: process.env.TEMPORAL_URL,
   });
 
   const worker = await Worker.create({
