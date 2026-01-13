@@ -1,8 +1,7 @@
-import { proxyActivities } from '@temporalio/workflow';
+import { proxyActivities, workflowInfo } from '@temporalio/workflow';
 import * as activities from '../activities';
 import { validateStoryContent } from '../activities/validate';
 import { getStoryPromptForLevel } from '../activities/stories/story-prompts';
-import { getTempDir } from '../activities/stories/storage';
 
 
 const {
@@ -11,12 +10,11 @@ const {
   enhanceText,
   generateTTS,
   combineAudio,
-  generateStoryImage,
   generateImageLangchain,
-  downloadImage,
   uploadAudio,
   uploadImage,
   saveStory,
+  createTempDir,
 } = proxyActivities<typeof activities>({
   startToCloseTimeout: '10 minutes',
   retry: {
@@ -40,7 +38,12 @@ export async function generateStoryWorkflow(
 ): Promise<{ storyId: string; slug: string }> {
   const { level } = params;
 
-  const tempDir = getTempDir();
+  // Get temp directory for file operations using workflow info
+  const info = workflowInfo();
+  const tempDir = `/tmp/${info.workflowId}/${info.runId}`;
+
+  // Create temp directory once
+  await createTempDir(tempDir);
 
   // Step 1: Get level-specific prompt with all requirements
   const basePrompt = getStoryPromptForLevel(level);
@@ -101,36 +104,37 @@ The story should feel like it naturally takes place in Mexico City, not like a t
   });
 
   // Step 11: Create slug for file paths
-  const slugTemp = content.title
+  const slug = content.title
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-  // Step 12: Upload audio to Supabase Storage
+  // Step 12: Upload audio to Supabase Storage (audio/{slug}.mp3)
   const audioUpload = await uploadAudio({
     filePath: combinedResult.audioFile,
-    fileName: `${slugTemp}/audio.mp3`,
+    slug,
   });
 
-  // Step 13: Upload image to Supabase Storage
+  // Step 13: Upload image to Supabase Storage (featured-images/{slug}.png)
   const imageUpload = await uploadImage({
     filePath: imageFile,
-    fileName: `${slugTemp}/featured.png`,
+    slug,
   });
 
-  // Step 14: Save story to database with all URLs and alignment data
+  // Step 14: Save story to database with alignment data from local files
   const result = await saveStory({
     title: content.title,
+    slug,
     text: content.text,
     level,
-    reading_time: content.reading_time,
-    enhanced_text: enhancedText,
-    audio_url: audioUpload.publicUrl,
-    featured_image_url: imageUpload.publicUrl,
-    alignment_data: combinedResult.alignmentFile,
-    normalized_alignment_data: combinedResult.normalizedAlignmentFile,
+    readingTime: content.reading_time,
+    enhancedText: enhancedText,
+    audioUrl: audioUpload.publicUrl,
+    featuredImageUrl: imageUpload.publicUrl,
+    alignmentFile: combinedResult.alignmentFile,
+    normalizedAlignmentFile: combinedResult.normalizedAlignmentFile,
   });
 
   return { storyId: result.id, slug: result.slug };

@@ -1,8 +1,7 @@
 import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
-import { Context } from '@temporalio/activity';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { exists, safe } from '../utils';
+import { exists } from '../utils';
 
 
 const ELEVEN_V3_MODEL = 'eleven_v3';
@@ -87,16 +86,7 @@ export async function generateTTS(params: {
 
   console.log('Generating TTS for text length:', text.length);
 
-  // // Activity execution info  https://typescript.temporal.io/api/classes/activity.Context
-  // const info = Context.current().info;
-  // const wfId = safe(info.workflowExecution.workflowId);
-  // const runId = safe(info.workflowExecution.runId);
-  // const actId = safe(info.activityId);
-
-  // const baseDir = path.join('/tmp', 'tts', wfId, runId, actId);
   const baseDir = tempDir;
-  await fs.mkdir(baseDir, { recursive: true });
-
   const chunks = splitTextIntoChunks(text, CHUNK_SIZE);
   console.log(`Text split into ${chunks.length} chunks`);
 

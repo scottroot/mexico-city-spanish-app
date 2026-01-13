@@ -144,8 +144,8 @@ export async function combineAudio(params: {
   normalizedAlignmentFiles: string[];
 }): Promise<{
   audioFile: string;
-  alignmentFile?: string;
-  normalizedAlignmentFile?: string;
+  alignmentFile: string;
+  normalizedAlignmentFile: string;
 }> {
   const { audioFiles, alignmentFiles, normalizedAlignmentFiles } = params;
 
@@ -166,21 +166,25 @@ export async function combineAudio(params: {
 
   // Put output next to the chunks (same base dir) so the next Activity can find it
   const baseDir = dirname(audioFiles[0]);
-  const outputFile = join(baseDir, `speech.mp3`);
+  const outputFile = join(baseDir, `audio.mp3`);
+
+  const outputAlignmentFile = join(baseDir, `alignment.json`);
+  const outputNormalizedAlignmentFile = join(baseDir, `normalized-alignment.json`);
 
   // Idempotency: if it already exists, reuse it
   try {
     await fs.access(outputFile);
     console.log(`Combined audio already exists at ${outputFile}`);
-    return { audioFile: outputFile };
+    return {
+      audioFile: outputFile,
+      alignmentFile: outputAlignmentFile,
+      normalizedAlignmentFile: outputNormalizedAlignmentFile
+    };
   } catch {
     // continue
   }
 
   await concatMp3Files(audioFiles, outputFile);
-
-  const outputAlignmentFile = join(baseDir, `alignment.json`);
-  const outputNormalizedAlignmentFile = join(baseDir, `normalized-alignment.json`);
 
   await combineAlignmentFiles({ alignmentFiles, outFile: outputAlignmentFile });
   await combineAlignmentFiles({ alignmentFiles: normalizedAlignmentFiles, outFile: outputNormalizedAlignmentFile });

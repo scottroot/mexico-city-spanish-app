@@ -1,13 +1,8 @@
-import OpenAI from 'openai';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { HumanMessage } from '@langchain/core/messages';
 import { exists } from './utils';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 const IMAGE_GENERATION_PROMPT = `Generate a featured image for this story. Do not include any text in the image. The style is a busy, full-color illustration style by Stephen Cartwright with large, detailed scenes filled with lots of objects for children to spot, learn, and discuss....`;
 
@@ -89,35 +84,6 @@ export async function generateImageLangchain(params: {
     }
   }
 
-  // // Fallback: Try to access raw response metadata if Langchain exposes it
-  // if (!imageDataUrl) {
-  //   const responseAny = response as any;
-    
-  //   // Check response_metadata for raw response
-  //   if (responseAny.response_metadata) {
-  //     const rawResponse = responseAny.response_metadata;
-      
-  //     // Try native Gemini structure in raw response
-  //     if (rawResponse.candidates && Array.isArray(rawResponse.candidates) && rawResponse.candidates.length > 0) {
-  //       const candidate = rawResponse.candidates[0];
-  //       if (candidate.content && candidate.content.parts && Array.isArray(candidate.content.parts)) {
-  //         for (const part of candidate.content.parts) {
-  //           if (part.inlineData && part.inlineData.data) {
-  //             const mimeType = part.inlineData.mimeType || part.inlineData.mime_type || 'image/png';
-  //             imageDataUrl = `data:${mimeType};base64,${part.inlineData.data}`;
-  //             break;
-  //           }
-  //           if (part.inline_data && part.inline_data.data) {
-  //             const mimeType = part.inline_data.mimeType || part.inline_data.mime_type || 'image/png';
-  //             imageDataUrl = `data:${mimeType};base64,${part.inline_data.data}`;
-  //             break;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
   if (!imageDataUrl) {
     // Debug: log the response structure to help troubleshoot
     console.error('Langchain response structure:', JSON.stringify(response, null, 2));
@@ -135,55 +101,7 @@ export async function generateImageLangchain(params: {
   };
 }
 
-export async function generateStoryImage(params: {
-  storyText: string; storyTitle: string;
-}): Promise<{ imageUrl: string; }> {
-  const { storyText, storyTitle } = params;
-
-  console.log(`Generating image for story: ${storyTitle}`);
-
-  const prompt = `${IMAGE_GENERATION_PROMPT}\n\n${storyTitle}\n\n${storyText}`;
-
-  const response = await openai.images.generate({
-    model: 'dall-e-3',
-    prompt: prompt.substring(0, 4000), // DALL-E has prompt length limits
-    size: '1024x1024',
-    quality: 'standard',
-    n: 1,
-  });
-
-  if (!response.data || response.data.length === 0) {
-    throw new Error('No image data returned from DALL-E');
-  }
-
-  const imageUrl = response.data[0]?.url;
-  const revisedPrompt = response.data[0]?.revised_prompt;
-  console.log('Revised image prompt:', revisedPrompt);
-
-  if (!imageUrl) {
-    throw new Error('No image URL returned from DALL-E');
-  }
-
-  console.log('Image generated successfully');
-
-  return {
-    imageUrl,
-    // revisedPrompt,
-  };
-}
-
 export async function downloadImage(urlOrPath: string, tempDir: string): Promise<string> {
-  // // If it's already a file path, just return it
-  // if (!urlOrPath.startsWith('http://') && !urlOrPath.startsWith('https://') && !urlOrPath.startsWith('data:')) {
-  //   console.log('Image is already a local file:', urlOrPath);
-  //   return urlOrPath;
-  // }
-
-  // console.log('Downloading image from:', urlOrPath);
-
-  // Ensure the temp directory exists
-  await fs.mkdir(tempDir, { recursive: true });
-
   // Handle data URLs
   if (urlOrPath.startsWith('data:')) {
     const base64Data = urlOrPath.split(',')[1];

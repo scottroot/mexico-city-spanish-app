@@ -8,7 +8,7 @@
  *   GOOGLE_API_KEY=your-key tsx test-image-generation.ts
  */
 
-import { generateImageLangchain, generateStoryImage } from './activities/stories/image';
+import { generateImageLangchain } from './activities/stories/image';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 
