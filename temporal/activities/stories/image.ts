@@ -38,7 +38,8 @@ export async function generateImageLangchain(params: {
   console.log(`Generating image with Gemini for story: ${storyTitle}`);
 
   const model = new ChatGoogleGenerativeAI({
-    model: 'gemini-2.5-flash-image', // Use image generation capable model
+    // model: 'gemini-2.5-flash-image', // Use image generation capable model
+    model: 'gemini-3-pro-image-preview',
     maxOutputTokens: 2048,
   });
 
