@@ -4,7 +4,7 @@ import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { HumanMessage } from '@langchain/core/messages';
 import { exists } from './utils';
 
-const IMAGE_GENERATION_PROMPT = `Generate a featured image for this story. Do not include any text in the image. The style is a busy, full-color illustration style by Stephen Cartwright with large, detailed scenes filled with lots of objects for children to spot, learn, and discuss....`;
+const IMAGE_GENERATION_PROMPT = `Generate a featured image for this story. Do not include any text in the image. The style is a busy, full-color illustration style by Stephen Cartwright with large, detailed scenes filled with lots of objects for children to spot, learn, and discuss. Important: full image with no borders, no frames, no signatures, no text.`;
 
 /**
  * Function uses Langchain with Gemini to generate an image.

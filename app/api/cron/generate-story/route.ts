@@ -64,7 +64,8 @@ export async function GET(req: NextRequest) {
   try {
     // Find which level needs more stories
     // TODO: remove hardcoding
-    const level = 'beginner' // await getLevelWithFewestStories();
+    // const level = await getLevelWithFewestStories();
+    const level = 'high_beginner';
 
     const client = await getTemporalClient();
 
