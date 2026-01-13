@@ -1,60 +1,125 @@
-import { proxyActivities } from '@temporalio/workflow';
-import type * as activities from '../activities';
+import { proxyActivities, workflowInfo } from '@temporalio/workflow';
+import * as activities from '../activities';
+import { validateStoryContent } from '../activities/validate';
 
-const { generateStructuredContent, validateStoryContent, saveStory } =
-  proxyActivities<typeof activities>({
-    startToCloseTimeout: '5 minutes',
-    retry: {
-      initialInterval: '1s',
-      maximumAttempts: 3,
-    },
-  });
+
+const {
+  generateStoryWithContext,
+  generateStorySummary,
+  enhanceText,
+  generateTTS,
+  combineAudio,
+  generateImageLangchain,
+  uploadAudio,
+  uploadImage,
+  saveStory,
+  createTempDir,
+  getRecentStoryTitles,
+} = proxyActivities<typeof activities>({
+  startToCloseTimeout: '10 minutes',
+  retry: {
+    initialInterval: '1s',
+    maximumAttempts: 3,
+  },
+});
 
 export interface GenerateStoryParams {
-  theme: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  wordCount: number;
-  createdBy?: string;
+  level: 'beginner' | 'high_beginner' | 'low_intermediate' | 'high_intermediate' | 'advanced' | 'proficient_near_native';
 }
 
 export async function generateStoryWorkflow(
   params: GenerateStoryParams
-): Promise<{ storyId: string }> {
-  const { theme, difficulty, wordCount, createdBy } = params;
+): Promise<{ storyId: string; slug: string }> {
+  const { level } = params;
 
-  // Step 1: Generate story content from OpenAI
-  const systemPrompt = `You are a creative writer specializing in Spanish language learning stories set in Mexico City. Write at ${difficulty} level. Return JSON with "title" and "text" fields.`;
+  // Get temp directory for file operations using workflow info
+  // Using /app/tmp so files persist in the Docker volume
+  const info = workflowInfo();
+  const tempDir = `/app/tmp/${info.workflowId}/${info.runId}`;
 
-  const userPrompt = `Write a ${wordCount}-word story in Spanish about "${theme}" set in Mexico City.
+  // Create temp directory once
+  await createTempDir(tempDir);
 
-Requirements:
-- Level: ${difficulty}
-- Use Mexico City Spanish expressions and cultural references
-- Include dialogue if appropriate
-- Make it engaging and educational
-- Return JSON: { "title": "...", "text": "..." }`;
+  // Step 1: Get recent story titles to avoid duplicates
+  const recentTitles = await getRecentStoryTitles({ level, limit: 50 });
 
-  const content = await generateStructuredContent({
-    type: 'story',
-    prompt: userPrompt,
-    systemPrompt,
-    schema: null,
+  // Step 2: Generate story content with Mexico City context
+  const { story } = await generateStoryWithContext({
+    level,
+    recentTitles,
   });
 
-  // Step 2: Validate the generated content
-  const validation = await validateStoryContent(content);
+  // Step 2.5: Check if generated title is a duplicate
+  if (recentTitles.includes(story.title)) {
+    throw new Error(`Generated duplicate title: "${story.title}". This title already exists. Workflow will retry with different generation.`);
+  }
+
+  // Step 3: Validate the generated content
+  const validation = validateStoryContent(story);
 
   if (!validation.valid) {
     throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
   }
 
-  // Step 3: Save to database
-  const result = await saveStory({
-    title: content.title,
-    content: content.text,
-    difficulty,
-    created_by: createdBy,
+  // Step 4: Generate summary
+  const summary = await generateStorySummary({
+    storyText: story.text,
+    storyTitle: story.title,
   });
 
-  return { storyId: result.id };
+  // Step 5: Enhance text with ElevenLabs (adds audio tags)
+  const enhancedText = await enhanceText(story.text);
+
+  // Step 6: Generate TTS with ElevenLabs
+  const ttsResult = await generateTTS({
+    text: enhancedText,
+    tempDir,
+  });
+
+  // Step 7: Combine audio chunks if needed
+  const combinedResult = await combineAudio(ttsResult);
+
+  // Step 8: Generate cover image and save to temp directory
+  const { imageFile } = await generateImageLangchain({
+    storyText: story.text,
+    storyTitle: story.title,
+    tempDir,
+  });
+
+  // Step 9: Create slug for file paths
+  const slug = story.title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  // Step 10: Upload audio to Supabase Storage (audio/{slug}.mp3)
+  const audioUpload = await uploadAudio({
+    filePath: combinedResult.audioFile,
+    slug,
+  });
+
+  // Step 11: Upload image to Supabase Storage (featured-images/{slug}.png)
+  const imageUpload = await uploadImage({
+    filePath: imageFile,
+    slug,
+  });
+
+  // Step 12: Save story to database with alignment data from local files
+  const result = await saveStory({
+    title: story.title,
+    slug,
+    text: story.text,
+    level,
+    readingTime: story.reading_time,
+    enhancedText: enhancedText,
+    audioUrl: audioUpload.publicUrl,
+    featuredImageUrl: imageUpload.publicUrl,
+    alignmentFile: combinedResult.alignmentFile,
+    normalizedAlignmentFile: combinedResult.normalizedAlignmentFile,
+    summaryEnglish: summary,
+  });
+
+  return { storyId: result.id, slug: result.slug };
 }

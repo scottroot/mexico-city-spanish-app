@@ -101,12 +101,13 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
     const loop = () => {
       const t = el.currentTime || 0;
       const idx = findActiveIndex(starts, words, t);
-      if (idx !== activeIdx) setActiveIdx(idx);
+      // Use functional update to avoid dependency on activeIdx
+      setActiveIdx(prev => idx !== prev ? idx : prev);
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [starts, words, activeIdx]);
+  }, [starts, words]);
 
   useEffect(() => {
     if (!autoScroll) return;
@@ -207,15 +208,16 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
         })}
       </div>
       
-      {/* Fixed Audio Player at Bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10">
+      {/* Fixed Audio Player at Bottom - Accounts for sidebar and mobile nav */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10
+                      max-md:bottom-16 md:left-[86px] xl:left-64">
         <div className="container mx-auto px-4 py-4">
-          <audio 
-            ref={audioRef} 
-            src={src} 
-            controls 
-            preload="metadata" 
-            className="w-full rounded-lg" 
+          <audio
+            ref={audioRef}
+            src={src}
+            controls
+            preload="metadata"
+            className="w-full rounded-lg"
           />
         </div>
       </div>

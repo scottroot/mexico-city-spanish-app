@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { BookOpen, Star, Clock, Users, Loader2 } from 'lucide-react'
+import { BookOpen, Star, Clock, Users, Loader2, Filter, ArrowUpDown } from 'lucide-react'
 import PageHeader from '@/components/ui/page-header'
 
 interface Story {
@@ -23,6 +23,8 @@ export default function StoriesPage() {
   const [stories, setStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedLevel, setSelectedLevel] = useState<string>('all')
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'alphabetical'>('newest')
 
   useEffect(() => {
     const fetchStories = async () => {
@@ -69,6 +71,37 @@ export default function StoriesPage() {
     }
   }
 
+  // Helper function to check if story is new (created within last 7 days)
+  const isNewStory = (createdAt: string) => {
+    const storyDate = new Date(createdAt)
+    const sevenDaysAgo = new Date()
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+    return storyDate > sevenDaysAgo
+  }
+
+  // Filter and sort stories
+  const filteredAndSortedStories = React.useMemo(() => {
+    let filtered = stories
+
+    // Filter by level
+    if (selectedLevel !== 'all') {
+      filtered = filtered.filter(story => story.level === selectedLevel)
+    }
+
+    // Sort
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortBy === 'alphabetical') {
+        return a.title.localeCompare(b.title)
+      } else if (sortBy === 'newest') {
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      } else {
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      }
+    })
+
+    return sorted
+  }, [stories, selectedLevel, sortBy])
+
   // Loading state or context not initialized
   if (loading) {
     return (
@@ -106,16 +139,52 @@ export default function StoriesPage() {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <PageHeader 
-          icon={BookOpen} 
-          title="Stories" 
+        <PageHeader
+          icon={BookOpen}
+          title="Stories"
           subtitle="Immerse yourself in Spanish through engaging stories"
         />
 
+        {/* Filter and Sort Controls */}
+        <div className="mb-6 max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3 text-sm">
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-gray-500" />
+            <span className="text-gray-600 font-medium">Level:</span>
+            <select
+              value={selectedLevel}
+              onChange={(e) => setSelectedLevel(e.target.value)}
+              className="pl-3 pr-8 py-1 text-gray-700 rounded bg-white border border-gray-300 hover:border-gray-400 rounded 
+              focus:ring-0 focus:outline-none !outline-none"
+            >
+              <option value="all">All Levels</option>
+              <option value="beginner">Beginner</option>
+              <option value="high_beginner">High Beginner</option>
+              <option value="low_intermediate">Low Intermediate</option>
+              <option value="high_intermediate">High Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="w-4 h-4 text-gray-500" />
+            <span className="text-gray-600 font-medium">Sort:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'alphabetical')}
+              className="pl-3 pr-8 py-1 text-gray-700 rounded bg-white border border-gray-300 hover:border-gray-400 rounded 
+              focus:ring-0 focus:outline-none !outline-none"
+            >
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+          </div>
+        </div>
+
         {/* Stories Grid */}
-        {stories.length > 0 ? (
+        {filteredAndSortedStories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {stories.map((story) => {
+            {filteredAndSortedStories.map((story) => {
               const levelInfo = getLevelInfo(story.level)
               return (
                 <div
@@ -168,10 +237,13 @@ export default function StoriesPage() {
                         <Clock className="w-4 h-4" />
                         <span>{story.reading_time || 'N/A'}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Users className="w-4 h-4" />
-                        <span>New</span>
-                      </div>
+                      {isNewStory(story.created_at) && (
+                        <div className="flex items-center gap-1">
+                          <span className="px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-600">
+                            New
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Read Button */}
@@ -253,8 +325,22 @@ export default function StoriesPage() {
         ) : (
           <div className="text-center py-12">
             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No Stories Available</h3>
-            <p className="text-gray-500">Check back later for new stories!</p>
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+              {stories.length === 0 ? 'No Stories Available' : 'No Stories Found'}
+            </h3>
+            <p className="text-gray-500">
+              {stories.length === 0
+                ? 'Check back later for new stories!'
+                : 'Try adjusting your filters to see more stories.'}
+            </p>
+            {selectedLevel !== 'all' && (
+              <button
+                onClick={() => setSelectedLevel('all')}
+                className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Clear Filters
+              </button>
+            )}
           </div>
         )}
 

@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import Link from 'next/link'
-import { ArrowLeft, BookOpen, Clock, Loader2, AlertCircle } from 'lucide-react'
-import TranscriptPlayer from '@/components/TranscriptPlayer'
-import type { Story, Word } from '@/types/story'
-import { normalizeAlignmentData } from '@/types/story'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft, BookOpen, Clock, Loader2, AlertCircle } from 'lucide-react';
+import TranscriptPlayer from '@/components/TranscriptPlayer';
+import type { Story, Word } from '@/types/story';
+import { normalizeAlignmentData } from '@/types/story';
 
 
 export default function StoryViewerPage() {
@@ -127,11 +128,23 @@ export default function StoryViewerPage() {
           {/* Featured Image */}
           {story.featured_image_url && (
             <div className="flex justify-center mb-6">
-              <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg">
-                <img 
-                  src={story.featured_image_url} 
+              <div 
+                // TODO: verify aspect ratio of story featured images and adjust the width and height accordingly
+                // className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-xl"
+                className="w-48 h-auto sm:w-64 md:w-80 lg:w-96 rounded-2xl overflow-hidden shadow-xl"
+                >
+              {/* <img
+                  src={story.featured_image_url}
                   alt={story.title}
                   className="w-full h-full object-cover"
+                /> */}
+                <Image
+                  src={story.featured_image_url}
+                  alt={story.title}
+                  className="w-full h-full object-cover"
+                  // fill
+                  width={500}
+                  height={500}
                 />
               </div>
             </div>

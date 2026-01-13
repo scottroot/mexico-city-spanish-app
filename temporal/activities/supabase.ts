@@ -38,33 +38,3 @@ export async function saveGame(params: SaveGameParams): Promise<{ id: string }> 
   return { id: data.id };
 }
 
-export interface SaveStoryParams {
-  title: string;
-  content: string;
-  difficulty: string;
-  audio_url?: string;
-  created_by?: string;
-}
-
-export async function saveStory(params: SaveStoryParams): Promise<{ id: string }> {
-  console.log(`Saving story: ${params.title} (${params.difficulty})`);
-
-  const { data, error } = await supabase
-    .from('stories')
-    .insert({
-      title: params.title,
-      content: params.content,
-      difficulty: params.difficulty,
-      audio_url: params.audio_url,
-      created_by: params.created_by,
-    })
-    .select('id')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to save story: ${error.message}`);
-  }
-
-  console.log(`Story saved with ID: ${data.id}`);
-  return { id: data.id };
-}
