@@ -33,8 +33,9 @@ export async function generateStoryWorkflow(
   const { level } = params;
 
   // Get temp directory for file operations using workflow info
+  // Using /app/tmp so files persist in the Docker volume
   const info = workflowInfo();
-  const tempDir = `/tmp/${info.workflowId}/${info.runId}`;
+  const tempDir = `/app/tmp/${info.workflowId}/${info.runId}`;
 
   // Create temp directory once
   await createTempDir(tempDir);

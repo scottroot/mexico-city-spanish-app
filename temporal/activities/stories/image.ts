@@ -4,7 +4,11 @@ import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { HumanMessage } from '@langchain/core/messages';
 import { exists } from './utils';
 
+const MODEL = 'gemini-3-pro-image-preview'; // gemini-2.5-flash-image
 const IMAGE_GENERATION_PROMPT = `Generate a featured image for this story. Do not include any text in the image. The style is a busy, full-color illustration style by Stephen Cartwright with large, detailed scenes filled with lots of objects for children to spot, learn, and discuss. Important: full image with no borders, no frames, no signatures, no text.`;
+
+const ASPECT_RATIO: '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '5:4' | '9:16' | '16:9' | '21:9' = '4:3';
+const TEMPERATURE = 1.0; // Maximum creativity (range: 0.0-1.0)
 
 /**
  * Function uses Langchain with Gemini to generate an image.
@@ -38,9 +42,8 @@ export async function generateImageLangchain(params: {
   console.log(`Generating image with Gemini for story: ${storyTitle}`);
 
   const model = new ChatGoogleGenerativeAI({
-    // model: 'gemini-2.5-flash-image', // Use image generation capable model
-    model: 'gemini-3-pro-image-preview',
-    maxOutputTokens: 2048,
+    model: MODEL,
+    apiKey: process.env.GOOGLE_API_KEY,
   });
 
   // Create the prompt
@@ -59,7 +62,11 @@ export async function generateImageLangchain(params: {
   // Generate image with response modalities to ensure image generation
   const response = await model.invoke([message], {
     generationConfig: {
+      temperature: TEMPERATURE,
       responseModalities: ['TEXT', 'IMAGE'],
+      imageConfig: {
+        aspectRatio: ASPECT_RATIO,
+      },
     },
   } as any);
 
