@@ -7,7 +7,8 @@
     "build": "tsc",
     "worker": "tsx worker.ts",
     "dev": "tsx watch worker.ts",
-    "test:image": "tsx --env-file=.env test-image-generation.ts"
+    "test:image": "tsx --env-file=.env test-image-generation.ts",
+    "test:tts": "tsx --env-file=.env test-tts-generation.ts"
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.30.0",

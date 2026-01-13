@@ -101,12 +101,13 @@ export default function TranscriptPlayer({ src, words, autoScroll = true }: Prop
     const loop = () => {
       const t = el.currentTime || 0;
       const idx = findActiveIndex(starts, words, t);
-      if (idx !== activeIdx) setActiveIdx(idx);
+      // Use functional update to avoid dependency on activeIdx
+      setActiveIdx(prev => idx !== prev ? idx : prev);
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [starts, words, activeIdx]);
+  }, [starts, words]);
 
   useEffect(() => {
     if (!autoScroll) return;

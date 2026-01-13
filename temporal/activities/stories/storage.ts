@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { readFile, mkdir } from 'fs/promises';
 import type { AlignmentData } from './tts/elevenlabs';
 
+
 export async function createTempDir(tempDir: string): Promise<void> {
   await mkdir(tempDir, { recursive: true });
 }
@@ -13,13 +14,8 @@ const supabase = createClient(
 
 const STORIES_BUCKET = 'stories';
 
-export interface UploadAudioParams {
+export interface UploadParams {
   filePath: string; // Local path to the audio file
-  slug: string; // Story slug (used for filename)
-}
-
-export interface UploadImageParams {
-  filePath: string; // Local path to the image file
   slug: string; // Story slug (used for filename)
 }
 
@@ -28,7 +24,7 @@ export interface UploadResult {
   path: string;
 }
 
-export async function uploadAudio(params: UploadAudioParams): Promise<UploadResult> {
+export async function uploadAudio(params: UploadParams): Promise<UploadResult> {
   const { filePath, slug } = params;
   const fileName = `audio/${slug}.mp3`;
 
@@ -60,7 +56,8 @@ export async function uploadAudio(params: UploadAudioParams): Promise<UploadResu
   };
 }
 
-export async function uploadImage(params: UploadImageParams): Promise<UploadResult> {
+
+export async function uploadImage(params: UploadParams): Promise<UploadResult> {
   const { filePath, slug } = params;
   const fileName = `featured-images/${slug}.png`;
 
@@ -91,6 +88,7 @@ export async function uploadImage(params: UploadImageParams): Promise<UploadResu
     path: data.path,
   };
 }
+
 
 export interface SaveStoryParams {
   title: string;

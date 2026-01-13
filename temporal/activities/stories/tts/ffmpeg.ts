@@ -82,7 +82,7 @@ function combineAlignmentObjects(alignmentDataArray: AlignmentData[]): Alignment
       combined.characterEndTimesSeconds.push(...adjustedEndTimes);
 
       if (alignment.characterEndTimesSeconds.length > 0) {
-        timeOffset = Math.max(...alignment.characterEndTimesSeconds) + timeOffset;
+        timeOffset += Math.max(...alignment.characterEndTimesSeconds);
       }
     }
   }
