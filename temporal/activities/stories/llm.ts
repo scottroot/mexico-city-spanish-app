@@ -20,7 +20,7 @@ const llm = new ChatOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   // model: 'gpt-4o-2024-08-06', // Must use a model that supports structured outputs
   model: 'gpt-5-mini', // Must use a model that supports structured outputs
-  temperature: 0.95, // Higher temperature for more creative variation
+  // temperature: 0.95, // Higher temperature for more creative variation
 });
 
 // Zod schemas for type-safe structured outputs
@@ -142,6 +142,10 @@ IMPORTANT: Ground your story in Mexico City by naturally incorporating 1-2 of th
 The story should feel like it naturally takes place in Mexico City, not like a tourist guide.`;
 
   const fullPrompt = uniquenessInstruction + basePrompt + contextInstruction;
+
+  console.log('========== FULL PROMPT BEING SENT TO LLM ==========');
+  console.log(fullPrompt);
+  console.log('===================================================');
 
   // Create structured output LLM with proper options
   // Type assertion needed to bypass TypeScript's deep type inference
