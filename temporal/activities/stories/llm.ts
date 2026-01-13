@@ -18,7 +18,8 @@ export interface MexicoCityContext {
 
 const llm = new ChatOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  model: 'gpt-4o-2024-08-06', // Must use a model that supports structured outputs
+  // model: 'gpt-4o-2024-08-06', // Must use a model that supports structured outputs
+  model: 'gpt-5-mini', // Must use a model that supports structured outputs
   temperature: 0.7,
 });
 
