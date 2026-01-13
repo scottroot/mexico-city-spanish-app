@@ -2,8 +2,19 @@ import { ChatOpenAI } from '@langchain/openai';
 import { PromptTemplate } from '@langchain/core/prompts';
 import { z } from 'zod';
 import { getStoryPromptForLevel } from './story-prompts';
-// Import types from openai.ts to avoid duplicate exports
-import type { MexicoCityContext, GenerateMexicoCityContextParams } from '../openai';
+
+export interface GenerateMexicoCityContextParams {
+  level: string;
+  storyTheme: string;
+}
+
+export interface MexicoCityContext {
+  landmarks: string[];
+  traditions: string[];
+  local_events: string[];
+  neighborhoods: string[];
+  cultural_elements: string[];
+}
 
 const llm = new ChatOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -26,7 +37,12 @@ const StoryContentSchema = z.object({
   text: z.string().min(100),
 });
 
+const StorySummarySchema = z.object({
+  summary: z.string().min(10).max(150).describe('A very short, punchy summary in English (1-2 sentences, 5-20 words). Focus on the main action or conflict.'),
+});
+
 export type StoryContent = z.infer<typeof StoryContentSchema>;
+export type StorySummary = z.infer<typeof StorySummarySchema>;
 
 // Prompt templates
 const mexicoCityContextTemplate = PromptTemplate.fromTemplate(`
@@ -44,7 +60,7 @@ Return JSON with:
 These are OPTIONS for the story - it should only use 1-2 elements total, not all of them.
 `);
 
-export async function generateMexicoCityContextLangChain(
+export async function generateMexicoCityContext(
   params: GenerateMexicoCityContextParams
 ): Promise<MexicoCityContext> {
   const { level, storyTheme } = params;
@@ -80,12 +96,13 @@ export async function generateMexicoCityContextLangChain(
 export interface GenerateStoryParams {
   level: string;
   mexicoCityContext: MexicoCityContext;
+  recentTitles?: string[];
 }
 
-export async function generateStoryLangChain(
+export async function generateStory(
   params: GenerateStoryParams
 ): Promise<StoryContent> {
-  const { level, mexicoCityContext } = params;
+  const { level, mexicoCityContext, recentTitles = [] } = params;
 
   console.log(`Generating story for level: ${level}`);
 
@@ -103,7 +120,17 @@ IMPORTANT: Ground your story in Mexico City by naturally incorporating 1-2 of th
 
 The story should feel like it naturally takes place in Mexico City, not like a tourist guide.`;
 
-  const fullPrompt = basePrompt + contextInstruction;
+  // Append title uniqueness instruction if there are recent titles
+  const uniquenessInstruction = recentTitles.length > 0
+    ? `
+
+IMPORTANT: Create a unique story title. Avoid these existing titles:
+${recentTitles.join(', ')}
+
+Your title must be distinctly different from all titles above.`
+    : '';
+
+  const fullPrompt = basePrompt + contextInstruction + uniquenessInstruction;
 
   // Create structured output LLM with proper options
   // Type assertion needed to bypass TypeScript's deep type inference
@@ -125,25 +152,73 @@ The story should feel like it naturally takes place in Mexico City, not like a t
   return result;
 }
 
-// Alternative: Use RunnableSequence for chaining both steps
-import { RunnableSequence } from '@langchain/core/runnables';
-
-export async function generateStoryWithContextChain(params: {
+export async function generateStoryWithContext(params: {
   level: string;
+  recentTitles?: string[];
 }): Promise<{ context: MexicoCityContext; story: StoryContent }> {
-  const { level } = params;
+  const { level, recentTitles = [] } = params;
 
   // Step 1: Generate context
-  const context = await generateMexicoCityContextLangChain({
+  const context = await generateMexicoCityContext({
     level,
     storyTheme: 'daily life',
   });
 
   // Step 2: Generate story with context
-  const story = await generateStoryLangChain({
+  const story = await generateStory({
     level,
     mexicoCityContext: context,
+    recentTitles,
   });
 
   return { context, story };
+}
+
+export interface GenerateStorySummaryParams {
+  storyText: string;
+  storyTitle: string;
+}
+
+export async function generateStorySummary(
+  params: GenerateStorySummaryParams
+): Promise<string> {
+  const { storyText, storyTitle } = params;
+
+  console.log(`Generating summary for story: ${storyTitle}`);
+
+  const prompt = `Read this Spanish learning story and create a very short, punchy English summary.
+
+Story Title: ${storyTitle}
+
+Story Text:
+${storyText}
+
+Requirements:
+- Write in English (even though the story is in Spanish)
+- Keep it VERY short: 1-2 sentences, 5-20 words total
+- Focus on the main action or conflict
+- Make it engaging and clear
+- Use simple present tense or present continuous
+
+Examples of good summaries:
+- "Ana searches everywhere when Coco disappears."
+- "Inés follows rumors to uncover hidden truths in her city."
+- "Lara turns an old map into a movement to save a city garden."`;
+
+  // Create structured output LLM with proper options
+  const structuredLlm = (llm.withStructuredOutput as any)(
+    StorySummarySchema,
+    {
+      name: "generate_story_summary",
+      strict: true,
+    }
+  );
+
+  // Invoke with message array
+  const result = (await structuredLlm.invoke([
+    { role: "user", content: prompt }
+  ])) as StorySummary;
+
+  console.log('Story summary generated:', result.summary);
+  return result.summary;
 }

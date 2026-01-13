@@ -1,11 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import { readFile, mkdir } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import type { AlignmentData } from './tts/elevenlabs';
-
-
-export async function createTempDir(tempDir: string): Promise<void> {
-  await mkdir(tempDir, { recursive: true });
-}
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -102,10 +97,35 @@ export interface SaveStoryParams {
   // TODO: Review - alignment files should realistically never be undefined
   alignmentFile?: string;
   normalizedAlignmentFile?: string;
-  // TODO: Add activity to generate summaries from story text
   summary?: string;
   summaryEnglish?: string;
 }
+
+export async function getRecentStoryTitles(params: {
+  level: string;
+  limit?: number;
+}): Promise<string[]> {
+  const { level, limit = 50 } = params;
+
+  console.log(`Fetching recent ${limit} story titles for level: ${level}`);
+
+  const { data, error } = await supabase
+    .from('stories')
+    .select('title')
+    .eq('level', level)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error(`Failed to fetch story titles: ${error.message}`);
+    return []; // Return empty array on error to not block generation
+  }
+
+  const titles = data.map((row) => row.title);
+  console.log(`Found ${titles.length} existing story titles`);
+  return titles;
+}
+
 
 export async function saveStory(params: SaveStoryParams): Promise<{ id: string; slug: string }> {
   console.log(`Saving story: ${params.title} (${params.level})`);
