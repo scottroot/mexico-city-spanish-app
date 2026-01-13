@@ -20,7 +20,7 @@ const llm = new ChatOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   // model: 'gpt-4o-2024-08-06', // Must use a model that supports structured outputs
   model: 'gpt-5-mini', // Must use a model that supports structured outputs
-  temperature: 0.7,
+  temperature: 0.95, // Higher temperature for more creative variation
 });
 
 // Zod schemas for type-safe structured outputs
@@ -80,7 +80,7 @@ export async function generateMexicoCityContext(
     MexicoCityContextSchema,
     {
       name: "generate_mexico_city_context",
-      strict: true,
+      strict: false,
     }
   );
 
@@ -106,9 +106,29 @@ export async function generateStory(
   const { level, mexicoCityContext, recentTitles = [] } = params;
 
   console.log(`Generating story for level: ${level}`);
+  console.log(`Recent titles to avoid (${recentTitles.length}):`, recentTitles);
 
   // Get level-specific prompt
   const basePrompt = getStoryPromptForLevel(level);
+
+  // Append uniqueness instruction FIRST if there are recent titles
+  const uniquenessInstruction = recentTitles.length > 0
+    ? `
+
+CRITICAL REQUIREMENT - STORY MUST BE COMPLETELY UNIQUE:
+You MUST create a story that is completely different from these existing stories:
+${recentTitles.join(', ')}
+
+REQUIREMENTS:
+1. Your title must be COMPLETELY DIFFERENT from all titles above
+2. Your story content, plot, and characters must be ENTIRELY ORIGINAL
+3. Do NOT reuse any character names, plot elements, or story structures from the list above
+4. Create a fresh, unique narrative that has not been told before
+
+If you generate a story similar to any above, it will be rejected.
+
+`
+    : '';
 
   // Append Mexico City context
   const contextInstruction = `
@@ -121,25 +141,16 @@ IMPORTANT: Ground your story in Mexico City by naturally incorporating 1-2 of th
 
 The story should feel like it naturally takes place in Mexico City, not like a tourist guide.`;
 
-  // Append title uniqueness instruction if there are recent titles
-  const uniquenessInstruction = recentTitles.length > 0
-    ? `
-
-IMPORTANT: Create a unique story title. Avoid these existing titles:
-${recentTitles.join(', ')}
-
-Your title must be distinctly different from all titles above.`
-    : '';
-
-  const fullPrompt = basePrompt + contextInstruction + uniquenessInstruction;
+  const fullPrompt = uniquenessInstruction + basePrompt + contextInstruction;
 
   // Create structured output LLM with proper options
   // Type assertion needed to bypass TypeScript's deep type inference
+  // Note: NOT using strict mode to allow more creative variation
   const structuredLlm = (llm.withStructuredOutput as any)(
     StoryContentSchema,
     {
       name: "generate_story_content",
-      strict: true,
+      strict: false,
     }
   );
 
@@ -211,7 +222,7 @@ Examples of good summaries:
     StorySummarySchema,
     {
       name: "generate_story_summary",
-      strict: true,
+      strict: false,
     }
   );
 

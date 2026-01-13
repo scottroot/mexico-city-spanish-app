@@ -48,6 +48,11 @@ export async function generateStoryWorkflow(
     recentTitles,
   });
 
+  // Step 2.5: Check if generated title is a duplicate
+  if (recentTitles.includes(story.title)) {
+    throw new Error(`Generated duplicate title: "${story.title}". This title already exists. Workflow will retry with different generation.`);
+  }
+
   // Step 3: Validate the generated content
   const validation = validateStoryContent(story);
 
