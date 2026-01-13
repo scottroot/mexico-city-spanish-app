@@ -2,7 +2,7 @@ import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
 import { Context } from '@temporalio/activity';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { exists, safe, splitTextIntoChunks } from './utils';
+import { exists, safe } from '../utils';
 
 
 const ELEVEN_V3_MODEL = 'eleven_v3';
@@ -11,6 +11,32 @@ const CHUNK_SIZE = 3000;
 const elevenlabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY!,
 });
+
+
+export function splitTextIntoChunks(text: string, maxLength: number): string[] {
+  const lines = text.split('\n');
+  const chunks: string[] = [];
+  let currentChunk = '';
+
+  for (const line of lines) {
+    if (currentChunk.length + line.length + 1 > maxLength && currentChunk.length > 0) {
+      chunks.push(currentChunk.trim());
+      currentChunk = line;
+    } else {
+      if (currentChunk.length > 0) {
+        currentChunk += '\n' + line;
+      } else {
+        currentChunk = line;
+      }
+    }
+  }
+
+  if (currentChunk.trim().length > 0) {
+    chunks.push(currentChunk.trim());
+  }
+
+  return chunks;
+}
 
 
 export interface AlignmentData {
@@ -50,23 +76,25 @@ async function generateTTSChunk(text: string, voiceId: string): Promise<{
 
 export async function generateTTS(params: {
   text: string;
+  tempDir: string;
   voiceId?: string;
 }): Promise<{
   audioFiles: string[];
   alignmentFiles: string[];
   normalizedAlignmentFiles: string[];
 }> {
-  const { text, voiceId = process.env.ELEVENLABS_VOICE_ID! } = params;
+  const { text, tempDir, voiceId = process.env.ELEVENLABS_VOICE_ID! } = params;
 
   console.log('Generating TTS for text length:', text.length);
 
-  // Activity execution info  https://typescript.temporal.io/api/classes/activity.Context
-  const info = Context.current().info;
-  const wfId = safe(info.workflowExecution.workflowId);
-  const runId = safe(info.workflowExecution.runId);
-  const actId = safe(info.activityId);
+  // // Activity execution info  https://typescript.temporal.io/api/classes/activity.Context
+  // const info = Context.current().info;
+  // const wfId = safe(info.workflowExecution.workflowId);
+  // const runId = safe(info.workflowExecution.runId);
+  // const actId = safe(info.activityId);
 
-  const baseDir = path.join('/tmp', 'tts', wfId, runId, actId);
+  // const baseDir = path.join('/tmp', 'tts', wfId, runId, actId);
+  const baseDir = tempDir;
   await fs.mkdir(baseDir, { recursive: true });
 
   const chunks = splitTextIntoChunks(text, CHUNK_SIZE);

@@ -2,6 +2,8 @@ import { proxyActivities } from '@temporalio/workflow';
 import * as activities from '../activities';
 import { validateStoryContent } from '../activities/validate';
 import { getStoryPromptForLevel } from '../activities/stories/story-prompts';
+import { getTempDir } from '../activities/stories/storage';
+
 
 const {
   generateMexicoCityContext,
@@ -10,6 +12,7 @@ const {
   generateTTS,
   combineAudio,
   generateStoryImage,
+  generateImageLangchain,
   downloadImage,
   uploadAudio,
   uploadImage,
@@ -36,6 +39,8 @@ export async function generateStoryWorkflow(
   params: GenerateStoryParams
 ): Promise<{ storyId: string; slug: string }> {
   const { level } = params;
+
+  const tempDir = getTempDir();
 
   // Step 1: Get level-specific prompt with all requirements
   const basePrompt = getStoryPromptForLevel(level);
@@ -82,33 +87,18 @@ The story should feel like it naturally takes place in Mexico City, not like a t
   // Step 7: Generate TTS with ElevenLabs
   const ttsResult = await generateTTS({
     text: enhancedText,
+    tempDir,
   });
 
   // Step 8: Combine audio chunks if needed
-  let combinedResult: {
-    audioFile: string;
-    alignmentFile?: string;
-    normalizedAlignmentFile?: string;
-  };
-  if (ttsResult.audioFiles.length > 1) {
-    combinedResult = await combineAudio(ttsResult);
-  }
-  else {
-    combinedResult = {
-      audioFile: ttsResult.audioFiles[0],
-      alignmentFile: ttsResult.alignmentFiles[0],
-      normalizedAlignmentFile: ttsResult.normalizedAlignmentFiles[0],
-    }
-  }
+  const combinedResult = await combineAudio(ttsResult);
 
-  // Step 9: Generate cover image with DALL-E
-  const imageResult = await generateStoryImage({
+  // Step 9: Generate cover image and save to temp directory
+  const { imageFile } = await generateImageLangchain({
     storyText: content.text,
     storyTitle: content.title,
+    tempDir,
   });
-
-  // Step 10: Download the generated image
-  const imageBuffer = await downloadImage(imageResult.imageUrl);
 
   // Step 11: Create slug for file paths
   const slugTemp = content.title
@@ -126,7 +116,7 @@ The story should feel like it naturally takes place in Mexico City, not like a t
 
   // Step 13: Upload image to Supabase Storage
   const imageUpload = await uploadImage({
-    imageBuffer,
+    filePath: imageFile,
     fileName: `${slugTemp}/featured.png`,
   });
 

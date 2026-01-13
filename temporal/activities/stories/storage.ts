@@ -1,5 +1,18 @@
 import { createClient } from '@supabase/supabase-js';
+import { Context } from '@temporalio/activity';
 import { readFile } from 'fs/promises';
+import { safe } from './utils';
+import path from 'path';
+
+
+export function getTempDir(): string {
+  const info = Context.current().info;
+  const wfId = safe(info.workflowExecution.workflowId);
+  const runId = safe(info.workflowExecution.runId);
+  const actId = safe(info.activityId);
+
+  return path.join('/tmp', wfId, runId, actId);
+}
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -14,7 +27,7 @@ export interface UploadAudioParams {
 }
 
 export interface UploadImageParams {
-  imageBuffer: Buffer;
+  filePath: string; // Local path to the image file
   fileName: string; // e.g., "story-slug/featured.png"
 }
 
@@ -55,7 +68,10 @@ export async function uploadAudio(params: UploadAudioParams): Promise<UploadResu
 }
 
 export async function uploadImage(params: UploadImageParams): Promise<UploadResult> {
-  const { imageBuffer, fileName } = params;
+  const { filePath, fileName } = params;
+
+  console.log(`Reading image file from: ${filePath}`);
+  const imageBuffer = await readFile(filePath);
 
   console.log(`Uploading image to: ${fileName}`);
 

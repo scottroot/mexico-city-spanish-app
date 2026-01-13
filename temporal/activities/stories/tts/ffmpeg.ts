@@ -128,7 +128,8 @@ export async function combineAlignmentFiles(params: {
   try {
     await fs.access(outFile);
     return outFile;
-  } catch {
+  }
+  catch {
     // continue
   }
 

@@ -6,11 +6,13 @@
   "scripts": {
     "build": "tsc",
     "worker": "tsx worker.ts",
-    "dev": "tsx watch worker.ts"
+    "dev": "tsx watch worker.ts",
+    "test:image": "tsx --env-file=.env test-image-generation.ts"
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.30.0",
     "@langchain/core": "^1.1.12",
+    "@langchain/google-genai": "^2.1.7",
     "@langchain/openai": "^1.2.1",
     "@supabase/supabase-js": "^2.90.1",
     "@temporalio/activity": "^1.14.1",
