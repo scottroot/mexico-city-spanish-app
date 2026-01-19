@@ -1,0 +1,6 @@
+{
+  "crons": [{
+    "path": "/api/cron/generate-story",
+    "schedule": "15 19 * * *"
+  }]
+}
