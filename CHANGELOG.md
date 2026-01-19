@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Story duplicate title prevention system (queries recent 50 titles and instructs LLM to avoid)
+- Story summary generation using LangChain with Zod validation
+- Level filter and sort controls for stories page (filter by difficulty, sort by newest/oldest/alphabetical)
+- Conditional "New" badge on stories (only shows for stories created within last 7 days)
+- Post-generation duplicate check with automatic workflow retry
+- Debug logging for story title uniqueness verification
 - Freemium authentication model (simple games playable without login, LLM-powered games require auth)
 - TypeScript migration for TTS client library
 - Quit button for custom verb quiz with confirmation dialog (exits without saving progress)
@@ -18,6 +24,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tense labels now show both English and Spanish names in modal
 
 ### Changed
+- Consolidated story generation to use only LangChain implementation (removed duplicate OpenAI code)
+- Renamed `story-llm.ts` to `llm.ts` for cleaner organization
+- Moved `createTempDir` from storage.ts to stories/utils.ts
+- Renamed `activities/stories/storage.ts` to `activities/stories/supabase.ts` (better reflects purpose)
+- Updated Temporal temp directory to `/app/tmp` (uses Docker volume, not ephemeral container storage)
+- Increased LLM temperature to 0.95 for more creative story variation
+- Disabled strict mode in structured outputs for more diverse story generation
+- Strengthened story uniqueness prompts with explicit requirements and rejection warnings
+- Image generation prompt now emphasizes full-bleed images without borders/frames/signatures
+- Featured image on story viewer page now responsive (192px mobile to 384px desktop)
+- Switched story viewer featured image to Next.js Image component
+- Audio player positioning now accounts for sidebar and mobile navigation
+- Story filter/sort controls now stack vertically on mobile for better responsiveness
+- Alignment data now stored in JSONB database columns (simplified from storage bucket URLs)
+- Docker worker now uses custom image with ffmpeg pre-installed (faster restarts)
+- Docker worker update script now uses `--force-recreate` to ensure fresh builds
 - Refactored game architecture to use colocated file structure
 - Migrated all game components to TypeScript (.tsx)
 - Games now use server-side rendering with proper 404 handling
@@ -38,12 +60,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Quiz preferences now persist to localStorage for unauthenticated users (survives page refresh)
 
 ### Removed
+- Duplicate story generation logic from `activities/openai.ts` (consolidated to LangChain)
+- `generateStoryImage` function using DALL-E (unused, replaced with Gemini)
+- Unused `safe()` function from stories/utils.ts
+- Hardcoded "New" badge on all stories (now conditional based on creation date)
 - Deprecated LanguageToggle component
 - Old JavaScript game files from components/games/
 - Unnecessary game layout passthrough component
 - Query parameter logic for game routing
 
 ### Fixed
+- Temporal workflow determinism violations (removed forbidden module imports)
+- Workflow now uses `workflowInfo()` for deterministic temp directory construction
+- combineAudio idempotency bug (now returns all fields consistently when audio exists)
+- Audio player controls hidden by navigation on mobile/desktop (added responsive positioning)
+- Story featured images with white borders and signatures (updated prompt)
+- Dropdown focus outlines that couldn't be removed (added proper Tailwind overrides)
+- Missing ffmpeg in Docker container (now pre-installed in custom image)
+- Duplicate story generation issue (added title checking and increased randomness)
 - ESLint prefer-const error in signout route
 - TypeScript type errors in game components
 - Build configuration for Next.js 15 with TypeScript
