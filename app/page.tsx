@@ -4,10 +4,11 @@ import Homepage from './Homepage'
 import Link from "next/link";
 import { navigationItems } from '@/components/Nav/navigation-items';
 import { getUserProgressData, UserStats, DailyProgress, RecentActivity } from '@/lib/user-stats';
+import FeaturedContentSlider from '@/components/FeaturedContentSlider';
 
 
 const PremiumFeatureCard = ({ user, dailyProgress }: { user: any, dailyProgress: DailyProgress }) => {
-  if (user) {
+  if (user?.isLoggedIn) {
     // Show CTA for logged-in users
     const hasCompletedToday = dailyProgress.gamesCompletedToday > 0;
     const isGoalReached = dailyProgress.gamesCompletedToday >= dailyProgress.dailyGoal;
@@ -114,14 +115,14 @@ const DailyProgressCard = ({ user, dailyProgress }: { user: any, dailyProgress: 
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 flex flex-col justify-between">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-800 mb-2">Daily Progress</h3>
-        {user ? (
+        {user?.isLoggedIn ? (
           <span className="text-blue-600 text-sm font-medium">VIEW ALL</span>
         ) : (
           <span className="text-gray-500 text-sm font-medium">SIGN UP TO TRACK</span>
         )}
       </div>
     <div className="space-y-3">
-      {user 
+      {user?.isLoggedIn
         ? (
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
@@ -186,15 +187,41 @@ const StatsCard = ({ user, userStats }: { user: any, userStats: UserStats | null
   </div>
 )
 
+const RegisterCTA = () => (
+  <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+    <div className="flex items-start justify-between mb-4">
+      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+        FREE
+      </div>
+    </div>
+    <h3 className="text-lg font-bold text-gray-800 mb-2">Create your account</h3>
+    <p className="text-sm text-gray-600 mb-4">
+      Track your progress, build learning streaks, and unlock personalized practice.
+    </p>
+    <Link
+      href="/auth/signup"
+      className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-4 rounded-lg font-semibold text-sm text-center block hover:from-blue-600 hover:to-purple-600 transition-colors"
+    >
+      REGISTER FOR FREE
+    </Link>
+    <p className="text-xs text-gray-500 text-center mt-3">
+      Already have an account?{' '}
+      <Link href="/auth/login" className="text-blue-600 hover:underline">
+        Log in
+      </Link>
+    </p>
+  </div>
+)
 
 export default async function Page() {
   const supabase = await createClient();
   // const { data: { user } } = await supabase.auth.getUser();
   const { error: userError, ...user } = await getUser();
+  console.log(JSON.stringify(user, null, 2))
 
   // Fetch user progress data if user is authenticated
   let userProgressData = null;
-  if (user && user?.id) {
+  if (user?.isLoggedIn && user?.id) {
     try {
       userProgressData = await getUserProgressData(user.id);
     } catch (error) {
@@ -233,18 +260,27 @@ export default async function Page() {
         </main>
 
         <aside className="sticky -top-1/2 hidden w-80 xl:w-96 shrink-0 lg:flex lg:flex-col gap-8">
-          <PremiumFeatureCard 
-            user={user} 
-            dailyProgress={userProgressData?.dailyProgress || { gamesCompletedToday: 0, dailyGoal: 5, progressPercentage: 0 }}
-          />
-          <DailyProgressCard 
-            user={user} 
-            dailyProgress={userProgressData?.dailyProgress || { gamesCompletedToday: 0, dailyGoal: 5, progressPercentage: 0 }}
-          />
-          <StatsCard 
-            user={user} 
-            userStats={userProgressData?.userStats || null}
-          />
+          {user?.isLoggedIn ? (
+            <>
+              <PremiumFeatureCard
+                user={user}
+                dailyProgress={userProgressData?.dailyProgress || { gamesCompletedToday: 0, dailyGoal: 5, progressPercentage: 0 }}
+              />
+              <DailyProgressCard
+                user={user}
+                dailyProgress={userProgressData?.dailyProgress || { gamesCompletedToday: 0, dailyGoal: 5, progressPercentage: 0 }}
+              />
+              <StatsCard
+                user={user}
+                userStats={userProgressData?.userStats || null}
+              />
+            </>
+          ) : (
+            <>
+              <FeaturedContentSlider />
+              <RegisterCTA />
+            </>
+          )}
           <div className="flex justify-center mt-4">
             {navigationItems.map((item) => (
               <Link key={item.href} href={item.href} className="font-medium text-gray-500 hover:text-primary-coral transition-all duration-200 mx-2.5 mb-3">
